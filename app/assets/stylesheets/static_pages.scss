@@ -1,0 +1,36 @@
+// Place all the styles related to the StaticPages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.nav-bar {
+  border-bottom: 2px solid lightgrey;
+  height: 120px;
+}
+
+.nav-bar-logo {
+  float: left;
+  padding: 10px 50px 10px 400px;
+}
+
+.nav-bar-logo > img {
+  width: 200px;
+}
+
+.location-search {
+  position: relative;
+}
+
+.location-type-search, .location-address-search {
+  width: 300px;
+  height: 30px;
+  margin: 42px 15px 42px 15px;
+  border-radius: 5px;
+  border-color: lightgrey;
+}
+
+.nav-logged-out {
+  position: relative;
+}
+
+.nav-logged-out > button {
+  float: left
+}

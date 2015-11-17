@@ -1,0 +1,17 @@
+<body>
+  <h1>Log into Nomz!</h1>
+
+  <form action='<%= session_url %>' method="POST">
+    <%= auth_token %>
+
+    <label for='username'>Username:</label>
+    <input type='text' name='user[username]' value='<%= @user.username %>'>
+    <br>
+
+    <label for='password'>Password:</label>
+    <input type='password' name='user[password]' value=''>
+    <br>
+
+    <button>Submit</button>
+  </form>
+</body>

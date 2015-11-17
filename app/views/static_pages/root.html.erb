@@ -1,0 +1,11 @@
+<div id="nomz"></div>
+
+<script>
+  window.userIsLoggedIn = <%= logged_in? %>;
+
+  window.NomzApp = window.NomzApp || {};
+
+  window.NomzApp.images = {
+    logoImage: "<%= image_path("nom-noms-logo.png") %>"
+  };
+</script>
