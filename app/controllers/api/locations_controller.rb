@@ -3,8 +3,8 @@ class Api::LocationsController < ApplicationController
     # parsed_params = parse(params[:bounds])
     #
     # @locations = Bench.in_bounds(parsed_params)
-    @locations = Location.all
-    
+    @locations = Location.find_by_search_params(params[:search])
+
     render :index
   end
 

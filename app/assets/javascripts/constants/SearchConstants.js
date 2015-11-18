@@ -1,0 +1,3 @@
+window.SearchConstants = {
+  RECEIVE_SEARCH_RESULTS: "RECEIVE_SEARCH_RESULTS"
+};

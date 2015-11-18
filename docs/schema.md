@@ -13,12 +13,12 @@ session_token   | string    | not null, indexed
 column name      | data type | details
 -----------------|-----------|-----------------------
 id               | integer   | not null, primary key
-location_type    | integer   | not null
+location_type    | string    | not null
 name             | string    | not null
 description      | text      | not null
 price_range      | integer   | not null, limit 1
 website          | string    |
-phone_number     | string    | 
+phone_number     | string    |
 street_address   | string    | not null
 city             | string    | not null
 state            | string    | not null, limit 2

@@ -9,6 +9,10 @@ $(document).on('ready', function () {
     render: function () {
       return (
         <div>
+          <header className="header">
+            <NavigationBar />
+          </header>
+
           { this.props.children }
         </div>
      );
@@ -20,6 +24,7 @@ $(document).on('ready', function () {
      <IndexRoute component={HomePage}/>
      <Route path="/users/new" component={NewUserPage}/>
      <Route path="/session/new" component={LogInPage}/>
+     <Route path="/search_results" component={SearchResultsPage}/>
    </Route>
   );
 

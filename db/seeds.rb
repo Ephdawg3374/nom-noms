@@ -9,12 +9,26 @@
 # Create random locations with addresses
 Location.destroy_all
 
-100.times do
+location_types = {
+  0 => "restaurant",
+  1 => "cafe",
+  2 => "gym",
+  3 => "library",
+  4 => "bar",
+  5 => "retail",
+  6 => "theater",
+  7 => "school",
+  8 => "barber",
+  9 => "park",
+  10 => "club"
+}
+
+10000.times do
     Location.create!(
-      location_type: rand(0..9),
+      location_type: location_types[rand(0..10)],
       name: Faker::Company.name,
       description: Faker::Company.bs,
-      price_range: rand(4),
+      price_range: "$" * rand(1..4),
       website: Faker::Internet.url,
       phone_number: "(#{rand.to_s[2..4]})#{rand.to_s[2..4]}-#{rand.to_s[2..5]}",
       street_address: Faker::Address.street_address,

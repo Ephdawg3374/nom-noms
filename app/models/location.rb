@@ -3,19 +3,6 @@ class Location < ActiveRecord::Base
             :street_address, :city, :state, :zipcode, :lat, :lng,
             presence: true
 
-  enum location_type: {
-    restaurant: 0,
-    cafe: 1,
-    gym: 2,
-    library: 3,
-    bar: 4,
-    retail: 5,
-    theater: 6,
-    school: 7,
-    barber: 8,
-    doctor: 9
-  }
-
   def self.in_bounds(bounds)
     # bounds in the following format:
     # {
@@ -44,5 +31,49 @@ class Location < ActiveRecord::Base
         "(seating BETWEEN ? AND ?)",
         min_seats, max_seats
       )
+  end
+
+  def self.find_by_search_params(search_params)
+    if search_params[:locationType].empty?
+      location_type = "%"
+    else
+      location_type = search_params[:locationType].downcase
+    end
+
+    location_address = search_params[:locationAddress].split(",")
+
+    location_address.each_with_index do |address_el, idx|
+      address_el = address_el.split(" ")
+
+      if address_el.length > 1
+        address_el.each do |address_el_pronoun|
+          address_el_pronoun.capitalize!
+        end
+      else
+        if address_el[0].length == 2
+          address_el[0].upcase!
+        end
+      end
+
+      location_address[idx] = address_el.join(" ")
+    end
+
+    if location_address.length == 1
+      # general address search
+      Location.where(
+        ("location_type LIKE ? AND
+        (street_address = ? OR city = ? OR state = ?
+        OR zipcode = ?)"),
+        location_type, location_address[0], location_address[0], location_address[0], location_address[0]
+      )
+    else
+      # city, state search
+      Location.where(
+        ("location_type = ? AND
+        (city = ? AND state = ?)"),
+        location_type, location_address[0], location_address[1]
+      )
+    end
+
   end
 end
