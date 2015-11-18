@@ -23,19 +23,38 @@ location_types = {
   10 => "club"
 }
 
+# placeholder images will be requested from http://lorempixel.com/
+img_types = {
+  0 => "food",
+  1 => "food",
+  2 => "sports",
+  3 => "city",
+  4 => "nightlife",
+  5 => "fashion",
+  6 => "abstract",
+  7 => "city",
+  8 => "people",
+  9 => "nature",
+  10 => "nightlife"
+}
+
 10000.times do
-    Location.create!(
-      location_type: location_types[rand(0..10)],
-      name: Faker::Company.name,
-      description: Faker::Company.bs,
-      price_range: "$" * rand(1..4),
-      website: Faker::Internet.url,
-      phone_number: "(#{rand.to_s[2..4]})#{rand.to_s[2..4]}-#{rand.to_s[2..5]}",
-      street_address: Faker::Address.street_address,
-      city: Faker::Address.city,
-      state: Faker::Address.state_abbr,
-      zipcode: Faker::Address.zip[0..4],
-      lat: Faker::Address.latitude.to_f.round(6),
-      lng: Faker::Address.longitude.to_f.round(6)
-    )
+  rand_loc_img_type = rand(10)
+  rand_img_number = rand(1..10)
+
+  Location.create!(
+    location_type: location_types[rand_loc_img_type],
+    img_url: "http://lorempixel.com/400/200/#{img_types[rand_loc_img_type]}/#{rand_img_number}",
+    name: Faker::Company.name,
+    description: Faker::Company.bs,
+    price_range: "$" * rand(1..4),
+    website: Faker::Internet.url,
+    phone_number: "(#{rand.to_s[2..4]})#{rand.to_s[2..4]}-#{rand.to_s[2..5]}",
+    street_address: Faker::Address.street_address,
+    city: Faker::Address.city,
+    state: Faker::Address.state_abbr,
+    zipcode: Faker::Address.zip[0..4],
+    lat: Faker::Address.latitude.to_f.round(6),
+    lng: Faker::Address.longitude.to_f.round(6)
+  )
 end

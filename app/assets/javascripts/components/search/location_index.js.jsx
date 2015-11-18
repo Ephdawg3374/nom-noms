@@ -19,7 +19,7 @@ var LocationIndex = React.createClass({
     var locationIndexItems;
 
     if (this.state.locations)  {
-      locationIndexItems = this.state.locations.map( function(location) {
+      locationIndexItems = this.state.locations.map( function(location, idx) {
         return <LocationIndexItem key={location.id} location={location} />;
       });
     }

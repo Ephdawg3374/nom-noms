@@ -30,6 +30,12 @@ gem 'react-rails', '1.3.0'
 
 gem 'flux-rails-assets'
 
+gem 'figaro'
+
+gem 'paperclip'
+
+gem 'aws-sdk', '~>1.6'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
