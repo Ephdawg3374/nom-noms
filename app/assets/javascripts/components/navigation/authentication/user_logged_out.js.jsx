@@ -1,9 +1,14 @@
 var UserLoggedOut = React.createClass({
   render: function () {
     return (
-      <div className="nav-logged-out group">
-        <button className="nav-signup-button">Sign Up</button>
-        <button className="nav-login-button">Log in</button>
+      <div className="nav-logged-out">
+        <button className="nav-signup-button">
+          <a href="/users/new">Sign Up</a>
+        </button>
+
+        <button className="nav-login-button">
+          <a href="/session/new">Log In</a>
+        </button>
       </div>
     );
   }

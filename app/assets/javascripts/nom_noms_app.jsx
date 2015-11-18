@@ -1,14 +1,14 @@
 $(document).on('ready', function () {
+  Link = ReactRouter.Link;
   var Router = ReactRouter.Router;
   var Route = ReactRouter.Route;
   var IndexRoute = ReactRouter.IndexRoute;
-
   var rootEl = document.getElementById('nomz');
 
-  var NomzApp = React.createClass({
+  var NomNomsApp = React.createClass({
     render: function () {
       return (
-        <div>
+        <div className="header">
           { this.props.children }
         </div>
      );
@@ -16,7 +16,7 @@ $(document).on('ready', function () {
   });
 
   var routes = (
-   <Route path="/" component={NomzApp}>
+   <Route path="/" component={NomNomsApp}>
      <IndexRoute component={NavigationBar}/>
    </Route>
   );

@@ -1,14 +1,19 @@
 // Place all the styles related to the StaticPages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.header {
+  background-color: lightblue;
+  border-bottom: 1px solid #ccc;
+}
+
 .nav-bar {
-  border-bottom: 2px solid lightgrey;
-  height: 120px;
+  width: 1200px;
+  margin: auto;
 }
 
 .nav-bar-logo {
   float: left;
-  padding: 10px 50px 10px 400px;
+  margin: 10px auto;
 }
 
 .nav-bar-logo > img {
@@ -16,7 +21,8 @@
 }
 
 .location-search {
-  position: relative;
+  float: left;
+  margin: auto 50px;
 }
 
 .location-type-search, .location-address-search {
@@ -25,12 +31,44 @@
   margin: 42px 15px 42px 15px;
   border-radius: 5px;
   border-color: lightgrey;
+  font-size: 16px;
 }
 
-.nav-logged-out {
-  position: relative;
+.nav-logged-out, .nav-logged-in {
+  width: 100px;
+  float: left;
 }
 
 .nav-logged-out > button {
-  float: left
+  color: white;
+  background: #b20000;
+  font-size: 16px;
+  width: 100px;
+  text-align: center;
+  padding: 3px;
+  margin: 20px 15px 0px 15px;
+  border-radius: 3px;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.nav-logged-in > button {
+  color: white;
+  background: #b20000;
+  font-size: 16px;
+  width: 100px;
+  text-align: center;
+  padding: 3px;
+  margin: 20px 15px 0px 15px;
+  border-radius: 3px;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.nav-logged-out > button:hover {
+  background-color:#bc3315;
+}
+
+.nav-logged-in > button:hover {
+  background-color:#bc3315;
 }

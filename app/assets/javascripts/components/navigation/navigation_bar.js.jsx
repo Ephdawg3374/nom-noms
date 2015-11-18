@@ -8,7 +8,6 @@ var NavigationBar = React.createClass({
       authComponent = <UserLoggedOut />;
     }
 
-
     return (
       <div className="nav-bar group">
 

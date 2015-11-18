@@ -21,7 +21,7 @@ var LocationSearch = React.createClass({
           <input className="location-type-search"
             type="text"
             valueLink={this.linkState("type")}
-            placeholder="Location type (restaurant, school, gym, bar, etc)"
+            placeholder="  Location type (restaurant, bar, etc)"
           />
 
         <input className="location-address-search"
