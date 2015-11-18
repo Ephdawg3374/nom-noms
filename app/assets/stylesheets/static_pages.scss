@@ -72,3 +72,25 @@
 .nav-logged-in > button:hover {
   background-color:#bc3315;
 }
+
+.auth-page {
+  width: 800px;
+  margin: auto;
+}
+
+.auth-page > h1 {
+  font-size: 40px;
+  text-align: center;
+  margin: 50px 0 25px 0;
+}
+
+.auth-page > .auth-page-form {
+  width: 200px;
+  margin: auto;
+  padding: 20px;
+}
+
+.auth-page-username, .auth-page-password{
+  font-size: 16px;
+  width: 200px;
+}
