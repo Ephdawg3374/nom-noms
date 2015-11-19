@@ -5,14 +5,20 @@ var LocationIndex = React.createClass({
 
   componentDidMount: function () {
     LocationStore.addLocationIndexChangeListener(this._onChange);
+    MarkerStore.addMarkersUpdatedListener(this._onMarkersUpdatedChange);
   },
 
   componentWillUnmount: function () {
     LocationStore.removeLocationIndexChangeListener(this._onChange);
+    MarkerStore.removeMarkersUpdatedListener(this._onMarkersUpdatedChange);
   },
 
   _onChange: function () {
     this.setState({ locations: LocationStore.all() });
+  },
+
+  _onMarkersUpdatedChange: function () {
+    this.forceUpdate();
   },
 
   render: function () {
@@ -20,7 +26,11 @@ var LocationIndex = React.createClass({
 
     if (this.state.locations)  {
       locationIndexItems = this.state.locations.map( function(location, idx) {
-        return <LocationIndexItem key={location.id} location={location} />;
+        return <LocationIndexItem
+          key={location.id}
+          location={location}
+          marker={MarkerStore.findMatchingMarker(location)}
+          />;
       });
     }
 

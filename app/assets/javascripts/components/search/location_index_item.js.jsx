@@ -1,5 +1,25 @@
 var LocationIndexItem = React.createClass({
+  getInitialState: function () {
+    return ({ hover: false });
+  },
+
+  mouseOver: function () {
+    this.setState({ hover: true });
+  },
+
+  mouseOut: function () {
+    this.setState({ hover: false });
+  },
+
   render: function () {
+
+    if (this.props.marker) {
+      if (this.state.hover === true) {
+        this.props.marker.setAnimation(google.maps.Animation.BOUNCE);
+      } else {
+        this.props.marker.setAnimation(null);
+      }
+    }
 
     return (
       <div className="location-index-item group">
@@ -8,10 +28,14 @@ var LocationIndexItem = React.createClass({
           <img src={this.props.location.img_url}/>
         </figure>
 
-        <h2 className="location-index-item-name">
+        <h2 className="location-index-item-name"
+          onMouseOver={this.mouseOver}
+          onMouseOut={this.mouseOut}>
+
           <Link to={"/locations/" + this.props.location.name}>
             {this.props.location.name}
           </Link>
+
         </h2>
 
         <label className="location-index-item-website">

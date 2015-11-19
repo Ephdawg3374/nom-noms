@@ -24,18 +24,11 @@
   float: left;
 }
 
-.pseudo-input-text-type {
+.pseudo-input-text {
   position: relative;
   font-size: 18px;
   font-weight: 700;
   left: 45px;
-}
-
-.pseudo-input-text-address {
-  position: relative;
-  font-size: 18px;
-  font-weight: 700;
-  left: 31px;
 }
 
 .location-search-input {
@@ -79,12 +72,12 @@
   cursor: pointer;
 }
 
-.nav-logged-out > button:hover {
+.nav-logged-out > button:hover, .nav-logged-in > button:hover {
   background-color:#bc3315;
 }
 
-.nav-logged-in > button:hover {
-  background-color:#bc3315;
+.nav-logged-out > button:active, .nav-logged-in > button:active {
+  box-shadow: inset 0 0 0 1px #27496d, inset 0 5px 30px #193047;
 }
 
 .auth-page {
@@ -117,8 +110,11 @@
 .location-index-item-website {
   display: block;
   color: #0000EE;
-  cursor: pointer;
   margin: 5px 10px;
+}
+
+.location-index-item-website > a {
+  cursor: pointer;
 }
 
 .search-results-page {
@@ -157,6 +153,9 @@
 .location-index-item-name {
   font-size: 26px;
   color: blue;
+}
+
+.location-index-item-name > a {
   cursor: pointer;
 }
 

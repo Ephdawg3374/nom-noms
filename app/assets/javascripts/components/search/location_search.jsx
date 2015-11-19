@@ -7,7 +7,7 @@ var LocationSearch = React.createClass({
         type: "",
         address: "",
         // default distance radius is 10 miles
-        distance: 5000 // meters
+        distance: 1609 // meters
       }
     );
   },
@@ -87,7 +87,7 @@ var LocationSearch = React.createClass({
         <form onSubmit={ this.handleSearchSubmit }
           onKeyPress={ handleKeyPress.bind(this) }>
           <label className="location-search-pseudo">
-            <span className="pseudo-input-text-type">Find</span>
+            <span className="pseudo-input-text">Find</span>
             <input className="location-search-input"
               type="text"
               valueLink={this.linkState("type")}
@@ -96,7 +96,7 @@ var LocationSearch = React.createClass({
           </label>
 
           <label className="location-search-pseudo">
-            <span className="pseudo-input-text-address">In</span>
+            <span className="pseudo-input-text">Near</span>
             <input className="location-search-input"
                 type="text"
                 valueLink={this.linkState("address")}

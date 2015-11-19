@@ -1,5 +1,6 @@
 (function() {
   var _markers = [];
+  var LOCATIONS_UPDATED = "LOCATIONS_UPDATED";
   var MARKERS_UPDATED = "MARKERS_UPDATED";
 
   window.MarkerStore = $.extend({}, EventEmitter.prototype, {
@@ -26,6 +27,16 @@
       }.bind(this));
 
       _markers = markers;
+
+      this.emit(MARKERS_UPDATED);
+
+      this.setMarkerLabelsToSearchIndices();
+    },
+
+    setMarkerLabelsToSearchIndices: function () {
+      _markers.forEach(function (marker, idx) {
+        marker.set('label', (idx + 1).toString());
+      });
     },
 
     determineMapBoundsAndSetCenter: function (map) {
@@ -34,12 +45,7 @@
           map.setZoom(13);
         });
 
-      var latLngBounds = new google.maps.LatLngBounds(
-        {
-          lat: 40.730610,
-          lng: -73.935242
-        }
-      );
+      var latLngBounds = new google.maps.LatLngBounds();
 
       LocationStore.allLatLngObjects().forEach(function (latLng) {
         latLngBounds.extend(latLng);
@@ -66,6 +72,19 @@
       return result;
     },
 
+    findMatchingMarker: function (location) {
+      var match = false;
+      var matchedMarker;
+
+      for (var i = 0; i < _markers.length; i++) {
+        if (_markers[i].locationId === location.id) {
+          matchedMarker = _markers[i];
+          break;
+        }
+      }
+      return matchedMarker;
+    },
+
     locationIncludedInMarkerStore: function (location) {
       var result = false;
 
@@ -78,7 +97,7 @@
       return result;
     },
 
-    createNewMarker: function (location) {
+    createNewMarker: function (location, idx) {
       var coord = {lat: location.lat, lng: location.lng};
 
       var marker = new google.maps.Marker({
@@ -90,22 +109,26 @@
     },
 
     addMarkerChangeListener: function (callback) {
+      this.on(LOCATIONS_UPDATED, callback);
+    },
+
+    addMarkersUpdatedListener: function (callback) {
       this.on(MARKERS_UPDATED, callback);
     },
 
     removeMarkerChangeListener: function (callback) {
-      this.removeListener(MARKERS_UPDATED, callback);
+      this.removeListener(LOCATIONS_UPDATED, callback);
     },
 
-    emitChange: function () {
-      this.emit(MARKERS_UPDATED);
+    removeMarkersUpdatedListener: function (callback) {
+      this.removeListener(MARKERS_UPDATED, callback);
     },
 
     dispatcherId: AppDispatcher.register(function (payload) {
       switch (payload.actionType) {
         case SearchConstants.RECEIVE_SEARCH_RESULTS:
           AppDispatcher.waitFor([LocationStore.dispatcherId]);
-          MarkerStore.emitChange();
+          MarkerStore.emit(LOCATIONS_UPDATED);
           break;
         default:
 
