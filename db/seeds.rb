@@ -38,10 +38,46 @@ img_types = {
   10 => "nightlife"
 }
 
+# app will be limited to locations within the Tri-State area (NY, PA, NJ)
+# City, State Zipcode combinations will be legitimate
+# Street address will be fake!
+locations = {
+  0 => ["NY", "New York"],
+  1 => ["PA", "Pennsylvania"],
+  2 => ["NJ", "New Jersey"]
+}
+
+def generate_random_zipcode(state)
+  # NY zipcode range: 10001 - 14975
+  # PA zipcode range: 15001 - 19640
+  # NJ zipcode range: 7001 - 8989
+  case state
+  when "NY"; return rand(10001..14975).to_s
+  when "PA"; return rand(15001..19640).to_s
+  when "NJ"; return rand(7001..8989).to_s.rjust(5, "0")
+  end
+
+end
+
+def generate_random_lat(state)
+  # NY lat range: -80.5297851563 -
+  # PA lat range:
+  # NJ lat range:
+end
+
+def generate_random_lng(state)
+  # NY lng range:
+  # PA lng range:
+  # NJ lng range:
+end
+
 10000.times do
   rand_loc_img_type = rand(10)
   rand_img_number = rand(1..10)
+  rand_loc_number = rand(3)
 
+  # still need to generate random lat/lng within bounds of NY/PA/NJ so
+  # map results look more legitimate
   Location.create!(
     location_type: location_types[rand_loc_img_type],
     img_url: "http://lorempixel.com/400/200/#{img_types[rand_loc_img_type]}/#{rand_img_number}",
@@ -52,8 +88,9 @@ img_types = {
     phone_number: "(#{rand.to_s[2..4]})#{rand.to_s[2..4]}-#{rand.to_s[2..5]}",
     street_address: Faker::Address.street_address,
     city: Faker::Address.city,
-    state: Faker::Address.state_abbr,
-    zipcode: Faker::Address.zip[0..4],
+    state: locations[rand_loc_number][0],
+    state_long: locations[rand_loc_number][1],
+    zipcode: generate_random_zipcode(locations[rand_loc_number][0]),
     lat: Faker::Address.latitude.to_f.round(6),
     lng: Faker::Address.longitude.to_f.round(6)
   )

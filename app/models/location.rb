@@ -24,15 +24,6 @@ class Location < ActiveRecord::Base
       )
   end
 
-  def self.search_by_min_max_seating(min_seats, max_seats, benches)
-    raise "min seats greater than max seats" if min_seats > max_seats
-
-    benches.where(
-        "(seating BETWEEN ? AND ?)",
-        min_seats, max_seats
-      )
-  end
-
   def self.find_by_search_params(search_params)
     if search_params[:locationType].empty?
       location_type = "%"
@@ -46,8 +37,8 @@ class Location < ActiveRecord::Base
       address_el = address_el.split(" ")
 
       if address_el.length > 1
-        address_el.each do |address_el_pronoun|
-          address_el_pronoun.capitalize!
+        address_el.map! do |address_el_pronoun|
+          address_el_pronoun.capitalize
         end
       else
         if address_el[0].length == 2
@@ -63,8 +54,9 @@ class Location < ActiveRecord::Base
       Location.where(
         ("location_type LIKE ? AND
         (street_address = ? OR city = ? OR state = ?
-        OR zipcode = ?)"),
-        location_type, location_address[0], location_address[0], location_address[0], location_address[0]
+        OR state_long = ? OR zipcode = ?)"),
+        location_type, location_address[0], location_address[0],
+        location_address[0], location_address[0], location_address[0]
       )
     else
       # city, state search

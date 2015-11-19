@@ -2,7 +2,7 @@
   var _locations = [];
   var LOCATION_INDEX_CHANGE = "LOCATION_INDEX_CHANGE";
 
-  window.LocationStore = $.extend({}, EventEmitter.prototype, {
+  window.LocationStore = window.LocationStore || $.extend({}, EventEmitter.prototype, {
     resetStore: function (searchResults) {
       _locations = searchResults;
     },
