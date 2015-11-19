@@ -5,6 +5,8 @@ var LocationSearch = React.createClass({
     return (
       {
         type: "",
+        address: "",
+        center: ""
       }
     );
   },
@@ -17,6 +19,8 @@ var LocationSearch = React.createClass({
     navigator.geolocation.getCurrentPosition(function(e) {
       var lat = e.coords.latitude;
       var lng = e.coords.longitude;
+
+      this.setState({ center: [lat, lng] });
 
       this.setAddressStateToCityState(lat, lng);
     }.bind(this));
@@ -49,6 +53,8 @@ var LocationSearch = React.createClass({
   },
 
   handleSearchSubmit: function (event) {
+    event.preventDefault();
+    
     var locationForm = event.currentTarget;
 
     var search = {
@@ -62,11 +68,13 @@ var LocationSearch = React.createClass({
   },
 
   autoCompleteLocationType: function () {
-
+    ApiLocationUtil.fetchLocationTypes(this.state.type.toLowerCase());
   },
 
   autoCompleteLocationAddress: function () {
-
+    if (this.state.address.length > 2) {
+      ApiLocationUtil.fetchLocationAddresses(this.state.address);
+    }
   },
 
   render: function () {
@@ -78,18 +86,29 @@ var LocationSearch = React.createClass({
 
     return (
       <div className="location-search">
-        <form onKeyPress={ handleKeyPress.bind(this) }>
-          <input className="location-type-search"
-            type="text"
-            valueLink={this.linkState("type")}
-            placeholder="  Location type (restaurant, bar, etc)"
-          />
+        <form onSubmit={ this.handleSearchSubmit }
+          onKeyPress={ handleKeyPress.bind(this) }>
+          <label className="location-search-pseudo">
+            <span className="pseudo-input-text-type">Find</span>
+            <input className="location-search-input"
+              type="text"
+              valueLink={this.linkState("type")}
+              placeholder="  Location type (restaurant, bar, etc)"
+            />
+          </label>
 
-        <input className="location-address-search"
-            type="text"
-            valueLink={this.linkState("address")}
-          />
+          <label className="location-search-pseudo">
+            <span className="pseudo-input-text-address">In</span>
+            <input className="location-search-input"
+                type="text"
+                valueLink={this.linkState("address")}
+              />
+          </label>
 
+          <button type="Submit"
+            className="location-search-button">
+            <img src={window.NomNomsApp.images.buttonImage}/>
+          </button>
         </form>
       </div>
     );

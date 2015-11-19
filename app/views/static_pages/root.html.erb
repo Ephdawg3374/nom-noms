@@ -3,9 +3,10 @@
 <script>
   window.userIsLoggedIn = <%= logged_in? %>;
 
-  window.NomzApp = window.NomzApp || {};
+  window.NomNomsApp = window.NomNomsApp || {};
 
-  window.NomzApp.images = {
-    logoImage: "<%= image_path("nom-noms-logo.png") %>"
+  window.NomNomsApp.images = {
+    logoImage: "<%= image_path("nom-noms-logo.png") %>",
+    buttonImage: "<%= image_path("nom-noms-search-button.png") %>"
   };
 </script>

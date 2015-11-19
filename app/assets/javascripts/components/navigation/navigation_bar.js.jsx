@@ -12,7 +12,7 @@ var NavigationBar = React.createClass({
       <div className="nav-bar group">
 
         <figure className="nav-bar-logo">
-          <img src={window.NomzApp.images.logoImage}/>
+          <img src={window.NomNomsApp.images.logoImage}/>
         </figure>
 
         <LocationSearch />

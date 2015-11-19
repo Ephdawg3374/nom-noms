@@ -1,12 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-
-# Create random locations with addresses
 Location.destroy_all
 
 location_types = {
@@ -38,43 +29,44 @@ img_types = {
   10 => "nightlife"
 }
 
-# app will be limited to locations within the Tri-State area (NY, PA, NJ)
-# City, State Zipcode combinations will be legitimate
-# Street address will be fake!
+# Longitudes and latidues for randomly generated locations will be bounded
+# within the NY-NJ area around NYC. This is so that results look more realistic
+# in google maps component.
+
+# Bounding Box
+# NW 40.914568, -74.287911
+# SW 40.627187, -74.287911
+# NE 40.914568, -73.799629
+# SE 40.627187, -73.799629
+
+# All other location attributes (besides state) will be fake!
 locations = {
   0 => ["NY", "New York"],
-  1 => ["PA", "Pennsylvania"],
-  2 => ["NJ", "New Jersey"]
+  1 => ["NJ", "New Jersey"]
 }
 
 def generate_random_zipcode(state)
-  # NY zipcode range: 10001 - 14975
-  # PA zipcode range: 15001 - 19640
-  # NJ zipcode range: 7001 - 8989
   case state
   when "NY"; return rand(10001..14975).to_s
-  when "PA"; return rand(15001..19640).to_s
   when "NJ"; return rand(7001..8989).to_s.rjust(5, "0")
   end
-
 end
 
-def generate_random_lat(state)
-  # NY lat range: -80.5297851563 -
-  # PA lat range:
-  # NJ lat range:
+def generate_random_lat
+  rand(40.627187..40.914568).round(6)
 end
 
 def generate_random_lng(state)
-  # NY lng range:
-  # PA lng range:
-  # NJ lng range:
+  case state
+  when "NY"; return rand(-74.007169..-73.799629).round(6)
+  when "NJ"; return rand(-74.287911..-74.007169).round(6)
+  end
 end
 
-10000.times do
+6000.times do
   rand_loc_img_type = rand(10)
   rand_img_number = rand(1..10)
-  rand_loc_number = rand(3)
+  rand_loc_number = rand(2)
 
   # still need to generate random lat/lng within bounds of NY/PA/NJ so
   # map results look more legitimate
@@ -91,7 +83,7 @@ end
     state: locations[rand_loc_number][0],
     state_long: locations[rand_loc_number][1],
     zipcode: generate_random_zipcode(locations[rand_loc_number][0]),
-    lat: Faker::Address.latitude.to_f.round(6),
-    lng: Faker::Address.longitude.to_f.round(6)
+    lat: generate_random_lat,
+    lng: generate_random_lng(locations[rand_loc_number][0])
   )
 end

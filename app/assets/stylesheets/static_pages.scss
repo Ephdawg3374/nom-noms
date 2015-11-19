@@ -22,13 +22,27 @@
 
 .location-search {
   float: left;
-  margin: 0 70px 0 10px;
 }
 
-.location-type-search, .location-address-search {
-  width: 300px;
+.pseudo-input-text-type {
+  position: relative;
+  font-size: 18px;
+  font-weight: 700;
+  left: 45px;
+}
+
+.pseudo-input-text-address {
+  position: relative;
+  font-size: 18px;
+  font-weight: 700;
+  left: 31px;
+}
+
+.location-search-input {
+  width: 275px;
   height: 30px;
-  margin: 42px 25px 42px 25px;
+  margin: 42px 0;
+  padding-left: 50px;
   border-radius: 5px;
   border-color: lightgrey;
   font-size: 16px;
@@ -110,6 +124,11 @@
 .search-results-page {
   width: 900px;
   margin: auto;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  background: white;
+  padding: 0 50px 50px 50px;
 }
 
 .location-index-item {
@@ -174,4 +193,15 @@
 .search-results-map {
   margin-top: 30px;
   float: right;
+}
+
+.location-search-button {
+  float: right;
+  margin: 34px 10px 34px 20px;
+  cursor: pointer;
+}
+
+.location-search-button > img {
+  width: 50px;
+  height: 50px;
 }
