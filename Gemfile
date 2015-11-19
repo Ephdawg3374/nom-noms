@@ -36,7 +36,7 @@ gem 'paperclip'
 
 gem 'aws-sdk', '~>1.6'
 
-gem 'faker'
+gem 'faker', require 'faker'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
