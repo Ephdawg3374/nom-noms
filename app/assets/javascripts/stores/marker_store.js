@@ -28,6 +28,32 @@
       _markers = markers;
     },
 
+    determineMapBoundsAndSetCenter: function (map) {
+      var zoomChangeBoundsListener =
+        google.maps.event.addListenerOnce(map, 'bounds_changed', function(event) {
+          map.setZoom(13);
+        });
+
+      var latLngBounds = new google.maps.LatLngBounds(
+        {
+          lat: 40.730610,
+          lng: -73.935242
+        }
+      );
+
+      LocationStore.allLatLngObjects().forEach(function (latLng) {
+        latLngBounds.extend(latLng);
+      });
+
+      map.setCenter(latLngBounds.getCenter());
+      map.fitBounds(latLngBounds);
+
+      setTimeout(function() {
+          google.maps.event.removeListener(zoomChangeBoundsListener);
+        },2000
+      );
+    },
+
     markerIncludedInLocationStore: function (marker) {
       var result = false;
 

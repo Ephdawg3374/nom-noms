@@ -6,7 +6,8 @@ var LocationSearch = React.createClass({
       {
         type: "",
         address: "",
-        center: ""
+        // default distance radius is 10 miles
+        distance: 5000 // meters
       }
     );
   },
@@ -20,8 +21,6 @@ var LocationSearch = React.createClass({
       var lat = e.coords.latitude;
       var lng = e.coords.longitude;
 
-      this.setState({ center: [lat, lng] });
-
       this.setAddressStateToCityState(lat, lng);
     }.bind(this));
   },
@@ -30,7 +29,7 @@ var LocationSearch = React.createClass({
     var latlng = new google.maps.LatLng(lat, lng);
     var geocoder = new google.maps.Geocoder();
 
-    var city, state;
+    var city;
 
     geocoder.geocode({'latLng': latlng}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
@@ -40,26 +39,25 @@ var LocationSearch = React.createClass({
           for (var j = 0; j < nearestLocation.address_components[i].types.length; j++) {
             if (nearestLocation.address_components[i].types[j] == "administrative_area_level_1") {
                 city = nearestLocation.address_components[i].long_name;
-                state = nearestLocation.address_components[i].short_name;
                 break;
             }
           }
         }
       }
-      var cityState = city + ", " + state;
 
-      this.setState({address: cityState});
+      this.setState({address: city});
     }.bind(this));
   },
 
   handleSearchSubmit: function (event) {
     event.preventDefault();
-    
+
     var locationForm = event.currentTarget;
 
     var search = {
-      locationType: locationForm[0].value,
-      locationAddress: locationForm[1].value
+      searchType: locationForm[0].value,
+      searchAddress: locationForm[1].value,
+      searchDistance: this.state.distance
     };
 
     ApiLocationUtil.fetchLocations(search);

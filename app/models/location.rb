@@ -5,26 +5,35 @@ class Location < ActiveRecord::Base
 
   def self.search_within_distance(locations, distance, search_location)
     # Distance will be in meters.
-    search_location = Location.parse_location(search_location)
+
+    search_location = Location.parse_location(search_location)[0]
 
     locations_within_distance = []
-    search_location_in_db = Location.find_by_city(search_location)
 
+    search_location_in_db = Location.find_by_city(search_location)
+    search_location_real = Location.actual_locations_for_searching[search_location]
+
+    # if search location exists as a city in DB, use those coords
     if search_location_in_db
       search_location_coords = [
         search_location.lat,
         search_location.lng
       ]
-    else
+    # if search location is an actual location (limited to the locations in
+    # actual_locations_for_searching)
+    elsif
       search_location_coords = [
-        locations_for_searching[search_location]["lat"],
-        locations_for_searching[search_location]["lng"]
+        Location.actual_locations_for_searching[search_location]["lat"],
+        Location.actual_locations_for_searching[search_location]["lng"]
       ]
+    # NYC coords
+    else
+      search_location_coords = [40.730610, -73.935242]
     end
 
     locations.each do |location|
       loc_coord = [location.lat, location.lng]
-      loc_dist = calc_distance(loc_coord, search_location_coords)
+      loc_dist = Location.calc_distance(loc_coord, search_location_coords)
 
       if loc_dist < distance
         locations_within_distance << location
@@ -36,37 +45,28 @@ class Location < ActiveRecord::Base
 
   def self.find_by_search_params(search_params)
     # pull all location types if no type specified
-    if search_params[:locationType].empty?
+    if search_params[:searchType].empty?
       location_type = "%"
     else
-      location_type = search_params[:locationType].downcase
+      location_type = search_params[:searchType].downcase
     end
 
-    location_address = search_params[:locationAddress].split(",")
+    location_address = Location.parse_location(search_params[:searchAddress])
 
-    location_address = parse_location(location_address)
+    locations_by_params = Location.where(
+      ("location_type = ?"),
+      location_type
+    )
 
-    if location_address.length == 1
-      # general address search
-      Location.where(
-        ("location_type LIKE ? AND
-        (street_address = ? OR city = ? OR state = ?
-        OR state_long = ? OR zipcode = ?)"),
-        location_type, location_address[0], location_address[0],
-        location_address[0], location_address[0], location_address[0]
-      )
-    else
-      # city, state search
-      Location.where(
-        ("location_type = ? AND
-        (city = ? AND state = ?)"),
-        location_type, location_address[0], location_address[1]
-      )
-    end
+    Location.search_within_distance(
+      locations_by_params,
+      search_params[:searchDistance].to_f,
+      search_params[:searchAddress]
+    )
 
   end
 
-  def calc_distance(coord1, coord2)
+  def self.calc_distance(coord1, coord2)
     rad_per_deg = Math::PI/180  # PI / 180
     rkm = 6371                  # Earth radius in kilometers
     rm = rkm * 1000             # Radius in meters
@@ -83,7 +83,7 @@ class Location < ActiveRecord::Base
     rm * c # Delta in meters
   end
 
-  def locations_for_searching
+  def self.actual_locations_for_searching
 
     # Location address search bar for this app will be limited to searching for
     # several real citys within the bounding box in which the random
@@ -105,20 +105,21 @@ class Location < ActiveRecord::Base
     }
   end
 
-  def parse_location(location)
-    location_address = location
+  # parse the location coming from front-end to be ready for querying
+  # handles lowercase
+  def self.parse_location(location)
+    # state abbr
+    if location.length == 2
+      return location.upcase
+    end
+
+    location_address = location.split(",")
 
     location_address.each_with_index do |address_el, idx|
       address_el = address_el.split(" ")
 
-      if address_el.length > 1
-        address_el.map! do |address_el_pronoun|
-          address_el_pronoun.capitalize
-        end
-      else
-        if address_el[0].length == 2
-          address_el[0].upcase!
-        end
+      address_el.map! do |address_el_pronoun|
+        address_el_pronoun.capitalize
       end
 
       location_address[idx] = address_el.join(" ")

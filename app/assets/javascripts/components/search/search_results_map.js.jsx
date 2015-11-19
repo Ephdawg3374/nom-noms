@@ -18,6 +18,7 @@ var SearchResultsMap = React.createClass({
 
   _onChange: function () {
     MarkerStore.updateMarkersFromLocationStore(this.map);
+    MarkerStore.determineMapBoundsAndSetCenter(this.map);
   },
 
   render: function () {

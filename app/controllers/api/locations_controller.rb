@@ -3,10 +3,18 @@ class Api::LocationsController < ApplicationController
     # parsed_params = parse(params[:bounds])
     #
     # @locations = Bench.in_bounds(parsed_params)
-    find_locations_by_params = Location.find_by_search_params(params[:search])
-    @locations = Location.search_within_distance()
+    @locations = Location.find_by_search_params(params[:search])
 
-    render :index
+    # distance = params[:search][:searchDistance]
+    # search_loc = params[:search][:searchAddress]
+    #
+    # @locations = Location.search_within_distance(locations_by_params)
+    if @locations
+      render :index
+    else
+      flash[:search_error] = "No results found."
+      render json: flash[:search_error]
+    end
   end
 
   def show
