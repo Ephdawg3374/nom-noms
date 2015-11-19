@@ -13,7 +13,7 @@
 
 .nav-bar-logo {
   float: left;
-  margin: 10px auto;
+  margin: 10px 20px 10px 30px;
 }
 
 .nav-bar-logo > img {
@@ -22,13 +22,13 @@
 
 .location-search {
   float: left;
-  margin: auto 50px;
+  margin: 0 70px 0 10px;
 }
 
 .location-type-search, .location-address-search {
   width: 300px;
   height: 30px;
-  margin: 42px 15px 42px 15px;
+  margin: 42px 25px 42px 25px;
   border-radius: 5px;
   border-color: lightgrey;
   font-size: 16px;
@@ -108,13 +108,13 @@
 }
 
 .search-results-page {
-  width: 600px;
+  width: 900px;
   margin: auto;
 }
 
 .location-index-item {
   width: 400px;
-  margin: 30px auto;
+  margin-bottom: 20px;
   border-top: 1px solid #ccc;
 }
 
@@ -129,6 +129,10 @@
 
 .location-index-item-img {
   margin-top: 25px;
+}
+
+.location-index-item-img > img {
+  border-radius: 10px;
 }
 
 .location-index-item-name {
@@ -155,4 +159,19 @@
 
 .location-index-item-contact-details > label {
   display: block;
+}
+
+.location-index {
+  margin: 15px;
+  float: left;
+}
+
+.map {
+  width: 400px;
+  height: 400px;
+}
+
+.search-results-map {
+  margin-top: 30px;
+  float: right;
 }

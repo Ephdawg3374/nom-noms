@@ -5,13 +5,47 @@ var LocationSearch = React.createClass({
     return (
       {
         type: "",
-        address: "",
       }
     );
   },
 
-  getCurrentLocation: function () {
+  componentDidMount: function () {
+    this.setCurrentLocation();
+  },
 
+  setCurrentLocation: function () {
+    navigator.geolocation.getCurrentPosition(function(e) {
+      var lat = e.coords.latitude;
+      var lng = e.coords.longitude;
+
+      this.setAddressStateToCityState(lat, lng);
+    }.bind(this));
+  },
+
+  setAddressStateToCityState: function (lat, lng) {
+    var latlng = new google.maps.LatLng(lat, lng);
+    var geocoder = new google.maps.Geocoder();
+
+    var city, state;
+
+    geocoder.geocode({'latLng': latlng}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        nearestLocation = results[0];
+
+        for (var i = 0; i < nearestLocation.address_components.length; i++) {
+          for (var j = 0; j < nearestLocation.address_components[i].types.length; j++) {
+            if (nearestLocation.address_components[i].types[j] == "administrative_area_level_1") {
+                city = nearestLocation.address_components[i].long_name;
+                state = nearestLocation.address_components[i].short_name;
+                break;
+            }
+          }
+        }
+      }
+      var cityState = city + ", " + state;
+
+      this.setState({address: cityState});
+    }.bind(this));
   },
 
   handleSearchSubmit: function (event) {

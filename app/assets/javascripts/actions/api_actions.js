@@ -1,8 +1,9 @@
 window.ApiActions = {
-  receiveSearchResults: function (searchResults) {
+  receiveSearchResults: function (searchResults, map) {
     AppDispatcher.dispatch({
       actionType: SearchConstants.RECEIVE_SEARCH_RESULTS,
-      searchResults: searchResults
+      searchResults: searchResults,
+      map: map
     });
   }
 };

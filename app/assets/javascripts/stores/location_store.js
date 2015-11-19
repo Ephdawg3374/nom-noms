@@ -1,4 +1,4 @@
-(function(root) {
+(function() {
   var _locations = [];
   var LOCATION_INDEX_CHANGE = "LOCATION_INDEX_CHANGE";
 
@@ -32,4 +32,4 @@
       }
     })
   });
-}(this));
+}());
