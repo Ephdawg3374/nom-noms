@@ -2,7 +2,7 @@ class Api::LocationsController < ApplicationController
   def index
     if !params[:search].nil?
       @locations = Location.find_by_search_params(params[:search])
-      
+
       unless @locations.empty?
         render :index
       else

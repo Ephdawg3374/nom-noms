@@ -59,19 +59,34 @@ var LocationSearch = React.createClass({
     }.bind(this));
   },
 
-  handleSearchSubmit: function (event) {
-    event.preventDefault();
-
-    var locationForm = event.currentTarget;
-
+  buildSearchObject: function (searchType, searchArea) {
     var search = {
-      searchType: locationForm[0].value.toLowerCase(),
-      searchArea: locationForm[1].value,
+      searchType: searchType || this.state.locType,
+      searchArea: searchArea || this.state.locArea,
       distanceRange: this.state.distanceRange,
       priceRange: this.state.priceRange
     };
 
-    ApiLocationUtil.fetchLocations(search);
+    return search;
+  },
+
+  handleSearchSubmit: function (event) {
+    event.preventDefault();
+
+    var locationForm = event.currentTarget;
+    var searchType = locationForm[0].value.toLowerCase();
+    var searchArea = locationForm[1].value;
+
+    var search = this.buildSearchObject(searchType, searchArea);
+
+    ApiLocationUtil.fetchLocations(search, function () {
+      this.setState(
+        {
+          showLocTypeAutoCompleteList: false,
+          showLocAreaAutoCompleteList: false
+        }
+      );
+    }.bind(this));
 
     this.history.pushState(null, "/search_results/");
   },
@@ -122,11 +137,25 @@ var LocationSearch = React.createClass({
 
   setPriceRangeFilter: function (event) {
     event.preventDefault();
+
+    if (LocationStore.all().length > 0) {
+      var search = this.buildSearchObject();
+      search.priceRange = event.currentTarget.value;
+      ApiLocationUtil.fetchLocations(search);
+    }
+
     this.setState({ priceRange: event.currentTarget.value });
   },
 
   setDistanceRangeFilter: function (event) {
     event.preventDefault();
+
+    if (LocationStore.all().length > 0) {
+      var search = this.buildSearchObject();
+      search.distanceRange = event.currentTarget.value;
+      ApiLocationUtil.fetchLocations(search);
+    }
+    
     this.setState({ distanceRange: event.currentTarget.value });
   },
 
