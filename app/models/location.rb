@@ -51,7 +51,7 @@ class Location < ActiveRecord::Base
       location_type = search_params[:searchType].downcase
     end
 
-    location_address = Location.parse_location(search_params[:searchAddress])
+    location_address = Location.parse_location(search_params[:searchArea])
 
     locations_by_params = Location.where(
       ("location_type LIKE ?"),
@@ -60,8 +60,8 @@ class Location < ActiveRecord::Base
 
     Location.search_within_distance(
       locations_by_params,
-      search_params[:searchDistance].to_f,
-      search_params[:searchAddress]
+      search_params[:distanceRange].to_f,
+      search_params[:searchArea]
     )
 
   end

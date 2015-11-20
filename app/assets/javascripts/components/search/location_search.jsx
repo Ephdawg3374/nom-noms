@@ -7,7 +7,8 @@ var LocationSearch = React.createClass({
         locType: "",
         locArea: "",
         // default distance radius is 10 miles
-        searchDistance: 1609, // meters
+        distanceRange: "1609.34", // meters
+        priceRange: "All",
         showLocTypeAutoCompleteList: false,
         showLocAreaAutoCompleteList: false
       }
@@ -65,8 +66,9 @@ var LocationSearch = React.createClass({
 
     var search = {
       searchType: locationForm[0].value,
-      searchAddress: locationForm[1].value,
-      searchDistance: this.state.searchDistance
+      searchArea: locationForm[1].value,
+      distanceRange: this.state.distanceRange,
+      priceRange: this.state.priceRange
     };
 
     ApiLocationUtil.fetchLocations(search);
@@ -118,6 +120,14 @@ var LocationSearch = React.createClass({
     );
   },
 
+  setPriceRangeFilter: function (event) {
+    this.setState({ priceRange: event.currentTarget.value });
+  },
+
+  setDistanceFilter: function (event) {
+    this.setState({ distanceRange: event.currentTarget.value });
+  },
+
   render: function () {
     var locTypeAutoCompleteList, locAreaAutoCompleteList;
 
@@ -138,6 +148,25 @@ var LocationSearch = React.createClass({
         return <li key={i} onClick={this.selectLocArea} value={locAreaMatch}>{locAreaMatch}</li>;
       }.bind(this));
     }
+
+    var priceRangeButtons = priceRangeMapping.map(function (priceRange, idx) {
+      var klass = this.state.priceRange === priceRange[idx] ? "active" : "";
+
+      return <PriceRangeButton
+        val={priceRange[idx]}
+        klass={klass}
+        setPriceRangeFilter={this.setPriceRangeFilter} />;
+    }.bind(this));
+
+    var distanceRangeButtons = distanceRangeMapping.map(function (distanceRange, idx) {
+      var klass = this.state.distanceRange === distanceRange[idx][0] ? "active" : "";
+
+      return <DistanceRangeButton
+        val={distanceRange[idx][0]}
+        label={distanceRange[idx][1]}
+        klass={klass}
+        setDistanceRangeFilter={this.setDistanceRangeFilter} />;
+    }.bind(this));
 
     return (
       <div className="location-search group">
@@ -170,6 +199,18 @@ var LocationSearch = React.createClass({
 
             <ul className="location-area-autocomplete">
               { locAreaAutoCompleteList }
+            </ul>
+
+          </div>
+
+          <div className="location-filter-options-wrapper-group">
+
+            <ul className="location-filter-price-range">
+              { priceRangeButtons }
+            </ul>
+
+            <ul className="location-filter-distance">
+              { distanceRangeButtons }
             </ul>
 
           </div>

@@ -1,11 +1,15 @@
 var UserLoggedOut = React.createClass({
   mixins: [ReactRouter.History],
 
-  goToSignUpPage: function () {
+  goToSignUpPage: function (event) {
+    event.preventDefault();
+
     this.history.pushState(null, "/users/new");
   },
 
-  goToLoginPage: function () {
+  goToLoginPage: function (event) {
+    event.preventDefault();
+    
     this.history.pushState(null, "/session/new");
   },
 

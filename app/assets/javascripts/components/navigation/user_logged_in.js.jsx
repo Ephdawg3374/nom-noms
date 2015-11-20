@@ -1,6 +1,6 @@
 var UserLoggedIn = React.createClass({
-  handleUserLogout: function () {
-    
+  handleUserLogout: function (event) {
+    event.preventDefault();
   },
 
   render: function () {

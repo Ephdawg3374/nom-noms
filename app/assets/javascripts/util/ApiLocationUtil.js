@@ -1,5 +1,6 @@
 window.ApiLocationUtil = {
   fetchLocations: function (search) {
+    debugger;
     $.ajax({
       url: "api/locations",
       method: "GET",
