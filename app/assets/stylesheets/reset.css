@@ -1,0 +1,38 @@
+html, body, h1, h2, h3, div, ul, li, a, figure, button, textarea {
+  padding: 0;
+  border: 0;
+  margin: 0;
+
+  font: inherit;
+  vertical-align: inherit;
+  text-align: inherit;
+  text-decoration: inherit;
+  color: inherit;
+
+  background: transparent
+}
+
+ul {
+  list-style: none;
+}
+
+.group:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+body {
+  font-family: sans-serif;
+  background: #eee;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+button {
+  cursor: pointer;
+}

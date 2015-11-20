@@ -54,7 +54,7 @@ class Location < ActiveRecord::Base
     location_address = Location.parse_location(search_params[:searchAddress])
 
     locations_by_params = Location.where(
-      ("location_type = ?"),
+      ("location_type LIKE ?"),
       location_type
     )
 

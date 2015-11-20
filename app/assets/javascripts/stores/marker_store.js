@@ -30,7 +30,7 @@
 
       this.emit(MARKERS_UPDATED);
 
-      this.setMarkerLabelsToSearchIndices();
+      // this.setMarkerLabelsToSearchIndices();
     },
 
     setMarkerLabelsToSearchIndices: function () {

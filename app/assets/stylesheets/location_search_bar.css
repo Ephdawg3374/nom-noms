@@ -5,11 +5,11 @@
 
 .location-search-bars-wrapper {
   float: left;
+  margin: 15px 0 0 0;
 }
 
 .location-search-pseudo {
   position: relative;
-  top: -15px;
 }
 
 .location-pseudo-input-text {
@@ -22,7 +22,6 @@
 .location-search-input {
   width: 275px;
   height: 30px;
-  margin: 42px 0;
   padding-left: 50px;
   border-radius: 5px;
   border-color: lightgrey;
@@ -35,10 +34,10 @@
 }
 
 .location-search-button > button {
-  margin: 40px 20px 40px 40px;
+  margin: 40px 20px 40px 20px;
   font-size: 30px;
   vertical-align: middle;
-  cursor: pointer;
+  border-radius: 5px;
 }
 
 .location-search-button > button:hover {

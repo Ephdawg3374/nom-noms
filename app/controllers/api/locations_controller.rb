@@ -2,8 +2,8 @@ class Api::LocationsController < ApplicationController
   def index
     if !params[:search].nil?
       @locations = Location.find_by_search_params(params[:search])
-
-      if @locations
+      
+      unless @locations.empty?
         render :index
       else
         render json: { errors: ["No results found."] }, status: 404

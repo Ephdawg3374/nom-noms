@@ -7,7 +7,9 @@ var LocationSearch = React.createClass({
         locType: "",
         locArea: "",
         // default distance radius is 10 miles
-        searchDistance: 1609 // meters
+        searchDistance: 1609, // meters
+        showLocTypeAutoCompleteList: false,
+        showLocAreaAutoCompleteList: false
       }
     );
   },
@@ -75,31 +77,67 @@ var LocationSearch = React.createClass({
   autoCompleteLocationType: function (event) {
     locTypePartial = event.currentTarget.value;
 
-    this.setState({ locType: locTypePartial} );
+    this.setState(
+      {
+        locType: locTypePartial,
+        showLocTypeAutoCompleteList: true
+      }
+    );
 
-    ApiLocationUtil.fetchLocationTypes(locTypePartial);
+    ApiLocationUtil.fetchLocationTypes(locTypePartial.toLowerCase());
   },
 
 
   autoCompleteLocationArea: function (event) {
-    this.setState({ locArea: event.currentTarget.valut} );
+    locAreaPartial = event.currentTarget.value;
+
+    this.setState(
+      {
+        locArea: event.currentTarget.value,
+        showLocAreaAutoCompleteList: true
+      }
+    );
     // ApiLocationUtil.fetchLocationAreas(this.state.locArea);
   },
 
   selectLocArea: function (event) {
-    this.setState({ locArea: event.currentTarget.innerText });
+    this.setState(
+      {
+        locArea: event.currentTarget.innerText,
+        showLocAreaAutoCompleteList: false
+      }
+    );
   },
 
   selectLocType: function (event) {
-    this.setState({ locType: event.currentTarget.innerText });
+    this.setState(
+      {
+        locType: event.currentTarget.innerText,
+        showLocTypeAutoCompleteList: false
+      }
+    );
   },
 
   render: function () {
+    var locTypeAutoCompleteList, locAreaAutoCompleteList;
+
     var handleKeyPress = function (e) {
       if (e.which === 13) {
         this.handleSearchSubmit(e);
       }
     };
+
+    if (this.state.showLocTypeAutoCompleteList) {
+      locTypeAutoCompleteList = LocTypeAutoCompleteStore.matches().map(function (locTypeMatch, i) {
+        return <li key={i} onClick={this.selectLocType} value={locTypeMatch}>{locTypeMatch}</li>;
+      }.bind(this));
+    }
+
+    if (this.state.showLocAreaAutoCompleteList) {
+      locAreaAutoCompleteList = LocAreaAutoCompleteStore.matches().map(function (locAreaMatch, i) {
+        return <li key={i} onClick={this.selectLocArea} value={locAreaMatch}>{locAreaMatch}</li>;
+      }.bind(this));
+    }
 
     return (
       <div className="location-search group">
@@ -117,11 +155,7 @@ var LocationSearch = React.createClass({
                 value={this.state.locType}/>
 
               <ul className="location-type-autocomplete-list">
-                {
-                  LocTypeAutoCompleteStore.matches().map(function (locTypeMatch, i) {
-                    return <li key={i} onClick={this.selectLocType} value={locTypeMatch}>{locTypeMatch}</li>;
-                  }.bind(this))
-                }
+                { locTypeAutoCompleteList }
               </ul>
 
             </label>
@@ -135,12 +169,7 @@ var LocationSearch = React.createClass({
             </label>
 
             <ul className="location-area-autocomplete">
-              {
-                LocAreaAutoCompleteStore.matches().map(function (locAreaMatch, i) {
-                  return <li key={i} onClick={this.selectLocArea}>{locAreaMatch}</li>;
-                }.bind(this))
-              }
-
+              { locAreaAutoCompleteList }
             </ul>
 
           </div>
