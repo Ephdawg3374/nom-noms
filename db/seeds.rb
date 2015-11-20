@@ -68,8 +68,6 @@ end
   rand_img_number = rand(1..10)
   rand_loc_number = rand(2)
 
-  # still need to generate random lat/lng within bounds of NY/PA/NJ so
-  # map results look more legitimate
   Location.create!(
     location_type: location_types[rand_loc_img_type],
     img_url: "http://lorempixel.com/400/200/#{img_types[rand_loc_img_type]}/#{rand_img_number}",

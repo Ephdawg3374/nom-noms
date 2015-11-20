@@ -1,9 +1,20 @@
 var LocationIndex = React.createClass({
+  mixins: [ReactPersistentState],
+
   getInitialState: function () {
     return ({ locations: LocationStore.all() });
   },
 
   componentDidMount: function () {
+    this.setPId('location_index');
+    this.setPStorage(this.localStorage);
+    setInterval(function () {
+      this.setPState({
+        locations: this.state.locations
+      });
+    }.bind(this), 1000);
+    this.restorePState();
+
     LocationStore.addLocationIndexChangeListener(this._onChange);
     MarkerStore.addMarkersUpdatedListener(this._onMarkersUpdatedChange);
   },
