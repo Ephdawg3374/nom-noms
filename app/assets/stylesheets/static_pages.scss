@@ -24,7 +24,12 @@
   float: left;
 }
 
-.pseudo-input-text {
+.location-search-pseudo {
+  position: relative;
+  top: -15px;
+}
+
+.location-pseudo-input-text {
   position: relative;
   font-size: 18px;
   font-weight: 700;
@@ -46,7 +51,7 @@
   float: left;
 }
 
-.nav-logged-out > button {
+.nav-logged-out > button, .nav-logged-in > button {
   color: white;
   background: #b20000;
   font-size: 16px;
@@ -55,20 +60,7 @@
   padding: 3px;
   margin: 20px 15px 0px 15px;
   border-radius: 3px;
-  border: 1px solid black;
-  cursor: pointer;
-}
-
-.nav-logged-in > button {
-  color: white;
-  background: #b20000;
-  font-size: 16px;
-  width: 100px;
-  text-align: center;
-  padding: 3px;
-  margin: 20px 15px 0px 15px;
-  border-radius: 3px;
-  border: 1px solid black;
+  border: 1px solid darkgrey;
   cursor: pointer;
 }
 
@@ -196,11 +188,20 @@
 
 .location-search-button {
   float: right;
-  margin: 34px 10px 34px 20px;
+  width: 60px;
+}
+
+.location-search-button > button {
+  margin: 40px 20px;
+  font-size: 30px;
+  vertical-align: middle;
   cursor: pointer;
 }
 
-.location-search-button > img {
-  width: 50px;
-  height: 50px;
+.location-search-button > button:hover {
+  text-shadow: 1px 1px 2px black;
+}
+
+.location-search-button > button:active {
+  box-shadow: inset 0 0 0 1px #27496d, inset 0 5px 30px #193047;
 }

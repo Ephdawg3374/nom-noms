@@ -4,18 +4,25 @@ var LocationSearch = React.createClass({
   getInitialState: function () {
     return (
       {
-        type: "",
-        address: "",
+        locType: "",
+        locArea: "",
         // default distance radius is 10 miles
-        distance: 1609 // meters
+        searchDistance: 1609 // meters
       }
     );
   },
 
   componentDidMount: function () {
     this.setCurrentLocation();
+
+    LocTypeAutoCompleteStore.addChangeListener(this._onChange);
   },
 
+  _onChange: function () {
+    this.forceUpdate();
+  },
+
+  // set current locaiton to current city
   setCurrentLocation: function () {
     navigator.geolocation.getCurrentPosition(function(e) {
       var lat = e.coords.latitude;
@@ -45,7 +52,7 @@ var LocationSearch = React.createClass({
         }
       }
 
-      this.setState({address: city});
+      this.setState({locArea: city});
     }.bind(this));
   },
 
@@ -57,7 +64,7 @@ var LocationSearch = React.createClass({
     var search = {
       searchType: locationForm[0].value,
       searchAddress: locationForm[1].value,
-      searchDistance: this.state.distance
+      searchDistance: this.state.searchDistance
     };
 
     ApiLocationUtil.fetchLocations(search);
@@ -65,14 +72,26 @@ var LocationSearch = React.createClass({
     this.history.pushState(null, "/search_results/");
   },
 
-  autoCompleteLocationType: function () {
-    ApiLocationUtil.fetchLocationTypes(this.state.type.toLowerCase());
+  autoCompleteLocationType: function (event) {
+    locTypePartial = event.currentTarget.value;
+
+    this.setState({ locType: locTypePartial} );
+
+    ApiLocationUtil.fetchLocationTypes(locTypePartial);
   },
 
-  autoCompleteLocationAddress: function () {
-    if (this.state.address.length > 2) {
-      ApiLocationUtil.fetchLocationAddresses(this.state.address);
-    }
+
+  autoCompleteLocationArea: function (event) {
+    this.setState({ locArea: event.currentTarget.valut} );
+    // ApiLocationUtil.fetchLocationAreas(this.state.locArea);
+  },
+
+  selectLocArea: function (event) {
+    this.setState({ locType: event.currentTarget.value });
+  },
+
+  selectLocType: function (event) {
+    this.setState({ locArea: event.currentTarget.value });
   },
 
   render: function () {
@@ -83,30 +102,47 @@ var LocationSearch = React.createClass({
     };
 
     return (
-      <div className="location-search">
-        <form onSubmit={ this.handleSearchSubmit }
-          onKeyPress={ handleKeyPress.bind(this) }>
+      <div className="location-search group">
+        <form onSubmit={ this.handleSearchSubmit } onKeyPress={ handleKeyPress.bind(this) }>
+
           <label className="location-search-pseudo">
-            <span className="pseudo-input-text">Find</span>
+            <span className="location-pseudo-input-text">Find</span>
             <input className="location-search-input"
               type="text"
-              valueLink={this.linkState("type")}
-              placeholder="  Location type (restaurant, bar, etc)"
-            />
+              placeholder="Location type (restaurant, bar, etc)"
+              onChange={this.autoCompleteLocationType}
+              value={this.state.locType}/>
           </label>
+
+          <ul className="location-type-autocomplete">
+            {
+              LocTypeAutoCompleteStore.matches().map(function (locTypeMatch, i) {
+                return <li key={i} onClick={this.selectLocType}>{locTypeMatch}</li>;
+              }.bind(this))
+            }
+          </ul>
 
           <label className="location-search-pseudo">
-            <span className="pseudo-input-text">Near</span>
+            <span className="location-pseudo-input-text">Near</span>
             <input className="location-search-input"
-                type="text"
-                valueLink={this.linkState("address")}
-              />
+              type="text"
+              onChange={this.autoCompleteLocationArea}
+              value={this.state.locArea}/>
           </label>
 
-          <button type="Submit"
-            className="location-search-button">
-            <img src={window.NomNomsApp.images.buttonImage}/>
-          </button>
+          <ul className="location-area-autocomplete">
+            {
+              LocAreaAutoCompleteStore.matches().map(function (locAreaMatch, i) {
+                return <li key={i} onClick={this.selectLocArea}>{locAreaMatch}</li>;
+              }.bind(this))
+            }
+
+          </ul>
+
+          <div className="location-search-button">
+            <button type="Submit">🔍</button>
+          </div>
+
         </form>
       </div>
     );

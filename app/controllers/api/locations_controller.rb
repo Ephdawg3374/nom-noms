@@ -1,20 +1,23 @@
 class Api::LocationsController < ApplicationController
   def index
-    # parsed_params = parse(params[:bounds])
-    #
-    # @locations = Bench.in_bounds(parsed_params)
-    @locations = Location.find_by_search_params(params[:search])
+    if !params[:search].nil?
+      @locations = Location.find_by_search_params(params[:search])
 
-    # distance = params[:search][:searchDistance]
-    # search_loc = params[:search][:searchAddress]
-    #
-    # @locations = Location.search_within_distance(locations_by_params)
-    if @locations
-      render :index
+      if @locations
+        render :index
+      else
+        render json: { errors: ["No results found."] }, status: 404
+      end
+    elsif !params[:locTypeAutoCompleteRequest].nil?
+      @location_types = Location.find_valid_location_types(params[:locTypeAutoCompleteRequest])
+      render json: @location_types
+    elsif !params[:locAddressAutoCompleteRequest].nil?
+      @location_areas = Location.find_valid_location_areas(params[:locAddressAutoCompleteRequest])
+      render json: @location_areas
     else
-      flash[:search_error] = "No results found."
-      render json: flash[:search_error]
+      render json: { errors: ["There was an error with your request"] }, status: 400
     end
+
   end
 
   def show

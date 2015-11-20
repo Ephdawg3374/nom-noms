@@ -18,22 +18,22 @@ window.ApiLocationUtil = {
       method: "GET",
       dataType: "json",
       contentType: "application/json",
-      data: {locTypePartial: locTypePartial},
+      data: {locTypeAutoCompleteRequest: locTypePartial},
       success: function (data) {
         ApiActions.receiveLocationTypes(data);
       }
     });
   },
 
-  fetchLocationAddresses: function (locAddressPartial) {
+  fetchLocationAreas: function (locAddressPartial) {
     $.ajax({
       url: "api/locations",
       method: "GET",
       dataType: "json",
       contentType: "application/json",
-      data: {locAddressPartial: locAddressPartial},
+      data: {locAddressAutoCompleteRequest: locAddressPartial},
       success: function (data) {
-        ApiActions.receiveLocationAddresses(data);
+        ApiActions.receiveLocationAreas(data);
       }
     });
   }

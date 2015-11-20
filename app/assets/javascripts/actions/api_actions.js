@@ -16,5 +16,31 @@ window.ApiActions = {
       searchResults: searchResults,
       latLngObjects: latLngObjects
     });
+  },
+
+  receiveLocationTypes: function (locTypesResults) {
+    var locTypes = [];
+
+    locTypesResults.forEach(function (locTypesResult) {
+      locTypes.push(locTypesResult.location_type);
+    });
+
+    AppDispatcher.dispatch({
+      actionType: SearchConstants.RECEIVE_AUTOCOMP_LOC_TYPES,
+      locTypes: locTypes
+    });
+  },
+
+  receiveLocationAreas: function (locAreasResults) {
+    // var locAreas = [];
+    //
+    // locAreasResults.forEach(function (locAreasResult) {
+    //   locAreas.push(locAreasResult[0].location_area);
+    // });
+
+    AppDispatcher.dispatch({
+      actionType: SearchConstants.RECEIVE_AUTOCOMP_LOC_AREAS,
+      locAreas: locAreas
+    });
   }
 };
