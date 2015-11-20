@@ -3,6 +3,10 @@
   width: 800px;
 }
 
+.location-search-filter-wrapper {
+
+}
+
 .location-search-bars-wrapper {
   float: left;
   margin: 15px 0 0 0;
@@ -23,29 +27,17 @@
   width: 275px;
   height: 30px;
   padding-left: 50px;
-  border-radius: 5px;
   border-color: lightgrey;
   font-size: 16px;
 }
 
 .location-search-button {
   float: right;
-  width: 60px;
+  margin-top: -60px;
 }
 
 .location-search-button > button {
-  margin: 40px 20px 40px 20px;
   font-size: 30px;
-  vertical-align: middle;
-  border-radius: 5px;
-}
-
-.location-search-button > button:hover {
-  text-shadow: 1px 1px 2px black;
-}
-
-.location-search-button > button:active {
-  box-shadow: inset 0 0 0 1px #27496d, inset 0 5px 30px #193047;
 }
 
 .location-type-autocomplete-list {
@@ -69,4 +61,32 @@
 
 .location-type-autocomplete-list > li:hover {
   background: #eee;
+}
+
+.location-filter-options-wrapper {
+  float: right;
+  margin: 15px 0 0 100px;
+}
+
+.location-filter-options-wrapper > * {
+  float: left;
+  padding: 0 65px 0 0;
+}
+
+.price-range-button, .distance-range-button {
+  padding: 7px;
+  text-align: center;
+  background: #b20000;
+  border: 1px solid darkgrey;
+  color: white;
+  font-size: 14px;
+}
+
+.price-range-button:hover, .distance-range-button:hover {
+  background-color:#bc3315;
+  text-shadow: 1px 1px 2px black;
+}
+
+.price-range-button.active, .distance-range-button.active {
+  box-shadow: inset 0 0 0 1px #27496d, inset 0 5px 30px #193047;
 }

@@ -30,12 +30,12 @@
   text-align: center;
   padding: 3px;
   margin: 20px 0 0 0;
-  border-radius: 5px;
   border: 1px solid darkgrey;
 }
 
 .nav-logged-out > button:hover, .nav-logged-in > button:hover {
   background-color:#bc3315;
+  text-shadow: 1px 1px 2px black;
 }
 
 .nav-logged-out > button:active, .nav-logged-in > button:active {

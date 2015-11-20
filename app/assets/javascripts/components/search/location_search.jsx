@@ -65,7 +65,7 @@ var LocationSearch = React.createClass({
     var locationForm = event.currentTarget;
 
     var search = {
-      searchType: locationForm[0].value,
+      searchType: locationForm[0].value.toLowerCase(),
       searchArea: locationForm[1].value,
       distanceRange: this.state.distanceRange,
       priceRange: this.state.priceRange
@@ -121,10 +121,12 @@ var LocationSearch = React.createClass({
   },
 
   setPriceRangeFilter: function (event) {
+    event.preventDefault();
     this.setState({ priceRange: event.currentTarget.value });
   },
 
   setDistanceFilter: function (event) {
+    event.preventDefault();
     this.setState({ distanceRange: event.currentTarget.value });
   },
 
@@ -153,8 +155,9 @@ var LocationSearch = React.createClass({
       var klass = this.state.priceRange === priceRange[idx] ? "active" : "";
 
       return <PriceRangeButton
+        key={idx}
         val={priceRange[idx]}
-        klass={klass}
+        klass={"price-range-button " + klass}
         setPriceRangeFilter={this.setPriceRangeFilter} />;
     }.bind(this));
 
@@ -162,57 +165,59 @@ var LocationSearch = React.createClass({
       var klass = this.state.distanceRange === distanceRange[idx][0] ? "active" : "";
 
       return <DistanceRangeButton
+        key={idx}
         val={distanceRange[idx][0]}
         label={distanceRange[idx][1]}
-        klass={klass}
+        klass={"distance-range-button " + klass}
         setDistanceRangeFilter={this.setDistanceRangeFilter} />;
     }.bind(this));
 
     return (
       <div className="location-search group">
-        <form onSubmit={ this.handleSearchSubmit } onKeyPress={ handleKeyPress.bind(this) }>
+        <form className="group" onSubmit={ this.handleSearchSubmit } onKeyPress={ handleKeyPress.bind(this) }>
+          <div className="location-search-filter-wrapper group">
+            <div className="location-search-bars-wrapper group">
+              <label className="location-search-pseudo">
 
-          <div className="location-search-bars-wrapper group">
-            <label className="location-search-pseudo">
+                <span className="location-pseudo-input-text">Find</span>
 
-              <span className="location-pseudo-input-text">Find</span>
+                <input className="location-search-input"
+                  type="text"
+                  placeholder="Location type (restaurant, bar, etc)"
+                  onChange={this.autoCompleteLocationType}
+                  value={this.state.locType}/>
 
-              <input className="location-search-input"
-                type="text"
-                placeholder="Location type (restaurant, bar, etc)"
-                onChange={this.autoCompleteLocationType}
-                value={this.state.locType}/>
+                <ul className="location-type-autocomplete-list">
+                  { locTypeAutoCompleteList }
+                </ul>
 
-              <ul className="location-type-autocomplete-list">
-                { locTypeAutoCompleteList }
+              </label>
+
+              <label className="location-search-pseudo">
+                <span className="location-pseudo-input-text">Near</span>
+                <input className="location-search-input"
+                  type="text"
+                  onChange={this.autoCompleteLocationArea}
+                  value={this.state.locArea}/>
+              </label>
+
+              <ul className="location-area-autocomplete">
+                { locAreaAutoCompleteList }
               </ul>
 
-            </label>
+            </div>
 
-            <label className="location-search-pseudo">
-              <span className="location-pseudo-input-text">Near</span>
-              <input className="location-search-input"
-                type="text"
-                onChange={this.autoCompleteLocationArea}
-                value={this.state.locArea}/>
-            </label>
+            <div className="location-filter-options-wrapper group">
 
-            <ul className="location-area-autocomplete">
-              { locAreaAutoCompleteList }
-            </ul>
+              <ul className="location-filter-price-range">
+                { priceRangeButtons }
+              </ul>
 
-          </div>
+              <ul className="location-filter-distance">
+                { distanceRangeButtons }
+              </ul>
 
-          <div className="location-filter-options-wrapper-group">
-
-            <ul className="location-filter-price-range">
-              { priceRangeButtons }
-            </ul>
-
-            <ul className="location-filter-distance">
-              { distanceRangeButtons }
-            </ul>
-
+            </div>
           </div>
 
           <div className="location-search-button">
