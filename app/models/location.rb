@@ -129,8 +129,12 @@ class Location < ActiveRecord::Base
   end
 
   def self.find_valid_location_types(loc_type_partial)
+    if loc_type_partial.length == 0
+      return []
+    end
+
     loc_type_partial = loc_type_partial + "%"
-    
+
     Location.select(:location_type)
       .where("location_type LIKE ?", loc_type_partial)
       .distinct.limit(4)

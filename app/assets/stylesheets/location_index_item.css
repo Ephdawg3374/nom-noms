@@ -1,0 +1,66 @@
+.location-index-item {
+  width: 400px;
+  margin-bottom: 20px;
+  border-top: 1px solid #ccc;
+}
+
+.location-index-item:last-child {
+  border-bottom: 1px solid #ccc;
+}
+
+.location-index-item:last-child > .location-index-item-contact-details {
+  margin: 10px 10px 25px 10px;
+}
+
+
+.location-index-item-img {
+  margin-top: 25px;
+}
+
+.location-index-item-img > img {
+  border-radius: 10px;
+}
+
+.location-index-item-name {
+  font-size: 26px;
+  color: blue;
+}
+
+.location-index-item-name > a {
+  cursor: pointer;
+}
+
+.location-index-item-details {
+  width: 100px;
+  float: left;
+  margin: 10px 10px 0 10px;
+}
+
+.location-index-item-contact-details {
+  width: 200px;
+  float: right;
+  margin: 10px 10px 0 10px;
+}
+
+.location-index-item-details > label {
+  display: block;
+}
+
+.location-index-item-contact-details > label {
+  display: block;
+}
+
+.location-index-item-description {
+  display: block;
+  margin: 5px 10px;
+}
+
+.location-index-item-website {
+  display: block;
+  color: #0000EE;
+  margin: 5px 10px;
+}
+
+.location-index-item-website > a {
+  cursor: pointer;
+}
