@@ -45,24 +45,21 @@ class Location < ActiveRecord::Base
 
   def self.find_by_search_params(search_params)
     location_type = search_params[:searchType]
+    price_range = search_params[:priceRange]
+    distance = search_params[:distanceRange].to_f
+    area = search_params[:searchArea]
+
     price_range = "%" if search_params[:priceRange] == "All"
 
     # pull all location types if no type specified
     location_type = "%" if location_type.empty?
 
-    location_address = Location.parse_location(search_params[:searchArea])
-
     locations_by_params = Location.where(
-      ("location_type LIKE ? AND price_range LIKE ?"),
+      "location_type LIKE ? AND price_range LIKE ?",
       location_type, price_range
     )
-
-    Location.search_within_distance(
-      locations_by_params,
-      search_params[:distanceRange].to_f,
-      search_params[:searchArea]
-    )
-
+    
+    Location.search_within_distance(locations_by_params, distance, area)
   end
 
   def self.calc_distance(coord1, coord2)
