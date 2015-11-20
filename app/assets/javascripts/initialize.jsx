@@ -11,7 +11,7 @@ $(document).on('ready', function () {
      <Route path="/users/new" component={NewUserPage}/>
      <Route path="/session/new" component={LogInPage}/>
      <Route path="/search_results" component={SearchResultsPage}/>
-     <Route path="/location/:location_name" component={LocationShowPage}/>
+     <Route path="/location/:id" component={LocationShowPage}/>
    </Route>
   );
 

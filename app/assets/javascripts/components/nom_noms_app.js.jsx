@@ -15,7 +15,9 @@ var NomNomsApp = React.createClass({
      this.history.pushState(null, "/login");
    }
 
-   this.setState({currentUser: CurrentUserStore.currentUser()});
+   this.setState(
+     {currentUser: CurrentUserStore.currentUser()}
+   );
   },
 
   render: function () {
