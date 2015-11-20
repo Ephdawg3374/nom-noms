@@ -125,7 +125,7 @@ var LocationSearch = React.createClass({
     this.setState({ priceRange: event.currentTarget.value });
   },
 
-  setDistanceFilter: function (event) {
+  setDistanceRangeFilter: function (event) {
     event.preventDefault();
     this.setState({ distanceRange: event.currentTarget.value });
   },
