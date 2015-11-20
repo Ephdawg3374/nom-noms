@@ -9,6 +9,8 @@
 * UsersController (create, new)
 * SessionsController (create, new, destroy)
 * Api::LocationsController (index, show)
+* Api::UsersController (create, update, destroy)
+* Api::SessionController (create, destroy)
 
 ### Views
 * users/new.html.erb

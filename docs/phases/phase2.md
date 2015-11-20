@@ -22,16 +22,21 @@
 ### Stores
 * LocationStore
 * MarkerStore
-* FilterParamStore
+* LocAreaAutoCompleteStore
+* LocTypeAutoCompleteStore
 
 ### Actions
 * ApiLocationActions.receiveLocations
-* FilterActions.updateFilter
+* ApiLocationActions.receiveLocationTypes
+* ApiLocationActions.receiveLocationAreas
 
 ### ApiUtil
 * ApiLocationUtil.fetchLocations
+* ApiLocationUtil.fetchLocationTypes
+* ApiLocationUtil.fetchLocationAreas
 
 ## Gems/Libraries
 * Flux Dispatcher
 * React
 * React Router
+* React PState
