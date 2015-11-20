@@ -20,8 +20,12 @@
 
 ## Flux
 ### Views (React Components)
+* LogInPage
+* NewUserPage
 
 ### Stores
+* UserStore
+* CurrentUserStore
 
 ### Actions
 

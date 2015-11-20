@@ -1,7 +1,7 @@
 (function() {
   var _locations = [];
   var _latLngObjects = [];
-  var LOCATION_INDEX_CHANGE = "LOCATION_INDEX_CHANGE";
+  var CHANGE_EVENT = "CHANGE_EVENT";
 
   window.LocationStore = window.LocationStore || $.extend({}, EventEmitter.prototype, {
     resetLocations: function (searchResults) {
@@ -21,15 +21,15 @@
     },
 
     addLocationIndexChangeListener: function (callback) {
-      this.on(LOCATION_INDEX_CHANGE, callback);
+      this.on(CHANGE_EVENT, callback);
     },
 
     removeLocationIndexChangeListener: function (callback) {
-      this.removeListener(LOCATION_INDEX_CHANGE, callback);
+      this.removeListener(CHANGE_EVENT, callback);
     },
 
     emitChange: function () {
-      this.emit(LOCATION_INDEX_CHANGE);
+      this.emit(CHANGE_EVENT);
     },
 
     dispatcherId: AppDispatcher.register(function (payload) {

@@ -8,20 +8,20 @@
       return _markers.slice();
     },
 
-    updateMarkersFromLocationStore: function (map) {
+    updateMarkersFromLocationStore: function (map, locations) {
       var markers = _markers.slice();
+      var locationsToCheck = locations || LocationStore.all();
 
       markers.forEach(function (marker) {
-       if (!this.markerIncludedInLocationStore(marker)) {
+       if (!this.markerIncludedInLocationStore(marker, locationsToCheck)) {
          marker.setMap(null);
          markers.splice(markers.indexOf(marker), 1);
         }
       }.bind(this));
 
-      LocationStore.all().forEach(function (location) {
+      locationsToCheck.forEach(function (location) {
         if (!this.locationIncludedInMarkerStore(location)) {
-          var newMarker = this.createNewMarker(location);
-          newMarker.setMap(map);
+          var newMarker = this.createNewMarker(map, location);
           markers.push(newMarker);
         }
       }.bind(this));
@@ -60,10 +60,10 @@
       );
     },
 
-    markerIncludedInLocationStore: function (marker) {
+    markerIncludedInLocationStore: function (marker, locations) {
       var result = false;
 
-      LocationStore.all().forEach(function (location) {
+      locations.forEach(function (location) {
         if (location.id === marker.locationId) {
           result = true;
         }
@@ -97,12 +97,13 @@
       return result;
     },
 
-    createNewMarker: function (location, idx) {
+    createNewMarker: function (map, location) {
       var coord = {lat: location.lat, lng: location.lng};
 
       var marker = new google.maps.Marker({
         position: coord,
-        locationId: location.id
+        locationId: location.id,
+        map: map
       });
 
       return marker;

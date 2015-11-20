@@ -5,20 +5,6 @@ $(document).on('ready', function () {
   var IndexRoute = ReactRouter.IndexRoute;
   var rootEl = document.getElementById('content');
 
-  var NomNomsApp = React.createClass({
-    render: function () {
-      return (
-        <div>
-          <header className="header">
-            <NavigationBar />
-          </header>
-
-          { this.props.children }
-        </div>
-     );
-    }
-  });
-
   var routes = (
    <Route path="/" component={NomNomsApp}>
      <IndexRoute component={HomePage}/>

@@ -1,5 +1,5 @@
 var LocationSearch = React.createClass({
-  mixins: [React.addons.LinkedStateMixin, ReactRouter.History],
+  mixins: [ReactPersistentState, ReactRouter.History],
 
   getInitialState: function () {
     return (
@@ -16,9 +16,31 @@ var LocationSearch = React.createClass({
   },
 
   componentDidMount: function () {
+    // this.setPId('location_search_params');
+    // this.setPStorage(this.localStorage);
+    // this.restorePState();
+    //
+    // this.intervalId = setInterval(function () {
+    //   this.setPState({
+    //     locType: this.state.locType,
+    //     locArea: this.state.locArea,
+    //     // default distance radius is 10 miles
+    //     distanceRange: this.state.distanceRange, // meters
+    //     priceRange: this.state.priceRange,
+    //     showLocTypeAutoCompleteList: this.state.showLocTypeAutoCompleteList,
+    //     showLocAreaAutoCompleteList: this.state.showLocAreaAutoCompleteList
+    //   });
+    // }.bind(this), 1000);
+
     this.setCurrentLocation();
 
     LocTypeAutoCompleteStore.addChangeListener(this._onChange);
+  },
+
+  componentWillUnmount: function () {
+    clearInterval(this.id);
+
+    LocTypeAutoCompleteStore.removeChangeListener(this._onChange);
   },
 
   _onChange: function () {
@@ -155,7 +177,7 @@ var LocationSearch = React.createClass({
       search.distanceRange = event.currentTarget.value;
       ApiLocationUtil.fetchLocations(search);
     }
-    
+
     this.setState({ distanceRange: event.currentTarget.value });
   },
 

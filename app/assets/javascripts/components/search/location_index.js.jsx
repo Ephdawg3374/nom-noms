@@ -8,8 +8,12 @@ var LocationIndex = React.createClass({
   componentDidMount: function () {
     this.setPId('location_index');
     this.setPStorage(this.localStorage);
-
     this.restorePState();
+
+    if (localStorage.location_index) {
+      var locations = JSON.parse(localStorage.location_index);
+      this.repopulateLocationStore(locations);
+    }
 
     LocationStore.addLocationIndexChangeListener(this._onChange);
     MarkerStore.addMarkersUpdatedListener(this._onMarkersUpdatedChange);
@@ -18,6 +22,10 @@ var LocationIndex = React.createClass({
   componentWillUnmount: function () {
     LocationStore.removeLocationIndexChangeListener(this._onChange);
     MarkerStore.removeMarkersUpdatedListener(this._onMarkersUpdatedChange);
+  },
+
+  repopulateLocationStore: function (locations) {
+    LocationStore.resetLocations(locations);
   },
 
   _onChange: function () {

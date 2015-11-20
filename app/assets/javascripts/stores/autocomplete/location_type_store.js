@@ -1,6 +1,6 @@
 (function() {
   var _locTypeMatches = [];
-  var LOC_TYPES_CHANGED = "LOC_TYPES_CHANGED";
+  var CHANGE_EVENT = "CHANGE_EVENT";
 
   LocTypeAutoCompleteStore = window.LocTypeAutoCompleteStore = $.extend({}, EventEmitter.prototype, {
     matches: function () {
@@ -12,18 +12,18 @@
     },
 
     addChangeListener: function (callback) {
-      this.on(LOC_TYPES_CHANGED, callback);
+      this.on(CHANGE_EVENT, callback);
     },
 
     removeChangeListener: function (callback) {
-      this.removeListener(LOC_TYPES_CHANGED, callback);
+      this.removeListener(CHANGE_EVENT, callback);
     },
 
     dispatcherId: AppDispatcher.register(function (payload) {
       switch (payload.actionType) {
         case SearchConstants.RECEIVE_AUTOCOMP_LOC_TYPES:
           LocTypeAutoCompleteStore.resetLocTypeMatches(payload.locTypes);
-          LocTypeAutoCompleteStore.emit(LOC_TYPES_CHANGED);
+          LocTypeAutoCompleteStore.emit(CHANGE_EVENT);
           break;
       }
     })

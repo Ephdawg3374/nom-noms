@@ -10,8 +10,14 @@ var LogInPage = React.createClass({
     );
   },
 
-  handleLoginSubmit: function () {
+  handleLoginSubmit: function (event) {
+    event.preventDefault();
 
+    var credentials = JSON.stringify($(event.currentTarget));
+
+     SessionsApiUtil.login(credentials, function () {
+       this.history.pushState(null, "/users");
+     }.bind(this));
   },
 
   render: function () {
