@@ -10,5 +10,11 @@
 
 .search-results-map {
   margin-top: 30px;
-  float: right;
+  position: fixed;
+  left: 52%;
+}
+
+.search-results-map > .map {
+  width: 400px;
+  height: 620px;
 }

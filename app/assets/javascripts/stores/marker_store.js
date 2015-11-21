@@ -9,35 +9,37 @@
     },
 
     updateMarkersFromLocationStore: function (map, locations) {
-      var markers = _markers.slice();
-      var locationsToCheck = locations || LocationStore.all();
+      var newLocations = locations || LocationStore.all();
 
-      markers.forEach(function (marker) {
-       if (!this.markerIncludedInLocationStore(marker, locationsToCheck)) {
-         marker.setMap(null);
-         markers.splice(markers.indexOf(marker), 1);
-        }
-      }.bind(this));
+      this.removeOldMarkers();
 
-      locationsToCheck.forEach(function (location) {
-        if (!this.locationIncludedInMarkerStore(location)) {
-          var newMarker = this.createNewMarker(map, location);
-          markers.push(newMarker);
-        }
-      }.bind(this));
-
-      _markers = markers;
+      this.createNewMarkers(map, newLocations);
 
       this.emit(MARKERS_UPDATED);
 
       // this.setMarkerLabelsToSearchIndices();
     },
 
-    setMarkerLabelsToSearchIndices: function () {
-      _markers.forEach(function (marker, idx) {
-        marker.set('label', (idx + 1).toString());
+    removeOldMarkers: function () {
+      _markers.forEach(function (marker) {
+        marker.setMap(null);
       });
+
+      _markers = [];
     },
+
+    createNewMarkers: function (map, newLocations) {
+      newLocations.forEach(function (location) {
+        var marker = this.createNewMarker(map, location);
+        _markers.push(marker);
+      }.bind(this));
+    },
+
+    // setMarkerLabelsToSearchIndices: function () {
+    //   _markers.forEach(function (marker, idx) {
+    //     marker.set('label', (idx + 1).toString());
+    //   });
+    // },
 
     determineMapBoundsAndSetCenter: function (map) {
       var zoomChangeBoundsListener =
@@ -51,25 +53,14 @@
         latLngBounds.extend(latLng);
       });
 
-      map.setCenter(latLngBounds.getCenter());
-      map.fitBounds(latLngBounds);
+      // map.setCenter(latLngBounds.getCenter());
+      // map.fitBounds(latLngBounds);
+      map.panTo(latLngBounds.getCenter());
 
       setTimeout(function() {
           google.maps.event.removeListener(zoomChangeBoundsListener);
         },2000
       );
-    },
-
-    markerIncludedInLocationStore: function (marker, locations) {
-      var result = false;
-
-      locations.forEach(function (location) {
-        if (location.id === marker.locationId) {
-          result = true;
-        }
-      });
-
-      return result;
     },
 
     findMatchingMarker: function (location) {
@@ -83,18 +74,6 @@
         }
       }
       return matchedMarker;
-    },
-
-    locationIncludedInMarkerStore: function (location) {
-      var result = false;
-
-      _markers.forEach(function (marker) {
-        if (marker.locationId === location.id) {
-          result = true;
-        }
-      });
-
-      return result;
     },
 
     createNewMarker: function (map, location) {
