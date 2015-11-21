@@ -23,7 +23,7 @@
   left: 45px;
 }
 
-.location-search-input {
+.location-type-search-input, .location-area-search-input {
   width: 275px;
   height: 30px;
   padding-left: 50px;

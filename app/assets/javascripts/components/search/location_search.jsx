@@ -16,21 +16,20 @@ var LocationSearch = React.createClass({
   },
 
   componentDidMount: function () {
-    // this.setPId('location_search_params');
-    // this.setPStorage(this.localStorage);
-    // this.restorePState();
-    //
-    // this.intervalId = setInterval(function () {
-    //   this.setPState({
-    //     locType: this.state.locType,
-    //     locArea: this.state.locArea,
-    //     // default distance radius is 10 miles
-    //     distanceRange: this.state.distanceRange, // meters
-    //     priceRange: this.state.priceRange,
-    //     showLocTypeAutoCompleteList: this.state.showLocTypeAutoCompleteList,
-    //     showLocAreaAutoCompleteList: this.state.showLocAreaAutoCompleteList
-    //   });
-    // }.bind(this), 1000);
+    this.setPId('location_search_params');
+    this.setPStorage(this.localStorage);
+    this.restorePState();
+
+    this.intervalId = setInterval(function () {
+      this.setPState({
+        locType: "",
+        locArea: this.state.locArea,
+        distanceRange: this.state.distanceRange,
+        priceRange: this.state.priceRange,
+        showLocTypeAutoCompleteList: this.state.showLocTypeAutoCompleteList,
+        showLocAreaAutoCompleteList: this.state.showLocAreaAutoCompleteList
+      });
+    }.bind(this), 1000);
 
     this.setCurrentLocation();
 
@@ -38,7 +37,7 @@ var LocationSearch = React.createClass({
   },
 
   componentWillUnmount: function () {
-    clearInterval(this.id);
+    clearInterval(this.intervalId);
 
     LocTypeAutoCompleteStore.removeChangeListener(this._onChange);
   },
@@ -96,8 +95,8 @@ var LocationSearch = React.createClass({
     event.preventDefault();
 
     var locationForm = event.currentTarget;
-    var searchType = locationForm[0].value.toLowerCase();
-    var searchArea = locationForm[1].value;
+    var searchType = this.state.locType.toLowerCase();
+    var searchArea = this.state.locArea;
 
     var search = this.buildSearchObject(searchType, searchArea);
 
@@ -140,18 +139,22 @@ var LocationSearch = React.createClass({
   },
 
   selectLocArea: function (event) {
+    var locArea = event.currentTarget.innerText;
+
     this.setState(
       {
-        locArea: event.currentTarget.innerText,
+        locArea: locArea,
         showLocAreaAutoCompleteList: false
       }
     );
   },
 
   selectLocType: function (event) {
+    var locType = event.currentTarget.innerText;
+
     this.setState(
       {
-        locType: event.currentTarget.innerText,
+        locType: locType,
         showLocTypeAutoCompleteList: false
       }
     );
@@ -232,11 +235,11 @@ var LocationSearch = React.createClass({
 
                 <span className="location-pseudo-input-text">Find</span>
 
-                <input className="location-search-input"
+                <input className="location-type-search-input"
                   type="text"
+                  value={this.state.locType}
                   placeholder="Location type (restaurant, bar, etc)"
-                  onChange={this.autoCompleteLocationType}
-                  value={this.state.locType}/>
+                  onChange={this.autoCompleteLocationType}/>
 
                 <ul className="location-type-autocomplete-list">
                   { locTypeAutoCompleteList }
@@ -246,10 +249,10 @@ var LocationSearch = React.createClass({
 
               <label className="location-search-pseudo">
                 <span className="location-pseudo-input-text">Near</span>
-                <input className="location-search-input"
+                <input className="location-area-search-input"
                   type="text"
-                  onChange={this.autoCompleteLocationArea}
-                  value={this.state.locArea}/>
+                  value={this.state.locArea}
+                  onChange={this.autoCompleteLocationArea}/>
               </label>
 
               <ul className="location-area-autocomplete">
