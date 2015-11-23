@@ -31,7 +31,7 @@ var NavigationBar = React.createClass({
 
         <LocationSearch />
 
-        {authComponent}
+        { authComponent }
 
       </div>
     );

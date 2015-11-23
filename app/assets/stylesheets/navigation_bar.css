@@ -22,14 +22,28 @@
   padding: 0 20px;
 }
 
-.nav-logged-out > button, .nav-logged-in > button {
+.nav-logged-in {
+  margin: 14px 0 10px 0;
+}
+
+.nav-logged-out > button {
   color: white;
   background: #b20000;
   font-size: 16px;
   width: 100px;
   text-align: center;
   padding: 3px;
+  border: 1px solid darkgrey;
   margin: 20px 0 0 0;
+}
+
+.nav-logged-in > button {
+  color: white;
+  background: #b20000;
+  font-size: 12px;
+  width: 65px;
+  text-align: center;
+  padding: 2px;
   border: 1px solid darkgrey;
 }
 
@@ -40,4 +54,11 @@
 
 .nav-logged-out > button:active, .nav-logged-in > button:active {
   box-shadow: inset 0 0 0 1px #27496d, inset 0 5px 30px #193047;
+}
+
+.nav-logged-in-tiny-pic {
+  display: block;
+  border: 1px solid darkgrey;
+  width: 63px;
+  height: 63px;
 }

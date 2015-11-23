@@ -6,9 +6,14 @@ var UserLoggedIn = React.createClass({
   },
 
   render: function () {
+    var tinyPicUrl = CurrentUserStore.currentUser().tiny_url;
+
     return (
       <div className="nav-logged-in">
-        <button onClick={this.handleUserLogout}>
+        <a href="#" className="nav-logged-in-tiny-pic">
+          <img src={ tinyPicUrl } />
+        </a>
+        <button onClick={ this.handleUserLogout }>
           Log Out
         </button>
       </div>

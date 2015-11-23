@@ -7,7 +7,6 @@ var NomNomsApp = React.createClass({
 
   componentWillMount: function () {
    ApiSessionUtil.fetchCurrentUser();
-   localStorage.clear();
   },
 
   // _ensureLoggedIn: function () {

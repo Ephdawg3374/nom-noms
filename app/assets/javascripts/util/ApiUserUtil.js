@@ -1,12 +1,12 @@
 window.ApiUserUtil = {
-  create: function (user, callback) {
+  create: function (formData, callback) {
     $.ajax({
       url: "/api/users",
       method: "POST",
       processData: false,
-      contentType: "application/json",
+      contentType: false,
       dataType: "json",
-      data: JSON.stringify({ user: user }),
+      data: formData,
       success: function (data) {
         UserActions.receiveUser(data);
         CurrentUserActions.receiveCurrentUser(data);

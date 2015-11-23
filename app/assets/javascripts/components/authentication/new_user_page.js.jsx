@@ -21,13 +21,19 @@ var NewUserPage = React.createClass({
   handleNewUserSubmit: function (event) {
     event.preventDefault();
 
-    var newUser = {
-      username: this.state.username,
-      password: this.state.password,
-      profile_pic: this.state.imageFile
-    };
+    var formData = new FormData();
 
-    ApiUserUtil.create(newUser, function () {
+    formData.append("user[username]", this.state.username);
+    formData.append("user[password]", this.state.password);
+    formData.append("user[profile_pic]", this.state.imageFile);
+
+    // var newUser = {
+    //   username: this.state.username,
+    //   password: this.state.password,
+    //   profile_pic: this.state.imageFile
+    // };
+
+    ApiUserUtil.create(formData, function () {
      this.history.pushState(null, "/");
     }.bind(this));
   },

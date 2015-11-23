@@ -109,7 +109,8 @@ var LocationSearch = React.createClass({
       );
     }.bind(this));
 
-    this.history.pushState(null, "/search_results/");
+    this.history.pushState(null, "/search/?type=" + searchType + "?area=" + searchArea +
+                          "?price-range=" + this.state.priceRange + "?distance=" + this.state.distanceRange);
   },
 
   autoCompleteLocationType: function (event) {
