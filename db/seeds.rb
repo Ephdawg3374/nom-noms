@@ -1,17 +1,17 @@
 Location.destroy_all
 
 location_types = {
-  0 => "restaurant",
-  1 => "cafe",
-  2 => "gym",
-  3 => "library",
-  4 => "bar",
-  5 => "retail",
-  6 => "theater",
-  7 => "school",
-  8 => "barber",
-  9 => "park",
-  10 => "club"
+  0 => "Restaurant",
+  1 => "Cafe",
+  2 => "Gym",
+  3 => "Library",
+  4 => "Bar",
+  5 => "Retail",
+  6 => "Theater",
+  7 => "School",
+  8 => "Barber",
+  9 => "Park",
+  10 => "Club",
 }
 
 # placeholder images will be requested from http://lorempixel.com/
@@ -27,6 +27,25 @@ img_types = {
   8 => "people",
   9 => "nature",
   10 => "nightlife"
+}
+
+# locations that are restaurants, bars, or cafes will have cuisine types.
+# This field will be null for locations that are not restaurants.
+
+cuisine_types = {
+  0 => "Chinese",
+  1 => "Japanese",
+  2 => "Korean",
+  3 => "Italian",
+  4 => "American",
+  5 => "Sandwiches",
+  6 => "Dessert",
+  7 => "German",
+  8 => "Peruvian",
+  9 => "Sushi",
+  10 => "Latin",
+  11 => "Spanish",
+  12 => "Mediterranean"
 }
 
 # Longitudes and latidues for randomly generated locations will be bounded
@@ -68,7 +87,7 @@ end
   rand_img_number = rand(1..10)
   rand_loc_number = rand(2)
 
-  Location.create!(
+  new_loc = Location.new(
     location_type: location_types[rand_loc_img_type],
     img_url: "http://lorempixel.com/400/200/#{img_types[rand_loc_img_type]}/#{rand_img_number}",
     name: Faker::Company.name,
@@ -84,4 +103,10 @@ end
     lat: generate_random_lat,
     lng: generate_random_lng(locations[rand_loc_number][0])
   )
+
+  if rand_loc_img_type == 0 || rand_loc_img_type == 1 || rand_loc_img_type == 4
+    new_loc.cuisine = cuisine_types[rand(13)]
+  end
+
+  new_loc.save!
 end

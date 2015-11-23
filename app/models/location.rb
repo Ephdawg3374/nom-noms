@@ -3,7 +3,21 @@ class Location < ActiveRecord::Base
             :street_address, :city, :state, :zipcode, :lat, :lng,
             presence: true
 
-  def self.search_within_distance(locations, distance, search_location)
+  def self.find_locations(search_params)
+    distance = search_params[:distanceRange].to_f
+    area = search_params[:searchArea]
+
+    locations_within_distance = Location.search_within_distance(
+      distance,
+      area)
+
+    location_type = search_params[:searchType]
+    price_range = search_params[:priceRange]
+
+    Location.find_by_filters(location_type, price_range, locations_within_distance)
+  end
+
+  def self.search_within_distance(distance, search_location)
     # Distance will be in meters.
 
     search_location = Location.parse_location(search_location)[0]
@@ -31,19 +45,45 @@ class Location < ActiveRecord::Base
       search_location_coords = [40.730610, -73.935242]
     end
 
-    locations.each do |location|
-      loc_coord = [location.lat, location.lng]
-      loc_dist = Location.calc_distance(loc_coord, search_location_coords)
+    # locations.each do |location|
+    #   loc_coord = [location.lat, location.lng]
+    #   loc_dist = Location.calc_distance(loc_coord, search_location_coords)
+    #
+    #   if loc_dist < distance
+    #     locations_within_distance << location
+    #   end
+    # end
 
-      if loc_dist < distance
-        locations_within_distance << location
-      end
-    end
+    distance_query_params = { lat: search_location_coords[0], lng: search_location_coords[1], distance: distance }
 
-    locations_within_distance
+    Location.find_by_sql [
+      "SELECT
+        *
+      FROM
+        (
+          SELECT
+            locations.*,
+             asin(
+              sqrt(
+                sin(radians(:lat-lat)/2)^2 +
+                sin(radians(:lng-lng)/2)^2 *
+                cos(radians(:lat)) *
+                cos(radians(:lng))
+                )
+              ) * 7926.3352 AS distance
+          FROM
+            locations
+        ) AS loc_w_distance
+      WHERE
+        loc_w_distance.distance < :distance
+      ORDER BY
+        loc_w_distance.distance
+      LIMIT
+        100",
+      distance_query_params]
   end
 
-  def self.find_by_search_params(search_params)
+  def self.narrow_search_by_filters(loc_type, price_range, locations)
     location_type = search_params[:searchType]
     price_range = search_params[:priceRange]
     distance = search_params[:distanceRange].to_f
@@ -58,7 +98,7 @@ class Location < ActiveRecord::Base
       "location_type LIKE ? AND price_range LIKE ?",
       location_type, price_range
     )
-    
+
     Location.search_within_distance(locations_by_params, distance, area)
   end
 
@@ -129,11 +169,17 @@ class Location < ActiveRecord::Base
       return []
     end
 
-    loc_type_partial = loc_type_partial + "%"
+    loc_type_partial = loc_type_partial.capitalize + "%"
 
-    Location.select(:location_type)
+    types = Location.select(:location_type)
       .where("location_type LIKE ?", loc_type_partial)
-      .distinct.limit(4)
+      .distinct.limit(3)
+
+    cuisines = Location.select(:cuisine)
+      .where("cuisine LIKE ?", loc_type_partial)
+      .distinct.limit(3)
+
+    types + cuisines
   end
 
 end

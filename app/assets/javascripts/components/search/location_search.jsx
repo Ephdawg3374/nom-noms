@@ -7,7 +7,7 @@ var LocationSearch = React.createClass({
         locType: "",
         locArea: "",
         // default distance radius is 10 miles
-        distanceRange: "1609.34", // meters
+        distanceRange: "1", // miles
         priceRange: "All",
         showLocTypeAutoCompleteList: false,
         showLocAreaAutoCompleteList: false
@@ -95,7 +95,7 @@ var LocationSearch = React.createClass({
     event.preventDefault();
 
     var locationForm = event.currentTarget;
-    var searchType = this.state.locType.toLowerCase();
+    var searchType = this.state.locType;
     var searchArea = this.state.locArea;
 
     var search = this.buildSearchObject(searchType, searchArea);
@@ -122,7 +122,7 @@ var LocationSearch = React.createClass({
       }
     );
 
-    ApiLocationUtil.fetchLocationTypes(locTypePartial.toLowerCase());
+    ApiLocationUtil.fetchLocationTypes(locTypePartial);
   },
 
 
@@ -216,12 +216,12 @@ var LocationSearch = React.createClass({
     }.bind(this));
 
     var distanceRangeButtons = distanceRangeMapping.map(function (distanceRange, idx) {
-      var klass = this.state.distanceRange === distanceRange[idx][0] ? "active" : "";
+      var klass = this.state.distanceRange === distanceRange[idx][1] ? "active" : "";
 
       return <DistanceRangeButton
         key={idx}
-        val={distanceRange[idx][0]}
-        label={distanceRange[idx][1]}
+        val={distanceRange[idx][1]}
+        label={distanceRange[idx][2]}
         klass={"distance-range-button " + klass}
         setDistanceRangeFilter={this.setDistanceRangeFilter} />;
     }.bind(this));

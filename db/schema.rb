@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151120184333) do
+ActiveRecord::Schema.define(version: 20151123144406) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,9 +31,10 @@ ActiveRecord::Schema.define(version: 20151120184333) do
     t.string "price_range",              null: false
     t.string "img_url"
     t.string "state_long",               null: false
+    t.string "cuisine"
   end
 
-  add_index "locations", ["city"], name: "index_locations_on_city", using: :btree
+  add_index "locations", ["lat", "lng"], name: "index_locations_on_lat_and_lng", using: :btree
   add_index "locations", ["location_type"], name: "index_locations_on_location_type", using: :btree
   add_index "locations", ["price_range"], name: "index_locations_on_price_range", using: :btree
 

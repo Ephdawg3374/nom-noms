@@ -22,7 +22,11 @@ window.ApiActions = {
     var locTypes = [];
 
     locTypesResults.forEach(function (locTypesResult) {
-      locTypes.push(locTypesResult.location_type);
+      if (locTypesResult.location_type) {
+        locTypes.push(locTypesResult.location_type);
+      } else {
+        locTypes.push(locTypesResult.cuisine);
+      }
     });
 
     AppDispatcher.dispatch({
