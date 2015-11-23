@@ -3,8 +3,9 @@ window.ApiUserUtil = {
     $.ajax({
       url: "/api/users",
       method: "POST",
+      processData: false,
+      contentType: false,
       dataType: "json",
-      contentType: "application/json",
       data: JSON.stringify({ user: user }),
       success: function (data) {
         UserActions.receiveUser(data);

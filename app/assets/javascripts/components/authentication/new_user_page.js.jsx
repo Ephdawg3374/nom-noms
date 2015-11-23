@@ -5,6 +5,8 @@ var NewUserPage = React.createClass({
     return (
       {
         username: "",
+        imageUrl: null,
+        imageFile: null,
         password: ""
       }
     );
@@ -21,12 +23,28 @@ var NewUserPage = React.createClass({
 
     var newUser = {
       username: this.state.username,
-      password: this.state.password
+      password: this.state.password,
+      profilePic: this.state.imageFile
     };
 
     ApiUserUtil.create(newUser, function () {
      this.history.pushState(null, "/");
     }.bind(this));
+  },
+
+  changeFile: function (event) {
+    var reader = new FileReader();
+    var file = event.currentTarget.files[0];
+
+    reader.onloadend = function() {
+      this.setState({ imageUrl: reader.result, imageFile: file });
+    }.bind(this);
+
+    if (file) {
+      reader.readAsDataURL(file);
+    } else {
+      this.setState({ imageUrl: "", imageFile: null });
+    }
   },
 
   render: function () {
@@ -39,14 +57,23 @@ var NewUserPage = React.createClass({
           <input
             className="auth-page-username"
             type="text"
-            valueLink={this.linkState("username")}/>
+            valueLink={this.linkState("username")} />
           </label>
+
+          <label>Upload a profile pic
+          <input
+            className="auth-page-profile-pic-input"
+            type="file"
+            onChange={this.changeFile} />
+          </label>
+
+          <img className="auth-page-profile-pic-preview" src={this.state.imageUrl} />
 
           <label>Password
           <input
             className="auth-page-password"
             type="password"
-            valueLink={this.linkState("password")}/>
+            valueLink={this.linkState("password")} />
           </label>
 
           <button type="submit">Create new user</button>

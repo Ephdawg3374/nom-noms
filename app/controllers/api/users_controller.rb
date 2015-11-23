@@ -4,19 +4,16 @@ class Api::UsersController < ApplicationController
 
     if @new_user.save
       login!(@new_user)
-      render json: @new_user
+      render :show
     else
-      render json: { errors: ["There was an error with your request"] }, status: 400
+      render json: @new_user.errors.full_messages, status: 400
     end
-  end
-
-  def show
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:username, :password)
+    params.require(:user).permit(:username, :password, :profilePic)
   end
 
 end
