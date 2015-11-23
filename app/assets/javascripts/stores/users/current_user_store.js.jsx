@@ -5,11 +5,11 @@
 
   CurrentUserStore = window.CurrentUserStore = $.extend({}, EventEmitter.prototype, {
 
-    addChangeHandler: function (callback) {
+    addChangeListener: function (callback) {
       this.on(CHANGE_EVENT, callback);
     },
 
-    removeChangeHandler: function (callback) {
+    removeChangeListener: function (callback) {
       this.removeListener(CHANGE_EVENT, callback);
     },
 
@@ -18,7 +18,7 @@
     },
 
     isLoggedIn: function () {
-      return (typeof _currentUser.id !== "undefined");
+      return (typeof _currentUser.username !== "undefined");
     },
 
     dispatcherId: AppDispatcher.register(function (payload) {

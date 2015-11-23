@@ -4,13 +4,13 @@ class User < ActiveRecord::Base
   has_secure_password
 
   has_attached_file :profile_pic,
-    default_url: image_path("profile_pic_placeholder.png"),
-    :styles => {
-      :tiny => "20x20#",
-      :thumb => "58x58#>",
-      :large }
+    default_url: "profile_pic_placeholder.png",
+    styles: {
+      tiny: "20x20#",
+      thumb: "58x58#>",
+      large: "640x480"}
 
-  validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
+  validates_attachment_content_type :profile_pic, content_type: /\Aimage\/.*\Z/
 
   after_initialize :ensure_session_token
 

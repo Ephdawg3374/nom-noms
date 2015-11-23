@@ -20,7 +20,7 @@ class Api::SessionsController < ApplicationController
       render json: {errors: ["User not found!"]}, status: 401
     else
       login!(@user)
-      render json: @user
+      render :show
     end
   end
 

@@ -4,7 +4,7 @@ window.ApiUserUtil = {
       url: "/api/users",
       method: "POST",
       processData: false,
-      contentType: false,
+      contentType: "application/json",
       dataType: "json",
       data: JSON.stringify({ user: user }),
       success: function (data) {

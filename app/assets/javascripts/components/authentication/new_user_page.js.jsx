@@ -24,7 +24,7 @@ var NewUserPage = React.createClass({
     var newUser = {
       username: this.state.username,
       password: this.state.password,
-      profilePic: this.state.imageFile
+      profile_pic: this.state.imageFile
     };
 
     ApiUserUtil.create(newUser, function () {

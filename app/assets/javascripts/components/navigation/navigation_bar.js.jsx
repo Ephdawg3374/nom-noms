@@ -1,4 +1,16 @@
 var NavigationBar = React.createClass({
+  componentDidMount: function () {
+    CurrentUserStore.addChangeListener(this._onChange);
+  },
+
+  componentWillUnmount: function () {
+    CurrentUserStore.removeChangeListener(this._onChange);
+  },
+
+  _onChange: function () {
+    this.forceUpdate();
+  },
+
   render: function () {
     var authComponent;
 
