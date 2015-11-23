@@ -1,4 +1,4 @@
-window.ApiActions = {
+window.SearchActions = {
   receiveSearchResults: function (searchResults) {
     var latLngObjects = [];
 

@@ -9,7 +9,7 @@ var UserLoggedOut = React.createClass({
 
   goToLoginPage: function (event) {
     event.preventDefault();
-    
+
     this.history.pushState(null, "/session/new");
   },
 

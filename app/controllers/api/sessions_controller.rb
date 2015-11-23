@@ -6,28 +6,32 @@ class Api::SessionsController < ApplicationController
       return
     end
 
-    @user = current_user
-    render "api/users/show"
+    @current_user = current_user
+    render json: @current_user
   end
 
   def create
-    @user = User.find_by_credentials(
-      params[:email],
-      params[:password]
-    )
+    username = session_params[:username]
+    password = session_params[:password]
+
+    @user = User.find_by(username: username).try(:authenticate, password)
 
     if @user.nil?
-      render json: {errors: ["Wrong!"]}, status: 401
+      render json: {errors: ["User not found!"]}, status: 401
     else
-      sign_in!(@user)
-      render "api/users/show"
+      login!(@user)
+      render json: @user
     end
   end
 
   def destroy
-    sign_out!
+    logout!
     render json: {}
   end
 
+  private
 
+  def session_params
+    params.require(:user).permit(:username, :password)
+  end
 end

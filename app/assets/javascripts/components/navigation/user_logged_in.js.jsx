@@ -1,6 +1,10 @@
 var UserLoggedIn = React.createClass({
   handleUserLogout: function (event) {
     event.preventDefault();
+
+    ApiSessionUtil.logout(function () {
+     this.history.pushState(null, "/");
+   }.bind(this));
   },
 
   render: function () {

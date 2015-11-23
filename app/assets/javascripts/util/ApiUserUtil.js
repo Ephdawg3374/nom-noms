@@ -5,8 +5,10 @@ window.ApiUserUtil = {
       method: "POST",
       dataType: "json",
       contentType: "application/json",
-      data: JSON.stringify({user: user}),
+      data: JSON.stringify({ user: user }),
       success: function (data) {
+        UserActions.receiveUser(data);
+        CurrentUserActions.receiveCurrentUser(data);
         callback && callback();
       }
     });

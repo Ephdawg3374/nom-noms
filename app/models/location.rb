@@ -80,62 +80,6 @@ class Location < ActiveRecord::Base
     end
   end
 
-  # def self.search_within_distance(distance, search_location)
-  #   # Distance will be in meters.
-  #
-  #
-  #
-  #   # locations.each do |location|
-  #   #   loc_coord = [location.lat, location.lng]
-  #   #   loc_dist = Location.calc_distance(loc_coord, search_location_coords)
-  #   #
-  #   #   if loc_dist < distance
-  #   #     locations_within_distance << location
-  #   #   end
-  #   # end
-  #
-  #
-  #
-  #
-  # end
-  #
-  # def self.narrow_search_by_filters(loc_type, price_range, locations)
-  #   location_type = search_params[:searchType]
-  #   price_range = search_params[:priceRange]
-  #   distance = search_params[:distanceRange].to_f
-  #   area = search_params[:searchArea]
-  #
-  #   price_range = "%" if search_params[:priceRange] == "All"
-  #
-  #   # pull all location types if no type specified
-  #   location_type = "%" if location_type.empty?
-  #
-  #   locations_by_params = Location.where(
-  #     "location_type LIKE ? AND price_range LIKE ?",
-  #     location_type, price_range
-  #   )
-  #
-  #   Location.search_within_distance(locations_by_params, distance, area)
-  # end
-
-  # ruby version of Haversine's formula
-  def self.calc_distance(coord1, coord2)
-    rad_per_deg = Math::PI/180  # PI / 180
-    rkm = 6371                  # Earth radius in kilometers
-    rm = rkm * 1000             # Radius in meters
-
-    dlat_rad = (coord2[0]-coord1[0]) * rad_per_deg  # Delta, converted to rad
-    dlon_rad = (coord2[1]-coord1[1]) * rad_per_deg
-
-    lat1_rad, lon1_rad = coord1.map {|i| i * rad_per_deg }
-    lat2_rad, lon2_rad = coord2.map {|i| i * rad_per_deg }
-
-    a = Math.sin(dlat_rad/2)**2 + Math.cos(lat1_rad) * Math.cos(lat2_rad) * Math.sin(dlon_rad/2)**2
-    c = 2 * Math::atan2(Math::sqrt(a), Math::sqrt(1-a))
-
-    rm * c # Delta in meters
-  end
-
   def self.actual_locations_for_searching
 
     # Location address search bar for this app will be limited to searching for

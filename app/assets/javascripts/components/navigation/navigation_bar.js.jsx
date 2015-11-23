@@ -2,7 +2,7 @@ var NavigationBar = React.createClass({
   render: function () {
     var authComponent;
 
-    if (window.userIsLoggedIn) {
+    if (CurrentUserStore.isLoggedIn()) {
       authComponent = <UserLoggedIn />;
     } else {
       authComponent = <UserLoggedOut />;

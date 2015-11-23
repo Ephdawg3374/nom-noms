@@ -10,6 +10,12 @@ var NewUserPage = React.createClass({
     );
   },
 
+  componentWillMount: function () {
+    if (CurrentUserStore.isLoggedIn()) {
+      this.history.pushState(null, "/");
+    }
+  },
+
   handleNewUserSubmit: function (event) {
     event.preventDefault();
 

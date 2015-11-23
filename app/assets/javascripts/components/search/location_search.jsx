@@ -22,7 +22,7 @@ var LocationSearch = React.createClass({
 
     this.intervalId = setInterval(function () {
       this.setPState({
-        locType: "",
+        locType: this.state.locType,
         locArea: this.state.locArea,
         distanceRange: this.state.distanceRange,
         priceRange: this.state.priceRange,

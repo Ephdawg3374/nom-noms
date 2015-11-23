@@ -1,25 +1,24 @@
-var SessionsApiUtil = {
+window.ApiSessionUtil = {
   login: function (credentials, success) {
     $.ajax({
       url: '/api/session',
       type: 'POST',
       dataType: 'json',
-      data: credentials,
+      contentType: "application/json",
+      data: JSON.stringify({ user: credentials }),
       success: function (currentUser) {
-        console.log("logged in!");
         CurrentUserActions.receiveCurrentUser(currentUser);
         success && success();
       }
     });
   },
 
-  logout: function (  ) {
+  logout: function () {
     $.ajax({
       url: '/api/session',
       type: 'DELETE',
       dataType: 'json',
       success: function () {
-        console.log("logged out!");
         CurrentUserActions.receiveCurrentUser({});
       }
     });
@@ -35,6 +34,4 @@ var SessionsApiUtil = {
       }
     });
   }
-
-
 };

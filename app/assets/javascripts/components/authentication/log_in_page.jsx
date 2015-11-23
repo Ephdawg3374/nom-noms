@@ -1,5 +1,5 @@
 var LogInPage = React.createClass({
-  mixins: [React.addons.LinkedStateMixin],
+  mixins: [React.addons.LinkedStateMixin, ReactRouter.History],
 
   getInitialState: function () {
     return (
@@ -10,30 +10,47 @@ var LogInPage = React.createClass({
     );
   },
 
-  handleLoginSubmit: function (event) {
+  componentWillMount: function () {
+    if (CurrentUserStore.isLoggedIn()) {
+      this.history.pushState(null, "/");
+    }
+  },
+
+  handleLogin: function (event) {
     event.preventDefault();
 
-    var credentials = JSON.stringify($(event.currentTarget));
+    var credentials = {
+      username: this.state.username,
+      password: this.state.password
+    };
 
-     SessionsApiUtil.login(credentials, function () {
-       this.history.pushState(null, "/users");
-     }.bind(this));
+    ApiSessionUtil.login(credentials, function () {
+     this.history.pushState(null, "/");
+    }.bind(this));
   },
 
   render: function () {
     return (
       <div className="auth-page">
         <h1>Log into your account</h1>
-        <form className="auth-page-form" onSubmit={this.handleLoginSubmit}>
-          <label>Username
-          <input className="auth-page-username" type="text" valueLink={this.linkState("username")}/>
-          </label>
+          <form className="auth-page-form" onSubmit={this.handleLogin}>
 
-          <label>Password
-          <input className="auth-page-password" type="password" valueLink={this.linkState("password")}/>
-          </label>
+            <label>Username
+            <input
+              className="auth-page-username"
+              type="text"
+              valueLink={this.linkState("username")}/>
+            </label>
 
-        </form>
+            <label>Password
+            <input
+              className="auth-page-password"
+              type="password"
+              valueLink={this.linkState("password")}/>
+            </label>
+
+            <button type="submit">Log In!</button>
+          </form>
       </div>
     );
   }

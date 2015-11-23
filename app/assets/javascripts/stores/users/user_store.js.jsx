@@ -1,12 +1,12 @@
 (function () {
-  var _currentUsers = [];
+  var _users = [];
   var CHANGE_EVENT = "CHANGE_EVENT";
 
   var _addUser = function (newUser) {
     _users.push(newUser);
   };
 
-  UserStore = window.UserStore = $.extend({}, EventEmitter.prototype, {
+  UsersStore = window.UserStore = $.extend({}, EventEmitter.prototype, {
 
     addChangeHandler: function (callback) {
       this.on(CHANGE_EVENT, callback);
@@ -17,7 +17,7 @@
     },
 
     all: function () {
-      return _currentUsers.slice();
+      return _users.slice();
     },
 
     findUserById: function (userId) {

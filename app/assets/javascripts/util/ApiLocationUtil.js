@@ -7,7 +7,7 @@ window.ApiLocationUtil = {
       contentType: "application/json",
       data: {search: search},
       success: function (data) {
-        ApiActions.receiveSearchResults(data);
+        SearchActions.receiveSearchResults(data);
         callback && callback();
       }
     });
@@ -21,7 +21,7 @@ window.ApiLocationUtil = {
       contentType: "application/json",
       data: {locTypeAutoCompleteRequest: locTypePartial},
       success: function (data) {
-        ApiActions.receiveLocationTypes(data);
+        SearchActions.receiveLocationTypes(data);
       }
     });
   },
@@ -34,7 +34,7 @@ window.ApiLocationUtil = {
       contentType: "application/json",
       data: {locAddressAutoCompleteRequest: locAddressPartial},
       success: function (data) {
-        ApiActions.receiveLocationAreas(data);
+        SearchActions.receiveLocationAreas(data);
       }
     });
   }

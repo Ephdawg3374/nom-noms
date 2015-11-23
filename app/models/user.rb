@@ -5,10 +5,6 @@ class User < ActiveRecord::Base
 
   after_initialize :ensure_session_token
 
-  def self.find_by_credentials(username, password)
-    User.find_by(username: username).try(:authenticate, password)
-  end
-
   def self.generate_session_token
     SecureRandom::urlsafe_base64
   end
