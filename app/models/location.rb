@@ -6,55 +6,22 @@ class Location < ActiveRecord::Base
   def self.find_locations(search_params)
     distance = search_params[:distanceRange].to_f
     area = search_params[:searchArea]
-
-    locations_within_distance = Location.search_within_distance(
-      distance,
-      area)
-
     location_type = search_params[:searchType]
     price_range = search_params[:priceRange]
 
-    Location.find_by_filters(location_type, price_range, locations_within_distance)
-  end
+    price_range = "%" if search_params[:priceRange] == "All"
+    # pull all location types if no type specified
+    location_type = "%" if location_type.empty?
 
-  def self.search_within_distance(distance, search_location)
-    # Distance will be in meters.
+    search_location_coords = Location.get_search_loc_coords(area)
 
-    search_location = Location.parse_location(search_location)[0]
-
-    locations_within_distance = []
-
-    search_location_in_db = Location.find_by_city(search_location)
-    search_location_real = Location.actual_locations_for_searching[search_location]
-
-    # if search location exists as a city in DB, use those coords
-    if search_location_in_db
-      search_location_coords = [
-        search_location.lat,
-        search_location.lng
-      ]
-    # if search location is an actual location (limited to the locations in
-    # actual_locations_for_searching)
-    elsif
-      search_location_coords = [
-        Location.actual_locations_for_searching[search_location]["lat"],
-        Location.actual_locations_for_searching[search_location]["lng"]
-      ]
-    # NYC coords
-    else
-      search_location_coords = [40.730610, -73.935242]
-    end
-
-    # locations.each do |location|
-    #   loc_coord = [location.lat, location.lng]
-    #   loc_dist = Location.calc_distance(loc_coord, search_location_coords)
-    #
-    #   if loc_dist < distance
-    #     locations_within_distance << location
-    #   end
-    # end
-
-    distance_query_params = { lat: search_location_coords[0], lng: search_location_coords[1], distance: distance }
+    sql_query_params = {
+      lat: search_location_coords[0],
+      lng: search_location_coords[1],
+      distance: distance,
+      location_type: location_type,
+      price_range: price_range
+    }
 
     Location.find_by_sql [
       "SELECT
@@ -75,33 +42,83 @@ class Location < ActiveRecord::Base
             locations
         ) AS loc_w_distance
       WHERE
-        loc_w_distance.distance < :distance
+        loc_w_distance.distance < :distance AND
+        location_type LIKE :location_type AND
+        price_range LIKE :price_range
       ORDER BY
         loc_w_distance.distance
       LIMIT
         100",
-      distance_query_params]
+      sql_query_params]
+
   end
 
-  def self.narrow_search_by_filters(loc_type, price_range, locations)
-    location_type = search_params[:searchType]
-    price_range = search_params[:priceRange]
-    distance = search_params[:distanceRange].to_f
-    area = search_params[:searchArea]
+  def self.get_search_loc_coords(search_location)
+    search_location = Location.parse_location(search_location)[0]
 
-    price_range = "%" if search_params[:priceRange] == "All"
+    locations_within_distance = []
 
-    # pull all location types if no type specified
-    location_type = "%" if location_type.empty?
+    search_location_in_db = Location.find_by_city(search_location)
+    search_location_real = Location.actual_locations_for_searching[search_location]
 
-    locations_by_params = Location.where(
-      "location_type LIKE ? AND price_range LIKE ?",
-      location_type, price_range
-    )
-
-    Location.search_within_distance(locations_by_params, distance, area)
+    # if search location exists as a city in DB, use those coords
+    if search_location_in_db
+      [
+        search_location.lat,
+        search_location.lng
+      ]
+    # if search location is an actual location (limited to the locations in
+    # actual_locations_for_searching)
+    elsif search_location_real
+      [
+        Location.actual_locations_for_searching[search_location]["lat"],
+        Location.actual_locations_for_searching[search_location]["lng"]
+      ]
+    # NYC coords
+    else
+      [40.730610, -73.935242]
+    end
   end
 
+  # def self.search_within_distance(distance, search_location)
+  #   # Distance will be in meters.
+  #
+  #
+  #
+  #   # locations.each do |location|
+  #   #   loc_coord = [location.lat, location.lng]
+  #   #   loc_dist = Location.calc_distance(loc_coord, search_location_coords)
+  #   #
+  #   #   if loc_dist < distance
+  #   #     locations_within_distance << location
+  #   #   end
+  #   # end
+  #
+  #
+  #
+  #
+  # end
+  #
+  # def self.narrow_search_by_filters(loc_type, price_range, locations)
+  #   location_type = search_params[:searchType]
+  #   price_range = search_params[:priceRange]
+  #   distance = search_params[:distanceRange].to_f
+  #   area = search_params[:searchArea]
+  #
+  #   price_range = "%" if search_params[:priceRange] == "All"
+  #
+  #   # pull all location types if no type specified
+  #   location_type = "%" if location_type.empty?
+  #
+  #   locations_by_params = Location.where(
+  #     "location_type LIKE ? AND price_range LIKE ?",
+  #     location_type, price_range
+  #   )
+  #
+  #   Location.search_within_distance(locations_by_params, distance, area)
+  # end
+
+  # ruby version of Haversine's formula
   def self.calc_distance(coord1, coord2)
     rad_per_deg = Math::PI/180  # PI / 180
     rkm = 6371                  # Earth radius in kilometers
