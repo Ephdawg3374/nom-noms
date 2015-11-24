@@ -32,7 +32,7 @@ var LocationIndexItem = React.createClass({
           onMouseOver={this.mouseOver}
           onMouseOut={this.mouseOut}>
 
-          <Link to={"/locations/" + this.props.location.name}>
+          <Link to={"/locations/" + this.props.location.id}>
             {this.props.location.name}
           </Link>
 

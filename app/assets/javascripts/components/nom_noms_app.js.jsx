@@ -1,6 +1,4 @@
 var NomNomsApp = React.createClass({
-  mixins: [ReactRouter.History],
-
   getInitialState: function () {
    return { currentUser: null };
   },
@@ -8,16 +6,6 @@ var NomNomsApp = React.createClass({
   componentWillMount: function () {
    ApiSessionUtil.fetchCurrentUser();
   },
-
-  // _ensureLoggedIn: function () {
-  //  if (!CurrentUserStore.isLoggedIn()) {
-  //    this.history.pushState(null, "/login");
-  //  }
-  //
-  //  this.setState(
-  //    {currentUser: CurrentUserStore.currentUser()}
-  //  );
-  // },
 
   render: function () {
     return (

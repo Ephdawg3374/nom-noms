@@ -20,16 +20,12 @@
       return _latLngObjects.slice();
     },
 
-    addLocationIndexChangeListener: function (callback) {
+    addChangeListener: function (callback) {
       this.on(CHANGE_EVENT, callback);
     },
 
-    removeLocationIndexChangeListener: function (callback) {
+    removeChangeListener: function (callback) {
       this.removeListener(CHANGE_EVENT, callback);
-    },
-
-    emitChange: function () {
-      this.emit(CHANGE_EVENT);
     },
 
     dispatcherId: AppDispatcher.register(function (payload) {
@@ -37,7 +33,7 @@
         case SearchConstants.RECEIVE_SEARCH_RESULTS:
           LocationStore.resetLocations(payload.searchResults);
           LocationStore.resetLatLngObjects(payload.latLngObjects);
-          LocationStore.emitChange();
+          LocationStore.emit(CHANGE_EVENT);
           break;
       }
     })

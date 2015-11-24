@@ -11,21 +11,15 @@ var LocationIndex = React.createClass({
     this.restorePState();
 
     if (localStorage.location_index) {
-      var locations = JSON.parse(localStorage.location_index);
-      this.repopulateLocationStore(locations);
+      var locations = JSON.parse(localStorage.location_index).locations;
+      SearchActions.receiveSearchResults(locations);
     }
 
-    LocationStore.addLocationIndexChangeListener(this._onChange);
-    MarkerStore.addMarkersUpdatedListener(this._onMarkersUpdatedChange);
+    LocationStore.addChangeListener(this._onChange);
   },
 
   componentWillUnmount: function () {
-    LocationStore.removeLocationIndexChangeListener(this._onChange);
-    MarkerStore.removeMarkersUpdatedListener(this._onMarkersUpdatedChange);
-  },
-
-  repopulateLocationStore: function (locations) {
-    LocationStore.resetLocations(locations);
+    LocationStore.removeChangeListener(this._onChange);
   },
 
   _onChange: function () {

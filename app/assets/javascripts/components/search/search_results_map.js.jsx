@@ -9,19 +9,15 @@ var SearchResultsMap = React.createClass({
 
     this.map = new google.maps.Map(map, mapOptions);
 
-    // if (localStorage.location_index) {
-    //   var locations = JSON.parse(localStorage.location_index.locations);
-    //
-    //   locations.forEach(function (location) {
-    //     MarkerStore.createNewMarker(this.map, location);
-    //   }.bind(this));
-    // }
-
-    MarkerStore.addMarkerChangeListener(this._onChange);
+    if (localStorage.location_index) {
+      var locations = JSON.parse(localStorage.location_index).locations;
+      this._onChange();
+    }
+    LocationStore.addChangeListener(this._onChange);
   },
 
   componentWillUnmount: function () {
-    MarkerStore.removeMarkerChangeListener(this._onChange);
+    LocationStore.removeChangeListener(this._onChange);
   },
 
   _onChange: function () {

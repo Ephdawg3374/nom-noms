@@ -1,21 +1,18 @@
 (function() {
   var _markers = [];
-  var LOCATIONS_UPDATED = "LOCATIONS_UPDATED";
-  var MARKERS_UPDATED = "MARKERS_UPDATED";
+  // var LOCATIONS_UPDATED = "LOCATIONS_UPDATED";
 
   window.MarkerStore = $.extend({}, EventEmitter.prototype, {
     all: function () {
       return _markers.slice();
     },
 
-    updateMarkersFromLocationStore: function (map, locations) {
-      var newLocations = locations || LocationStore.all();
+    updateMarkersFromLocationStore: function (map) {
+      var newLocations = LocationStore.all();
 
       this.removeOldMarkers();
 
       this.createNewMarkers(map, newLocations);
-
-      this.emit(MARKERS_UPDATED);
 
       // this.setMarkerLabelsToSearchIndices();
     },
@@ -87,33 +84,6 @@
 
       return marker;
     },
-
-    addMarkerChangeListener: function (callback) {
-      this.on(LOCATIONS_UPDATED, callback);
-    },
-
-    addMarkersUpdatedListener: function (callback) {
-      this.on(MARKERS_UPDATED, callback);
-    },
-
-    removeMarkerChangeListener: function (callback) {
-      this.removeListener(LOCATIONS_UPDATED, callback);
-    },
-
-    removeMarkersUpdatedListener: function (callback) {
-      this.removeListener(MARKERS_UPDATED, callback);
-    },
-
-    dispatcherId: AppDispatcher.register(function (payload) {
-      switch (payload.actionType) {
-        case SearchConstants.RECEIVE_SEARCH_RESULTS:
-          AppDispatcher.waitFor([LocationStore.dispatcherId]);
-          MarkerStore.emit(LOCATIONS_UPDATED);
-          break;
-        default:
-
-      }
-    })
 
   });
 

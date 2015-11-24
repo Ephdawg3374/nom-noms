@@ -42,6 +42,10 @@
   border: 0;
 }
 
+.location-search-button > button:hover {
+  background: transparent;
+}
+
 .location-type-autocomplete-list {
   position: absolute;
   left: 39px;
