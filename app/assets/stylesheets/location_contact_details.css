@@ -1,0 +1,17 @@
+.location-details {
+  width: 70px;
+  float: left;
+}
+
+.location-details > label {
+  display: block;
+}
+
+.location-contact-details {
+  width: 140px;
+  float: right;
+}
+
+.location-contact-details > label {
+  display: block;
+}

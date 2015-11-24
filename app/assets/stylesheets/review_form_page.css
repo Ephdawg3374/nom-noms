@@ -1,0 +1,49 @@
+.review-form-page {
+  width: 1000px;
+  margin: auto;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  background: white;
+}
+
+.review-form-page-header {
+  min-height: 150px;
+  width: 800px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.review-form-page-header > h2 {
+  font-size: 28px;
+}
+
+.header-details-figure > img {
+  border-radius: 10px;
+  width: 200px;
+  height: auto;
+  margin-top: 5px;
+  float: left;
+}
+
+.header-details-wrapper {
+  float: left;
+  margin: 0 40px;
+}
+
+.header-details-name > a {
+  font-size: 20px;
+  margin-top: 5px;
+  color: blue;
+}
+
+.header-details-website > a {
+  display: block;
+  color: #0000EE;
+  margin-top: 5px;
+}
+
+.review-form-page-header > .location-details-wrapper {
+  width: 300px;
+  float: left;
+}

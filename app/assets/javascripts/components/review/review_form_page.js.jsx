@@ -7,25 +7,36 @@ var ReviewFormPage = React.createClass({
   },
 
   render: function () {
-    var location = LocationStore.find_location(this.props.params.location_id);
+    var location = LocationStore.find_location(parseInt(this.props.params.location_id));
 
     return (
       <div className="review-form-page">
 
-        <div className="review-form-page-header">
+        <div className="review-form-page-header group">
           <h2>Write a Review</h2>
 
-          <div className="header-loc-details">
+          <figure className="header-details-figure">
+            <img src={location.img_url}/>
+          </figure>
 
-            <figure className="header-loc-details-figure">
-              <img src={location.img_url}/>
-            </figure>
+          <div className="header-details-wrapper group">
+            <h2 className="header-details-name">
+              <Link to={'/locations/' + location.id}>
+                {location.name}
+              </Link>
+            </h2>
 
-            <h2>{location.name}</h2>
+            <label className="header-details-website">
+              <a>{location.website}</a>
+            </label>
 
+            <label className="header-details-description">
+              {location.description}
+            </label>
           </div>
-        </div>
 
+          <LocationContactDetails location={location} />
+        </div>
 
       </div>
     );

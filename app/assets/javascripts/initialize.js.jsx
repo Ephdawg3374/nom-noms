@@ -6,15 +6,14 @@ $(document).on('ready', function () {
   var rootEl = document.getElementById('content');
 
   var routes = (
-   <Route path="/" component={NomNomsApp}>
-     <IndexRoute component={HomePage} />
-     <Route path="/users/new" component={NewUserPage} />
-     <Route path="/session/new" component={LogInPage} />
-     <Route path="/search" component={SearchResultsPage} />
-     <Route path="/locations/:location_id" component={LocationShowPage}>
-      <Route path="/reviews/new" component={ReviewFormPage} />
-    </Route>
-   </Route>
+  <Route path="/" component={NomNomsApp}>
+    <IndexRoute component={HomePage} />
+    <Route path="users/new" component={NewUserPage} />
+    <Route path="session/new" component={LogInPage} />
+    <Route path="search" component={SearchResultsPage} />
+    <Route path="locations/:location_id" component={LocationShowPage} />
+    <Route path="locations/:location_id/reviews/new" component={ReviewFormPage} />
+  </Route>
   );
 
   React.render(<Router>{routes}</Router>, rootEl);

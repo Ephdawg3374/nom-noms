@@ -42,6 +42,10 @@ button {
   color: white;
 }
 
+a {
+  cursor: pointer;
+}
+
 button:hover {
   text-shadow: 1px 1px 2px black;
   background:#bc3315;

@@ -86,7 +86,7 @@ Phase 6 will be focused on styling the app and making last minute touch-ups.
 - [ ] Pagination / infinite scroll for Location Index with Kaminari
 - [ ] Multiple sessions
 - [ ] Location album available in the show page
-- [ ] Enhance Location model to include more attributes
+- [ ] Omni Auth (Facebook)
 
 [phase-one]: ./docs/phases/phase1.md
 [phase-two]: ./docs/phases/phase2.md
