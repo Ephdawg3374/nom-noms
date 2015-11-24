@@ -10,7 +10,7 @@
 
 .search-index {
   float: left;
-  width: 200px;
+  width: 225px;
   margin-left: 15px;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -19,6 +19,6 @@
 
 .search-index-map {
   float: right;
-  width: 785px;
+  width: 710px;
   height: 700px;
 }

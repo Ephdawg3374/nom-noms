@@ -1,12 +1,12 @@
 var LocationShowPage = React.createClass({
-  mixins: [ReactPersistentState],
+  mixins: [ReactPersistentState, ReactRouter.History],
 
   getInitialState: function () {
     return ({ location: this.getLocationFromStore() });
   },
 
   getLocationFromStore: function () {
-    return LocationStore.find_location(parseInt(this.props.params.id));
+    return LocationStore.find_location(parseInt(this.props.params.location_id));
   },
 
   componentWillMount: function () {
@@ -20,6 +20,10 @@ var LocationShowPage = React.createClass({
     }
 
     this.setState({ location: this.getLocationFromStore() });
+  },
+
+  goToReviewFormPage: function () {
+    this.history.pushState(null, "/locations/" + this.state.location.id + "/reviews/new");
   },
 
   render: function () {
@@ -49,7 +53,7 @@ var LocationShowPage = React.createClass({
             <div className="sub-header-options">
               <button
                 className="sub-header-options-review-button"
-                onClick={this.goToReviewForm} >
+                onClick={this.goToReviewFormPage} >
                 Write a Review
               </button>
             </div>

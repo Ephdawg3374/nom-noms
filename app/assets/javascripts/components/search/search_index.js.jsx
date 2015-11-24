@@ -5,7 +5,7 @@ var SearchIndex = React.createClass({
     return ({ locations: LocationStore.all() });
   },
 
-  componentDidMount: function () {
+  componentWillMount: function () {
     this.setPId('location_index');
     this.setPStorage(this.localStorage);
     this.restorePState();
@@ -14,7 +14,9 @@ var SearchIndex = React.createClass({
       var locations = JSON.parse(localStorage.location_index).locations;
       SearchActions.receiveSearchResults(locations);
     }
+  },
 
+  componentDidMount: function () {
     LocationStore.addChangeListener(this._onChange);
     MarkerStore.addChangeListener(this._onMarkerUpdate);
   },
@@ -34,10 +36,10 @@ var SearchIndex = React.createClass({
   },
 
   render: function () {
-    var locationIndexItems;
+    var searchIndexItems;
 
     if (this.state.locations)  {
-      locationIndexItems = this.state.locations.map( function(location, idx) {
+      searchIndexItems = this.state.locations.map( function(location, idx) {
         return <SearchIndexItem
           key={location.id}
           location={location}
@@ -48,7 +50,7 @@ var SearchIndex = React.createClass({
 
     return (
       <div className="search-index">
-        {locationIndexItems}
+        {searchIndexItems}
       </div>
     );
   }

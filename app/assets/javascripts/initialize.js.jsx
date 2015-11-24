@@ -1,5 +1,4 @@
 $(document).on('ready', function () {
-
   Link = ReactRouter.Link;
   var Router = ReactRouter.Router;
   var Route = ReactRouter.Route;
@@ -12,8 +11,8 @@ $(document).on('ready', function () {
      <Route path="/users/new" component={NewUserPage} />
      <Route path="/session/new" component={LogInPage} />
      <Route path="/search" component={SearchResultsPage} />
-     <Route path="/locations/:id" component={LocationShowPage}>
-      <Route path="/reviews/new" component={ReviewForm} />
+     <Route path="/locations/:location_id" component={LocationShowPage}>
+      <Route path="/reviews/new" component={ReviewFormPage} />
     </Route>
    </Route>
   );

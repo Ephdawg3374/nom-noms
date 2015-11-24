@@ -15,7 +15,7 @@ var SearchMain = React.createClass({
     );
   },
 
-  componentDidMount: function () {
+  componentWillMount: function () {
     this.setPId('location_search_params');
     this.setPStorage(this.localStorage);
     this.restorePState();
@@ -30,7 +30,9 @@ var SearchMain = React.createClass({
         showLocAreaAutoCompleteList: this.state.showLocAreaAutoCompleteList
       });
     }.bind(this), 0);
+  },
 
+  componentDidMount: function () {
     this.setCurrentLocation();
 
     LocTypeAutoCompleteStore.addChangeListener(this._onChange);
