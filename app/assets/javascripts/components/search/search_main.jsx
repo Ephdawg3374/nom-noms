@@ -1,4 +1,4 @@
-var LocationSearch = React.createClass({
+var SearchMain = React.createClass({
   mixins: [ReactPersistentState, ReactRouter.History],
 
   getInitialState: function () {

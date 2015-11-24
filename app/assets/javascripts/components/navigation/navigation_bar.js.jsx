@@ -29,7 +29,7 @@ var NavigationBar = React.createClass({
           </a>
         </figure>
 
-        <LocationSearch />
+        <SearchMain />
 
         { authComponent }
 

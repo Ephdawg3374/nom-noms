@@ -1,4 +1,4 @@
-var LocationIndex = React.createClass({
+var SearchIndex = React.createClass({
   mixins: [ReactPersistentState],
 
   getInitialState: function () {
@@ -38,7 +38,7 @@ var LocationIndex = React.createClass({
 
     if (this.state.locations)  {
       locationIndexItems = this.state.locations.map( function(location, idx) {
-        return <LocationIndexItem
+        return <SearchIndexItem
           key={location.id}
           location={location}
           marker={MarkerStore.findMatchingMarker(location)}

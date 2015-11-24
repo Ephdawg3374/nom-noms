@@ -1,4 +1,4 @@
-var LocationIndexItem = React.createClass({
+var SearchIndexItem = React.createClass({
   getInitialState: function () {
     return ({ hover: false });
   },
