@@ -41,7 +41,7 @@
     determineMapBoundsAndSetCenter: function (map) {
       var zoomChangeBoundsListener =
         google.maps.event.addListenerOnce(map, 'bounds_changed', function(event) {
-          map.setZoom(14);
+          map.setZoom(15);
         });
 
       var latLngBounds = new google.maps.LatLngBounds();

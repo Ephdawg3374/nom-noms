@@ -12,6 +12,19 @@
       _latLngObjects = latLngObjects;
     },
 
+    find_location: function (id) {
+      var location;
+
+      for (i = 0; i < _locations.length; i++) {
+        if (_locations[i].id === id) {
+          location = _locations[i];
+          break;
+        }
+      }
+
+      return location;
+    },
+
     all: function () {
       return _locations.slice();
     },
