@@ -8,11 +8,11 @@ $(document).on('ready', function () {
 
   var routes = (
    <Route path="/" component={NomNomsApp}>
-     <IndexRoute component={HomePage}/>
-     <Route path="/users/new" component={NewUserPage}/>
-     <Route path="/session/new" component={LogInPage}/>
-     <Route path="/search" component={SearchResultsPage}/>
-     <Route path="/location/:id" component={LocationShowPage}/>
+     <IndexRoute component={HomePage} />
+     <Route path="/users/new" component={NewUserPage} />
+     <Route path="/session/new" component={LogInPage} />
+     <Route path="/search" component={SearchResultsPage} />
+     <Route path="/locations/:id" component={LocationShowPage} />
    </Route>
   );
 

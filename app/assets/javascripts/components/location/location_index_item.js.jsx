@@ -12,13 +12,10 @@ var LocationIndexItem = React.createClass({
   },
 
   render: function () {
-
-    if (this.props.marker) {
-      if (this.state.hover === true) {
-        this.props.marker.setAnimation(google.maps.Animation.BOUNCE);
-      } else {
-        this.props.marker.setAnimation(null);
-      }
+    if (this.state.hover === true) {
+      this.props.marker.setAnimation(google.maps.Animation.BOUNCE);
+    } else {
+      this.props.marker.setAnimation(null);
     }
 
     return (
@@ -32,7 +29,7 @@ var LocationIndexItem = React.createClass({
           onMouseOver={this.mouseOver}
           onMouseOut={this.mouseOut}>
 
-          <Link to={"/locations/" + this.props.location.id}>
+          <Link to={'/locations/' + this.props.location.id}>
             {this.props.location.name}
           </Link>
 

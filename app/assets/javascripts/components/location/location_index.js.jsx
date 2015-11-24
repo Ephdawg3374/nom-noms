@@ -15,20 +15,16 @@ var LocationIndex = React.createClass({
       SearchActions.receiveSearchResults(locations);
     }
 
-    LocationStore.addChangeListener(this._onChange);
+    MarkerStore.addChangeListener(this._onChange);
   },
 
   componentWillUnmount: function () {
-    LocationStore.removeChangeListener(this._onChange);
+    MarkerStore.removeChangeListener(this._onChange);
   },
 
   _onChange: function () {
     this.setState({ locations: LocationStore.all() });
     this.setPState({ locations: LocationStore.all() });
-  },
-
-  _onMarkersUpdatedChange: function () {
-    this.forceUpdate();
   },
 
   render: function () {

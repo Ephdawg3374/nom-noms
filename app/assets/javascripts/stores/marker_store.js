@@ -1,6 +1,6 @@
 (function() {
   var _markers = [];
-  // var LOCATIONS_UPDATED = "LOCATIONS_UPDATED";
+  var CHANGE_EVENT = "CHANGE_EVENT";
 
   window.MarkerStore = $.extend({}, EventEmitter.prototype, {
     all: function () {
@@ -14,6 +14,7 @@
 
       this.createNewMarkers(map, newLocations);
 
+      this.emit(CHANGE_EVENT);
       // this.setMarkerLabelsToSearchIndices();
     },
 
@@ -23,6 +24,14 @@
       });
 
       _markers = [];
+    },
+
+    addChangeListener: function (callback) {
+      this.on(CHANGE_EVENT, callback);
+    },
+
+    removeChangeListener: function (callback) {
+      this.removeListener(CHANGE_EVENT, callback);
     },
 
     createNewMarkers: function (map, newLocations) {
@@ -84,7 +93,5 @@
 
       return marker;
     },
-
   });
-
 }());
