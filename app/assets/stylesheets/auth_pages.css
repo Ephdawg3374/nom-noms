@@ -1,21 +1,42 @@
 .auth-page {
-  width: 800px;
+  width: 900px;
   margin: auto;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  background: white;
+  padding: 50px
 }
 
 .auth-page > h1 {
   font-size: 40px;
   text-align: center;
-  margin: 50px 0 25px 0;
 }
 
 .auth-page > .auth-page-form {
   width: 200px;
-  margin: auto;
-  padding: 20px;
+  margin: 50px auto;
+  padding: 20px 60px;
+  border: 1px solid #ccc;
+  background: #eee;
+  border-radius: 5px;
 }
 
-.auth-page-username, .auth-page-password{
+.auth-page > .auth-page-form > label {
+  display: block;
+  padding: 10px 0;
+  font-weight: bold;
+}
+
+.auth-page > .auth-page-form > button {
+  padding: 5px;
+  width: 75px;
+  margin: 10px 65px 0 65px;
+}
+
+.auth-page-username, .auth-page-password {
   font-size: 16px;
-  width: 200px;
+  width: 195px;
+  margin-top: 5px;
+  border-radius: 5px;
 }

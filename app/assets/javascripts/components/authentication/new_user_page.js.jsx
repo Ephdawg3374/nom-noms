@@ -6,7 +6,7 @@ var NewUserPage = React.createClass({
       {
         username: "",
         imageUrl: null,
-        imageFile: null,
+        imageFile: "",
         password: ""
       }
     );
@@ -26,12 +26,6 @@ var NewUserPage = React.createClass({
     formData.append("user[username]", this.state.username);
     formData.append("user[password]", this.state.password);
     formData.append("user[profile_pic]", this.state.imageFile);
-
-    // var newUser = {
-    //   username: this.state.username,
-    //   password: this.state.password,
-    //   profile_pic: this.state.imageFile
-    // };
 
     ApiUserUtil.create(formData, function () {
      this.history.pushState(null, "/");
@@ -82,7 +76,7 @@ var NewUserPage = React.createClass({
             valueLink={this.linkState("password")} />
           </label>
 
-          <button type="submit">Create new user</button>
+          <button type="submit">Submit</button>
 
         </form>
       </div>
