@@ -12,10 +12,12 @@ var LocationIndexItem = React.createClass({
   },
 
   render: function () {
-    if (this.state.hover === true) {
-      this.props.marker.setAnimation(google.maps.Animation.BOUNCE);
-    } else {
-      this.props.marker.setAnimation(null);
+    if (this.props.marker) {
+      if (this.state.hover === true) {
+        this.props.marker.setAnimation(google.maps.Animation.BOUNCE);
+      } else {
+        this.props.marker.setAnimation(null);
+      }
     }
 
     return (
@@ -48,6 +50,7 @@ var LocationIndexItem = React.createClass({
         <div className="location-index-item-details-wrapper group">
           <div className="location-index-item-details">
             <h3>{this.props.location.location_type}</h3>
+            <h3>{this.props.location.cuisine}</h3>
 
             <label className="location-index-item-price-range">
               {this.props.location.price_range}

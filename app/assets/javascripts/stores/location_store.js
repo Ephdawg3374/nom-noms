@@ -50,7 +50,7 @@
         case SearchConstants.RECEIVE_SEARCH_RESULTS:
           LocationStore.resetLocations(payload.searchResults);
           LocationStore.resetLatLngObjects(payload.latLngObjects);
-          // LocationStore.emit(CHANGE_EVENT);
+          LocationStore.emit(CHANGE_EVENT);
           break;
       }
     })

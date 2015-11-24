@@ -101,7 +101,8 @@ end
     state_long: locations[rand_loc_number][1],
     zipcode: generate_random_zipcode(locations[rand_loc_number][0]),
     lat: generate_random_lat,
-    lng: generate_random_lng(locations[rand_loc_number][0])
+    lng: generate_random_lng(locations[rand_loc_number][0]),
+    cuisine: ""
   )
 
   if rand_loc_img_type == 0 || rand_loc_img_type == 1 || rand_loc_img_type == 4

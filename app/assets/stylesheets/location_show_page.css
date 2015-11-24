@@ -1,0 +1,12 @@
+.location-show-page {
+  width: 1000px;
+  margin: auto;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  background: white;
+}
+
+.main-header {
+  border-bottom: 1px solid #ccc;
+}

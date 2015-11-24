@@ -24,30 +24,36 @@ var LocationShowPage = React.createClass({
 
   render: function () {
     return (
-      <div className="main-header">
+      <div className="location-show-page">
+        <div className="main-header">
 
-        <div className="sub-header">
-          <div className="sub-header-info">
+          <div className="sub-header">
+            <div className="sub-header-info">
 
-            <h1>{this.state.location.name}</h1>
+              <h1>{this.state.location.name}</h1>
 
-            <span className="sub-header-info-price-range">
-              {this.state.location.price_range}
-            </span>
+              <span className="sub-header-info-price-range">
+                {this.state.location.price_range}
+              </span>
 
-            <span className="sub-header-info-type">
-              {this.state.location.location_type}
-            </span>
+              <span className="sub-header-info-type">
+                {this.state.location.location_type}
+              </span>
 
-            <span className="sub-header-info-cuisine">
-              {this.state.location.cuisine}
-            </span>
+              <span className="sub-header-info-cuisine">
+                {this.state.location.cuisine}
+              </span>
 
+            </div>
+
+            <div className="sub-header-options">
+              <button
+                className="sub-header-options-review-button"
+                onClick={this.goToReviewForm} >
+                Write a Review
+              </button>
+            </div>
           </div>
-
-          <ul className="sub-header-options">
-
-          </ul>
         </div>
       </div>
     );

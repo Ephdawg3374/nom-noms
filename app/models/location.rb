@@ -8,7 +8,7 @@ class Location < ActiveRecord::Base
     area = search_params[:searchArea]
     location_type = search_params[:searchType]
     price_range = search_params[:priceRange]
-
+    
     price_range = "%" if search_params[:priceRange] == "All"
     # pull all location types if no type specified
     location_type = "%" if location_type.empty?
@@ -43,7 +43,7 @@ class Location < ActiveRecord::Base
         ) AS loc_w_distance
       WHERE
         loc_w_distance.distance < :distance AND
-        location_type LIKE :location_type AND
+        (location_type LIKE :location_type OR cuisine LIKE :location_type) AND
         price_range LIKE :price_range
       ORDER BY
         loc_w_distance.distance
