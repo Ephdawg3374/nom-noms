@@ -20,16 +20,16 @@ var LocationSearch = React.createClass({
     this.setPStorage(this.localStorage);
     this.restorePState();
 
-    this.intervalId = setInterval(function () {
+    this.intervalId = setTimeout(function () {
       this.setPState({
-        locType: this.state.locType,
+        locType: "",
         locArea: this.state.locArea,
         distanceRange: this.state.distanceRange,
         priceRange: this.state.priceRange,
         showLocTypeAutoCompleteList: this.state.showLocTypeAutoCompleteList,
         showLocAreaAutoCompleteList: this.state.showLocAreaAutoCompleteList
       });
-    }.bind(this), 1000);
+    }.bind(this), 0);
 
     this.setCurrentLocation();
 

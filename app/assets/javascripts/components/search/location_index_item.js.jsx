@@ -48,28 +48,29 @@ var LocationIndexItem = React.createClass({
           {this.props.location.description}
         </label>
 
-        <div className="location-index-item-details">
-          <h3>{this.props.location.location_type}</h3>
+        <div className="location-index-item-details-wrapper group">
+          <div className="location-index-item-details">
+            <h3>{this.props.location.location_type}</h3>
 
-          <label className="location-index-item-price-range">
-            {this.props.location.price_range}
-          </label>
+            <label className="location-index-item-price-range">
+              {this.props.location.price_range}
+            </label>
+          </div>
+
+          <div className="location-index-item-contact-details">
+            <label className="location-index-item-address">
+              {this.props.location.street_address}
+            </label>
+
+            <label className="location-index-item-address">
+              {this.props.location.city}, {this.props.location.state} {this.props.location.zipcode}
+            </label>
+
+            <label className="location-index-item-phone">
+              {this.props.location.phone_number}
+            </label>
+          </div>
         </div>
-
-        <div className="location-index-item-contact-details">
-          <label className="location-index-item-address">
-            {this.props.location.street_address}
-          </label>
-
-          <label className="location-index-item-address">
-            {this.props.location.city}, {this.props.location.state} {this.props.location.zipcode}
-          </label>
-
-          <label className="location-index-item-phone">
-            {this.props.location.phone_number}
-          </label>
-        </div>
-
       </div>
     );
   }

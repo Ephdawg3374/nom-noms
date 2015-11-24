@@ -2,13 +2,9 @@ var SearchResultsPage = React.createClass({
   render: function () {
     return (
       <div className="search-results-page group">
-        <div className="location-index">
-          <LocationIndex />
-        </div>
+        <LocationIndex />
 
-        <div className="search-results-map">
-          <SearchResultsMap />
-        </div>
+        <SearchResultsMap />
       </div>
     );
   }

@@ -1,21 +1,24 @@
 .search-results-page {
-  width: 900px;
+  width: 1000px;
   margin: auto;
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
   background: white;
-  padding: 0 50px 50px 50px;
   min-height: 660px;
 }
 
-.search-results-map {
-  margin-top: 30px;
-  position: fixed;
-  left: 52%;
+.location-index {
+  float: left;
+  width: 200px;
+  margin-left: 15px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 700px;
 }
 
-.search-results-map > .map {
-  width: 400px;
-  height: 620px;
+.location-index-map {
+  float: right;
+  width: 785px;
+  height: 700px;
 }

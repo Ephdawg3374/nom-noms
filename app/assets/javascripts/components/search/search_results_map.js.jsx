@@ -27,7 +27,7 @@ var SearchResultsMap = React.createClass({
 
   render: function () {
     return (
-      <div className="map" ref="map">
+      <div className="location-index-map" ref="map">
       </div>
     );
   }

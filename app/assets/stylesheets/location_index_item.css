@@ -1,28 +1,25 @@
 .location-index-item {
-  width: 400px;
-  margin-bottom: 20px;
-  border-top: 1px solid #ccc;
-}
-
-.location-index-item:last-child {
+  padding: 20px 0;
   border-bottom: 1px solid #ccc;
+  font-size: 12px;
 }
 
 .location-index-item:last-child > .location-index-item-contact-details {
   margin: 10px 10px 25px 10px;
 }
 
-
 .location-index-item-img {
-  margin-top: 25px;
+
 }
 
 .location-index-item-img > img {
   border-radius: 10px;
+  width: 100%;
+  height: auto;
 }
 
 .location-index-item-name {
-  font-size: 26px;
+  font-size: 16px;
   color: blue;
 }
 
@@ -31,15 +28,17 @@
 }
 
 .location-index-item-details {
-  width: 100px;
+  width: 55px;
   float: left;
-  margin: 10px 10px 0 10px;
+}
+
+.location-index-item-details-wrapper {
+  margin-top: 5px;
 }
 
 .location-index-item-contact-details {
-  width: 200px;
+  width: 100px;
   float: right;
-  margin: 10px 10px 0 10px;
 }
 
 .location-index-item-details > label {
@@ -52,13 +51,12 @@
 
 .location-index-item-description {
   display: block;
-  margin: 5px 10px;
 }
 
 .location-index-item-website {
   display: block;
   color: #0000EE;
-  margin: 5px 10px;
+  margin-top: 5px;
 }
 
 .location-index-item-website > a {

@@ -1,3 +1,8 @@
+.header {
+  background-color: lightblue;
+  border-bottom: 1px solid #ccc;
+}
+
 .nav-bar {
   width: 1200px;
   margin: auto;

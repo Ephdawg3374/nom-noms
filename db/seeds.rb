@@ -89,7 +89,7 @@ end
 
   new_loc = Location.new(
     location_type: location_types[rand_loc_img_type],
-    img_url: "http://lorempixel.com/400/200/#{img_types[rand_loc_img_type]}/#{rand_img_number}",
+    img_url: "http://lorempixel.com/200/100/#{img_types[rand_loc_img_type]}/#{rand_img_number}",
     name: Faker::Company.name,
     description: Faker::Company.bs,
     price_range: "$" * rand(1..4),
