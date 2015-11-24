@@ -21,13 +21,13 @@ var SearchIndexItem = React.createClass({
     }
 
     return (
-      <div className="location-index-item group">
+      <div className="search-index-item group">
 
-        <figure className="location-index-item-img">
+        <figure className="search-index-item-img">
           <img src={this.props.location.img_url}/>
         </figure>
 
-        <h2 className="location-index-item-name"
+        <h2 className="search-index-item-name"
           onMouseOver={this.mouseOver}
           onMouseOut={this.mouseOut}>
 
@@ -37,36 +37,36 @@ var SearchIndexItem = React.createClass({
 
         </h2>
 
-        <label className="location-index-item-website">
+        <label className="search-index-item-website">
           <a href="#">
             {this.props.location.website}
           </a>
         </label>
 
-        <label className="location-index-item-description">
+        <label className="search-index-item-description">
           {this.props.location.description}
         </label>
 
-        <div className="location-index-item-details-wrapper group">
-          <div className="location-index-item-details">
+        <div className="search-index-item-details-wrapper group">
+          <div className="search-index-item-details">
             <h3>{this.props.location.location_type}</h3>
             <h3>{this.props.location.cuisine}</h3>
 
-            <label className="location-index-item-price-range">
+            <label className="search-index-item-price-range">
               {this.props.location.price_range}
             </label>
           </div>
 
-          <div className="location-index-item-contact-details">
-            <label className="location-index-item-address">
+          <div className="search-index-item-contact-details">
+            <label className="search-index-item-address">
               {this.props.location.street_address}
             </label>
 
-            <label className="location-index-item-address">
+            <label className="search-index-item-address">
               {this.props.location.city}, {this.props.location.state} {this.props.location.zipcode}
             </label>
 
-            <label className="location-index-item-phone">
+            <label className="search-index-item-phone">
               {this.props.location.phone_number}
             </label>
           </div>

@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
 
   validates_attachment_content_type :profile_pic, content_type: /\Aimage\/.*\Z/
 
+  has_many :reviews
+
   after_initialize :ensure_session_token
 
   def self.generate_session_token

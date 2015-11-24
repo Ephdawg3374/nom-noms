@@ -47,7 +47,7 @@ var SearchIndex = React.createClass({
     }
 
     return (
-      <div className="location-index">
+      <div className="search-index">
         {locationIndexItems}
       </div>
     );

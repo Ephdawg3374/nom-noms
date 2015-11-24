@@ -3,12 +3,14 @@ class Location < ActiveRecord::Base
             :street_address, :city, :state, :zipcode, :lat, :lng,
             presence: true
 
+  has_many :reviews
+
   def self.find_locations(search_params)
     distance = search_params[:distanceRange].to_f
     area = search_params[:searchArea]
     location_type = search_params[:searchType]
     price_range = search_params[:priceRange]
-    
+
     price_range = "%" if search_params[:priceRange] == "All"
     # pull all location types if no type specified
     location_type = "%" if location_type.empty?

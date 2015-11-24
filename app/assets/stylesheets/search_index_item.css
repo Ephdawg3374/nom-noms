@@ -1,0 +1,65 @@
+.search-index-item {
+  padding: 20px 0;
+  border-bottom: 1px solid #ccc;
+  font-size: 12px;
+}
+
+.search-index-item:last-child > .search-index-item-contact-details {
+  margin: 10px 10px 25px 10px;
+}
+
+.search-index-item-img {
+
+}
+
+.search-index-item-img > img {
+  border-radius: 10px;
+  width: 100%;
+  height: auto;
+}
+
+.search-index-item-name {
+  font-size: 16px;
+  margin-top: 5px;
+  color: blue;
+}
+
+.search-index-item-name > a {
+  cursor: pointer;
+}
+
+.search-index-item-details {
+  width: 55px;
+  float: left;
+}
+
+.search-index-item-details-wrapper {
+  margin-top: 5px;
+}
+
+.search-index-item-contact-details {
+  width: 100px;
+  float: right;
+}
+
+.search-index-item-details > label {
+  display: block;
+}
+
+.search-index-item-contact-details > label {
+  display: block;
+}
+
+.search-index-item-description {
+  display: block;
+}
+
+.search-index-item-website {
+  display: block;
+  color: #0000EE;
+  margin-top: 5px;
+}
+
+.search-index-item-website > a {
+  cursor: pointer;
+}

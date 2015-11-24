@@ -8,7 +8,7 @@
   min-height: 660px;
 }
 
-.location-index {
+.search-index {
   float: left;
   width: 200px;
   margin-left: 15px;
@@ -17,7 +17,7 @@
   height: 700px;
 }
 
-.location-index-map {
+.search-index-map {
   float: right;
   width: 785px;
   height: 700px;
