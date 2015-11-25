@@ -10,7 +10,14 @@ var LocationShowPage = React.createClass({
       var locations = JSON.parse(localStorage.location_index).locations;
       LocationStore.repopulateStore(locations);
     }
+
+    ApiReviewUtil.fetchReviewsByLocation(this.props.params.location_id);
   },
+
+  componentDidMount: function () {
+
+  },
+
 
   goToReviewFormPage: function (event) {
     event.preventDefault();
@@ -57,6 +64,14 @@ var LocationShowPage = React.createClass({
               </button>
             </div>
           </div>
+        </div>
+
+        <ReviewForm location={location} />
+
+        <div className="location-show-page-review-section">
+
+          <ReviewIndex />
+
         </div>
       </div>
     );

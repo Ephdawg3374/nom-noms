@@ -10,3 +10,13 @@
 .main-header {
   border-bottom: 1px solid #ccc;
 }
+
+.location-show-page > .review-form {
+  width: 50%;
+  margin: 30px auto;
+}
+
+.location-show-page > .review-form > .review-form-content > .review-form-body {
+  height: auto;
+  width: 90%;
+}

@@ -4,9 +4,7 @@ class Api::ImagesController < ApplicationController
 
     @image.save
 
-    @review = @image.review
-    
-    render "api/review/show"
+    render :show
   end
 
   private

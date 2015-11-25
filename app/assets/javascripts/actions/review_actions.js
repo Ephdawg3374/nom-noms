@@ -1,5 +1,5 @@
 var ReviewActions = {
-  reviewReviews: function (reviews) {
+  receiveReviews: function (reviews) {
     AppDispatcher.dispatch({
       actionType: ReviewConstants.RECEIVE_REVIEWS,
       reviews: reviews

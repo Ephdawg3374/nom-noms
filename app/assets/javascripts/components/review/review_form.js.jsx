@@ -133,7 +133,6 @@ var ReviewForm = React.createClass({
     }.bind(this);
 
     var successfulReviewCreation = function (review) {
-
       for (var i = 0; i < imageFiles.length; i++) {
         var formDataImage = new FormData();
         formDataImage.append("image[review_id]", review.id);
@@ -141,7 +140,8 @@ var ReviewForm = React.createClass({
         ApiImageUtil.create(formDataImage);
       }
 
-      this.setInitialState();
+      this.localStorage.review_form = {};
+
       this.history.pushState(null, "/locations/" + this.props.location.id);
     }.bind(this);
 
@@ -172,7 +172,6 @@ var ReviewForm = React.createClass({
       );
     }.bind(this));
 
-
     return (
       <form onSubmit={this.submitReview} className="review-form">
         { error_message }
@@ -191,6 +190,7 @@ var ReviewForm = React.createClass({
         <div className="review-form-content">
           <textarea
             className="review-form-body"
+            placeholder="Write your review here"
             valueLink={this.linkState("body")}>
           </textarea>
 

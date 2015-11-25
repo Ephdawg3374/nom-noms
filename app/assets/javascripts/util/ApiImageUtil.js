@@ -8,7 +8,7 @@ window.ApiImageUtil = {
       dataType: "json",
       data: formData,
       success: function (data) {
-        ReviewActions.receiveSingleReview(data);
+        ImageActions.receiveImage(data);
       }
     });
   }

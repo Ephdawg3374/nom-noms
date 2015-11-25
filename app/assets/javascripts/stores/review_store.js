@@ -8,6 +8,7 @@
     },
 
     addReview: function (review) {
+      debugger;
       var idx = _reviews.indexOf(review);
 
       if (idx === -1) {
