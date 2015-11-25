@@ -1,13 +1,12 @@
 var ReviewForm = React.createClass({
-  mixins: [ReactPersistentState],
+  mixins: [ReactPersistentState, React.addons.LinkedStateMixin],
 
   getInitialState: function () {
     return (
       {
         rating: 1,
         body: "",
-        imageUrls: [],
-        imageFiles: [],
+        images: [],
         uploading: false
       }
     );
@@ -19,22 +18,27 @@ var ReviewForm = React.createClass({
     this.restorePState();
   },
 
+  componentDidMount: function () {
+    this.intervalId = setInterval(function () {
+      this.setPState({
+        rating: this.state.rating,
+        body: this.state.body,
+        images: this.state.images,
+        uploading: false
+      });
+    }.bind(this), 1000);
+  },
+
+  componentWillUnmount: function () {
+    clearInterval(this.intervalId);
+  },
+
   setReviewRating: function (event) {
     event.preventDefault();
 
     var newRating = parseInt(event.currentTarget.value);
 
     this.setState({rating: newRating});
-    this.setPState({rating: newRating});
-  },
-
-  setBody: function (event) {
-    event.preventDefault();
-
-    var newBody = event.currentTarget.value;
-
-    this.setState({body: newBody});
-    this.setPState({body: newBody});
   },
 
   changeFile: function (event) {
@@ -44,17 +48,13 @@ var ReviewForm = React.createClass({
     var file = event.currentTarget.files[0];
 
     reader.onloadend = function() {
+      var images = this.state.images.slice();
+      var image = [reader.result, file];
+      images.push(image);
+
       this.setState(
         {
-          imageUrls: this.state.imageUrls.concat(reader.result),
-          imageFiles: this.state.imageFiles.concat(file),
-          uploading: false
-        }
-      );
-      this.setPState(
-        {
-          imageUrls: this.state.imageUrls.concat(reader.result),
-          imageFiles: this.state.imageFiles.concat(file),
+          images: images,
           uploading: false
         }
       );
@@ -69,6 +69,11 @@ var ReviewForm = React.createClass({
   deleteFile: function (event) {
     event.preventDefault();
 
+    var imageIdx = event.currentTarget.value;
+    var images = this.state.images.slice();
+    images.splice(imageIdx, 1);
+
+    this.setState({ images: images });
   },
 
   render: function () {
@@ -76,14 +81,21 @@ var ReviewForm = React.createClass({
       <button className="submit-review-button disabled" disabled>Submit Review</button> :
       <button className="submit-review-button">Submit Review</button>;
 
-    var uploadedPics = this.state.imageUrls.map(function (imageUrl, idx) {
+    var uploadedPics = this.state.images.map(function (image, idx) {
+      var imageUrl = image[0];
+      var file = image[1];
+
       return (
         <div key={idx} className="review-form-uploaded-pic">
-          <button className="delete-uploaded-pic-button" img={imageUrl}>X</button>
+          <button
+            className="delete-uploaded-pic-button"
+            onClick={this.deleteFile}
+            value={idx}
+            >X</button>
           <img className="review-form-pic-preview" src={imageUrl} />
         </div>
       );
-    });
+    }.bind(this));
 
 
     return (
@@ -103,11 +115,10 @@ var ReviewForm = React.createClass({
         <div className="review-form-content">
           <textarea
             className="review-form-body"
-            onChange={this.setBody}
-            val={this.state.body}>
+            valueLink={this.linkState("body")}>
           </textarea>
 
-          <div className="review-form-pics-preview" >
+          <div className="review-form-pics-preview group" >
             { uploadedPics }
           </div>
         </div>

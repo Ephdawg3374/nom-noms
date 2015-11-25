@@ -50,6 +50,24 @@
 
 .review-form-pic-preview {
   width: 200px;
+  border-radius: 10px;
+}
+
+.review-form-uploaded-pic {
+  float: left;
+}
+
+.delete-uploaded-pic-button {
+  position: absolute;
+  font-size: 12px;
+  padding: 3px;
+  background: white;
+  color: red;
+  border-radius: 50%;
+}
+
+.delete-uploaded-pic-button:hover {
+
 }
 
 .submit-review-button.disabled {

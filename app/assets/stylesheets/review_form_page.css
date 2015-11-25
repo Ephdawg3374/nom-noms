@@ -28,7 +28,7 @@
 
 .header-details-wrapper {
   float: left;
-  margin: 0 40px;
+  margin: 0 30px;
 }
 
 .header-details-name > a {
@@ -44,6 +44,9 @@
 }
 
 .review-form-page-header > .location-details-wrapper {
-  width: 300px;
+  width: 250px;
   float: left;
+}
+.review-form-page-header > .location-details-wrapper > .contact-details > label {
+  white-space: nowrap;
 }
