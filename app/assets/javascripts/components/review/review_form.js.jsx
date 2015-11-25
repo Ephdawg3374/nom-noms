@@ -7,7 +7,9 @@ var ReviewForm = React.createClass({
         rating: 1,
         body: "",
         images: [],
-        uploading: false
+        isUploading: false,
+        isValid: true,
+        errors: ""
       }
     );
   },
@@ -24,7 +26,7 @@ var ReviewForm = React.createClass({
         rating: this.state.rating,
         body: this.state.body,
         images: this.state.images,
-        uploading: false
+        isUploading: false
       });
     }.bind(this), 1000);
   },
@@ -55,14 +57,14 @@ var ReviewForm = React.createClass({
       this.setState(
         {
           images: images,
-          uploading: false
+          isUploading: false
         }
       );
     }.bind(this);
 
     if (file) {
       reader.readAsDataURL(file);
-      this.setState({ uploading: true });
+      this.setState({ isUploading: true });
     }
   },
 
@@ -76,8 +78,38 @@ var ReviewForm = React.createClass({
     this.setState({ images: images });
   },
 
+  submitReview: function (event) {
+    event.preventDefault();
+
+    var formData = new FormData();
+    var imageFiles = [];
+
+    this.state.images.forEach(function (image) {
+      imageFiles.push(image[1]);
+    });
+
+    formData.append("review[rating]", this.state.rating);
+    formData.append("review[body]", this.state.body);
+    formData.append("review[images]", imageFiles);
+    formData.append("review[username]", CurrentUserStore.currentUser().id);
+    formData.append("review[location_id]", this.props.location.id);
+    
+    var success = function () {
+      this.history.pushState(null, "/locations/" + this.props.location.id);
+    }.bind(this);
+
+    var failure = function (err_msg) {
+      this.setState({ isValid: false, errors: err_msg });
+    }.bind(this);
+
+    ApiReviewUtil.create(formData, success, failure);
+  },
+
   render: function () {
-    var submitButton = this.state.uploading === true ?
+    var error_message = !this.state.isValid ?
+      <span className="review-form-error-message">{this.state.errors}</span> : null;
+
+    var submitButton = this.state.isUploading === true ?
       <button className="submit-review-button disabled" disabled>Submit Review</button> :
       <button className="submit-review-button">Submit Review</button>;
 
@@ -100,6 +132,7 @@ var ReviewForm = React.createClass({
 
     return (
       <form onSubmit={this.submitReview} className="review-form">
+        { error_message }
         <div className="review-form-header group">
           <ReviewRatingBar
             setReviewRating={this.setReviewRating}

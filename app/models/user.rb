@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
 
   validates_attachment_content_type :profile_pic, content_type: /\Aimage\/.*\Z/
 
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
 
   after_initialize :ensure_session_token
 

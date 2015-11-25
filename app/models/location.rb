@@ -3,7 +3,7 @@ class Location < ActiveRecord::Base
             :street_address, :city, :state, :zipcode, :lat, :lng,
             presence: true
 
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
 
   def self.find_locations(search_params)
     distance = search_params[:distanceRange].to_f

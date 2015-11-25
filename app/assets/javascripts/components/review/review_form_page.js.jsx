@@ -38,7 +38,7 @@ var ReviewFormPage = React.createClass({
           <LocationContactDetails location={location} />
         </div>
 
-        <ReviewForm />
+        <ReviewForm location={location}/>
 
       </div>
     );
