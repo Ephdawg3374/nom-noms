@@ -63,3 +63,13 @@ button.active {
 button:focus {
   outline: 0;
 }
+
+button.disabled {
+  background: darkgrey;
+}
+
+button.disabled:hover {
+  box-shadow: none;
+  text-shadow: none;
+  cursor: none;
+}

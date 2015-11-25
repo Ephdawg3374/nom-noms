@@ -1,3 +1,22 @@
+var success = function () {
+  this.setState(
+    {
+      showLocTypeAutoCompleteList: false,
+      showLocAreaAutoCompleteList: false
+    }
+  );
+};
+
+var failure = function (errMsg) {
+  this.setState(
+    {
+      errMsg: errMsg,
+      showLocTypeAutoCompleteList: false,
+      showLocAreaAutoCompleteList: false
+    }
+  );
+};
+
 var SearchMain = React.createClass({
   mixins: [ReactPersistentState, ReactRouter.History],
 
@@ -10,7 +29,8 @@ var SearchMain = React.createClass({
         distanceRange: "1", // miles
         priceRange: "All",
         showLocTypeAutoCompleteList: false,
-        showLocAreaAutoCompleteList: false
+        showLocAreaAutoCompleteList: false,
+        errMsg: null
       }
     );
   },
@@ -24,12 +44,13 @@ var SearchMain = React.createClass({
   componentDidMount: function () {
     this.intervalId = setInterval(function () {
       this.setPState({
-        locType: "",
+        locType: this.state.locType,
         locArea: this.state.locArea,
         distanceRange: this.state.distanceRange,
         priceRange: this.state.priceRange,
         showLocTypeAutoCompleteList: this.state.showLocTypeAutoCompleteList,
-        showLocAreaAutoCompleteList: this.state.showLocAreaAutoCompleteList
+        showLocAreaAutoCompleteList: this.state.showLocAreaAutoCompleteList,
+        errMsg: null
       });
     }.bind(this), 1000);
 
@@ -82,37 +103,45 @@ var SearchMain = React.createClass({
     }.bind(this));
   },
 
-  buildSearchObject: function (searchType, searchArea) {
-    var search = {
-      searchType: searchType || this.state.locType,
-      searchArea: searchArea || this.state.locArea,
+  buildSearchObject: function () {
+    var searchParams = {
+      searchType: this.state.locType,
+      searchArea: this.state.locArea,
       distanceRange: this.state.distanceRange,
       priceRange: this.state.priceRange
     };
 
-    return search;
+    return searchParams;
   },
 
   handleSearchSubmit: function (event) {
-    event.preventDefault();
+    if (event) {
+      event.preventDefault();
+    }
 
-    var locationForm = event.currentTarget;
-    var searchType = this.state.locType;
-    var searchArea = this.state.locArea;
+    var searchParams = this.buildSearchObject();
 
-    var search = this.buildSearchObject(searchType, searchArea);
+    this.getLocationsAndPushState(searchParams);
+  },
 
-    ApiLocationUtil.fetchLocations(search, function () {
-      this.setState(
-        {
-          showLocTypeAutoCompleteList: false,
-          showLocAreaAutoCompleteList: false
-        }
-      );
-    }.bind(this));
+  getLocationsAndPushState: function (searchParams) {
+    ApiLocationUtil.fetchLocations(searchParams, success.bind(this), failure.bind(this));
 
-    this.history.pushState(null, "/search/?type=" + searchType + "?area=" + searchArea +
-                          "?price-range=" + this.state.priceRange + "?distance=" + this.state.distanceRange);
+    this.history.pushState(null, "search/", searchParams);
+  },
+
+  handlePriceRangeFilter: function (priceRange) {
+    var searchParams = this.buildSearchObject();
+    searchParams.priceRange = priceRange;
+
+    this.getLocationsAndPushState(searchParams);
+  },
+
+  handleDistanceRangeFilter: function (distanceRange) {
+    var searchParams = this.buildSearchObject();
+    searchParams.distanceRange = distanceRange;
+
+    this.getLocationsAndPushState(searchParams);
   },
 
   autoCompleteLocationType: function (event) {
@@ -166,10 +195,10 @@ var SearchMain = React.createClass({
   setPriceRangeFilter: function (event) {
     event.preventDefault();
 
-    if (LocationStore.all().length > 0) {
-      var search = this.buildSearchObject();
-      search.priceRange = event.currentTarget.value;
-      ApiLocationUtil.fetchLocations(search);
+    var priceRange = event.currentTarget.value;
+
+    if (NomNomsApp.search_auto) {
+      this.handlePriceRangeFilter(priceRange);
     }
 
     this.setState({ priceRange: event.currentTarget.value });
@@ -178,17 +207,21 @@ var SearchMain = React.createClass({
   setDistanceRangeFilter: function (event) {
     event.preventDefault();
 
-    if (LocationStore.all().length > 0) {
-      var search = this.buildSearchObject();
-      search.distanceRange = event.currentTarget.value;
-      ApiLocationUtil.fetchLocations(search);
+    var distanceRange = event.currentTarget.value;
+
+    if (NomNomsApp.search_auto) {
+      this.handleDistanceRangeFilter(distanceRange);
     }
 
     this.setState({ distanceRange: event.currentTarget.value });
   },
 
   render: function () {
-    var locTypeAutoCompleteList, locAreaAutoCompleteList;
+    var locTypeAutoCompleteList, locAreaAutoCompleteList, errMsg;
+
+    if (this.state.errMsg) {
+      errMsg = <span className="location-search-error-msg">this.state.errMsg</span>;
+    }
 
     var handleKeyPress = function (e) {
       if (e.which === 13) {
@@ -282,6 +315,8 @@ var SearchMain = React.createClass({
           </div>
 
         </form>
+
+        { errMsg }
       </div>
     );
   }

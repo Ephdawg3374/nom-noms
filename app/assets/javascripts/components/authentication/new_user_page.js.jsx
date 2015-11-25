@@ -7,7 +7,10 @@ var NewUserPage = React.createClass({
         username: "",
         imageUrl: null,
         imageFile: "",
-        password: ""
+        password: "",
+        isValid: true,
+        isSubmitting: false,
+        errMsg: ""
       }
     );
   },
@@ -21,15 +24,27 @@ var NewUserPage = React.createClass({
   handleNewUserSubmit: function (event) {
     event.preventDefault();
 
+    this.setState({ isSubmitting: true });
+
     var formData = new FormData();
 
     formData.append("user[username]", this.state.username);
     formData.append("user[password]", this.state.password);
     formData.append("user[profile_pic]", this.state.imageFile);
 
-    ApiUserUtil.create(formData, function () {
-     this.history.pushState(null, "/");
-    }.bind(this));
+    var success = function () {
+      this.history.pushState(null, "/");
+    }.bind(this);
+
+    var failure = function (errMsg) {
+      this.setState({
+        isValid: false,
+        errMsg: errMsg,
+        isSubmitting: false
+      });
+    };
+
+    ApiUserUtil.create(formData, success, failure);
   },
 
   changeFile: function (event) {
@@ -48,6 +63,10 @@ var NewUserPage = React.createClass({
   },
 
   render: function () {
+    var submitButton = this.state.isSubmitting === true ?
+      <button className="disabled" disabled>Submit</button> :
+      <button>Submit</button>;
+
     return (
       <div className="auth-page">
         <h1>Create a new user</h1>
@@ -76,7 +95,7 @@ var NewUserPage = React.createClass({
             valueLink={this.linkState("password")} />
           </label>
 
-          <button type="submit">Submit</button>
+          { submitButton }
 
         </form>
       </div>

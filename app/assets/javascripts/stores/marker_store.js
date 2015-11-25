@@ -47,11 +47,27 @@
     //   });
     // },
 
-    determineMapBoundsAndSetCenter: function (map) {
-      var zoomChangeBoundsListener =
-        google.maps.event.addListenerOnce(map, 'bounds_changed', function(event) {
-          map.setZoom(15);
-        });
+    determineMapBoundsAndSetCenter: function (map, distanceRange) {
+      var zoomLevel = 13;
+
+      switch (distanceRange) {
+        case ".5":
+          zoomLevel = 15;
+          break;
+        case "1":
+          zoomLevel = 14;
+          break;
+        case "5":
+          zoomLevel = 13;
+          break;
+        case "10":
+          zoomLevel = 12;
+          break;
+      }
+      
+      var zoomChangeBoundsListener = google.maps.event.addListenerOnce(map, 'bounds_changed', function(event) {
+        map.setZoom(zoomLevel);
+      });
 
       var latLngBounds = new google.maps.LatLngBounds();
 
@@ -60,8 +76,8 @@
       });
 
       // map.setCenter(latLngBounds.getCenter());
-      // map.fitBounds(latLngBounds);
       map.panTo(latLngBounds.getCenter());
+      map.fitBounds(latLngBounds);
 
       setTimeout(function() {
           google.maps.event.removeListener(zoomChangeBoundsListener);

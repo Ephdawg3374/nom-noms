@@ -71,12 +71,3 @@
 .delete-uploaded-pic-button:hover {
 
 }
-
-.review-form > .submit-review-button.disabled {
-  background: darkgrey;
-}
-
-.review-form > .disabled:hover {
-  box-shadow: none;
-  text-shadow: none;
-}

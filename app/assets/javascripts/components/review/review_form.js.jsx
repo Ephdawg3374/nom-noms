@@ -10,7 +10,7 @@ var ReviewForm = React.createClass({
         isUploading: false,
         isSubmitting: false,
         isValid: true,
-        errors: ""
+        errMsg: ""
       }
     );
   },
@@ -30,7 +30,7 @@ var ReviewForm = React.createClass({
         isSubmitting: false,
         isUploading: false,
         isValid: true,
-        errors: ""
+        errMsg: ""
       });
     }.bind(this), 1000);
   },
@@ -84,6 +84,7 @@ var ReviewForm = React.createClass({
 
   submitReview: function (event) {
     event.preventDefault();
+    
     this.setState({ isSubmitting: true });
 
     var formData = new FormData();
@@ -103,8 +104,12 @@ var ReviewForm = React.createClass({
       this.history.pushState(null, "/locations/" + this.props.location.id);
     }.bind(this);
 
-    var failure = function (err_msg) {
-      this.setState({ isValid: false, errors: err_msg, isSubmitting: false });
+    var failure = function (errMsg) {
+      this.setState({
+        isValid: false,
+        errMsg: errMsg,
+        isSubmitting: false
+      });
     }.bind(this);
 
     ApiReviewUtil.create(formData, success, failure);
@@ -112,7 +117,7 @@ var ReviewForm = React.createClass({
 
   render: function () {
     var error_message = !this.state.isValid ?
-      <span className="review-form-error-message">{this.state.errors}</span> : null;
+      <span className="review-form-error-message">{this.state.errMsg}</span> : null;
 
     var submitButton = this.state.isSubmitting === true ?
       <button className="submit-review-button disabled" disabled>Submit Review</button> :

@@ -1,5 +1,5 @@
 window.ApiLocationUtil = {
-  fetchLocations: function (search, callback) {
+  fetchLocations: function (search, success, failure) {
     $.ajax({
       url: "api/locations",
       method: "GET",
@@ -8,7 +8,10 @@ window.ApiLocationUtil = {
       data: {search: search},
       success: function (data) {
         SearchActions.receiveSearchResults(data);
-        callback && callback();
+        success();
+      },
+      failure: function (data) {
+        failure();
       }
     });
   },
