@@ -13,13 +13,14 @@ window.ApiSessionUtil = {
     });
   },
 
-  logout: function () {
+  logout: function (success) {
     $.ajax({
       url: '/api/session',
       type: 'DELETE',
       dataType: 'json',
       success: function () {
         CurrentUserActions.receiveCurrentUser({});
+        success();
       }
     });
   },

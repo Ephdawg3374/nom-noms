@@ -5,5 +5,4 @@ var CurrentUserActions = {
       currentUser: currentUser
     });
   }
-
 };

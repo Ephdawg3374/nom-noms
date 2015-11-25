@@ -34,7 +34,7 @@ var SearchIndexItem = React.createClass({
           onMouseOver={this.mouseOverHeader}
           onMouseOut={this.mouseOutHeader}>
 
-          <Link to={'/locations/' + location.id}>
+          <Link to={'/locations/' + location.id} params={ location }>
             {location.name}
           </Link>
         </h2>

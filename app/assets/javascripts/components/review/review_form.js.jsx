@@ -1,8 +1,22 @@
 var ReviewForm = React.createClass({
-  mixins: [ReactPersistentState, React.addons.LinkedStateMixin],
+  mixins: [ReactPersistentState, React.addons.LinkedStateMixin, ReactRouter.History],
 
   getInitialState: function () {
     return (
+      {
+        rating: 1,
+        body: "",
+        images: [],
+        isUploading: false,
+        isSubmitting: false,
+        isValid: true,
+        errMsg: ""
+      }
+    );
+  },
+
+  setInitialState: function () {
+    this.setState(
       {
         rating: 1,
         body: "",
@@ -22,11 +36,16 @@ var ReviewForm = React.createClass({
   },
 
   componentDidMount: function () {
+    setTimeout(function () {
+      this.setState({
+        images: []
+      });
+    }.bind(this), 100);
+
     this.intervalId = setInterval(function () {
       this.setPState({
         rating: this.state.rating,
         body: this.state.body,
-        images: this.state.images,
         isSubmitting: false,
         isUploading: false,
         isValid: true,
@@ -84,25 +103,26 @@ var ReviewForm = React.createClass({
 
   submitReview: function (event) {
     event.preventDefault();
-    
+
     this.setState({ isSubmitting: true });
 
-    var formData = new FormData();
+    var formDataNoImages = new FormData();
+
+    var rating = this.state.rating;
+    var body = this.state.body;
+    var userId = CurrentUserStore.currentUser().id;
+    var locationId = this.props.location.id;
+
     var imageFiles = [];
 
     this.state.images.forEach(function (image) {
       imageFiles.push(image[1]);
     });
 
-    formData.append("review[rating]", this.state.rating);
-    formData.append("review[body]", this.state.body);
-    formData.append("review[images]", imageFiles);
-    formData.append("review[username]", CurrentUserStore.currentUser().id);
-    formData.append("review[location_id]", this.props.location.id);
-
-    var success = function () {
-      this.history.pushState(null, "/locations/" + this.props.location.id);
-    }.bind(this);
+    formDataNoImages.append("review[rating]", rating);
+    formDataNoImages.append("review[body]", body);
+    formDataNoImages.append("review[user_id]", userId);
+    formDataNoImages.append("review[location_id]", locationId);
 
     var failure = function (errMsg) {
       this.setState({
@@ -112,7 +132,20 @@ var ReviewForm = React.createClass({
       });
     }.bind(this);
 
-    ApiReviewUtil.create(formData, success, failure);
+    var successfulReviewCreation = function (review) {
+
+      for (var i = 0; i < imageFiles.length; i++) {
+        var formDataImage = new FormData();
+        formDataImage.append("image[review_id]", review.id);
+        formDataImage.append("image[image_pic]", imageFiles[i]);
+        ApiImageUtil.create(formDataImage);
+      }
+
+      this.setInitialState();
+      this.history.pushState(null, "/locations/" + this.props.location.id);
+    }.bind(this);
+
+    ApiReviewUtil.create(formDataNoImages, successfulReviewCreation, failure);
   },
 
   render: function () {

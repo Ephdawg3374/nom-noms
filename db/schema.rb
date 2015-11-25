@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151125024110) do
+ActiveRecord::Schema.define(version: 20151125155442) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "images", force: :cascade do |t|
+    t.integer  "review_id",              null: false
+    t.string   "image_pic_file_name"
+    t.string   "image_pic_content_type"
+    t.integer  "image_pic_file_size"
+    t.datetime "image_pic_updated_at"
+  end
 
   create_table "locations", force: :cascade do |t|
     t.string "name",                     null: false
@@ -39,17 +47,13 @@ ActiveRecord::Schema.define(version: 20151125024110) do
   add_index "locations", ["price_range"], name: "index_locations_on_price_range", using: :btree
 
   create_table "reviews", force: :cascade do |t|
-    t.integer  "user_id",                          null: false
-    t.integer  "location_id",                      null: false
-    t.integer  "rating",              default: 0,  null: false
-    t.text     "body",                             null: false
-    t.integer  "tags",                default: [],              array: true
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
-    t.string   "images_file_name",                              array: true
-    t.string   "images_content_type",                           array: true
-    t.integer  "images_file_size",                              array: true
-    t.datetime "images_updated_at",                             array: true
+    t.integer  "user_id",                  null: false
+    t.integer  "location_id",              null: false
+    t.integer  "rating",      default: 0,  null: false
+    t.text     "body",                     null: false
+    t.integer  "tags",        default: [],              array: true
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   add_index "reviews", ["location_id"], name: "index_reviews_on_location_id", using: :btree

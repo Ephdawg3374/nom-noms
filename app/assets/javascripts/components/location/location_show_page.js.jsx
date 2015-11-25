@@ -18,7 +18,8 @@ var LocationShowPage = React.createClass({
     if (!CurrentUserStore.isLoggedIn()) {
       this.history.pushState(null, "/session/new");
     } else {
-      this.history.pushState(null, "/locations/" + this.props.params.location_id + "/reviews/new");
+      var location = { locationId: this.props.params.location_id };
+      this.history.pushState(null, "/locations/" + location.locationId + "/reviews/new", location);
     }
   },
 

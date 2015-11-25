@@ -10,9 +10,5 @@ class Review < ActiveRecord::Base
 
   belongs_to :location
 
-  has_attached_file :images,
-    default_url: "profile_pic_placeholder.png",
-    styles: { medium: "320x240" }
-
-  validates_attachment_content_type :profile_pic, content_type: /\Aimage\/.*\Z/
+  has_many :images, dependent: :destroy
 end
