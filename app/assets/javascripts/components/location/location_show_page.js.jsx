@@ -15,7 +15,11 @@ var LocationShowPage = React.createClass({
   goToReviewFormPage: function (event) {
     event.preventDefault();
 
-    this.history.pushState(null, "/locations/" + this.props.params.location_id + "/reviews/new");
+    if (!CurrentUserStore.isLoggedIn()) {
+      this.history.pushState(null, "/session/new");
+    } else {
+      this.history.pushState(null, "/locations/" + this.props.params.location_id + "/reviews/new");
+    }
   },
 
   render: function () {

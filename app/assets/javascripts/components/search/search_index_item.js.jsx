@@ -37,7 +37,6 @@ var SearchIndexItem = React.createClass({
           <Link to={'/locations/' + location.id}>
             {location.name}
           </Link>
-
         </h2>
 
         <label className="search-index-item-website">

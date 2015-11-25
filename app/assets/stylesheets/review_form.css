@@ -18,6 +18,8 @@
 
 .review-form-pic-input {
   float: left;
+  padding: 5px;
+  margin: 25px 0;
 }
 
 .review-rating-button {
@@ -70,6 +72,11 @@
 
 }
 
-.submit-review-button.disabled {
+.review-form > .submit-review-button.disabled {
   background: darkgrey;
+}
+
+.review-form > .disabled:hover {
+  box-shadow: none;
+  text-shadow: none;
 }

@@ -1,8 +1,12 @@
 var UserLoggedIn = React.createClass({
+  mixins: [ReactRouter.History],
+
   handleUserLogout: function (event) {
     event.preventDefault();
 
-    ApiSessionUtil.logout();
+    ApiSessionUtil.logout(function () {
+      this.history.pushState(null, "/");
+    }.bind(this));
   },
 
   render: function () {

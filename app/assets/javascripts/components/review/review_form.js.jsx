@@ -8,6 +8,7 @@ var ReviewForm = React.createClass({
         body: "",
         images: [],
         isUploading: false,
+        isSubmitting: false,
         isValid: true,
         errors: ""
       }
@@ -26,7 +27,10 @@ var ReviewForm = React.createClass({
         rating: this.state.rating,
         body: this.state.body,
         images: this.state.images,
-        isUploading: false
+        isSubmitting: false,
+        isUploading: false,
+        isValid: true,
+        errors: ""
       });
     }.bind(this), 1000);
   },
@@ -80,6 +84,7 @@ var ReviewForm = React.createClass({
 
   submitReview: function (event) {
     event.preventDefault();
+    this.setState({ isSubmitting: true });
 
     var formData = new FormData();
     var imageFiles = [];
@@ -93,13 +98,13 @@ var ReviewForm = React.createClass({
     formData.append("review[images]", imageFiles);
     formData.append("review[username]", CurrentUserStore.currentUser().id);
     formData.append("review[location_id]", this.props.location.id);
-    
+
     var success = function () {
       this.history.pushState(null, "/locations/" + this.props.location.id);
     }.bind(this);
 
     var failure = function (err_msg) {
-      this.setState({ isValid: false, errors: err_msg });
+      this.setState({ isValid: false, errors: err_msg, isSubmitting: false });
     }.bind(this);
 
     ApiReviewUtil.create(formData, success, failure);
@@ -109,7 +114,7 @@ var ReviewForm = React.createClass({
     var error_message = !this.state.isValid ?
       <span className="review-form-error-message">{this.state.errors}</span> : null;
 
-    var submitButton = this.state.isUploading === true ?
+    var submitButton = this.state.isSubmitting === true ?
       <button className="submit-review-button disabled" disabled>Submit Review</button> :
       <button className="submit-review-button">Submit Review</button>;
 
