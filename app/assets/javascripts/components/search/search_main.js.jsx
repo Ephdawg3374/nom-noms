@@ -1,6 +1,7 @@
 var success = function () {
   this.setState(
     {
+      errMsg: null,
       showLocTypeAutoCompleteList: false,
       showLocAreaAutoCompleteList: false
     }
@@ -50,7 +51,6 @@ var SearchMain = React.createClass({
         priceRange: this.state.priceRange,
         showLocTypeAutoCompleteList: this.state.showLocTypeAutoCompleteList,
         showLocAreaAutoCompleteList: this.state.showLocAreaAutoCompleteList,
-        errMsg: null
       });
     }.bind(this), 1000);
 
@@ -220,7 +220,7 @@ var SearchMain = React.createClass({
     var locTypeAutoCompleteList, locAreaAutoCompleteList, errMsg;
 
     if (this.state.errMsg) {
-      errMsg = <span className="location-search-error-msg">this.state.errMsg</span>;
+      errMsg = <label className="search-error-msg">{this.state.errMsg}</label>;
     }
 
     var handleKeyPress = function (e) {

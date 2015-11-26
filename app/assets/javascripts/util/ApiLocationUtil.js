@@ -11,7 +11,7 @@ window.ApiLocationUtil = {
         success();
       },
       error: function (data) {
-        failure();
+        failure(data.responseText);
       }
     });
   },

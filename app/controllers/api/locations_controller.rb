@@ -2,11 +2,11 @@ class Api::LocationsController < ApplicationController
   def index
     if !params[:search].nil?
       @locations = Location.find_locations(params[:search])
-      
+
       unless @locations.empty?
         render :index
       else
-        render json: { errors: ["No results found."] }, status: 404
+        render json: "No results found ¯\\_(ツ)_/¯", status: 404
       end
     elsif !params[:locTypeAutoCompleteRequest].nil?
       @location_types = Location.find_valid_location_types(params[:locTypeAutoCompleteRequest])
@@ -15,7 +15,7 @@ class Api::LocationsController < ApplicationController
       @location_areas = Location.find_valid_location_areas(params[:locAddressAutoCompleteRequest])
       render json: @location_areas
     else
-      render json: { errors: ["There was an error with your request"] }, status: 400
+      render json: "There was an error with your request", status: 400
     end
 
   end
