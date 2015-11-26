@@ -27,7 +27,9 @@ var ReviewIndexItem = React.createClass({
       <div className="review-index-item group">
         <div className="review-index-item-side-bar">
           <figure className="review-index-item-pic">
-            <h3>{this.props.review.author}</h3>
+            <Link to={"/users/" + this.props.review.user_id}>
+              <h3>{this.props.review.author}</h3>
+            </Link>
             <img src={this.props.review.user_thumbnail_url}/>
           </figure>
         </div>

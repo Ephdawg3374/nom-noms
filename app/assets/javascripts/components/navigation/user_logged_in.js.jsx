@@ -4,9 +4,7 @@ var UserLoggedIn = React.createClass({
   handleUserLogout: function (event) {
     event.preventDefault();
 
-    ApiSessionUtil.logout(function () {
-      this.history.pushState(null, "/");
-    }.bind(this));
+    ApiSessionUtil.logout();
   },
 
   render: function () {
@@ -14,9 +12,9 @@ var UserLoggedIn = React.createClass({
 
     return (
       <div className="nav-logged-in">
-        <a href="#" className="nav-logged-in-tiny-pic">
+        <Link className = "nav-logged-in-tiny-pic" to={"/users/" + CurrentUserStore.currentUser().id}>
           <img src={ tinyPicUrl } />
-        </a>
+        </Link>
         <button onClick={ this.handleUserLogout }>
           Log Out
         </button>

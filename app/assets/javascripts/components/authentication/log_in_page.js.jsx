@@ -14,7 +14,7 @@ var LogInPage = React.createClass({
 
   componentWillMount: function () {
     if (CurrentUserStore.isLoggedIn()) {
-      this.history.pushState(null, "/");
+      this.history.goBack();
     }
   },
 
@@ -27,7 +27,7 @@ var LogInPage = React.createClass({
     };
 
     var success = function () {
-     this.history.pushState(null, "/");
+     this.history.goBack();
     }.bind(this);
 
     var failure = function (errors) {
@@ -49,7 +49,7 @@ var LogInPage = React.createClass({
     return (
       <div className="auth-page">
         <h1>Log into your account</h1>
-        
+
           <div className="user-form-errors-wrapper group">
             { errors }
           </div>

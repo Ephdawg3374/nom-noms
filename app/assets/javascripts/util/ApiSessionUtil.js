@@ -23,7 +23,7 @@ window.ApiSessionUtil = {
       dataType: 'json',
       success: function () {
         CurrentUserActions.receiveCurrentUser({});
-        success();
+        success && success();
       }
     });
   },

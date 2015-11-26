@@ -10,7 +10,8 @@ var ReviewForm = React.createClass({
         isUploading: false,
         isSubmitting: false,
         isValid: true,
-        errors: []
+        errors: [],
+        visible: true
       }
     );
   },
@@ -51,10 +52,22 @@ var ReviewForm = React.createClass({
         isValid: true,
       });
     }.bind(this), 1000);
+
+    CurrentUserStore.addChangeListener(this._ensureLoggedIn);
   },
 
   componentWillUnmount: function () {
     clearInterval(this.intervalId);
+
+    CurrentUserStore.removeChangeListener(this._ensureLoggedIn);
+  },
+
+  _ensureLoggedIn: function () {
+    if (CurrentUserStore.isLoggedIn()) {
+      this.setState({ visible: true });
+    } else {
+      this.setState({ visible: false });
+    }
   },
 
   setReviewRating: function (event) {
@@ -149,10 +162,17 @@ var ReviewForm = React.createClass({
   },
 
   render: function () {
-    var errors = this.state.errors.length > 0 ?
-      this.state.errors.map(function (error, idx) {
+    var klass, errors;
+
+    if (!this.state.visible) {
+      klass = "not-visible";
+    }
+
+    if (this.state.errors.length > 0) {
+      errors = this.state.errors.map(function (error, idx) {
         return <label key={idx} className="review-form-error-msg">{error}</label>;
-      }) : "";
+      });
+    }
 
     var submitButton = this.state.isSubmitting === true ?
       <button className="submit-review-button disabled" disabled>Submit Review</button> :
@@ -175,7 +195,7 @@ var ReviewForm = React.createClass({
     }.bind(this));
 
     return (
-      <form onSubmit={this.submitReview} className="review-form">
+      <form onSubmit={this.submitReview} className={"review-form " + klass} >
 
         <div className="review-form-errors-wrapper group">
           { errors }

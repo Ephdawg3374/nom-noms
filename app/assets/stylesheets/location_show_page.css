@@ -6,6 +6,7 @@
 .main-header {
   border-bottom: 1px solid #ccc;
   background: #eee;
+  height: 300px;
 }
 
 .sub-header {
@@ -19,13 +20,15 @@
 }
 
 .sub-header-info > h1 {
+  float: left;
   font-size: 30px;
   font-weight: bold;
 }
 
 .sub-header-info > .review-rating-bar {
+  float: left;
   margin: 0;
-  padding: 15px 0;
+  padding: 0 15px 0 25px;
 }
 .sub-header-options {
   float: right;
@@ -37,16 +40,16 @@
 }
 
 .sub-header-info > .num-reviews-text {
+  float: left;
   font-style: italic;
   font-weight: lighter;
   font-size: 14px;
-  display: block;
-  margin: 25px 0;
-  width: 200px;
+  margin: 10px 0;
 }
 
 .sub-header-banner {
-
+  position: relative;
+  top: 50px;
 }
 
 .sub-header-banner-left-section {
@@ -54,6 +57,7 @@
   width: 350px;
   background: white;
   padding: 5px;
+  border: 1px solid #ccc;
 }
 
 .sub-header-banner-left-section > .search-index-map {
@@ -79,16 +83,30 @@
   padding: 0 15px;
 },
 
-.location-show-page > .review-form {
-  width: 50%;
-  margin: 30px auto;
+.location-show-page-review-wrapper {
+  position: relative;
+  top: 150px;
 }
 
-.location-show-page > .review-form > .review-form-content > .review-form-body {
-  height: auto;
-  width: 90%;
+.sub-header-banner-left-section > .location-details-wrapper > .location-contact-details {
+  width: 160px;
+}
+
+.sub-header-banner-cover-photo {
+  float: right;
+  width: 600px;
+  margin-top: 20px;
 }
 
 .location-show-page-review-section {
   background: white;
+}
+
+.location-show-page-review-wrapper {
+  position: relative;
+  top: 200px;
+}
+
+.location-show-page-review-wrapper > .review-form > .review-form-content > .review-form-body {
+  height: 75px;
 }

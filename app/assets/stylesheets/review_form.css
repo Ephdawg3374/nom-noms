@@ -1,9 +1,14 @@
 .review-form {
+  display: block;
   width: 800px;
   margin: 0 auto;
   border: 1px solid #ccc;
   border-radius: 10px;
   background: #eee;
+}
+
+.review-form.not-visible {
+  display: none;
 }
 
 .review-form-header {

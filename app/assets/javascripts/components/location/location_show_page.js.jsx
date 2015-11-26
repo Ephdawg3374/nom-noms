@@ -32,7 +32,8 @@ var LocationShowPage = React.createClass({
 
   render: function () {
     var location = LocationStore.find_location(parseInt(this.props.params.location_id));
-    var num_reviews_text = "Number of Reviews: " + location.num_reviews;
+    var numReviewsText = "Number of Reviews: " + location.num_reviews;
+    var reviewForm;
 
     return (
       <div className="location-show-page">
@@ -44,7 +45,7 @@ var LocationShowPage = React.createClass({
                 <h1>{location.name}</h1>
 
                 <ReviewRatingBar currentRating={location.ave_rating} mode="disabled" />
-                <label className="num-reviews-text">{num_reviews_text}</label>
+                <label className="num-reviews-text">{numReviewsText}</label>
 
               </div>
 
@@ -73,7 +74,9 @@ var LocationShowPage = React.createClass({
 
         </div>
 
-        <ReviewForm location={location} />
+        <div className="location-show-page-review-wrapper">
+          <ReviewForm location={location} />
+        </div>
 
         <div className="location-show-page-review-section">
 

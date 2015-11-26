@@ -14,7 +14,8 @@ var Map = React.createClass({
 
       if (localStorage.location_index) {
         var locations = JSON.parse(localStorage.location_index).locations;
-        this._onChange();
+        // MarkerStore.updateMarkersFromLocationStore(this.map);
+        // MarkerStore.determineMapBoundsAndSetCenter(this.map, this.props.distanceRange);
       }
     }
   },
