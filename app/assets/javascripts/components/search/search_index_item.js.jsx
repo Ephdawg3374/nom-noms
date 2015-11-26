@@ -39,6 +39,8 @@ var SearchIndexItem = React.createClass({
           </Link>
         </h2>
 
+        <ReviewRatingBar mode="disabled" currentRating={location.ave_rating}/>
+
         <label className="search-index-item-website">
           <a>{location.website}</a>
         </label>

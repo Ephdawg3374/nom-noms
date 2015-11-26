@@ -8,7 +8,7 @@ class Api::ImagesController < ApplicationController
   end
 
   def index
-    
+
     @images = Image.where(review_id: params[:reviewId].to_i)
 
     render :index

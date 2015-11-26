@@ -25,3 +25,8 @@
 .search-index-item > .location-details-wrapper {
   margin-top: 5px;
 }
+
+.search-index-item > .review-rating-bar {
+  margin: 0;
+  padding: 0;
+}

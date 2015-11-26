@@ -26,10 +26,15 @@
   padding: 5px;
   background: lightblue;
   transition: all .2s ease-in-out;
+  box-shadow: inset 0 0 0 1px #27496d, inset 0 5px 30px #193047;
 }
 
 .review-rating-button:hover {
   transform: scale(1.1);
+}
+
+.review-rating-button.active {
+  box-shadow: none;
 }
 
 .review-form-content {
@@ -74,22 +79,4 @@
 
 .review-form-cancel-button {
   padding: 5px;
-}
-
-.review-rating-button.active.disabled:hover {
-  text-shadow: none;
-  cursor: default;
-  transition: none;
-  transform: none;
-  background: lightblue;
-  box-shadow: inset 0 0 0 1px #27496d, inset 0 5px 30px #193047;
-}
-
-.review-rating-button.disabled:hover {
-  text-shadow: none;
-  cursor: default;
-  transition: none;
-  transform: none;
-  box-shadow: none;
-  background: lightblue;
 }
