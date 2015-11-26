@@ -30,12 +30,12 @@ var Map = React.createClass({
 
   setLocationShowPageMap: function (map) {
     var mapOptions = {
+      draggable: false,
+      scrollwheel: false,
+      panControl: false,
       center: {
         lat: this.props.location.lat,
         lng: this.props.location.lng,
-        draggable: false,
-        scrollwheel: false,
-        panControl: false
       },
       zoom: 15
     };
@@ -44,8 +44,10 @@ var Map = React.createClass({
   },
 
   componentWillReceiveProps: function () {
-    MarkerStore.updateMarkersFromLocationStore(this.map);
-    MarkerStore.determineMapBoundsAndSetCenter(this.map, this.props.distanceRange);
+    if (this.props.mode === "searchIndex") {
+      MarkerStore.updateMarkersFromLocationStore(this.map);
+      MarkerStore.determineMapBoundsAndSetCenter(this.map, this.props.distanceRange);
+    }
   },
 
   render: function () {

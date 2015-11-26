@@ -32,42 +32,45 @@ var LocationShowPage = React.createClass({
 
   render: function () {
     var location = LocationStore.find_location(parseInt(this.props.params.location_id));
+    var num_reviews_text = "Number of Reviews: " + location.num_reviews;
 
     return (
       <div className="location-show-page">
         <div className="main-header">
-
           <div className="sub-header">
-            <div className="sub-header-info">
+            <div className="sub-header-info-wrapper group">
+              <div className="sub-header-info group">
 
-              <h1>{location.name}</h1>
+                <h1>{location.name}</h1>
 
-              <span className="sub-header-info-price-range">
-                {location.price_range}
-              </span>
+                <ReviewRatingBar currentRating={location.ave_rating} mode="disabled" />
+                <label className="num-reviews-text">{num_reviews_text}</label>
 
-              <span className="sub-header-info-type">
-                {location.location_type}
-              </span>
+              </div>
 
-              <span className="sub-header-info-cuisine">
-                {location.cuisine}
-              </span>
-
+              <div className="sub-header-options">
+                <button
+                  className="sub-header-options-review-button"
+                  onClick={this.goToReviewFormPage} >
+                  Write a Review
+                </button>
+              </div>
             </div>
 
-            <div className="sub-header-options">
-              <button
-                className="sub-header-options-review-button"
-                onClick={this.goToReviewFormPage} >
-                Write a Review
-              </button>
+            <div className="sub-header-banner group">
+              <div className="sub-header-banner-left-section">
+                <Map location={location} mode="locationShowPage"/>
+                <a href="#">{location.website}</a>
+                <label>{location.description}</label>
+                <LocationContactDetails location={location} />
+              </div>
+
+              <figure className="sub-header-banner-cover-photo">
+                <img src={location.img_url}/>
+              </figure>
             </div>
           </div>
 
-          <div className="sub-header-banner">
-            <Map location={location} mode="locationShowPage"/>
-          </div>
         </div>
 
         <ReviewForm location={location} />

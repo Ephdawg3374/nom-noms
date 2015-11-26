@@ -1,15 +1,83 @@
 .location-show-page {
-  width: 1000px;
   margin: auto;
-  border-left: 1px solid #ccc;
-  border-right: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
   background: white;
 }
 
 .main-header {
   border-bottom: 1px solid #ccc;
+  background: #eee;
 }
+
+.sub-header {
+  width: 1000px;
+  margin: auto;
+  padding: 20px;
+}
+
+.sub-header-info {
+  float: left;
+}
+
+.sub-header-info > h1 {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.sub-header-info > .review-rating-bar {
+  margin: 0;
+  padding: 15px 0;
+}
+.sub-header-options {
+  float: right;
+}
+
+.sub-header-options-review-button {
+  padding: 7px;
+  font-size: 20px;
+}
+
+.sub-header-info > .num-reviews-text {
+  font-style: italic;
+  font-weight: lighter;
+  font-size: 14px;
+  display: block;
+  margin: 25px 0;
+  width: 200px;
+}
+
+.sub-header-banner {
+
+}
+
+.sub-header-banner-left-section {
+  float: left;
+  width: 350px;
+  background: white;
+  padding: 5px;
+}
+
+.sub-header-banner-left-section > .search-index-map {
+  width: 100%;
+  height: 200px;
+}
+
+.sub-header-banner-left-section > a {
+  font-size: 18px;
+  text-decoration: underline;
+  color: blue;
+  margin: 5px 10px;
+}
+
+.sub-header-banner-left-section > label {
+  display: block;
+  font-size: 18px;
+  margin: 5px 10px;
+}
+
+.sub-header-banner-left-section > .location-details-wrapper {
+  margin: 5px 0;
+  padding: 0 15px;
+},
 
 .location-show-page > .review-form {
   width: 50%;
@@ -19,4 +87,8 @@
 .location-show-page > .review-form > .review-form-content > .review-form-body {
   height: auto;
   width: 90%;
+}
+
+.location-show-page-review-section {
+  background: white;
 }
