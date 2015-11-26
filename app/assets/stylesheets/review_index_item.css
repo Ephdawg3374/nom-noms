@@ -1,4 +1,55 @@
+.review-index-item {
+  border-top: 1px solid #ccc;
+  padding: 20px 30px;
+}
+
+.review-index-item:last-child {
+  border-bottom: 1px solid #ccc;
+}
+
+.review-index-item-side-bar {
+  width: 100px;
+  float: left;
+}
+
 .review-index-item-pic > img {
+  border-radius: 10px;
+}
+
+.review-index-item-content {
+  width: 80%;
+  float: left;
+  margin-left: 20px;
+}
+
+.review-index-item-content-header {
+  border-bottom: 1px solid #ccc;
+}
+
+.review-creation-date {
+  float: left;
+  margin: 5px 0;
+  padding: 0 15px;
+}
+
+.review-index-item-content-header > .review-rating-bar {
+  margin: 0 0 20px 0;
+  padding: 0;
+}
+
+.review-index-item-body {
+  width: 80%;
+  padding: 20px;
+  outline: 0;
+}
+
+.review-index-item-images > img {
   width: 100px;
   height: 100px;
+}
+
+.delete-review-button {
+  float: right;
+  padding: 5px;
+  font-size: 12px;
 }

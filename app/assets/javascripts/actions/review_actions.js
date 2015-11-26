@@ -11,5 +11,12 @@ var ReviewActions = {
       actionType: ReviewConstants.RECEIVE_SINGLE_REVIEW,
       review: review
     });
+  },
+
+  deleteSingleReview: function (review) {
+    AppDispatcher.dispatch({
+      actionType: ReviewConstants.DELETE_SINGLE_REVIEW,
+      review: review
+    });
   }
 };

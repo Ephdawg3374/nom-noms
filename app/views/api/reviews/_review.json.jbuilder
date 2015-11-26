@@ -1,4 +1,4 @@
-json.extract!(review, :rating, :body, :user_id, :location_id)
+json.extract!(review, :id, :rating, :body, :user_id, :location_id)
 
 json.time_ago time_ago_in_words(review.created_at)
 #reviewer thumbnail pic

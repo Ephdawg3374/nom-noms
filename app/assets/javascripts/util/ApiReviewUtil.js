@@ -41,5 +41,15 @@ window.ApiReviewUtil = {
         failure(errMsg);
       }
     });
+  },
+
+  destroy: function (reviewId) {
+    $.ajax({
+      url: "/api/reviews/" + reviewId,
+      method: "DELETE",
+      success: function (data) {
+        ReviewActions.deleteSingleReview(data);
+      }
+    });
   }
 };

@@ -1,27 +1,45 @@
 var ReviewIndexItem = React.createClass({
+  deleteReview: function (event) {
+    event.preventDefault();
+    
+    ApiReviewUtil.destroy(event.currentTarget.value);
+  },
 
   render: function () {
+    var deleteReviewButton;
+
+    if (CurrentUserStore.currentUser().id === this.props.review.user_id) {
+      deleteReviewButton = (
+        <button
+          className="delete-review-button"
+          onClick={this.deleteReview}
+          value={this.props.review.id}>
+          Delete
+        </button>
+      );
+    }
+
     var pics = this.props.review.images.map(function (image) {
       return <img src={image.medium_url}/>;
     });
 
     return (
-      <div className="review-index-item">
+      <div className="review-index-item group">
         <div className="review-index-item-side-bar">
           <figure className="review-index-item-pic">
+            <h3>{this.props.review.author}</h3>
             <img src={this.props.review.user_thumbnail_url}/>
           </figure>
         </div>
 
         <div className="review-index-item-content">
 
-          <div className="review-index-item-content-header">
-            <h3>Reviewed by: {this.props.review.author}</h3>
-
-            <span className="review-creation-date">{this.props.review.time_ago}</span>
-
+          <div className="review-index-item-content-header group">
             <ReviewRatingBar mode="disabled" currentRating={this.props.review.rating}/>
 
+            <span className="review-creation-date">{this.props.review.time_ago} ago</span>
+
+            { deleteReviewButton }
           </div>
 
           <textarea
