@@ -28,7 +28,8 @@
 
 .header-details-wrapper {
   float: left;
-  margin: 0 30px;
+  margin: 0 15px 0 30px;
+  width: 250px;
 }
 
 .header-details-name > a {
@@ -43,10 +44,35 @@
   margin-top: 5px;
 }
 
+.header-details-description {
+  display: block;
+  white-space: nowrap;
+}
+
+.header-details-num-reviews {
+  font-size: 12px;
+  font-weight: lighter;
+  font-style: italic;
+  width: 50px;
+  white-space: normal;
+}
+
 .review-form-page-header > .location-details-wrapper {
-  width: 250px;
   float: left;
 }
+
 .review-form-page-header > .location-details-wrapper > .contact-details > label {
   white-space: nowrap;
+}
+
+.review-form-page-header > .location-details-wrapper > .location-contact-details {
+  margin-left: 50px;
+}
+
+
+.header-details-wrapper > .review-rating-bar {
+  margin: 0;
+  padding-top: 5px;
+  padding-bottom: 0;
+  width: 90%;
 }

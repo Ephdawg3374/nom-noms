@@ -16,10 +16,6 @@ var ReviewFormPage = React.createClass({
     CurrentUserStore.removeChangeListener(this._ensureLoggedIn);
   },
 
-  componentWillReceiveProps: function () {
-    debugger;
-  },
-
   _ensureLoggedIn: function () {
     if (!CurrentUserStore.isLoggedIn()) {
       this.history.pushState(null, "/session/new");
@@ -28,7 +24,7 @@ var ReviewFormPage = React.createClass({
 
   render: function () {
     var location = LocationStore.find_location(parseInt(this.props.params.location_id));
-
+    var num_reviews_text = "Number of reviews: " + location.num_reviews;
     return (
       <div className="review-form-page">
 
@@ -52,6 +48,12 @@ var ReviewFormPage = React.createClass({
 
             <label className="header-details-description">
               {location.description}
+            </label>
+
+            <ReviewRatingBar mode="disabled" />
+
+            <label className="header-details-num-reviews">
+              {num_reviews_text}
             </label>
           </div>
 

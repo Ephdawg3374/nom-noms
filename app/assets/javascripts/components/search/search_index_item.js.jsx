@@ -22,6 +22,7 @@ var SearchIndexItem = React.createClass({
     }
 
     var location = this.props.location;
+    var num_reviews_text = "Number of Reviews: " + location.num_reviews;
 
     return (
       <div className="search-index-item">
@@ -40,6 +41,8 @@ var SearchIndexItem = React.createClass({
         </h2>
 
         <ReviewRatingBar mode="disabled" currentRating={location.ave_rating}/>
+
+        <label className="search-index-item-number-of-ratings">{num_reviews_text}</label>
 
         <label className="search-index-item-website">
           <a>{location.website}</a>

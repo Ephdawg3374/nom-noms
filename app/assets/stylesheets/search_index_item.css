@@ -29,4 +29,19 @@
 .search-index-item > .review-rating-bar {
   margin: 0;
   padding: 0;
+  margin-right: 5px;
+}
+
+.search-index-item > .review-rating-bar > .review-rating-button {
+  font-size: 22px;
+  padding: 0;
+}
+
+.search-index-item-number-of-ratings {
+  display: block;
+  text-align: left;
+  font-size: 10px;
+  font-style: italic;
+  font-weight: lighter;
+  margin: 4px 0;
 }
