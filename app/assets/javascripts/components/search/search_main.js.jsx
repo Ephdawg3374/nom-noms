@@ -1,4 +1,4 @@
-var success = function () {
+var success = function (searchParams) {
   this.setState(
     {
       errMsg: null,
@@ -6,6 +6,8 @@ var success = function () {
       showLocAreaAutoCompleteList: false
     }
   );
+
+  this.history.pushState(null, "search/", searchParams);
 };
 
 var failure = function (errMsg) {
@@ -25,8 +27,7 @@ var SearchMain = React.createClass({
     return (
       {
         locType: "",
-        locArea: "",
-        // default distance radius is 10 miles
+        locArea: this.setCurrentLocation(),
         distanceRange: "1", // miles
         priceRange: "All",
         showLocTypeAutoCompleteList: false,
@@ -37,30 +38,28 @@ var SearchMain = React.createClass({
   },
 
   componentWillMount: function () {
-    this.setPId('location_search_params');
-    this.setPStorage(this.localStorage);
-    this.restorePState();
+    // this.setPId('location_search_params');
+    // this.setPStorage(this.localStorage);
+    // this.restorePState();
   },
 
   componentDidMount: function () {
-    this.intervalId = setInterval(function () {
-      this.setPState({
-        locType: this.state.locType,
-        locArea: this.state.locArea,
-        distanceRange: this.state.distanceRange,
-        priceRange: this.state.priceRange,
-        showLocTypeAutoCompleteList: this.state.showLocTypeAutoCompleteList,
-        showLocAreaAutoCompleteList: this.state.showLocAreaAutoCompleteList,
-      });
-    }.bind(this), 1000);
-
-    this.setCurrentLocation();
+    // this.intervalId = setInterval(function () {
+    //   this.setPState({
+    //     locType: this.state.locType,
+    //     locArea: this.state.locArea,
+    //     distanceRange: this.state.distanceRange,
+    //     priceRange: this.state.priceRange,
+    //     showLocTypeAutoCompleteList: this.state.showLocTypeAutoCompleteList,
+    //     showLocAreaAutoCompleteList: this.state.showLocAreaAutoCompleteList,
+    //   });
+    // }.bind(this), 1000);
 
     LocTypeAutoCompleteStore.addChangeListener(this._onChange);
   },
 
   componentWillUnmount: function () {
-    clearInterval(this.intervalId);
+    // clearInterval(this.intervalId);
 
     LocTypeAutoCompleteStore.removeChangeListener(this._onChange);
   },
@@ -114,34 +113,26 @@ var SearchMain = React.createClass({
     return searchParams;
   },
 
-  handleSearchSubmit: function (event) {
-    if (event) {
-      event.preventDefault();
+  handleSearchSubmit: function (e) {
+    if (e) {
+      e.preventDefault();
     }
 
     var searchParams = this.buildSearchObject();
 
-    this.getLocationsAndPushState(searchParams);
-  },
-
-  getLocationsAndPushState: function (searchParams) {
     ApiLocationUtil.fetchLocations(searchParams, success.bind(this), failure.bind(this));
-
-    this.history.pushState(null, "search/", searchParams);
   },
 
   handlePriceRangeFilter: function (priceRange) {
     var searchParams = this.buildSearchObject();
     searchParams.priceRange = priceRange;
-
-    this.getLocationsAndPushState(searchParams);
+    ApiLocationUtil.fetchLocations(searchParams, success.bind(this), failure.bind(this));
   },
 
   handleDistanceRangeFilter: function (distanceRange) {
     var searchParams = this.buildSearchObject();
     searchParams.distanceRange = distanceRange;
-
-    this.getLocationsAndPushState(searchParams);
+    ApiLocationUtil.fetchLocations(searchParams, success.bind(this), failure.bind(this));
   },
 
   autoCompleteLocationType: function (event) {
@@ -221,6 +212,9 @@ var SearchMain = React.createClass({
 
     if (this.state.errMsg) {
       errMsg = <label className="search-error-msg">{this.state.errMsg}</label>;
+      setTimeout(function() {
+        $(".search-error-msg").fadeOut('fast');
+      }, 3000);
     }
 
     var handleKeyPress = function (e) {

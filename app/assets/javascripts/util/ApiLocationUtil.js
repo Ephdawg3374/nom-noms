@@ -7,8 +7,8 @@ window.ApiLocationUtil = {
       contentType: "application/json",
       data: {search: search},
       success: function (data) {
-        SearchActions.receiveSearchResults(data);
-        success();
+        SearchActions.receiveSearchResults(data, success);
+        success(search);
       },
       error: function (data) {
         failure(data.responseText);

@@ -43,13 +43,17 @@ var LogInPage = React.createClass({
   render: function () {
     var errors = this.state.errors.length > 0 ?
       this.state.errors.map(function (error, idx) {
-        return <label key={idx} className="user-error-msg">{error}</label>;
+        return <label key={idx} className="user-form-error-msg">{error}</label>;
       }) : "";
 
     return (
       <div className="auth-page">
         <h1>Log into your account</h1>
-          { errors }
+        
+          <div className="user-form-errors-wrapper group">
+            { errors }
+          </div>
+
           <form className="auth-page-form" onSubmit={this.handleLogin}>
 
             <label>Username

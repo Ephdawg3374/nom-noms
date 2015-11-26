@@ -64,6 +64,10 @@ var LocationShowPage = React.createClass({
               </button>
             </div>
           </div>
+
+          <div className="sub-header-banner">
+            <Map location={location} mode="locationShowPage"/>
+          </div>
         </div>
 
         <ReviewForm location={location} />

@@ -37,8 +37,8 @@ window.ApiReviewUtil = {
         ReviewActions.receiveSingleReview(data);
         success(data);
       },
-      error: function (errMsg) {
-        failure(errMsg);
+      error: function (data) {
+        failure(JSON.parse(data.responseText));
       }
     });
   },

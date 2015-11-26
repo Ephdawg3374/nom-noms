@@ -1,34 +1,32 @@
 var SearchIndex = React.createClass({
-  mixins: [ReactPersistentState],
-
-  getInitialState: function () {
-    return ({ locations: LocationStore.all() });
-  },
+  // getInitialState: function () {
+  //   return ({ locations: LocationStore.all() });
+  // },
 
   componentWillMount: function () {
-    this.setPId('location_index');
-    this.setPStorage(this.localStorage);
-    this.restorePState();
-
-    if (localStorage.location_index) {
-      var locations = JSON.parse(localStorage.location_index).locations;
-      SearchActions.receiveSearchResults(locations);
-    }
+    // this.setPId('search_index');
+    // this.setPStorage(this.localStorage);
+    // this.restorePState();
+    //
+    // if (localStorage.location_index) {
+    //   var locations = JSON.parse(localStorage.location_index).locations;
+    //   SearchActions.receiveSearchResults(locations);
+    // }
   },
 
   componentDidMount: function () {
-    LocationStore.addChangeListener(this._onChange);
+    // LocationStore.addChangeListener(this._onChange);
     MarkerStore.addChangeListener(this._onMarkerUpdate);
   },
 
   componentWillUnmount: function () {
-    LocationStore.removeChangeListener(this._onChange);
+    // LocationStore.removeChangeListener(this._onChange);
     MarkerStore.removeChangeListener(this._onMarkerUpdate);
   },
 
   _onChange: function () {
-    this.setState({ locations: LocationStore.all() });
-    this.setPState({ locations: LocationStore.all() });
+    // this.setState({ locations: LocationStore.all() });
+    // this.setPState({ locations: LocationStore.all() });
   },
 
   _onMarkerUpdate: function () {
@@ -38,8 +36,8 @@ var SearchIndex = React.createClass({
   render: function () {
     var searchIndexItems;
 
-    if (this.state.locations)  {
-      searchIndexItems = this.state.locations.map( function(location, idx) {
+    if (this.props.locations)  {
+      searchIndexItems = this.props.locations.map( function(location, idx) {
         return <SearchIndexItem
           key={location.id}
           location={location}

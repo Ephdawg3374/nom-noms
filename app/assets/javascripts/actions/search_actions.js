@@ -14,7 +14,7 @@ window.SearchActions = {
     AppDispatcher.dispatch({
       actionType: SearchConstants.RECEIVE_SEARCH_RESULTS,
       searchResults: searchResults,
-      latLngObjects: latLngObjects
+      latLngObjects: latLngObjects,
     });
   },
 

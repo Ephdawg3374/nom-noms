@@ -10,7 +10,7 @@ var ReviewForm = React.createClass({
         isUploading: false,
         isSubmitting: false,
         isValid: true,
-        errMsg: ""
+        errors: []
       }
     );
   },
@@ -24,7 +24,7 @@ var ReviewForm = React.createClass({
         isUploading: false,
         isSubmitting: false,
         isValid: true,
-        errMsg: ""
+        errors: []
       }
     );
   },
@@ -49,7 +49,6 @@ var ReviewForm = React.createClass({
         isSubmitting: false,
         isUploading: false,
         isValid: true,
-        errMsg: ""
       });
     }.bind(this), 1000);
   },
@@ -124,10 +123,10 @@ var ReviewForm = React.createClass({
     formDataNoImages.append("review[user_id]", userId);
     formDataNoImages.append("review[location_id]", locationId);
 
-    var failure = function (errMsg) {
+    var failure = function (errors) {
       this.setState({
         isValid: false,
-        errMsg: errMsg,
+        errors: errors,
         isSubmitting: false
       });
     }.bind(this);
@@ -150,8 +149,10 @@ var ReviewForm = React.createClass({
   },
 
   render: function () {
-    var error_message = !this.state.isValid ?
-      <span className="review-form-error-message">{this.state.errMsg}</span> : null;
+    var errors = this.state.errors.length > 0 ?
+      this.state.errors.map(function (error, idx) {
+        return <label key={idx} className="review-form-error-msg">{error}</label>;
+      }) : "";
 
     var submitButton = this.state.isSubmitting === true ?
       <button className="submit-review-button disabled" disabled>Submit Review</button> :
@@ -175,7 +176,11 @@ var ReviewForm = React.createClass({
 
     return (
       <form onSubmit={this.submitReview} className="review-form">
-        { error_message }
+
+        <div className="review-form-errors-wrapper group">
+          { errors }
+        </div>
+
         <div className="review-form-header group">
           <ReviewRatingBar
             setReviewRating={this.setReviewRating}

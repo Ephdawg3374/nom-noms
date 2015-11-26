@@ -49,7 +49,6 @@
 
     determineMapBoundsAndSetCenter: function (map, distanceRange) {
       var zoomLevel = 13;
-
       switch (distanceRange) {
         case ".5":
           zoomLevel = 15;
@@ -64,7 +63,7 @@
           zoomLevel = 12;
           break;
       }
-      
+
       var zoomChangeBoundsListener = google.maps.event.addListenerOnce(map, 'bounds_changed', function(event) {
         map.setZoom(zoomLevel);
       });
