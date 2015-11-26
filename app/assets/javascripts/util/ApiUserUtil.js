@@ -1,5 +1,5 @@
 window.ApiUserUtil = {
-  create: function (formData, callback) {
+  create: function (formData, success, failure) {
     $.ajax({
       url: "/api/users",
       method: "POST",
@@ -10,7 +10,10 @@ window.ApiUserUtil = {
       success: function (data) {
         UserActions.receiveUser(data);
         CurrentUserActions.receiveCurrentUser(data);
-        callback && callback();
+        success();
+      },
+      error: function (data) {
+        failure(JSON.parse(data.responseText));
       }
     });
   }

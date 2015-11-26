@@ -1,5 +1,5 @@
 window.ApiSessionUtil = {
-  login: function (credentials, success) {
+  login: function (credentials, success, failure) {
     $.ajax({
       url: '/api/session',
       type: 'POST',
@@ -8,7 +8,10 @@ window.ApiSessionUtil = {
       data: JSON.stringify({ user: credentials }),
       success: function (currentUser) {
         CurrentUserActions.receiveCurrentUser(currentUser);
-        success && success();
+        success();
+      },
+      error: function (data) {
+        failure(JSON.parse(data.responseText));
       }
     });
   },

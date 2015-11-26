@@ -10,7 +10,7 @@ var NewUserPage = React.createClass({
         password: "",
         isValid: true,
         isSubmitting: false,
-        errMsg: ""
+        errors: []
       }
     );
   },
@@ -36,13 +36,13 @@ var NewUserPage = React.createClass({
       this.history.pushState(null, "/");
     }.bind(this);
 
-    var failure = function (errMsg) {
+    var failure = function (errors) {
       this.setState({
         isValid: false,
-        errMsg: errMsg,
+        errors: errors,
         isSubmitting: false
       });
-    };
+    }.bind(this);
 
     ApiUserUtil.create(formData, success, failure);
   },
@@ -63,6 +63,12 @@ var NewUserPage = React.createClass({
   },
 
   render: function () {
+
+    var errors = this.state.errors.length > 0 ?
+      this.state.errors.map(function (error, idx) {
+        return <label key={idx} className="user-error-msg">{error}</label>;
+      }) : "";
+
     var submitButton = this.state.isSubmitting === true ?
       <button className="disabled" disabled>Submit</button> :
       <button>Submit</button>;
@@ -70,6 +76,9 @@ var NewUserPage = React.createClass({
     return (
       <div className="auth-page">
         <h1>Create a new user</h1>
+
+        { errors }
+
         <form className="auth-page-form" onSubmit={this.handleNewUserSubmit}>
 
           <label>Username

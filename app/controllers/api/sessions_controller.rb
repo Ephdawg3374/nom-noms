@@ -17,7 +17,7 @@ class Api::SessionsController < ApplicationController
     @user = User.find_by(username: username).try(:authenticate, password)
 
     if @user.nil?
-      render json: {errors: ["User not found!"]}, status: 401
+      render json: ["User not found!"], status: 401
     else
       login!(@user)
       render :show

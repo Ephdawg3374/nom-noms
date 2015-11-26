@@ -10,7 +10,7 @@ window.ApiLocationUtil = {
         SearchActions.receiveSearchResults(data);
         success();
       },
-      failure: function (data) {
+      error: function (data) {
         failure();
       }
     });

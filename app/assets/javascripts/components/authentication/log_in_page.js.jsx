@@ -5,7 +5,9 @@ var LogInPage = React.createClass({
     return (
       {
         username: "",
-        password: ""
+        password: "",
+        isValid: true,
+        errors: []
       }
     );
   },
@@ -24,15 +26,30 @@ var LogInPage = React.createClass({
       password: this.state.password
     };
 
-    ApiSessionUtil.login(credentials, function () {
+    var success = function () {
      this.history.pushState(null, "/");
-    }.bind(this));
+    }.bind(this);
+
+    var failure = function (errors) {
+      this.setState({
+        isValid: false,
+        errors: errors
+      });
+    }.bind(this);
+
+    ApiSessionUtil.login(credentials, success, failure);
   },
 
   render: function () {
+    var errors = this.state.errors.length > 0 ?
+      this.state.errors.map(function (error, idx) {
+        return <label key={idx} className="user-error-msg">{error}</label>;
+      }) : "";
+
     return (
       <div className="auth-page">
         <h1>Log into your account</h1>
+          { errors }
           <form className="auth-page-form" onSubmit={this.handleLogin}>
 
             <label>Username
