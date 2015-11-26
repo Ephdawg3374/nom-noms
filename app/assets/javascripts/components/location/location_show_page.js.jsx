@@ -73,6 +73,7 @@ var LocationShowPage = React.createClass({
           <ReviewIndex />
 
         </div>
+
       </div>
     );
   }

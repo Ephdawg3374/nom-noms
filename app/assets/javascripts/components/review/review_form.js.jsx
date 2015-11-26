@@ -140,7 +140,8 @@ var ReviewForm = React.createClass({
         ApiImageUtil.create(formDataImage);
       }
 
-      this.localStorage.review_form = {};
+      // this.localStorage.review_form = {};
+      this.setInitialState();
 
       this.history.pushState(null, "/locations/" + this.props.location.id);
     }.bind(this);
@@ -200,6 +201,10 @@ var ReviewForm = React.createClass({
         </div>
 
         { submitButton }
+
+        <button className="review-form-cancel-button">
+          <Link to={"/locations/" + this.props.location.id}>Cancel</Link>
+        </button>
       </form>
     );
   }

@@ -1,5 +1,10 @@
 var ReviewIndexItem = React.createClass({
+
   render: function () {
+    var pics = this.props.review.images.map(function (image) {
+      return <img src={image.medium_url}/>;
+    });
+
     return (
       <div className="review-index-item">
         <div className="review-index-item-side-bar">
@@ -11,7 +16,7 @@ var ReviewIndexItem = React.createClass({
         <div className="review-index-item-content">
 
           <div className="review-index-item-content-header">
-            <h3>{this.props.review.username}</h3>
+            <h3>Reviewed by: {this.props.review.author}</h3>
 
             <span className="review-creation-date">{this.props.review.time_ago}</span>
 
@@ -19,10 +24,14 @@ var ReviewIndexItem = React.createClass({
 
           </div>
 
-          <div className="review-index-item-content-main">
+          <textarea
+            className="review-index-item-body"
+            readOnly
+            value={this.props.review.body}/>
 
+          <div className="review-index-item-images">
+            { pics }
           </div>
-
         </div>
       </div>
     );

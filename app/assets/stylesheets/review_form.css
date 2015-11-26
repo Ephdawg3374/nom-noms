@@ -72,3 +72,7 @@
 .delete-uploaded-pic-button:hover {
 
 }
+
+.review-form-cancel-button {
+  padding: 5px;
+}
