@@ -68,7 +68,6 @@ var SearchMain = React.createClass({
     this.forceUpdate();
   },
 
-  // set current locaiton to current city
   setCurrentLocation: function () {
     navigator.geolocation.getCurrentPosition(function(e) {
       var lat = e.coords.latitude;
@@ -82,7 +81,7 @@ var SearchMain = React.createClass({
     var latlng = new google.maps.LatLng(lat, lng);
     var geocoder = new google.maps.Geocoder();
 
-    var city;
+    var area;
 
     geocoder.geocode({'latLng': latlng}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
@@ -92,13 +91,15 @@ var SearchMain = React.createClass({
           for (var j = 0; j < nearestLocation.address_components[i].types.length; j++) {
             if (nearestLocation.address_components[i].types[j] == "administrative_area_level_1") {
                 city = nearestLocation.address_components[i].long_name;
+                state = nearestLocation.address_components[i].short_name;
                 break;
             }
           }
         }
       }
+      area = city + ", " + state;
 
-      this.setState({locArea: city});
+      this.setState({locArea: area});
     }.bind(this));
   },
 
@@ -154,11 +155,12 @@ var SearchMain = React.createClass({
 
     this.setState(
       {
-        locArea: event.currentTarget.value,
+        locArea: locAreaPartial,
         showLocAreaAutoCompleteList: true
       }
     );
-    // ApiLocationUtil.fetchLocationAreas(this.state.locArea);
+
+    ApiLocationUtil.fetchLocationAreas(locAreaPartial);
   },
 
   selectLocArea: function (event) {
@@ -283,11 +285,11 @@ var SearchMain = React.createClass({
                   type="text"
                   value={this.state.locArea}
                   onChange={this.autoCompleteLocationArea}/>
-              </label>
 
-              <ul className="location-area-autocomplete">
-                { locAreaAutoCompleteList }
-              </ul>
+                <ul className="location-area-autocomplete">
+                  { locAreaAutoCompleteList }
+                </ul>
+              </label>
 
             </div>
 

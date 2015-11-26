@@ -46,7 +46,7 @@
   background: transparent;
 }
 
-.location-type-autocomplete-list {
+.location-type-autocomplete-list, .location-area-autocomplete {
   position: absolute;
   left: 39px;
   top: 25px;
@@ -61,12 +61,12 @@
   overflow: hidden;
 }
 
-.location-type-autocomplete-list > li {
+.location-type-autocomplete-list > li, .location-area-autocomplete > li {
   border-top: 1px solid grey;
   padding: 5px;
 }
 
-.location-type-autocomplete-list > li:hover {
+.location-type-autocomplete-list > li:hover, .location-area-autocomplete > li:hover {
   background: #eee;
 }
 

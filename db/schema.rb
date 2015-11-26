@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151125155442) do
+ActiveRecord::Schema.define(version: 20151126211349) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,7 +38,6 @@ ActiveRecord::Schema.define(version: 20151125155442) do
     t.string "location_type",            null: false
     t.string "price_range",              null: false
     t.string "img_url"
-    t.string "state_long",               null: false
     t.string "cuisine"
   end
 

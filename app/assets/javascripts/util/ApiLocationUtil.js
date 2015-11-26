@@ -7,6 +7,7 @@ window.ApiLocationUtil = {
       contentType: "application/json",
       data: {search: search},
       success: function (data) {
+
         SearchActions.receiveSearchResults(data, success);
         success(search);
       },

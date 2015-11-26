@@ -60,8 +60,8 @@ cuisine_types = {
 
 # All other location attributes (besides state) will be fake!
 locations = {
-  0 => ["NY", "New York"],
-  1 => ["NJ", "New Jersey"]
+  0 => ["NY"],
+  1 => ["NJ"]
 }
 
 def generate_random_zipcode(state)
@@ -98,10 +98,51 @@ end
     street_address: Faker::Address.street_address,
     city: Faker::Address.city,
     state: locations[rand_loc_number][0],
-    state_long: locations[rand_loc_number][1],
     zipcode: generate_random_zipcode(locations[rand_loc_number][0]),
     lat: generate_random_lat,
     lng: generate_random_lng(locations[rand_loc_number][0]),
+    cuisine: ""
+  )
+
+  if rand_loc_img_type == 0 || rand_loc_img_type == 1 || rand_loc_img_type == 4
+    new_loc.cuisine = cuisine_types[rand(13)]
+  end
+
+  new_loc.save!
+end
+
+# Actual city locations
+locations_for_searching = {
+  0 => {"city" => "New York", "state" => "NY", "lat" => 40.730610, "lng" => -73.935242},
+  1 => {"city" => "Brooklyn", "state" => "NY", "lat" => 40.650002, "lng" => -73.949997},
+  2 => {"city" => "Manhattan", "state" => "NY", "lat" => 40.758896, "lng" => -73.985130},
+  3 => {"city" => "Fort Lee", "state" => "NJ", "lat" => 40.8509300, "lng" => -73.9701400},
+  4 => {"city" => "Hoboken", "state" => "NJ", "lat" => 40.7439900, "lng" => -74.0323600},
+  5 => {"city" => "Englewood", "state" => "NJ", "lat" => 40.8928800, "lng" => -73.9726400},
+  6 => {"city" => "Queens", "state" => "NY", "lat" => 40.742054, "lng" => -73.769417},
+  7 => {"city" => "Bronx", "state" => "NY", "lat" => 40.837048, "lng" => -73.865433},
+  8 => {"city" => "Yonkers", "state" => "NY", "lat" => 40.93121, "lng" => -73.898747},
+  9 => {"city" => "New Rochelle", "state" => "NY", "lat" => 40.9114900, "lng" => -73.7823500}
+}
+
+10.times do |idx|
+  rand_loc_img_type = rand(10)
+  rand_img_number = rand(1..10)
+
+  new_loc = Location.new(
+    location_type: location_types[rand_loc_img_type],
+    img_url: "http://lorempixel.com/600/300/#{img_types[rand_loc_img_type]}/#{rand_img_number}",
+    name: Faker::Company.name,
+    description: Faker::Company.bs,
+    price_range: "$" * rand(1..4),
+    website: Faker::Internet.url,
+    phone_number: "(#{rand.to_s[2..4]})#{rand.to_s[2..4]}-#{rand.to_s[2..5]}",
+    street_address: Faker::Address.street_address,
+    city: locations_for_searching[idx]["city"],
+    state: locations_for_searching[idx]["state"],
+    zipcode: generate_random_zipcode(locations_for_searching[idx]["state"]),
+    lat: locations_for_searching[idx]["lat"],
+    lng: locations_for_searching[idx]["lng"],
     cuisine: ""
   )
 

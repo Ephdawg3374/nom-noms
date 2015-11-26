@@ -36,12 +36,13 @@ window.SearchActions = {
   },
 
   receiveLocationAreas: function (locAreasResults) {
-    // var locAreas = [];
-    //
-    // locAreasResults.forEach(function (locAreasResult) {
-    //   locAreas.push(locAreasResult[0].location_area);
-    // });
+    var locAreas = [];
 
+    locAreasResults.forEach(function (locAreasResult) {
+      var area = locAreasResult.city + ", " + locAreasResult.state;
+      locAreas.push(area);
+    });
+    
     AppDispatcher.dispatch({
       actionType: SearchConstants.RECEIVE_AUTOCOMP_LOC_AREAS,
       locAreas: locAreas

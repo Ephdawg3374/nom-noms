@@ -20,7 +20,7 @@
     },
 
     dispatcherId: AppDispatcher.register(function (payload) {
-      switch (payload.actionArea) {
+      switch (payload.actionType) {
         case SearchConstants.RECEIVE_AUTOCOMP_LOC_AREAS:
           LocAreaAutoCompleteStore.resetLocAreaMatches(payload.locAreas);
           LocAreaAutoCompleteStore.emit(CHANGE_EVENT);

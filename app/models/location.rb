@@ -58,25 +58,10 @@ class Location < ActiveRecord::Base
   def self.get_search_loc_coords(search_location)
     search_location = Location.parse_location(search_location)[0]
 
-    locations_within_distance = []
+    search_location = Location.where(city: search_location).limit(1).first
 
-    search_location_in_db = Location.find_by_city(search_location)
-    search_location_real = Location.actual_locations_for_searching[search_location]
-
-    # if search location exists as a city in DB, use those coords
-    if search_location_in_db
-      [
-        search_location.lat,
-        search_location.lng
-      ]
-    # if search location is an actual location (limited to the locations in
-    # actual_locations_for_searching)
-    elsif search_location_real
-      [
-        Location.actual_locations_for_searching[search_location]["lat"],
-        Location.actual_locations_for_searching[search_location]["lng"]
-      ]
-    # NYC coords
+    if search_location
+      [search_location.lat, search_location.lng]
     else
       [40.730610, -73.935242]
     end
@@ -108,9 +93,9 @@ class Location < ActiveRecord::Base
   # handles lowercase
   def self.parse_location(location)
     # state abbr
-    if location.length == 2
-      return location.upcase
-    end
+    # if location.length == 2
+    #   return location.upcase
+    # end
 
     location_address = location.split(",")
 
@@ -143,6 +128,21 @@ class Location < ActiveRecord::Base
       .distinct.limit(3)
 
     types + cuisines
+  end
+
+  def self.find_valid_location_areas(loc_area_partial)
+    if loc_area_partial.length <= 1
+      return []
+    end
+
+    loc_area_partial = parse_location(loc_area_partial)[0] + "%"
+
+    cities = Location.select(:city, :state)
+      .where("city LIKE ?", loc_area_partial)
+      .distinct.limit(5)
+
+    actual_locs =
+    cities
   end
 
 end
