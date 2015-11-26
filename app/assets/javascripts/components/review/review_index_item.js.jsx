@@ -1,7 +1,7 @@
 var ReviewIndexItem = React.createClass({
   deleteReview: function (event) {
     event.preventDefault();
-    
+
     ApiReviewUtil.destroy(event.currentTarget.value);
   },
 
@@ -19,8 +19,8 @@ var ReviewIndexItem = React.createClass({
       );
     }
 
-    var pics = this.props.review.images.map(function (image) {
-      return <img src={image.medium_url}/>;
+    var pics = this.props.review.images.map(function (image, idx) {
+      return <img key={idx} src={image.medium_url}/>;
     });
 
     return (

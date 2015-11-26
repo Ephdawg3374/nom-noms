@@ -13,6 +13,10 @@ var ReviewIndex = React.createClass({
     if (localStorage.review_index) {
       var reviews = JSON.parse(localStorage.review_index).reviews;
       ReviewActions.receiveReviews(reviews);
+
+      reviews.forEach(function (review) {
+        ApiImageUtil.fetchReviewImages(review.id);
+      });
     }
   },
 

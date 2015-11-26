@@ -7,6 +7,13 @@ class Api::ImagesController < ApplicationController
     render :show
   end
 
+  def index
+    
+    @images = Image.where(review_id: params[:reviewId].to_i)
+
+    render :index
+  end
+
   private
 
   def image_params

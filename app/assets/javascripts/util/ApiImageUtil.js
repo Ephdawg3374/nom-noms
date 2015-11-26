@@ -11,5 +11,18 @@ window.ApiImageUtil = {
         ImageActions.receiveImage(data);
       }
     });
-  }
+  },
+
+  fetchReviewImages: function (reviewId) {
+    $.ajax({
+      url: "api/images",
+      method: "GET",
+      dataType: "json",
+      contentType: "application/json",
+      data: {reviewId: reviewId},
+      success: function (data) {
+        ImageActions.receiveReviewImages(data);
+      }
+    });
+  },
 };

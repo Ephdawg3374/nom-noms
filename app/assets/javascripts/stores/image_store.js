@@ -3,14 +3,7 @@
 
   window.ImageStore = window.ImageStore || $.extend({}, EventEmitter.prototype, {
     addImageToReview: function (image) {
-      ReviewStore.all().forEach(function (review) {
-        // if (review.images) {
-        //   review.images.push(image);
-        // } else {
-        //   review.images = [image];
-        // }
-        review.images.push(image);
-      });
+      ReviewStore.appendImage(image);
     },
 
     addChangeListener: function (callback) {
@@ -25,6 +18,12 @@
       switch (payload.actionType) {
         case ImageConstants.RECEIVE_IMAGE:
           ImageStore.addImageToReview(payload.image);
+          ImageStore.emit(CHANGE_EVENT);
+          break;
+        case ImageConstants.RECEIVE_REVIEW_IMAGES:
+          payload.images.forEach(function (image) {
+            ImageStore.addImageToReview(image);
+          });
           ImageStore.emit(CHANGE_EVENT);
           break;
       }

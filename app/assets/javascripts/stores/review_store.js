@@ -7,6 +7,16 @@
       _reviews = reviews;
     },
 
+    appendImage: function (image) {
+      var review = this.findReview(image.review_id);
+
+      if (review) {
+        review.images.push(image);
+      }
+
+      this.emit(CHANGE_EVENT);
+    },
+
     addReview: function (review) {
       var idx = _reviews.indexOf(review);
 
@@ -19,7 +29,7 @@
 
     deleteReview: function (review) {
       var idx = this.findReview(review.id);
-      
+
       if (idx !== -1) {
         _reviews.splice(idx, 1);
       }
@@ -28,10 +38,10 @@
     findReview: function (reviewId) {
       for (var i = 0; i < _reviews.length; i++) {
         if (_reviews[i].id === reviewId) {
-          return i;
+          return _reviews[i];
         }
       }
-      return -1;
+      return null;
     },
 
     all: function () {

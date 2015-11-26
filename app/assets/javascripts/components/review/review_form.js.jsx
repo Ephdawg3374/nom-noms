@@ -133,7 +133,6 @@ var ReviewForm = React.createClass({
     }.bind(this);
 
     var successfulReviewCreation = function (review) {
-      debugger;
       for (var i = 0; i < imageFiles.length; i++) {
         var formDataImage = new FormData();
         formDataImage.append("image[review_id]", review.id);
