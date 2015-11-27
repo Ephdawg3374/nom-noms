@@ -1,10 +1,27 @@
 var UserShowPage = React.createClass({
+  getInitialState: function () {
+    return ({ user: {} });
+  },
+
   componentWillMount: function () {
     ApiUserUtil.fetchUser(this.props.params.user_id);
   },
 
+  componentDidMount: function () {
+    UsersStore.addChangeListener(this._onChange);
+  },
+
+  componentWillUnmount: function () {
+    UsersStore.removeChangeListener(this._onChange);
+  },
+
+  _onChange: function () {
+    this.setState({ user: UsersStore.findUser(parseInt(this.props.params.user_id)) });
+  },
+
   render: function () {
-    var user = UserStore.findUser(this.props.params.user_id);
+    // debugger;
+    var user = this.state.user;
 
     return (
       <div className="user-show-page">

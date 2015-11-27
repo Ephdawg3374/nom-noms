@@ -1,4 +1,7 @@
 class Api::UsersController < ApplicationController
+  def index
+  end
+
   def create
     @user = User.new(user_params)
 
@@ -11,13 +14,16 @@ class Api::UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:user][:userId])
+    @user = User.find(params[:userId].to_i)
 
     if @user
       render :show
     else
       render json: ["User not found!"], status: 404
     end
+  end
+
+  def destroy
   end
 
   private

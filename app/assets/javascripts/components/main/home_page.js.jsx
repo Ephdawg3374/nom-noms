@@ -24,7 +24,7 @@ var HomePage = React.createClass({
   },
 
   render: function () {
-    var msg1Text = "Tryin' to Nom?";
+    var msg1Text = "Tryin' to nom?";
     var msg2Text = "Use the search bars. Go nom or go home.";
     var msg3Text = "Unless you are already home...then stay there...";
     var msgBaseClass = "home-page-splash-msg ";
