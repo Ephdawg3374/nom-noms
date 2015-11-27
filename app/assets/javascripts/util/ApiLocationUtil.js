@@ -7,12 +7,23 @@ window.ApiLocationUtil = {
       contentType: "application/json",
       data: {search: search},
       success: function (data) {
-
-        SearchActions.receiveSearchResults(data, success);
+        SearchActions.receiveSearchResults(data);
         success(search);
       },
       error: function (data) {
         failure(data.responseText);
+      }
+    });
+  },
+
+  fetchSingleLocation: function (locationId) {
+    $.ajax({
+      url: "api/locations/" + locationId,
+      method: "GET",
+      dataType: "json",
+      success: function (data) {
+        debugger;
+        SearchActions.receiveSingleLocation(data);
       }
     });
   },

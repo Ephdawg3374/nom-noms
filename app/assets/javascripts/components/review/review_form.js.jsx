@@ -149,6 +149,7 @@ var ReviewForm = React.createClass({
         var formDataImage = new FormData();
         formDataImage.append("image[review_id]", review.id);
         formDataImage.append("image[image_pic]", imageFiles[i]);
+        formDataImage.append("image[user_id]", userId);
         ApiImageUtil.create(formDataImage);
       }
 

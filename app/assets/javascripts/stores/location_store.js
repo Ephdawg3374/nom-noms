@@ -52,6 +52,9 @@
           LocationStore.resetLatLngObjects(payload.latLngObjects);
           LocationStore.emit(CHANGE_EVENT);
           break;
+        case SearchConstants.RECEIVE_SINGLE_LOCATION:
+          LocationStore.addLocation(payload.location);
+          LocationStore.emit(CHANGE_EVENT);
       }
     })
   });

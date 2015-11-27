@@ -12,10 +12,10 @@ var Map = React.createClass({
     } else {
       this.map = this.setSearchIndexDefaultMap(map);
 
-      if (localStorage.location_index) {
-        var locations = JSON.parse(localStorage.location_index).locations;
-        // MarkerStore.updateMarkersFromLocationStore(this.map);
-        // MarkerStore.determineMapBoundsAndSetCenter(this.map, this.props.distanceRange);
+      if (localStorage.search_index) {
+        var locations = JSON.parse(localStorage.search_index).locations;
+        MarkerStore.updateMarkersFromLocationStore(this.map);
+        MarkerStore.determineMapBoundsAndSetCenter(this.map, this.props.distanceRange);
       }
     }
   },

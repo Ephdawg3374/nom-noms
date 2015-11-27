@@ -1,8 +1,21 @@
 var ReviewIndexItem = React.createClass({
   deleteReview: function (event) {
     event.preventDefault();
-
     ApiReviewUtil.destroy(event.currentTarget.value);
+  },
+
+  componentDidMount: function() {
+    ImageStore.addChangeListener(this._onChange);
+    CurrentUserStore.addChangeListener(this._onChange);
+  },
+
+  componentWillUnmount: function () {
+    ImageStore.removeChangeListener(this._onChange);
+    CurrentUserStore.removeChangeListener(this._onChange);
+  },
+
+  _onChange: function () {
+    this.forceUpdate();
   },
 
   render: function () {

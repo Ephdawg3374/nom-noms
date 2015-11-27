@@ -12,8 +12,8 @@ var SearchResultsPage = React.createClass({
     this.setPStorage(this.localStorage);
     this.restorePState();
 
-    if (localStorage.location_index) {
-      var locations = JSON.parse(localStorage.location_index).locations;
+    if (localStorage.search_index) {
+      var locations = JSON.parse(localStorage.search_index).locations;
       SearchActions.receiveSearchResults(locations);
     }
   },

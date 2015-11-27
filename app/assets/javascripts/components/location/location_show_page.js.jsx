@@ -1,23 +1,41 @@
 var LocationShowPage = React.createClass({
   mixins: [ReactPersistentState, ReactRouter.History],
 
+  getInitialState: function () {
+    return ({ reviews: ReviewStore.all() });
+  },
+
   componentWillMount: function () {
-    this.setPId('location_index');
+    this.setPId('search_index');
     this.setPStorage(this.localStorage);
     this.restorePState();
 
-    if (localStorage.location_index) {
-      var locations = JSON.parse(localStorage.location_index).locations;
+    if (localStorage.search_index) {
+      var locations = JSON.parse(localStorage.search_index).locations;
       LocationStore.repopulateStore(locations);
+    } else {
+      ApiReviewUtil.fetchSingleLocation(this.props.params.location_id);
     }
 
     ApiReviewUtil.fetchReviewsByLocation(this.props.params.location_id);
   },
 
   componentDidMount: function () {
-
+    ReviewStore.addChangeListener(this._onChange);
   },
 
+  componentWillUnmount: function () {
+    ReviewStore.removeChangeListener(this._onChange);
+  },
+
+  _onUserChange: function () {
+    this.forceUpdate();
+  },
+
+  _onChange: function () {
+    this.setState({ reviews: ReviewStore.all() });
+    this.setPState({ reviews: ReviewStore.all() });
+  },
 
   goToReviewFormPage: function (event) {
     event.preventDefault();
@@ -34,6 +52,7 @@ var LocationShowPage = React.createClass({
     var location = LocationStore.find_location(parseInt(this.props.params.location_id));
     var numReviewsText = "Number of Reviews: " + location.num_reviews;
     var reviewForm;
+    var reviews = this.state.reviews;
 
     return (
       <div className="location-show-page">
@@ -80,7 +99,7 @@ var LocationShowPage = React.createClass({
 
         <div className="location-show-page-review-section">
 
-          <ReviewIndex />
+          <ReviewIndex reviews={reviews}/>
 
         </div>
 

@@ -33,7 +33,7 @@ var NewUserPage = React.createClass({
     formData.append("user[profile_pic]", this.state.imageFile);
 
     var success = function () {
-      this.history.pushState(null, "/");
+      this.history.goBack();
     }.bind(this);
 
     var failure = function (errors) {

@@ -1,5 +1,5 @@
 class Image < ActiveRecord::Base
-  validates :review, presence: true
+  validates :review, :user, presence: true
 
   has_attached_file :image_pic,
     styles: { medium: "640x480" }
@@ -7,4 +7,5 @@ class Image < ActiveRecord::Base
   validates_attachment_content_type :image_pic, content_type: /\Aimage\/.*\Z/
 
   belongs_to :review
+  belongs_to :user
 end

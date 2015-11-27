@@ -6,7 +6,6 @@ var success = function (searchParams) {
       showLocAreaAutoCompleteList: false
     }
   );
-
   this.history.pushState(null, "search/", searchParams);
 };
 

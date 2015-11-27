@@ -8,12 +8,24 @@ window.ApiUserUtil = {
       dataType: "json",
       data: formData,
       success: function (data) {
-        UserActions.receiveUser(data);
         CurrentUserActions.receiveCurrentUser(data);
         success();
       },
       error: function (data) {
         failure(JSON.parse(data.responseText));
+      }
+    });
+  },
+
+  fetchUser: function (userId) {
+    $.ajax({
+      url: "api/users/" + userId,
+      method: "GET",
+      dataType: "json",
+      contentType: "application/json",
+      data: {userId: userId},
+      success: function (data) {
+        UserActions.receiveUser(data);
       }
     });
   }

@@ -2,11 +2,12 @@
   var _users = [];
   var CHANGE_EVENT = "CHANGE_EVENT";
 
-  var _addUser = function (newUser) {
-    _users.push(newUser);
-  };
-
   UsersStore = window.UserStore = $.extend({}, EventEmitter.prototype, {
+    _addUser: function (newUser) {
+      if (_users.indexOf(newUser) !== -1) {
+        _users.push(newUser);
+      }
+    },
 
     addChangeListener: function (callback) {
       this.on(CHANGE_EVENT, callback);
@@ -20,14 +21,17 @@
       return _users.slice();
     },
 
-    findUserById: function (userId) {
-      for (var i = 0; i < _users.length; i++) {
-        if (_users[i].id === userId) {
-          return _users[i];
+    findUser: function (id) {
+      var user;
+
+      for (i = 0; i < _locations.length; i++) {
+        if (_locations[i].id === id) {
+          user = _users[i];
+          break;
         }
       }
 
-      return;
+      return user;
     },
 
     dispatcherId: AppDispatcher.register(function (payload) {

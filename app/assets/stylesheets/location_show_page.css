@@ -6,7 +6,6 @@
 .main-header {
   border-bottom: 1px solid #ccc;
   background: #eee;
-  height: 300px;
 }
 
 .sub-header {
@@ -17,6 +16,7 @@
 
 .sub-header-info {
   float: left;
+  width: 500px;
 }
 
 .sub-header-info > h1 {
@@ -28,7 +28,7 @@
 .sub-header-info > .review-rating-bar {
   float: left;
   margin: 0;
-  padding: 0 15px 0 25px;
+  padding: 0;
 }
 .sub-header-options {
   float: right;
@@ -44,7 +44,7 @@
   font-style: italic;
   font-weight: lighter;
   font-size: 14px;
-  margin: 10px 0;
+  margin: 10px 0 10px 10px;
 }
 
 .sub-header-banner {
@@ -100,11 +100,21 @@
 
 .location-show-page-review-section {
   background: white;
+  position: relative;
+  top: 115px;
 }
 
 .location-show-page-review-wrapper {
   position: relative;
-  top: 200px;
+  top: 60px;
+}
+
+.location-show-page-review-wrapper > .review-form {
+  height: 50%;
+}
+
+.location-show-page-review-wrapper > .review-form > .review-form-header {
+  height: auto;
 }
 
 .location-show-page-review-wrapper > .review-form > .review-form-content > .review-form-body {

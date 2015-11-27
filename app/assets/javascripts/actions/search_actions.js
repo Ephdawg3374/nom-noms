@@ -18,6 +18,13 @@ window.SearchActions = {
     });
   },
 
+  receiveSingleLocation: function (location) {
+    AppDispatcher.dispatch({
+      actionType: SearchConstants.RECEIVE_SINGLE_LOCATION,
+      location: location
+    });
+  },
+
   receiveLocationTypes: function (locTypesResults) {
     var locTypes = [];
 
@@ -42,7 +49,7 @@ window.SearchActions = {
       var area = locAreasResult.city + ", " + locAreasResult.state;
       locAreas.push(area);
     });
-    
+
     AppDispatcher.dispatch({
       actionType: SearchConstants.RECEIVE_AUTOCOMP_LOC_AREAS,
       locAreas: locAreas

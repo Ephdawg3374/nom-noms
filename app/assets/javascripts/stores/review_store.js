@@ -21,7 +21,7 @@
       var idx = _reviews.indexOf(review);
 
       if (idx === -1) {
-        _reviews.push(review);
+        _reviews.unshift(review);
       } else {
         _review[idx] = review;
       }

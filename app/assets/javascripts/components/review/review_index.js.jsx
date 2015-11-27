@@ -1,10 +1,6 @@
 var ReviewIndex = React.createClass({
   mixins: [ReactPersistentState],
 
-  getInitialState: function () {
-    return ({ reviews: ReviewStore.all() });
-  },
-
   componentWillMount: function () {
     this.setPId('review_index');
     this.setPStorage(this.localStorage);
@@ -13,28 +9,15 @@ var ReviewIndex = React.createClass({
     if (localStorage.review_index) {
       var reviews = JSON.parse(localStorage.review_index).reviews;
       ReviewActions.receiveReviews(reviews);
-
-      reviews.forEach(function (review) {
-        ApiImageUtil.fetchReviewImages(review.id);
-      });
     }
-  },
 
-  componentDidMount: function () {
-    ReviewStore.addChangeListener(this._onChange);
-  },
-
-  componentWillUnmount: function () {
-    ReviewStore.removeChangeListener(this._onChange);
-  },
-
-  _onChange: function () {
-    this.setState({ reviews: ReviewStore.all() });
-    this.setPState({ reviews: ReviewStore.all() });
+    ReviewStore.all().forEach(function (review) {
+      ApiImageUtil.fetchReviewImages(review.id);
+    });
   },
 
   render: function () {
-    var ReviewIndexItems = this.state.reviews.map(function (review, idx) {
+    var ReviewIndexItems = this.props.reviews.map(function (review, idx) {
       return <ReviewIndexItem key={idx} review={review} />;
       });
 

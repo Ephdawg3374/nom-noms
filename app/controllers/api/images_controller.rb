@@ -8,7 +8,6 @@ class Api::ImagesController < ApplicationController
   end
 
   def index
-
     @images = Image.where(review_id: params[:reviewId].to_i)
 
     render :index
@@ -17,7 +16,7 @@ class Api::ImagesController < ApplicationController
   private
 
   def image_params
-    params.require(:image).permit(:review_id, :image_pic)
+    params.require(:image).permit(:review_id, :image_pic, :user_id)
   end
 
 end
