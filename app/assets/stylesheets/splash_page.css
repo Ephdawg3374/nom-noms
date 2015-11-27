@@ -1,0 +1,43 @@
+.home-page-splash-video {
+  display: block;
+  width: 1000px;
+  height: auto;
+  border: 1px solid #ccc;
+  margin: 0 auto;
+}
+
+.home-page-splash-msg {
+  display: none;
+  position: absolute;
+  color: #ccc;
+  font-weight: bolder;
+  transition: opacity 3s;
+}
+
+.home-page-splash-msg.inactive {
+  display: block;
+  opacity: 0;
+}
+
+.home-page-splash-msg.active {
+  display: block;
+  opacity: .8;
+}
+
+.home-page-splash-msg.first {
+  font-size: 70px;
+  top: 20%;
+  left: 32%;
+}
+
+.home-page-splash-msg.second {
+  font-size: 40px;
+  top: 35%;
+  left: 20%;
+}
+
+.home-page-splash-msg.third {
+  font-size: 24px;
+  top: 70%;
+  left: 30%;
+}
