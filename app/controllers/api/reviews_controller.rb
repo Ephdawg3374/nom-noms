@@ -10,6 +10,7 @@ class Api::ReviewsController < ApplicationController
   end
 
   def index
+    
     if !params[:locId].nil?
       @reviews = Review.where(location_id: params[:locId]).order(created_at: :desc)
     elsif !params[:userId].nil?

@@ -34,18 +34,22 @@ var HomePage = React.createClass({
     var msg3Class = msgBaseClass + "third " + (this.state.message3 ? "active" : "inactive");
 
     return (
-      <div className="home-page">
-        <video
-          className="home-page-splash-video"
-          src="https://s3.amazonaws.com/nom-noms-dev/videos/avengers_shawarma_scene_no_sound.mp4"
-          autoPlay
-          loop
-          type="video/mp4">
-        </video>
+      <div className="home-page-wrapper">
+        <div className="home-page">
+          <video
+            className="home-page-splash-video"
+            src="https://s3.amazonaws.com/nom-noms-dev/videos/avengers_shawarma_scene_no_sound.mp4"
+            autoPlay
+            loop
+            type="video/mp4">
+          </video>
 
-        <label className={msg1Class}>{ msg1Text }</label>
-        <label className={msg2Class}>{ msg2Text }</label>
-        <label className={msg3Class}>{ msg3Text }</label>
+          <div className="msg-wrapper">
+            <label className={msg1Class}>{ msg1Text }</label>
+            <label className={msg2Class}>{ msg2Text }</label>
+            <label className={msg3Class}>{ msg3Text }</label>
+          </div>
+        </div>
       </div>
     );
   }

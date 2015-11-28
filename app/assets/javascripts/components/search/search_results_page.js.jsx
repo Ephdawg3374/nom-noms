@@ -11,7 +11,6 @@ var SearchResultsPage = React.createClass({
     this.setPId('search_index');
     this.setPStorage(this.localStorage);
     this.restorePState();
-
     if (localStorage.search_index) {
       var locations = JSON.parse(localStorage.search_index).locations;
       SearchActions.receiveSearchResults(locations);
@@ -35,10 +34,12 @@ var SearchResultsPage = React.createClass({
 
   render: function () {
     return (
-      <div className="search-results-page group">
-        <SearchIndex locations={this.state.locations}/>
+      <div className="search-results-page-wrapper">
+        <div className="search-results-page group">
+          <SearchIndex locations={this.state.locations}/>
 
-        <Map distanceRange={this.props.location.query.distanceRange} mode="searchIndex"/>
+          <Map distanceRange={this.props.location.query.distanceRange} mode="searchIndex"/>
+        </div>
       </div>
     );
   }

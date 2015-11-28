@@ -14,6 +14,9 @@ class Api::LocationsController < ApplicationController
     elsif !params[:locAddressAutoCompleteRequest].nil?
       @location_areas = Location.find_valid_location_areas(params[:locAddressAutoCompleteRequest])
       render json: @location_areas
+    elsif !params[:userId].nil?
+      @locations = User.find(params[:userId].to_i).locations
+      render :index
     else
       render json: "There was an error with your request", status: 400
     end

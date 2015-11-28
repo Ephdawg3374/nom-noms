@@ -1,0 +1,96 @@
+.user-show-page {
+  background: white;
+}
+
+.user-show-page-header-wrapper {
+  background: #eee;
+  border-bottom: 1px solid #ccc;
+  height: 250px;
+}
+
+.user-show-page-header {
+  width: 1000px;
+  margin: auto;
+}
+
+.user-show-page-header-floater-section {
+  float: left;
+}
+
+.user-profile-pic {
+  position: absolute;
+  top: 150px;
+}
+
+.user-options {
+  position: absolute;
+  top: 500px;
+  width: 240px;
+  min-height: 300px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.user-profile-pic > img {
+  width: 240px;
+  height: 320px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.user-show-page-header-mid-section {
+  float:left;
+  padding: 0 50px 0 292px;
+  margin: 40px auto 0 auto;
+  width: 400px;
+}
+
+.user-show-page-header-mid-section > h1 {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.user-show-page-header-stats {
+  margin-top: 10px;
+}
+
+.user-show-page-header-stats > li:nth-child(2) {
+  margin-top: 10px;
+}
+
+.user-show-page-header-right-section {
+  float: right;
+  border-left: 1px solid #ccc;
+}
+
+.user-show-page-content-wrapper {
+  background: white;
+}
+
+.user-show-page-content {
+  width: 1000px;
+  margin: auto;
+}
+
+.user-show-page-content-mid-section {
+  float: left;
+  margin-left: 240px;
+  border-right: 1px solid #ccc;
+}
+
+.user-show-page-content-mid-section > .review-index {
+  margin: 50px 25px;
+}
+
+.user-show-page-right-section {
+  float: right;
+}
+
+.user-show-page-content-mid-section > .review-index > .review-index-item > .review-index-item-content > .review-index-item-content-header > .review-rating-bar {
+  padding: 0;
+  margin: 0;
+}
+
+.user-show-page-content-mid-section > .review-index > .review-index-item > .review-index-item-content > .review-index-item-content-header {
+  padding: 15px;
+}

@@ -16,11 +16,10 @@
 
 .sub-header-info {
   float: left;
-  width: 500px;
+  white-space: nowrap;
 }
 
 .sub-header-info > h1 {
-  float: left;
   font-size: 30px;
   font-weight: bold;
 }
@@ -58,6 +57,7 @@
   background: white;
   padding: 5px;
   border: 1px solid #ccc;
+  border-radius: 10px;
 }
 
 .sub-header-banner-left-section > .search-index-map {
@@ -81,7 +81,7 @@
 .sub-header-banner-left-section > .location-details-wrapper {
   margin: 5px 0;
   padding: 0 15px;
-},
+}
 
 .location-show-page-review-wrapper {
   position: relative;
@@ -94,8 +94,13 @@
 
 .sub-header-banner-cover-photo {
   float: right;
-  width: 600px;
   margin-top: 20px;
+}
+
+.sub-header-banner-cover-photo > img {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  width: 600px;
 }
 
 .location-show-page-review-section {

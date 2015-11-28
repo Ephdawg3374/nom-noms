@@ -25,6 +25,13 @@ window.SearchActions = {
     });
   },
 
+  receiveLocations: function (locations) {
+    AppDispatcher.dispatch({
+      actionType: SearchConstants.RECEIVE_LOCATIONS,
+      locations: locations
+    });
+  },
+
   receiveLocationTypes: function (locTypesResults) {
     var locTypes = [];
 

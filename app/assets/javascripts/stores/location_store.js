@@ -45,6 +45,17 @@
       this.removeListener(CHANGE_EVENT, callback);
     },
 
+    addLocation: function (location) {
+      for (var i = 0; i < _locations.length; i++) {
+        if (_locations[i].id === location.id) {
+          _locations[i] = location;
+          return;
+        }
+      }
+
+      _locations.push(location);
+    },
+
     dispatcherId: AppDispatcher.register(function (payload) {
       switch (payload.actionType) {
         case SearchConstants.RECEIVE_SEARCH_RESULTS:
@@ -55,6 +66,11 @@
         case SearchConstants.RECEIVE_SINGLE_LOCATION:
           LocationStore.addLocation(payload.location);
           LocationStore.emit(CHANGE_EVENT);
+          break;
+        case SearchConstants.RECEIVE_LOCATIONS:
+          LocationStore.resetLocations(payload.locations);
+          LocationStore.emit(CHANGE_EVENT);
+          break;
       }
     })
   });

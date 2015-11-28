@@ -8,9 +8,15 @@
     },
 
     _addUser: function (newUser) {
-      if (_users.indexOf(newUser) === -1) {
-        _users.push(newUser);
+      // if user already in store, replace. otherwise push
+      for (var i = 0; i < _users.length; i++) {
+        if (_users[i].id === newUser.id) {
+          _users[i] = newUser;
+          return;
+        }
       }
+
+      _users.push(newUser);
     },
 
     addChangeListener: function (callback) {

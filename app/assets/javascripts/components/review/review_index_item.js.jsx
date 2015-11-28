@@ -19,7 +19,21 @@ var ReviewIndexItem = React.createClass({
   },
 
   render: function () {
-    var deleteReviewButton;
+    var deleteReviewButton, locationContactDetails;
+
+    if (this.props.location) {
+      locationContactDetails = (
+        <div className="review-index-item-location-details group">
+          <img src={this.props.location.img_url}/>
+
+          <div className="review-index-item-location-details-section1 group">
+            <label>{this.props.location.name}</label>
+            <label>{this.props.location.price_range} {this.props.location.location_type} {this.props.location.cuisine}</label>
+            <ReviewRatingBar currentRating={this.props.location.ave_rating} mode="disabled"/>
+          </div>
+        </div>
+      );
+    }
 
     if (CurrentUserStore.currentUser().id === this.props.review.user_id) {
       deleteReviewButton = (
@@ -48,6 +62,8 @@ var ReviewIndexItem = React.createClass({
         </div>
 
         <div className="review-index-item-content">
+
+          { locationContactDetails }
 
           <div className="review-index-item-content-header group">
             <ReviewRatingBar mode="disabled" currentRating={this.props.review.rating}/>

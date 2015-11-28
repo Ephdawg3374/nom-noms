@@ -9,12 +9,14 @@ class User < ActiveRecord::Base
     styles: {
       tiny: "58x58#",
       thumb: "100x100#",
-      large: "640x480"}
+      avatar: "240x320"}
 
   validates_attachment_content_type :profile_pic, content_type: /\Aimage\/.*\Z/
 
   has_many :reviews, dependent: :destroy
   has_many :images, dependent: :destroy
+  has_many :locations, through: :reviews
+
 
   after_initialize :ensure_session_token
 

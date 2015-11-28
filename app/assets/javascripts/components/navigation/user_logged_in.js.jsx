@@ -12,7 +12,7 @@ var UserLoggedIn = React.createClass({
 
     return (
       <div className="nav-logged-in">
-        <Link className="nav-logged-in-tiny-pic" to={"/users/" + CurrentUserStore.currentUser().id}>
+        <Link className = "nav-logged-in-tiny-pic" to={"/users/" + CurrentUserStore.currentUser().id}>
           <img src={ tinyPicUrl } />
         </Link>
         <button onClick={ this.handleUserLogout }>

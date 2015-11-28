@@ -37,6 +37,12 @@
   padding: 0;
 }
 
+.review-index-item-location-details-section1 > .review-rating-bar {
+  float: left;
+  padding: 0;
+  margin: 0;
+}
+
 .review-index-item-body {
   width: 80%;
   padding: 20px;
@@ -44,12 +50,40 @@
 }
 
 .review-index-item-images > img {
-  width: 100px;
-  height: 100px;
+  width: 320px;
 }
 
 .delete-review-button {
   float: right;
   padding: 5px;
   font-size: 12px;
+}
+
+.review-index-item-location-details {
+  padding: 0 0 10px 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.review-index-item-location-details > img {
+  float: left;
+  width: 150px;
+  height: 75px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.review-index-item-location-details-section1 {
+  float: left;
+}
+
+.review-index-item-location-details-section1 > * {
+  float: left;
+}
+
+.review-index-item-location-details-section1 > label {
+  width: 100%;
+}
+
+.review-index-item-location-details-section2 {
+  float: left;
 }

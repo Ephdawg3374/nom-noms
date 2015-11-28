@@ -22,7 +22,6 @@ window.ApiLocationUtil = {
       method: "GET",
       dataType: "json",
       success: function (data) {
-        debugger;
         SearchActions.receiveSingleLocation(data);
       }
     });
@@ -50,6 +49,19 @@ window.ApiLocationUtil = {
       data: {locAddressAutoCompleteRequest: locAddressPartial},
       success: function (data) {
         SearchActions.receiveLocationAreas(data);
+      }
+    });
+  },
+
+  fetchReviewedLocationsByUser: function (userId) {
+    $.ajax({
+      url: "api/locations",
+      method: "GET",
+      dataType: "json",
+      contentType: "application/json",
+      data: {userId: userId},
+      success: function (data) {
+        SearchActions.receiveLocations(data);
       }
     });
   }

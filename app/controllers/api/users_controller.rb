@@ -1,7 +1,4 @@
 class Api::UsersController < ApplicationController
-  def index
-  end
-
   def create
     @user = User.new(user_params)
 
@@ -13,8 +10,12 @@ class Api::UsersController < ApplicationController
     end
   end
 
+  def index
+  end
+
   def show
-    @user = User.find(params[:userId].to_i)
+    
+    @user = User.find(params[:id].to_i)
 
     if @user
       render :show

@@ -23,7 +23,6 @@ window.ApiUserUtil = {
       method: "GET",
       dataType: "json",
       contentType: "application/json",
-      data: {userId: userId},
       success: function (data) {
         UserActions.receiveUser(data);
       }
