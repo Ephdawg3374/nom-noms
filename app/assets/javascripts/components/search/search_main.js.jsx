@@ -275,7 +275,7 @@ var SearchMain = React.createClass({
                 <input className="location-type-search-input"
                   type="text"
                   value={this.state.locType}
-                  placeholder="Location type (restaurant, bar, etc)"
+                  placeholder="Location name, type, or cuisine"
                   onChange={this.autoCompleteLocationType}/>
 
                 <ul className="location-type-autocomplete-list">
@@ -289,6 +289,7 @@ var SearchMain = React.createClass({
                 <input className="location-area-search-input"
                   type="text"
                   value={this.state.locArea}
+                  placeholder="Select a city"
                   onChange={this.autoCompleteLocationArea}/>
 
                 <ul className="location-area-autocomplete">

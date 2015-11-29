@@ -38,12 +38,16 @@ window.SearchActions = {
   receiveLocationTypes: function (locTypesResults) {
     var locTypes = [];
 
+    // locTypesResults.forEach(function (locTypesResult) {
+    //   if (locTypesResult.location_type) {
+    //     locTypes.push(locTypesResult.location_type);
+    //   } else {
+    //     locTypes.push(locTypesResult.cuisine);
+    //   }
+    // });
+
     locTypesResults.forEach(function (locTypesResult) {
-      if (locTypesResult.location_type) {
-        locTypes.push(locTypesResult.location_type);
-      } else {
-        locTypes.push(locTypesResult.cuisine);
-      }
+      locTypes.push(locTypesResult);
     });
 
     AppDispatcher.dispatch({
