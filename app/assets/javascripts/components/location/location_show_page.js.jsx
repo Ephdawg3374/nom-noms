@@ -8,8 +8,8 @@ var LocationShowPage = React.createClass({
   },
 
   componentDidMount: function () {
-    LocationStore.addChangeListener(this._onLocationUpdate);
-    CurrentUserStore.addChangeListener(this._ensureLoggedIn);
+    LocationStore.addChangeListener(this._onChange);
+    CurrentUserStore.addChangeListener(this._onChange);
   },
 
   componentWillUnmount: function () {
@@ -37,10 +37,14 @@ var LocationShowPage = React.createClass({
 
     var numReviewsText = "Number of Reviews: " + location.num_reviews;
 
-    var reviewForm;
+    var reviewForm, map;
 
-    if (this.state.isLoggedIn) {
+    if (CurrentUserStore.isLoggedIn()) {
       reviewForm = <ReviewForm location={location} />;
+    }
+
+    if (Object.keys(location).length !== 0) {
+      map = <Map location={location} mode="locationShowPage"/>;
     }
 
     var reviewIndex = <ReviewIndex isLoggedIn={CurrentUserStore.isLoggedIn()} location={location} />;
@@ -70,7 +74,7 @@ var LocationShowPage = React.createClass({
 
             <div className="sub-header-banner group">
               <div className="sub-header-banner-left-section">
-                <Map location={location} mode="locationShowPage"/>
+                { map }
                 <a href="#">{location.website}</a>
                 <label>{location.description}</label>
                 <LocationContactDetails location={location} />

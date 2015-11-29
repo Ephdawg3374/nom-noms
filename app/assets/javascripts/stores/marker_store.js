@@ -74,7 +74,6 @@
         latLngBounds.extend(latLng);
       });
 
-      // map.setCenter(latLngBounds.getCenter());
       map.panTo(latLngBounds.getCenter());
       map.fitBounds(latLngBounds);
 

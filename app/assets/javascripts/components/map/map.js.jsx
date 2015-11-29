@@ -1,4 +1,5 @@
 var Map = React.createClass({
+
   componentDidMount: function () {
     this.determineMapSettings();
   },
@@ -8,15 +9,12 @@ var Map = React.createClass({
 
     if (this.props.mode === "locationShowPage") {
       this.map = this.setLocationShowPageMap(map);
+      MarkerStore.removeOldMarkers();
       MarkerStore.createNewMarker(this.map, this.props.location);
-    } else {
+    } else if (this.props.mode === "searchIndex") {
       this.map = this.setSearchIndexDefaultMap(map);
-
-      if (localStorage.search_index) {
-        var locations = JSON.parse(localStorage.search_index).locations;
-        MarkerStore.updateMarkersFromLocationStore(this.map);
-        MarkerStore.determineMapBoundsAndSetCenter(this.map, this.props.distanceRange);
-      }
+      MarkerStore.updateMarkersFromLocationStore(this.map);
+      MarkerStore.determineMapBoundsAndSetCenter(this.map, this.props.distanceRange);
     }
   },
 
@@ -45,7 +43,10 @@ var Map = React.createClass({
   },
 
   componentWillReceiveProps: function () {
-    if (this.props.mode === "searchIndex") {
+    if (this.props.mode === "locationShowPage") {
+      MarkerStore.removeOldMarkers();
+      MarkerStore.createNewMarker(this.map, this.props.location);
+    } else if (this.props.mode === "searchIndex") {
       MarkerStore.updateMarkersFromLocationStore(this.map);
       MarkerStore.determineMapBoundsAndSetCenter(this.map, this.props.distanceRange);
     }
