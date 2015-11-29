@@ -27,34 +27,9 @@ class Location < ActiveRecord::Base
 
     exact_loc_match = Location.where("locations.name = ?", location_type)
 
-    # if loc type search matches an exact name location, search for all locations with that
-    # name where distance < 10 miles from the searchArea (ignores distance and price filters)
-    if exact_loc_match
-      Location.find_by_sql [
-        "SELECT
-          *
-        FROM
-          (
-            SELECT
-              locations.*,
-               asin(
-                sqrt(
-                  sin(radians(:lat-lat)/2)^2 +
-                  sin(radians(:lng-lng)/2)^2 *
-                  cos(radians(:lat)) *
-                  cos(radians(:lng))
-                  )
-                ) * 7926.3352 AS distance
-            FROM
-              locations
-          ) AS loc_w_distance
-        WHERE
-          loc_w_distance.distance < 10 AND
-          name = :location_type
-        ORDER BY
-          loc_w_distance.distance",
-        sql_query_params]
-    else
+    # if loc type search matches an exact name location, search for locations with that
+    # name and ignore price range filter (but respect distacne range filter)
+    if exact_loc_match.empty?
       Location.find_by_sql [
         "SELECT
           *
@@ -83,6 +58,31 @@ class Location < ActiveRecord::Base
           loc_w_distance.distance
         LIMIT
           100",
+        sql_query_params]
+    else
+      Location.find_by_sql [
+        "SELECT
+          *
+        FROM
+          (
+            SELECT
+              locations.*,
+               asin(
+                sqrt(
+                  sin(radians(:lat-lat)/2)^2 +
+                  sin(radians(:lng-lng)/2)^2 *
+                  cos(radians(:lat)) *
+                  cos(radians(:lng))
+                  )
+                ) * 7926.3352 AS distance
+            FROM
+              locations
+          ) AS loc_w_distance
+        WHERE
+          loc_w_distance.distance < :distance AND
+          name = :location_type
+        ORDER BY
+          loc_w_distance.distance",
         sql_query_params]
       end
   end
