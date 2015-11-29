@@ -7,14 +7,20 @@ var SearchResultsPage = React.createClass({
 
   componentWillMount: function () {
     window.NomNomsApp.search_auto = true;
-
     this.setPId('search_index');
     this.setPStorage(this.localStorage);
     this.restorePState();
+
     if (localStorage.search_index) {
       var locations = JSON.parse(localStorage.search_index).locations;
-      SearchActions.receiveSearchResults(locations);
+      SearchActions.receiveLocations(locations);
     }
+  },
+
+  componentWillReceiveProps: function () {
+    this.setPState({
+      locations: LocationStore.all()
+    });
   },
 
   componentDidMount: function () {
@@ -29,17 +35,14 @@ var SearchResultsPage = React.createClass({
 
   _onChange: function () {
     this.setState({ locations: LocationStore.all() });
-    this.setPState({ locations: LocationStore.all() });
   },
 
   render: function () {
     return (
-      <div className="search-results-page-wrapper">
-        <div className="search-results-page group">
-          <SearchIndex locations={this.state.locations}/>
+      <div className="search-results-page group">
+        <SearchIndex locations={this.state.locations}/>
 
-          <Map distanceRange={this.props.location.query.distanceRange} mode="searchIndex"/>
-        </div>
+        <Map distanceRange={this.props.location.query.distanceRange} mode="searchIndex"/>
       </div>
     );
   }

@@ -1,4 +1,4 @@
-var HomePage = React.createClass({
+var SplashPage = React.createClass({
   getInitialState: function () {
     return (
       {

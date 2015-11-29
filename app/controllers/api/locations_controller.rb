@@ -1,6 +1,7 @@
 class Api::LocationsController < ApplicationController
   def index
-    if !params[:search].nil?
+    
+    if !params[:search].nil? && !params[:search][:searchArea].nil?
       @locations = Location.find_locations(params[:search])
 
       unless @locations.empty?

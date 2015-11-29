@@ -1,28 +1,8 @@
-.search-results-page-wrapper {
-  background-color: #eee;
-  height: 100%;
-}
-
-.search-results-page {
-  width: 1000px;
-  margin: auto;
-  border-left: 1px solid #ccc;
-  border-right: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
-  min-height: 660px;
-}
-
 .search-index {
   float: left;
   width: 225px;
   padding: 0 15px;
   overflow-y: scroll;
   overflow-x: hidden;
-  height: 700px;
-}
-
-.search-index-map {
-  float: right;
-  width: 745px;
   height: 700px;
 }

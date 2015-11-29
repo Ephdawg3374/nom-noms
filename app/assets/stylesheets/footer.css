@@ -1,0 +1,25 @@
+.footer-wrapper {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  background: lightblue;
+}
+
+.foooter {
+  width: 1000px;
+  margin: auto;
+}
+
+.footer-about {
+  font-size: 14px;
+  float: left;
+}
+
+.footer-links {
+  float: right;
+}
+
+.social-media-icon {
+  display: inline;
+  width: 32px;
+  height: 32px;
+}

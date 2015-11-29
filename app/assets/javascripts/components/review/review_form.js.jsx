@@ -11,13 +11,24 @@ var ReviewForm = React.createClass({
         isSubmitting: false,
         isValid: true,
         errors: [],
-        visible: true
       }
     );
   },
 
   setInitialState: function () {
     this.setState(
+      {
+        rating: 1,
+        body: "",
+        images: [],
+        isUploading: false,
+        isSubmitting: false,
+        isValid: true,
+        errors: []
+      }
+    );
+
+    this.setPState(
       {
         rating: 1,
         body: "",
@@ -52,22 +63,10 @@ var ReviewForm = React.createClass({
         isValid: true,
       });
     }.bind(this), 1000);
-
-    CurrentUserStore.addChangeListener(this._ensureLoggedIn);
   },
 
   componentWillUnmount: function () {
     clearInterval(this.intervalId);
-
-    CurrentUserStore.removeChangeListener(this._ensureLoggedIn);
-  },
-
-  _ensureLoggedIn: function () {
-    if (CurrentUserStore.isLoggedIn()) {
-      this.setState({ visible: true });
-    } else {
-      this.setState({ visible: false });
-    }
   },
 
   setReviewRating: function (event) {
@@ -153,7 +152,6 @@ var ReviewForm = React.createClass({
         ApiImageUtil.create(formDataImage);
       }
 
-      // this.localStorage.review_form = {};
       this.setInitialState();
 
       this.history.pushState(null, "/locations/" + this.props.location.id);
@@ -163,11 +161,7 @@ var ReviewForm = React.createClass({
   },
 
   render: function () {
-    var klass, errors;
-
-    if (!this.state.visible) {
-      klass = "not-visible";
-    }
+    var errors;
 
     if (this.state.errors.length > 0) {
       errors = this.state.errors.map(function (error, idx) {
@@ -196,7 +190,7 @@ var ReviewForm = React.createClass({
     }.bind(this));
 
     return (
-      <form onSubmit={this.submitReview} className={"review-form " + klass} >
+      <form onSubmit={this.submitReview} className={"review-form "} >
 
         <div className="review-form-errors-wrapper group">
           { errors }

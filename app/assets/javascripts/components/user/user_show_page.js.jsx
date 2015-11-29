@@ -1,27 +1,30 @@
 var UserShowPage = React.createClass({
-  getInitialState: function () {
-    return ({ user: {} });
-  },
-
   componentWillMount: function () {
     localStorage.removeItem("review_index");
+
+    ApiUserUtil.fetchUser(this.props.params.user_id);
+  },
+
+  componentWillReceiveProps: function () {
+    ApiUserUtil.fetchUser(this.props.params.user_id);
   },
 
   componentDidMount: function () {
-    ApiUserUtil.fetchUser(this.props.params.user_id);
+    CurrentUserStore.addChangeListener(this._onChange);
     UsersStore.addChangeListener(this._onChange);
   },
 
   componentWillUnmount: function () {
+    CurrentUserStore.removeChangeListener(this._onChange);
     UsersStore.removeChangeListener(this._onChange);
   },
 
-  _onChange: function () {
-    this.setState({ user: UsersStore.findUser(parseInt(this.props.params.user_id)) });
+  _onChange: function ()  {
+    this.forceUpdate();
   },
 
   render: function () {
-    var user = this.state.user;
+    var user = UsersStore.findUser(parseInt(this.props.params.user_id));
 
     var fiveStarProgressVal, fourStarProgressVal, threeStarProgressVal,
       twoStarProgressVal, oneStarProgressVal, noProgessVal, reviewIndex;
@@ -37,7 +40,7 @@ var UserShowPage = React.createClass({
     }
 
     if (Object.keys(user).length !== 0) {
-      reviewIndex = <ReviewIndex user={user} />;
+      reviewIndex = <ReviewIndex user={user} isLoggedIn={CurrentUserStore.isLoggedIn()} />;
     }
 
     return (

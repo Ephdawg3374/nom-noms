@@ -1,41 +1,25 @@
 var LocationShowPage = React.createClass({
   mixins: [ReactPersistentState, ReactRouter.History],
 
-  // getInitialState: function () {
-  //   return ({ reviews: ReviewStore.all() });
-  // },
-
   componentWillMount: function () {
-    this.setPId('search_index');
-    this.setPStorage(this.localStorage);
-    this.restorePState();
+    localStorage.removeItem("review_index");
 
-    if (localStorage.search_index) {
-      var locations = JSON.parse(localStorage.search_index).locations;
-      LocationStore.repopulateStore(locations);
-    } else {
-      ApiLocationUtil.fetchSingleLocation(this.props.params.location_id);
-    }
-
-    // ApiReviewUtil.fetchReviewsByLocation(this.props.params.location_id);
+    ApiLocationUtil.fetchSingleLocation(this.props.params.location_id);
   },
 
-  // componentDidMount: function () {
-  //   ReviewStore.addChangeListener(this._onChange);
-  // },
-  //
-  // componentWillUnmount: function () {
-  //   ReviewStore.removeChangeListener(this._onChange);
-  // },
-  //
-  // _onUserChange: function () {
-  //   this.forceUpdate();
-  // },
+  componentDidMount: function () {
+    LocationStore.addChangeListener(this._onLocationUpdate);
+    CurrentUserStore.addChangeListener(this._ensureLoggedIn);
+  },
 
-  // _onChange: function () {
-  //   this.setState({ reviews: ReviewStore.all() });
-  //   this.setPState({ reviews: ReviewStore.all() });
-  // },
+  componentWillUnmount: function () {
+    LocationStore.removeChangeListener(this._onChange);
+    CurrentUserStore.removeChangeListener(this._onChange);
+  },
+
+  _onChange: function () {
+    this.forceUpdate();
+  },
 
   goToReviewFormPage: function (event) {
     event.preventDefault();
@@ -50,8 +34,16 @@ var LocationShowPage = React.createClass({
 
   render: function () {
     var location = LocationStore.find_location(parseInt(this.props.params.location_id));
+
     var numReviewsText = "Number of Reviews: " + location.num_reviews;
+
     var reviewForm;
+
+    if (this.state.isLoggedIn) {
+      reviewForm = <ReviewForm location={location} />;
+    }
+
+    var reviewIndex = <ReviewIndex isLoggedIn={CurrentUserStore.isLoggedIn()} location={location} />;
 
     return (
       <div className="location-show-page">
@@ -93,13 +85,11 @@ var LocationShowPage = React.createClass({
         </div>
 
         <div className="location-show-page-review-wrapper">
-          <ReviewForm location={location} />
+          { reviewForm }
         </div>
 
         <div className="location-show-page-review-section">
-
-          <ReviewIndex location={location}/>
-
+          { reviewIndex }
         </div>
 
       </div>

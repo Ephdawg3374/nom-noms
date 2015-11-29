@@ -1,10 +1,27 @@
 window.SearchActions = {
-  receiveSearchResults: function (searchResults) {
+  receiveSingleLocation: function (location) {
+    var latLngObject = new google.maps.LatLng(
+      {
+        locId: location.id,
+        lat: parseFloat(location.lat),
+        lng: parseFloat(location.lng)
+      }
+    );
+
+    AppDispatcher.dispatch({
+      actionType: SearchConstants.RECEIVE_SINGLE_LOCATION,
+      location: location,
+      latLngObject: latLngObject
+    });
+  },
+
+  receiveLocations: function (locations) {
     var latLngObjects = [];
 
-    searchResults.forEach(function (location) {
+    locations.forEach(function (location) {
       latLngObjects.push(new google.maps.LatLng(
         {
+          locId: location.id,
           lat: parseFloat(location.lat),
           lng: parseFloat(location.lng)
         })
@@ -12,23 +29,9 @@ window.SearchActions = {
     });
 
     AppDispatcher.dispatch({
-      actionType: SearchConstants.RECEIVE_SEARCH_RESULTS,
-      searchResults: searchResults,
-      latLngObjects: latLngObjects,
-    });
-  },
-
-  receiveSingleLocation: function (location) {
-    AppDispatcher.dispatch({
-      actionType: SearchConstants.RECEIVE_SINGLE_LOCATION,
-      location: location
-    });
-  },
-
-  receiveLocations: function (locations) {
-    AppDispatcher.dispatch({
       actionType: SearchConstants.RECEIVE_LOCATIONS,
-      locations: locations
+      locations: locations,
+      latLngObjects: latLngObjects,
     });
   },
 

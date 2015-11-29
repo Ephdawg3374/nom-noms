@@ -69,6 +69,7 @@
         case ReviewConstants.DELETE_SINGLE_REVIEW:
           ReviewStore.deleteReview(payload.review);
           ReviewStore.emit(CHANGE_EVENT);
+          break;
       }
     })
   });

@@ -9,7 +9,7 @@ $(document).on('ready', function () {
 
   var routes = (
     <Route path="/" component={NomNomsApp}>
-      <IndexRoute component={HomePage} />
+      <IndexRoute component={SplashPage} />
       <Route path="/users/new" component={NewUserPage} />
       <Route path="/session/new" component={LogInPage} />
       <Route path="/search" component={SearchResultsPage} />

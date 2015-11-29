@@ -2,24 +2,27 @@ var ReviewFormPage = React.createClass({
   mixins: [ReactRouter.History],
 
   componentWillMount: function () {
-    if (localStorage.location_index) {
-      var locations = JSON.parse(localStorage.location_index).locations;
-      LocationStore.repopulateStore(locations);
-    }
+    ApiLocationUtil.fetchSingleLocation(this.props.params.location_id);
   },
 
   componentDidMount: function () {
+    LocationStore.addChangeListener(this._onLocationUpdate);
     CurrentUserStore.addChangeListener(this._ensureLoggedIn);
   },
 
   componentWillUnmount: function () {
+    LocationStore.removeChangeListener(this._onLocationUpdate);
     CurrentUserStore.removeChangeListener(this._ensureLoggedIn);
   },
 
   _ensureLoggedIn: function () {
     if (!CurrentUserStore.isLoggedIn()) {
-      this.history.pushState(null, "/session/new");
+      this.history.goBack();
     }
+  },
+
+  _onLocationUpdate: function () {
+    this.forceUpdate();
   },
 
   render: function () {

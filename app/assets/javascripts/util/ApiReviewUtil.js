@@ -35,6 +35,7 @@ window.ApiReviewUtil = {
       data: formData,
       success: function (data) {
         ReviewActions.receiveSingleReview(data);
+        ApiLocationUtil.fetchSingleLocation(data.location_id);
         success(data);
       },
       error: function (data) {

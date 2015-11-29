@@ -13,7 +13,7 @@
     },
 
     find_location: function (id) {
-      var location;
+      var location = {};
 
       for (i = 0; i < _locations.length; i++) {
         if (_locations[i].id === id) {
@@ -45,7 +45,7 @@
       this.removeListener(CHANGE_EVENT, callback);
     },
 
-    addLocation: function (location) {
+    addLocation: function (location, latLngObject) {
       for (var i = 0; i < _locations.length; i++) {
         if (_locations[i].id === location.id) {
           _locations[i] = location;
@@ -54,21 +54,18 @@
       }
 
       _locations.push(location);
+      _latLngObjects.push(latLngObject);
     },
 
     dispatcherId: AppDispatcher.register(function (payload) {
       switch (payload.actionType) {
-        case SearchConstants.RECEIVE_SEARCH_RESULTS:
-          LocationStore.resetLocations(payload.searchResults);
-          LocationStore.resetLatLngObjects(payload.latLngObjects);
-          LocationStore.emit(CHANGE_EVENT);
-          break;
         case SearchConstants.RECEIVE_SINGLE_LOCATION:
-          LocationStore.addLocation(payload.location);
+          LocationStore.addLocation(payload.location, payload.latLngObject);
           LocationStore.emit(CHANGE_EVENT);
           break;
         case SearchConstants.RECEIVE_LOCATIONS:
           LocationStore.resetLocations(payload.locations);
+          LocationStore.resetLatLngObjects(payload.latLngObjects);
           LocationStore.emit(CHANGE_EVENT);
           break;
       }

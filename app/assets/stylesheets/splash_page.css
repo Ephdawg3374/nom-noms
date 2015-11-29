@@ -1,11 +1,13 @@
+.home-page-wrapper {
+  background: #eee;
+  height: 100%;
+}
+
 .home-page {
   width: 1000px;
   margin: auto;
 }
 
-.home-page-wrapper {
-  background: #eee;
-}
 
 .home-page-splash-video {
   width: 1000px;

@@ -2,6 +2,7 @@ var success = function (searchParams) {
   this.setState(
     {
       errMsg: null,
+      locType: "",
       showLocTypeAutoCompleteList: false,
       showLocAreaAutoCompleteList: false
     }
@@ -37,28 +38,29 @@ var SearchMain = React.createClass({
   },
 
   componentWillMount: function () {
-    // this.setPId('location_search_params');
-    // this.setPStorage(this.localStorage);
-    // this.restorePState();
+    this.setPId('search_params');
+    this.setPStorage(this.localStorage);
+    this.restorePState();
   },
 
   componentDidMount: function () {
-    // this.intervalId = setInterval(function () {
-    //   this.setPState({
-    //     locType: this.state.locType,
-    //     locArea: this.state.locArea,
-    //     distanceRange: this.state.distanceRange,
-    //     priceRange: this.state.priceRange,
-    //     showLocTypeAutoCompleteList: this.state.showLocTypeAutoCompleteList,
-    //     showLocAreaAutoCompleteList: this.state.showLocAreaAutoCompleteList,
-    //   });
-    // }.bind(this), 1000);
+    this.intervalId = setInterval(function () {
+      this.setPState({
+        locType: this.state.locType,
+        locArea: this.state.locArea,
+        distanceRange: this.state.distanceRange,
+        priceRange: this.state.priceRange,
+        showLocTypeAutoCompleteList: this.state.showLocTypeAutoCompleteList,
+        showLocAreaAutoCompleteList: this.state.showLocAreaAutoCompleteList,
+        errMsg: null
+      });
+    }.bind(this), 1000);
 
     LocTypeAutoCompleteStore.addChangeListener(this._onChange);
   },
 
   componentWillUnmount: function () {
-    // clearInterval(this.intervalId);
+    clearInterval(this.intervalId);
 
     LocTypeAutoCompleteStore.removeChangeListener(this._onChange);
   },

@@ -5,16 +5,14 @@ var ReviewIndexItem = React.createClass({
   },
 
   componentDidMount: function() {
-    ImageStore.addChangeListener(this._onChange);
-    CurrentUserStore.addChangeListener(this._onChange);
+    ImageStore.addChangeListener(this._onImageUpload);
   },
 
   componentWillUnmount: function () {
-    ImageStore.removeChangeListener(this._onChange);
-    CurrentUserStore.removeChangeListener(this._onChange);
+    ImageStore.removeChangeListener(this._onImageUpload);
   },
 
-  _onChange: function () {
+  _onImageUpload: function () {
     this.forceUpdate();
   },
 
@@ -35,7 +33,7 @@ var ReviewIndexItem = React.createClass({
       );
     }
 
-    if (CurrentUserStore.currentUser().id === this.props.review.user_id) {
+    if (this.props.isLoggedIn && CurrentUserStore.currentUser().id === this.props.review.user_id) {
       deleteReviewButton = (
         <button
           className="delete-review-button"

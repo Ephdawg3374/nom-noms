@@ -32,7 +32,7 @@
     },
 
     findUser: function (id) {
-      var user;
+      var user = {};
 
       for (i = 0; i < _users.length; i++) {
         if (_users[i].id === id) {

@@ -7,11 +7,11 @@ window.ApiLocationUtil = {
       contentType: "application/json",
       data: {search: search},
       success: function (data) {
-        SearchActions.receiveSearchResults(data);
-        success(search);
+        SearchActions.receiveLocations(data);
+        success && success(search);
       },
       error: function (data) {
-        failure(data.responseText);
+        failure && failure(data.responseText);
       }
     });
   },

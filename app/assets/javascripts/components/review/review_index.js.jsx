@@ -24,10 +24,6 @@ var ReviewIndex = React.createClass({
       ApiReviewUtil.fetchReviewsByLocation(this.props.location.id);
     }
 
-    ReviewStore.all().forEach(function (review) {
-      ApiImageUtil.fetchReviewImages(review.id);
-    });
-
     LocationStore.addChangeListener(this._onLocationUpdate);
     ReviewStore.addChangeListener(this._onChange);
   },
@@ -51,14 +47,14 @@ var ReviewIndex = React.createClass({
 
     if (this.props.location) {
       ReviewIndexItems = this.state.reviews.map(function (review, idx) {
-        return <ReviewIndexItem key={idx} review={review} />;
+          return <ReviewIndexItem key={idx} review={review} />;
         });
     } else if (this.props.user) {
       ReviewIndexItems = this.state.reviews.map(function (review, idx) {
-        var location = LocationStore.find_location(review.location_id);
+          var location = LocationStore.find_location(review.location_id);
 
-        return <ReviewIndexItem key={idx} review={review} location={location}/>;
-        });
+          return <ReviewIndexItem key={idx} isLoggedIn={this.props.isLoggedIn} review={review}  location={location}/>;
+        }.bind(this));
     }
 
     return (
