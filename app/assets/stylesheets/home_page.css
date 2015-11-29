@@ -12,6 +12,7 @@
   width: 1000px;
   height: auto;
   border: 1px solid #ccc;
+  margin-top: 50px;
 }
 
 .home-page-splash-msg {
@@ -50,5 +51,5 @@
 .msg-wrapper {
   position: relative;
   height: 0px;
-  top: -550px;
+  top: -530px;
 }
