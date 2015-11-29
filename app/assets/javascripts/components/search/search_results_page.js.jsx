@@ -6,7 +6,7 @@ var SearchResultsPage = React.createClass({
   },
 
   componentWillMount: function () {
-    window.NomNomsApp.search_auto = true;
+    window.NomNomsApp.searchAuto = true;
     this.setPId('search_index');
     this.setPStorage(this.localStorage);
     this.restorePState();
@@ -28,7 +28,7 @@ var SearchResultsPage = React.createClass({
   },
 
   componentWillUnmount: function () {
-    window.NomNomsApp.search_auto = false;
+    window.NomNomsApp.searchAuto = false;
 
     LocationStore.removeChangeListener(this._onChange);
   },

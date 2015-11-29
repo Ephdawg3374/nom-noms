@@ -2,11 +2,15 @@ var success = function (searchParams) {
   this.setState(
     {
       errMsg: null,
-      locType: "",
       showLocTypeAutoCompleteList: false,
       showLocAreaAutoCompleteList: false
     }
   );
+
+  if (!window.NomNomsApp.searchAuto) {
+    this.setState({ locType: "" });
+  }
+
   this.history.pushState(null, "search/", searchParams);
 };
 
@@ -191,7 +195,7 @@ var SearchMain = React.createClass({
 
     var priceRange = event.currentTarget.value;
 
-    if (NomNomsApp.search_auto) {
+    if (NomNomsApp.searchAuto) {
       this.handlePriceRangeFilter(priceRange);
     }
 
@@ -203,7 +207,7 @@ var SearchMain = React.createClass({
 
     var distanceRange = event.currentTarget.value;
 
-    if (NomNomsApp.search_auto) {
+    if (NomNomsApp.searchAuto) {
       this.handleDistanceRangeFilter(distanceRange);
     }
 

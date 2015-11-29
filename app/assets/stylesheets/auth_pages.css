@@ -6,6 +6,7 @@
   border-bottom: 1px solid #ccc;
   background: white;
   padding: 50px;
+  min-height: 650px;
 }
 
 .auth-page > h1 {

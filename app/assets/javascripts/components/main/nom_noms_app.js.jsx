@@ -1,6 +1,6 @@
 var NomNomsApp = React.createClass({
   componentWillMount: function () {
-    window.NomNomsApp.search_auto = false;
+    window.NomNomsApp.searchAuto = false;
     ApiSessionUtil.fetchCurrentUser();
   },
 

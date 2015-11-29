@@ -1,6 +1,7 @@
 .location-show-page {
   margin: auto;
   background: white;
+  min-height: 755px;
 }
 
 .main-header {
