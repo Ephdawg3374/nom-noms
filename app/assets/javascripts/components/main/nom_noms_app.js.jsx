@@ -6,7 +6,7 @@ var NomNomsApp = React.createClass({
 
   render: function () {
     return (
-      <div>
+      <div className="main-app">
         <header className="header">
           <NavigationBar />
         </header>

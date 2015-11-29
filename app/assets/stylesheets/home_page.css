@@ -1,13 +1,12 @@
 .home-page-wrapper {
+  padding-bottom: 50px;
   background: #eee;
-  height: 100%;
 }
 
 .home-page {
   width: 1000px;
   margin: auto;
 }
-
 
 .home-page-splash-video {
   width: 1000px;
@@ -49,8 +48,7 @@
 }
 
 .msg-wrapper {
-  position: absolute;
-  width: 1000px;
-  top: 150px;
-  left: 450px;
+  position: relative;
+  height: 0px;
+  top: -550px;
 }

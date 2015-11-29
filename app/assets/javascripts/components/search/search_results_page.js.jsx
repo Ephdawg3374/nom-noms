@@ -39,10 +39,12 @@ var SearchResultsPage = React.createClass({
 
   render: function () {
     return (
-      <div className="search-results-page group">
-        <SearchIndex locations={this.state.locations}/>
+      <div className="search-results-page-wrapper">
+        <div className="search-results-page group">
+          <SearchIndex locations={this.state.locations}/>
 
-        <Map distanceRange={this.props.location.query.distanceRange} mode="searchIndex"/>
+          <Map distanceRange={this.props.location.query.distanceRange} mode="searchIndex"/>
+        </div>
       </div>
     );
   }

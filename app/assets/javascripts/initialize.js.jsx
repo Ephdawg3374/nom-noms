@@ -5,8 +5,6 @@ $(document).on('ready', function () {
   var IndexRoute = ReactRouter.IndexRoute;
   var rootEl = document.getElementById('content');
 
-  // localStorage.clear();
-
   var routes = (
     <Route path="/" component={NomNomsApp}>
       <IndexRoute component={SplashPage} />

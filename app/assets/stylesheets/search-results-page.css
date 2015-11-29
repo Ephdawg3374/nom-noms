@@ -1,9 +1,9 @@
 .search-results-page-wrapper {
   background-color: #eee;
-  height: 100%;
 }
 
 .search-results-page {
+  background: white;
   width: 1000px;
   margin: auto;
   border-left: 1px solid #ccc;

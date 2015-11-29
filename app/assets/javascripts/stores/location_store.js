@@ -55,7 +55,6 @@
 
       _locations.push(location);
       _latLngObjects.push(latLngObject);
-      debugger;
     },
 
     dispatcherId: AppDispatcher.register(function (payload) {
