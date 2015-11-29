@@ -1,5 +1,6 @@
 .user-show-page {
   background: white;
+  min-height: 1000px;
 }
 
 .user-show-page-header-wrapper {

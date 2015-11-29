@@ -1,4 +1,5 @@
 .home-page-wrapper {
+  min-height: 1000px;
   padding-bottom: 50px;
   background: #eee;
 }
