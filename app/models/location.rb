@@ -11,9 +11,12 @@ class Location < ActiveRecord::Base
     location_type = search_params[:searchType]
     price_range = search_params[:priceRange]
 
-    price_range = "%" if search_params[:priceRange] == "All"
+    search_params[:priceRange] == "All" ? price_range = "%" : price_range += "%"
+    # price_range = "%" if search_params[:priceRange] == "All"
     # pull all location types if no type specified
-    location_type = "%" if location_type.empty?
+    location_type.empty? ? location_type= "%" : location_type += "%"
+
+    # location_type = "%" if location_type.empty?
 
     search_location_coords = Location.get_search_loc_coords(area)
 
@@ -21,7 +24,7 @@ class Location < ActiveRecord::Base
       lat: search_location_coords[0],
       lng: search_location_coords[1],
       distance: distance,
-      location_type: location_type,
+      location_type: parse_location(location_type)[0],
       price_range: price_range
     }
 
