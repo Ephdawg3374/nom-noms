@@ -72,9 +72,8 @@ class Location < ActiveRecord::Base
     location_type = location_type.split(" ")
 
     location_type.map! do |type_el|
-        type_el.capitalize unless type_el == "and"
+      type_el == "and" ? type_el.downcase : type_el.capitalize
     end
-
     location_type
   end
 
@@ -127,8 +126,7 @@ class Location < ActiveRecord::Base
       LIMIT
         3",
       loc_type_partial])
-    # names = Location.select(:name, :reviews)
-    #   .where("name LIKE ?", loc_type_partial).order().limit(3)
+      
     (types + cuisines + names)
   end
 

@@ -22,7 +22,7 @@ var SearchIndexItem = React.createClass({
     }
 
     var location = this.props.location;
-    var num_reviews_text = "Number of Reviews: " + location.num_reviews;
+    var num_reviews_text = location.num_reviews + " reviews";
 
     return (
       <div className="search-index-item">

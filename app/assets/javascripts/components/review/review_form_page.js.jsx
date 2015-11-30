@@ -27,7 +27,7 @@ var ReviewFormPage = React.createClass({
 
   render: function () {
     var location = LocationStore.find_location(parseInt(this.props.params.location_id));
-    var num_reviews_text = "Number of reviews: " + location.num_reviews;
+    var num_reviews_text = location.num_reviews + " reviews";
     return (
       <div className="review-form-page">
 

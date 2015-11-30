@@ -19,6 +19,8 @@ var ReviewIndexItem = React.createClass({
   render: function () {
     var deleteReviewButton, locationContactDetails;
 
+    var num_reviews_text = this.props.location.num_reviews + " reviews";
+
     if (this.props.location) {
       locationContactDetails = (
         <div className="review-index-item-location-details group">
@@ -32,6 +34,7 @@ var ReviewIndexItem = React.createClass({
             </h1>
             <label>{this.props.location.price_range} {this.props.location.location_type} {this.props.location.cuisine}</label>
             <ReviewRatingBar currentRating={this.props.location.ave_rating} mode="disabled"/>
+            <label className="search-index-item-number-of-ratings">{num_reviews_text}</label>
           </div>
         </div>
       );

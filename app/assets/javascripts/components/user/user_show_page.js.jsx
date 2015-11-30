@@ -61,7 +61,7 @@ var UserShowPage = React.createClass({
               <h1>{user.username}</h1>
 
               <ul className="user-show-page-header-stats">
-                <li>Number of Reviews: {user.num_reviews}</li>
+                <li>{user.num_reviews} reviews</li>
                 <li>
                   5 Star Reviews:
                   <progress value={fiveStarProgressVal || noProgessVal} max="100" />

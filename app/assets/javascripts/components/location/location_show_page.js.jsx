@@ -35,7 +35,7 @@ var LocationShowPage = React.createClass({
   render: function () {
     var location = LocationStore.find_location(parseInt(this.props.params.location_id));
 
-    var numReviewsText = "Number of Reviews: " + location.num_reviews;
+    var numReviewsText = location.num_reviews + " reviews";
 
     var reviewForm, map;
 
