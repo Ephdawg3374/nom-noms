@@ -43,23 +43,25 @@ var ReviewIndex = React.createClass({
   },
 
   render: function () {
-    var ReviewIndexItems;
+    var reviewIndexItems;
 
     if (this.props.location) {
-      ReviewIndexItems = this.state.reviews.map(function (review, idx) {
-          return <ReviewIndexItem key={idx} review={review} />;
-        });
+      reviewIndexItems = this.state.reviews.map(function (review, idx) {
+        return <ReviewIndexItem key={idx} isLoggedIn={this.props.isLoggedIn} review={review} location={this.props.location}/>;
+      }.bind(this));
     } else if (this.props.user) {
-      ReviewIndexItems = this.state.reviews.map(function (review, idx) {
-          var location = LocationStore.find_location(review.location_id);
+      reviewIndexItems = this.state.reviews.map(function (review, idx) {
+        var location = LocationStore.find_location(review.location_id);
 
+        if (Object.keys(location).length !== 0) {
           return <ReviewIndexItem key={idx} isLoggedIn={this.props.isLoggedIn} review={review}  location={location}/>;
-        }.bind(this));
+        }
+      }.bind(this));
     }
 
     return (
       <ul className="review-index">
-        { ReviewIndexItems }
+        { reviewIndexItems }
       </ul>
     );
   }

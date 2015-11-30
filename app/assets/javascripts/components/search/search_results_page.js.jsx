@@ -14,6 +14,8 @@ var SearchResultsPage = React.createClass({
     if (localStorage.search_index) {
       var locations = JSON.parse(localStorage.search_index).locations;
       SearchActions.receiveLocations(locations);
+    } else {
+      ApiLocationUtil.fetchLocations(this.props.location.query);
     }
   },
 

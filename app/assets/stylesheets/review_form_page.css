@@ -53,8 +53,9 @@
   font-size: 12px;
   font-weight: lighter;
   font-style: italic;
-  width: 50px;
+  float: left;
   white-space: normal;
+  margin: 5px 0 0 0;
 }
 
 .review-form-page-header > .location-details-wrapper {

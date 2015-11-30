@@ -1,6 +1,7 @@
 var ReviewIndexItem = React.createClass({
   deleteReview: function (event) {
     event.preventDefault();
+
     ApiReviewUtil.destroy(event.currentTarget.value);
   },
 
@@ -17,11 +18,13 @@ var ReviewIndexItem = React.createClass({
   },
 
   render: function () {
-    var deleteReviewButton, locationContactDetails;
+    var deleteReviewButton, locationContactDetails, num_reviews_text;
 
-    var num_reviews_text = this.props.location.num_reviews + " reviews";
+
 
     if (this.props.location) {
+      num_reviews_text = this.props.location.num_reviews + " reviews";
+
       locationContactDetails = (
         <div className="review-index-item-location-details group">
           <img src={this.props.location.img_url}/>
@@ -62,7 +65,9 @@ var ReviewIndexItem = React.createClass({
             <Link to={"/users/" + this.props.review.user_id}>
               <h3>{this.props.review.author}</h3>
             </Link>
-            <img src={this.props.review.user_thumbnail_url}/>
+            <Link to={"/users/" + this.props.review.user_id}>
+              <img src={this.props.review.user_thumbnail_url}/>
+            </Link>
           </figure>
         </div>
 

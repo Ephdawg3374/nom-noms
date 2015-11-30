@@ -50,7 +50,7 @@
           UsersStore._resetUsers = payload.users;
           UsersStore.emit(CHANGE_EVENT);
           break;
-        case UserConstants.RECEIVE_USER:
+        case UserConstants.RECEIVE_SINGLE_USER:
           UsersStore._addUser(payload.user);
           UsersStore.emit(CHANGE_EVENT);
           break;

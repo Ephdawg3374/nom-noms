@@ -1,6 +1,4 @@
 var UserLoggedIn = React.createClass({
-  mixins: [ReactRouter.History],
-
   handleUserLogout: function (event) {
     event.preventDefault();
 

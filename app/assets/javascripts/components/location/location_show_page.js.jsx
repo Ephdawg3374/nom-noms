@@ -3,11 +3,11 @@ var LocationShowPage = React.createClass({
 
   componentWillMount: function () {
     localStorage.removeItem("review_index");
-
-    ApiLocationUtil.fetchSingleLocation(this.props.params.location_id);
   },
 
   componentDidMount: function () {
+    ApiLocationUtil.fetchSingleLocation(this.props.params.location_id);
+
     LocationStore.addChangeListener(this._onChange);
     CurrentUserStore.addChangeListener(this._onChange);
   },
@@ -35,19 +35,17 @@ var LocationShowPage = React.createClass({
   render: function () {
     var location = LocationStore.find_location(parseInt(this.props.params.location_id));
 
-    var numReviewsText = location.num_reviews + " reviews";
-
-    var reviewForm, map;
+    var reviewForm, map, numReviewsText, reviewIndex;
 
     if (CurrentUserStore.isLoggedIn()) {
       reviewForm = <ReviewForm location={location} />;
     }
 
     if (Object.keys(location).length !== 0) {
+      numReviewsText = location.num_reviews + " reviews";
       map = <Map location={location} mode="locationShowPage"/>;
+      reviewIndex = <ReviewIndex isLoggedIn={CurrentUserStore.isLoggedIn()} location={location} />;
     }
-
-    var reviewIndex = <ReviewIndex isLoggedIn={CurrentUserStore.isLoggedIn()} location={location} />;
 
     return (
       <div className="location-show-page">

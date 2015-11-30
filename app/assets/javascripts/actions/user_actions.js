@@ -6,9 +6,9 @@ var UserActions = {
     });
   },
 
-  receiveUser: function (user) {
+  receiveSingleUser: function (user) {
     AppDispatcher.dispatch({
-      actionType: UserConstants.RECEIVE_USER,
+      actionType: UserConstants.RECEIVE_SINGLE_USER,
       user: user
     });
   }

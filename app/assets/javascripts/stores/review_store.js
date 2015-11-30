@@ -27,8 +27,8 @@
       }
     },
 
-    deleteReview: function (review) {
-      var idx = this.findReview(review.id);
+    _deleteReview: function (review) {
+      var idx = _reviews.indexOf(this.findReview(review.id));
 
       if (idx !== -1) {
         _reviews.splice(idx, 1);
@@ -42,6 +42,17 @@
         }
       }
       return null;
+
+      var review = {};
+
+      for (i = 0; i < _reviews.length; i++) {
+        if (_reviews[i].id === id) {
+          review = _reviews[i];
+          break;
+        }
+      }
+
+      return review;
     },
 
     all: function () {
@@ -67,7 +78,7 @@
           ReviewStore.emit(CHANGE_EVENT);
           break;
         case ReviewConstants.DELETE_SINGLE_REVIEW:
-          ReviewStore.deleteReview(payload.review);
+          ReviewStore._deleteReview(payload.review);
           ReviewStore.emit(CHANGE_EVENT);
           break;
       }

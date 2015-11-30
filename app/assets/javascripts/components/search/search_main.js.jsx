@@ -7,10 +7,6 @@ var success = function (searchParams) {
     }
   );
 
-  if (!window.NomNomsApp.searchAuto) {
-    this.setState({ locType: "" });
-  }
-
   this.history.pushState(null, "search/", searchParams);
 };
 

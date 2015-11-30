@@ -24,7 +24,7 @@ window.ApiUserUtil = {
       dataType: "json",
       contentType: "application/json",
       success: function (data) {
-        UserActions.receiveUser(data);
+        UserActions.receiveSingleUser(data);
       }
     });
   }
