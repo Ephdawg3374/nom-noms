@@ -7,7 +7,7 @@ $(document).on('ready', function () {
   localStorage.clear();
   var routes = (
     <Route path="/" component={NomNomsApp}>
-      <IndexRoute component={SplashPage} />
+      <IndexRoute component={HomePage} />
       <Route path="/users/new" component={NewUserPage} />
       <Route path="/session/new" component={LogInPage} />
       <Route path="/search" component={SearchResultsPage} />

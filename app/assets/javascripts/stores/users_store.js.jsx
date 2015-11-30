@@ -51,6 +51,7 @@
           UsersStore.emit(CHANGE_EVENT);
           break;
         case UserConstants.RECEIVE_SINGLE_USER:
+        debugger;
           UsersStore._addUser(payload.user);
           UsersStore.emit(CHANGE_EVENT);
           break;

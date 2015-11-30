@@ -1,10 +1,10 @@
-var SplashPage = React.createClass({
+var HomePage = React.createClass({
   getInitialState: function () {
     return (
       {
         message1: false,
         message2: false,
-        message3: false
+        message3: false,
       }
      );
   },
@@ -26,7 +26,7 @@ var SplashPage = React.createClass({
   render: function () {
     var msg1Text = "Tryin' to nom?";
     var msg2Text = "Use the search bars. Go nom or go home.";
-    var msg3Text = "Unless you are already home...then stay there...";
+    var msg3Text = "Nom noms is a Yelp clone (www.yelp.com).";
     var msgBaseClass = "home-page-splash-msg ";
 
     var msg1Class = msgBaseClass + "first " + (this.state.message1 ? "active" : "inactive");

@@ -13,24 +13,36 @@
 * Api::SessionController (create, destroy)
 
 ### Views
-* users/new.html.erb
-* session/new.html.erb
-* locations/index.json.jbuilder
-* locations/show.json.jbuilder
+* api/users/user.json.jbuilder
+* api/users/index.json.jbuilder
+* api/users/show.json.jbuilder
+* api/session/new.json.jbuilder
+* api/locations/location.json.jbuilder
+* api/locations/index.json.jbuilder
+* api/locations/show.json.jbuilder
 
 ## Flux
-### Views (React Components)
+### React Components
+* NavigationBar
+  * SearchMain
+  * UserLoggedIn
+  * UserLoggedOut
 * LogInPage
 * NewUserPage
 
 ### Stores
-* UserStore
+* UsersStore
 * CurrentUserStore
 
 ### Actions
+* UserActions
+* CurrentUserActions
 
 ### ApiUtil
+* ApiUserUtil
+* ApiSessionUtil
 
 ## Gems/Libraries
 * BCrypt
 * Faker
+* ReactRouter

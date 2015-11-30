@@ -315,6 +315,7 @@ var SearchMain = React.createClass({
         </form>
 
         { errMsg }
+        
       </div>
     );
   }

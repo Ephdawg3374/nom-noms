@@ -1,23 +1,23 @@
-# Nomz
+# Nom-noms
 
-[Heroku link][nomz-app.herokuapp.com] **NB:** This should be a link to your production site
+[Heroku link][nom-noms.herokuapp.com] **NB:** This should be a link to your production site
 
 [heroku]: http://www.herokuapp.com
 
 ## Minimum Viable Product
 
-Nomz is a web application inspired by Yelp built using Ruby on Rails
-and React.js. Nomz allows users to:
+Nom-noms is a web application inspired by Yelp built using Ruby on Rails
+and React.js. Nom-noms allows users to:
 
 <!-- This is a Markdown checklist. Use it to keep track of your progress! -->
 
-- [ ] Create an account
-- [ ] Log in / Log out
-- [ ] Search for locations by City/ZipCode/Location Type
-- [ ] View search results by index or by Google Maps view
-- [ ] Filter search results
-- [ ] Create, read, edit, and delete Location reviews
-- [ ] Upload pictures to location reviews
+- [X] Create an account
+- [X] Log in / Log out
+- [X] Search for locations by Location name, type, cuisine and by City w/ autocomplete listings
+- [X] View search results by index or by Google Maps view
+- [X] Filter search results by price range and distance
+- [X] Create, read, edit, and delete Location reviews
+- [X] Upload pictures to location reviews
 - [ ] Follow other users
 - [ ] Comment on other user reviews
 - [ ] Tag reviews with multiple tags
@@ -32,17 +32,32 @@ and React.js. Nomz allows users to:
 
 ## Implementation Timeline
 
-### Phase 1: User Authentication, Location Model and JSON API (2 days)
+### Phase 1: User Authentication, Location Model, Flux Architecture and JSON API (2.5 days)
 
-In Phase 1, I will begin by implementing user signup and authentication (using BCrypt). There will be a navigation bar at the top of each page that will contain a location type and a location search bar. In addition, guests will see a sign-up option that will allow he/she to create a user. A login button will also be available if the guest user already has a login. Finally, a "remember me" function will allow the user to visit the site without having to log back in. If the user is already logged in, the login button will be replaced with a logout button. Users not logged in will be able to conduct searches but they will not be able to use most of the site's functionality (commenting, creating reviews, etc).
+In Phase 1, I will begin by implementing user signup and authentication (using BCrypt) with Flux and React. There will be a navigation bar at the top of each page that will contain a location type and a location search bar. In addition, guests will see a sign-up option that will allow he/she to create a user. A login button will also be available if the guest user already has a login. Finally, a "remember me" function will allow the user to visit the site without having to log back in. If the user is already logged in, the login button will be replaced with a logout button. Users not logged in will be able to conduct searches but they will not be able to use most of the site's functionality (commenting, creating reviews, etc).
 
-The location model will contain all relevant data elements a user would be concerned with when searching for a location. I will be using the Faker gem to seed the database with locations to search from. I will also be using Jbuilder to create views that the JSON API will render when sending responses back to the client.
+The location model will contain all relevant data elements a user would be concerned with when searching for a location. I will be using the Faker gem to seed the database with locations to search from.
 
-At the end of Phase 1, the user will be able to create a user, login, and be able to leave the site and come back without having to log back in.  On the backend side, data will be ready to get sent over to the client.
+I chose to seed the database with fake locations rather than with real locations because that would take an enormous amount of time and I'd rather have the search index look more realistic by just getting a lot of data rather than select few locations.  The seeds.rb file generates 6000 random locations with lat/lng around NYC. Lastly, I hardcoded the seeds file to generate at least one location from each of the following cities so that you can search for a known city.
+
+* New York, NY
+* Brooklyn, NY
+* Manhattan, NY
+* Fort Lee, NJ
+* Hoboken, NJ
+* Englewood, NJ
+* Queens, NY
+* Bronx, NY
+* Yonkers, NY
+* New Rochelle, NY
+
+I will also be using Jbuilder to create views that the JSON APIs will render when sending responses back to the client.
+
+At the end of Phase 1, the user will be able to create a user, login, and be able to leave the site and come back without having to log back in.  On the backend side, location data will be ready to get sent over to the client.
 
 [Details][phase-one]
 
-### Phase 2: Flux Architecture, Location Querying, and Filtering (2.5 days)
+### Phase 2: , Location Querying, and Filtering (2 days)
 
 Phase 2 is focused on setting up Flux, the React Router, and the React view structure for the search and filtering components of the application. After the basic Flux architecture has been set up, a Location data store will be implemented and a set of actions corresponding to the necessary CRUD operations for querying Locations. A param filter store will also be implemented with actions that will allow the app to maintain the users' required filter parameters.  The filter store will automatically update when locations are queried.
 

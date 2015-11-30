@@ -13,7 +13,7 @@ class Location < ActiveRecord::Base
 
     price_range = "%" if search_params[:priceRange] == "All"
     # pull all location types if no type specified
-    location_type.empty? ? location_type = "%" : location_type += "%"
+    location_type.empty? ? location_type = "%" : location_type = "%" + location_type + "%"
 
     search_location_coords = Location.get_search_loc_coords(area)
 
@@ -98,7 +98,7 @@ class Location < ActiveRecord::Base
       return []
     end
 
-    loc_type_partial = parse_location(loc_type_partial)[0] + "%"
+    loc_type_partial = "%" + parse_location(loc_type_partial)[0] + "%"
 
     types = Location.select(:location_type)
       .where("location_type LIKE ?", loc_type_partial)
@@ -126,7 +126,7 @@ class Location < ActiveRecord::Base
       LIMIT
         3",
       loc_type_partial])
-      
+
     (types + cuisines + names)
   end
 

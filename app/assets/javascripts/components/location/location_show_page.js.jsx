@@ -25,20 +25,26 @@ var LocationShowPage = React.createClass({
     event.preventDefault();
 
     if (!CurrentUserStore.isLoggedIn()) {
-      this.history.pushState(null, "/session/new");
+      this.openLogInModal();
     } else {
       var location = { locationId: this.props.params.location_id };
       this.history.pushState(null, "/locations/" + location.locationId + "/reviews/new", location);
     }
   },
 
+  openLogInModal: function () {
+    
+  },
+
   render: function () {
     var location = LocationStore.find_location(parseInt(this.props.params.location_id));
 
-    var reviewForm, map, numReviewsText, reviewIndex;
+    var reviewForm, map, numReviewsText, reviewIndex, logInModal;
 
     if (CurrentUserStore.isLoggedIn()) {
       reviewForm = <ReviewForm location={location} />;
+    } else {
+      logInModal = <LogInModal className="is-closed"/>;
     }
 
     if (Object.keys(location).length !== 0) {
