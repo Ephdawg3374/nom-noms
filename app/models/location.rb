@@ -21,7 +21,7 @@ class Location < ActiveRecord::Base
       lat: search_location_coords[0],
       lng: search_location_coords[1],
       distance: distance,
-      location_type: parse_location(location_type).join("%"),
+      location_type: parse_location_type(location_type).join("%"),
       price_range: price_range
     }
 
@@ -68,36 +68,17 @@ class Location < ActiveRecord::Base
     end
   end
 
-  def self.actual_locations_for_searching
+  def self.parse_location_type(location_type)
+    location_type = location_type.split(" ")
 
-    # Location address search bar for this app will be limited to searching for
-    # several real citys within the bounding box in which the random
-    # locations are generated.  This is b/c app will search for locations
-    # within distance from the area specificed in the location search bar (which will be
-    # an ACTUAL acrea).  Default distance is 16093.4 meters (10miles)
+    location_type.map! do |type_el|
+        type_el.capitalize unless type_el == "and"
+    end
 
-    locations_for_searching = {
-      "New York" => {"state" => "NY", "lat" => 40.730610, "lng" => -73.935242},
-      "Brooklyn" => {"state" => "NY", "lat" => 40.650002, "lng" => -73.949997},
-      "Manhattan" => {"state" => "NY", "lat" => 40.758896, "lng" => -73.985130},
-      "Fort Lee" => {"state" => "NJ", "lat" => 40.8509300, "lng" => -73.9701400},
-      "Hoboken" => {"state" => "NJ", "lat" => 40.7439900, "lng" => -74.0323600},
-      "Englewood" => {"state" => "NJ", "lat" => 40.8928800, "lng" => -73.9726400},
-      "Queens" => {"state" => "NY", "lat" => 40.742054, "lng" => -73.769417},
-      "Bronx" => {"state" => "NY", "lat" => 40.837048, "lng" => -73.865433},
-      "Yonkers" => {"state" => "NY", "lat" => 40.93121, "lng" => -73.898747},
-      "New Rochelle" => {"state" => "NY", "lat" => 40.9114900, "lng" => -73.7823500}
-    }
+    location_type
   end
 
-  # parse the location coming from front-end to be ready for querying
-  # handles lowercase
   def self.parse_location(location)
-    # state abbr
-    # if location.length == 2
-    #   return location.upcase
-    # end
-
     location_address = location.split(",")
 
     location_address.each_with_index do |address_el, idx|

@@ -37,7 +37,7 @@
   padding: 0;
 }
 
-.review-index-item-location-details-section1 > .review-rating-bar {
+.review-index-item-location-details-section > .review-rating-bar {
   float: left;
   padding: 0;
   margin: 0;
@@ -72,15 +72,23 @@
   border-radius: 10px;
 }
 
-.review-index-item-location-details-section1 {
+.review-index-item-location-details-section {
   float: left;
-  margin-left: 10px;
+  margin-left: 15px;
+  width: 300px;
 }
 
-.review-index-item-location-details-section1 > * {
+.review-index-item-location-details-section > * {
   float: left;
 }
 
-.review-index-item-location-details-section1 > label {
+.review-index-item-location-details-section > h1 {
+  width: 100%;
+  text-decoration: underline;
+  color: blue;
+  font-size: 20px;
+}
+
+.review-index-item-location-details-section > label {
   width: 100%;
 }

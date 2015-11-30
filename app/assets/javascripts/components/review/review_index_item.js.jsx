@@ -24,8 +24,12 @@ var ReviewIndexItem = React.createClass({
         <div className="review-index-item-location-details group">
           <img src={this.props.location.img_url}/>
 
-          <div className="review-index-item-location-details-section1 group">
-            <label>{this.props.location.name}</label>
+          <div className="review-index-item-location-details-section group">
+            <h1>
+              <Link to={"/locations/" + this.props.location.id} params={ this.props.location }>
+                {this.props.location.name}
+              </Link>
+            </h1>
             <label>{this.props.location.price_range} {this.props.location.location_type} {this.props.location.cuisine}</label>
             <ReviewRatingBar currentRating={this.props.location.ave_rating} mode="disabled"/>
           </div>
