@@ -26,9 +26,9 @@ var LogInForm = React.createClass({
       password: this.state.password
     };
 
-    var success = function () {
-     this.history.goBack();
-    }.bind(this);
+    // var success = function () {
+    //  this.history.goBack();
+    // }.bind(this);
 
     var failure = function (errors) {
       this.setState({
@@ -37,7 +37,7 @@ var LogInForm = React.createClass({
       });
     }.bind(this);
 
-    ApiSessionUtil.login(credentials, success, failure);
+    ApiSessionUtil.login(credentials, this.props.success, failure);
   },
 
   render: function () {
@@ -47,7 +47,7 @@ var LogInForm = React.createClass({
       }) : "";
 
     return (
-      <form className="auth-page-form" onSubmit={this.handleLogin}>
+      <form className={this.props.klass} onSubmit={this.handleLogin}>
         <h1>Log into your account.</h1>
 
         <div className="user-form-errors-wrapper group">

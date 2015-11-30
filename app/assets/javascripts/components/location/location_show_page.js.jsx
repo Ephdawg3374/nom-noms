@@ -1,6 +1,10 @@
 var LocationShowPage = React.createClass({
   mixins: [ReactPersistentState, ReactRouter.History],
 
+  getInitialState: function () {
+    return ({ logInModalVisible: false });
+  },
+
   componentWillMount: function () {
     localStorage.removeItem("review_index");
   },
@@ -33,18 +37,24 @@ var LocationShowPage = React.createClass({
   },
 
   openLogInModal: function () {
-    
+    this.setState({ logInModalVisible: true });
   },
 
   render: function () {
     var location = LocationStore.find_location(parseInt(this.props.params.location_id));
 
-    var reviewForm, map, numReviewsText, reviewIndex, logInModal;
+    var reviewForm, map, numReviewsText, reviewIndex;
+
+    var logInModalSuccessCallback = function () {
+      this.setState({ logInModalVisible: false });
+    }.bind(this);
+
+    var logInModal = this.state.logInModalVisible ?
+      <LogInModal isOpen success={logInModalSuccessCallback}/> :
+      <LogInModal success={logInModalSuccessCallback}/>;
 
     if (CurrentUserStore.isLoggedIn()) {
       reviewForm = <ReviewForm location={location} />;
-    } else {
-      logInModal = <LogInModal className="is-closed"/>;
     }
 
     if (Object.keys(location).length !== 0) {
@@ -100,6 +110,7 @@ var LocationShowPage = React.createClass({
           { reviewIndex }
         </div>
 
+        { logInModal }
       </div>
     );
   }
