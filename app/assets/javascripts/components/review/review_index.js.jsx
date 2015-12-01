@@ -54,7 +54,7 @@ var ReviewIndex = React.createClass({
         var location = LocationStore.find_location(review.location_id);
 
         if (Object.keys(location).length !== 0) {
-          return <ReviewIndexItem key={idx} isLoggedIn={this.props.isLoggedIn} review={review}  location={location}/>;
+          return <ReviewIndexItem key={idx} isLoggedIn={this.props.isLoggedIn} review={review}  location={location} user/>;
         }
       }.bind(this));
     }

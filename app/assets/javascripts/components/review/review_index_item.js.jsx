@@ -20,9 +20,7 @@ var ReviewIndexItem = React.createClass({
   render: function () {
     var deleteReviewButton, locationContactDetails, num_reviews_text;
 
-
-
-    if (this.props.location) {
+    if (this.props.user) {
       num_reviews_text = this.props.location.num_reviews + " reviews";
 
       locationContactDetails = (
