@@ -1,12 +1,12 @@
-.log-in-modal {
+.login-modal {
   display: none;
 }
 
-.log-in-modal.is-open {
+.login-modal.is-open {
   display: block;
 }
 
-.log-in-modal-screen {
+.login-modal-screen {
   position: fixed;
   background: rgba(0, 0, 0, 0.7);
   top: 0;
@@ -16,38 +16,34 @@
   z-index: 2;
 }
 
-.modal-form {
+.login-modal-form {
   position: absolute;
   top: 100px;
   left: 50%;
   margin-left: -220px;
-  width: 360px;
+  width: 400px;
   padding: 20px;
   background: #fff;
   z-index: 3;
-  border-radius: 5px;
+  border-radius: 10px;
   border: 1px solid #000;
 }
 
-.modal-close {
+.login-modal-close {
   position: absolute;
   top: 10px;
-  right: 20px;
-  font-size: 36px;
+  right: 15px;
+  font-size: 12px;
+  padding: 3px;
+}
+
+.login-modal-form > h1 {
+  font-size: 30px;
   line-height: 1;
-  cursor: pointer;
+  font-weight: bold;
+  text-align: center;
 }
 
-.modal-close:hover {
-  color: #f00;
-}
-
-.modal-form > h1 {
-  font-size: 36px;
-  line-height: 1;
-  font-weight: 300;
-}
-
-.modal-form > p {
-  margin: 0 0 20px 0;
+.login-modal-form > .auth-page-input-wrapper {
+  margin-top: 20px;
 }

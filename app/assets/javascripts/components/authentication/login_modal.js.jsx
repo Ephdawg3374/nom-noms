@@ -1,6 +1,6 @@
 var LogInModal = React.createClass({
   render: function () {
-    var klass = "login-modal-screen ";
+    var klass = "login-modal ";
 
     if (this.props.isOpen) {
       klass += "is-open";
@@ -8,7 +8,7 @@ var LogInModal = React.createClass({
 
     return (
       <div className={ klass }>
-        <LogInForm klass="auth-page-form" success={ this.props.success }/>
+        <LogInForm klass="login-modal-form" modalMode success={ this.props.success } close={this.props.close}/>
 
         <div className="login-modal-screen"></div>
       </div>

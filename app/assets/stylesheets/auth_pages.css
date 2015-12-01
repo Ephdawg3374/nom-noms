@@ -3,7 +3,6 @@
   margin: auto;
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
   background: white;
   padding: 50px;
   min-height: 650px;
@@ -23,13 +22,18 @@
   border-radius: 5px;
 }
 
-.auth-page > .auth-page-form > label {
+.auth-page-input-wrapper {
+  width: 200px;
+  margin: auto;
+}
+
+.auth-page-input-wrapper > label {
   display: block;
   padding: 10px 0;
   font-weight: bold;
 }
 
-.auth-page > .auth-page-form > button {
+.auth-page-input-wrapper > .submit {
   padding: 5px;
   width: 75px;
   margin: 10px 65px 0 65px;

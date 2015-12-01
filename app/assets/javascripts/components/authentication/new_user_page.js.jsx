@@ -70,8 +70,8 @@ var NewUserPage = React.createClass({
       }) : "";
 
     var submitButton = this.state.isSubmitting === true ?
-      <button className="disabled" disabled>Submit</button> :
-      <button>Submit</button>;
+      <button className="submit disabled" disabled>Submit</button> :
+      <button className="submit">Submit</button>;
 
     return (
       <div className="auth-page">
@@ -80,32 +80,32 @@ var NewUserPage = React.createClass({
         { errors }
 
         <form className="auth-page-form" onSubmit={this.handleNewUserSubmit}>
+          <div className="auth-page-input-wrapper">
+            <label>Username
+            <input
+              className="auth-page-username"
+              type="text"
+              valueLink={this.linkState("username")} />
+            </label>
 
-          <label>Username
-          <input
-            className="auth-page-username"
-            type="text"
-            valueLink={this.linkState("username")} />
-          </label>
+            <label>Upload a profile pic
+            <input
+              className="auth-page-profile-pic-input"
+              type="file"
+              onChange={this.changeFile} />
+            </label>
 
-          <label>Upload a profile pic
-          <input
-            className="auth-page-profile-pic-input"
-            type="file"
-            onChange={this.changeFile} />
-          </label>
+            <img className="auth-page-profile-pic-preview" src={this.state.imageUrl} />
 
-          <img className="auth-page-profile-pic-preview" src={this.state.imageUrl} />
+            <label>Password
+            <input
+              className="auth-page-password"
+              type="password"
+              valueLink={this.linkState("password")} />
+            </label>
 
-          <label>Password
-          <input
-            className="auth-page-password"
-            type="password"
-            valueLink={this.linkState("password")} />
-          </label>
-
-          { submitButton }
-
+            { submitButton }
+          </div>
         </form>
       </div>
     );

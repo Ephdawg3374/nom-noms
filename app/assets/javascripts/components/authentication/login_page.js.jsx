@@ -8,6 +8,8 @@ var LogInPage = React.createClass({
 
     return (
       <div className="auth-page">
+        <h1>Log into your account.</h1>
+
         <LogInForm klass="auth-page-form" success={success}/>
       </div>
     );

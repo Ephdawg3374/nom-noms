@@ -41,34 +41,45 @@ var LogInForm = React.createClass({
   },
 
   render: function () {
+    var modalHeaderText, closeButton;
+
     var errors = this.state.errors.length > 0 ?
       this.state.errors.map(function (error, idx) {
         return <label key={idx} className="user-form-error-msg">{error}</label>;
       }) : "";
 
+    if (this.props.modalMode) {
+      modalHeaderText = "Please login to continue.";
+      closeButton = <button className="login-modal-close" onClick={this.props.close}>X</button>;
+    }
+
     return (
       <form className={this.props.klass} onSubmit={this.handleLogin}>
-        <h1>Log into your account.</h1>
+        { closeButton }
 
-        <div className="user-form-errors-wrapper group">
+        <h1>{ modalHeaderText }</h1>
+
+        <div className="errors-wrapper group">
           { errors }
         </div>
 
-        <label>Username
-        <input
-          className="auth-page-username"
-          type="text"
-          valueLink={this.linkState("username")}/>
-        </label>
+        <div className="auth-page-input-wrapper">
+          <label>Username
+          <input
+            className="auth-page-username"
+            type="text"
+            valueLink={this.linkState("username")}/>
+          </label>
 
-        <label>Password
-        <input
-          className="auth-page-password"
-          type="password"
-          valueLink={this.linkState("password")}/>
-        </label>
+          <label>Password
+          <input
+            className="auth-page-password"
+            type="password"
+            valueLink={this.linkState("password")}/>
+          </label>
 
-        <button type="submit">Log In!</button>
+          <button className="submit" type="submit">Log In!</button>
+        </div>
       </form>
     );
   }

@@ -40,6 +40,12 @@ var LocationShowPage = React.createClass({
     this.setState({ logInModalVisible: true });
   },
 
+  closeLogInModal: function (event) {
+    event.preventDefault();
+    
+    this.setState({ logInModalVisible: false });
+  },
+
   render: function () {
     var location = LocationStore.find_location(parseInt(this.props.params.location_id));
 
@@ -50,8 +56,8 @@ var LocationShowPage = React.createClass({
     }.bind(this);
 
     var logInModal = this.state.logInModalVisible ?
-      <LogInModal isOpen success={logInModalSuccessCallback}/> :
-      <LogInModal success={logInModalSuccessCallback}/>;
+      <LogInModal isOpen success={logInModalSuccessCallback} close={this.closeLogInModal}/> :
+      <LogInModal success={logInModalSuccessCallback} close={this.closeLogInModal}/>;
 
     if (CurrentUserStore.isLoggedIn()) {
       reviewForm = <ReviewForm location={location} />;
