@@ -53,7 +53,7 @@ var LogInForm = React.createClass({
 
     if (this.props.modalMode) {
       modalHeaderText = "Please login to continue.";
-      closeButton = <button className="login-modal-close" onClick={this.props.close}>X</button>;
+      closeButton = <button className="modal-close" onClick={this.props.close}>X</button>;
     }
 
     return (

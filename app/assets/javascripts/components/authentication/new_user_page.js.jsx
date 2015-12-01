@@ -5,6 +5,8 @@ var NewUserPage = React.createClass({
     return (
       {
         username: "",
+        firstname: "",
+        lastname: "",
         imageUrl: null,
         imageFile: "",
         password: "",
@@ -29,6 +31,8 @@ var NewUserPage = React.createClass({
     var formData = new FormData();
 
     formData.append("user[username]", this.state.username);
+    formData.append("user[firstname]", this.state.firstname);
+    formData.append("user[lastname]", this.state.lastname);
     formData.append("user[password]", this.state.password);
     formData.append("user[profile_pic]", this.state.imageFile);
 
@@ -86,6 +90,20 @@ var NewUserPage = React.createClass({
               className="auth-page-username"
               type="text"
               valueLink={this.linkState("username")} />
+            </label>
+
+            <label>First Name
+            <input
+              className="auth-page-firstname"
+              type="text"
+              valueLink={this.linkState("firstname")} />
+            </label>
+
+            <label>Last Name
+            <input
+              className="auth-page-lastname"
+              type="text"
+              valueLink={this.linkState("lastname")} />
             </label>
 
             <label>Upload a profile pic

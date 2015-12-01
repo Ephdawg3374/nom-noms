@@ -1,0 +1,38 @@
+.auth-page-form {
+  width: 200px;
+  margin: 50px auto;
+  padding: 20px 60px;
+  border: 1px solid #ccc;
+  background: #eee;
+  border-radius: 5px;
+}
+
+.auth-page-form > button {
+  padding: 5px;
+  width: 75px;
+  margin: 10px 65px 0 65px;
+}
+
+.auth-page-input-wrapper {
+  width: 200px;
+  margin: auto;
+}
+
+.auth-page-input-wrapper > .submit {
+  padding: 5px;
+  width: 75px;
+  margin: 10px 65px 0 65px;
+}
+
+.auth-page-username, .auth-page-password, .auth-page-firstname, .auth-page-lastname {
+  font-size: 16px;
+  width: 195px;
+  margin-top: 5px;
+  border-radius: 5px;
+}
+
+.auth-page-input-wrapper > label {
+  display: block;
+  padding: 10px 0;
+  font-weight: bold;
+}

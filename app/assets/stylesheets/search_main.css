@@ -70,12 +70,12 @@
   background: #eee;
 }
 
-.location-filter-options-wrapper {
+.options-wrapper {
   float: right;
   margin: 15px 0 0 100px;
 }
 
-.location-filter-options-wrapper > * {
+.options-wrapper > * {
   float: left;
   padding: 0 65px 0 0;
 }

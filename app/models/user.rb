@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
-  validates :username, :session_token, presence: true
+  validates :username, :firstname, :lastname, :session_token, presence: true
   validates :username, uniqueness: true
+  validate :valid_names
 
   has_secure_password
 
@@ -32,6 +33,16 @@ class User < ActiveRecord::Base
 
   def ensure_session_token
     self.session_token = self.session_token || User.generate_session_token
+  end
+
+  def valid_names
+    if (self.firstname =~ /[[:punct:]]/)
+      errors.add(:invalid_name, "First name can't include invalid characters.")
+    end
+
+    if (self.lastname =~ /[[:punct:]]/)
+      errors.add(:invalid_name, "Last name can't include invalid characters.")
+    end
   end
 
 end

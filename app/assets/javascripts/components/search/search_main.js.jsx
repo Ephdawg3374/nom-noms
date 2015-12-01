@@ -32,7 +32,8 @@ var SearchMain = React.createClass({
         priceRange: "All",
         showLocTypeAutoCompleteList: false,
         showLocAreaAutoCompleteList: false,
-        errMsg: null
+        errMsg: null,
+        userSearchModalVisible: false
       }
     );
   },
@@ -52,7 +53,7 @@ var SearchMain = React.createClass({
         priceRange: this.state.priceRange,
         showLocTypeAutoCompleteList: this.state.showLocTypeAutoCompleteList,
         showLocAreaAutoCompleteList: this.state.showLocAreaAutoCompleteList,
-        errMsg: null
+        errMsg: null,
       });
     }.bind(this), 1000);
 
@@ -210,8 +211,20 @@ var SearchMain = React.createClass({
     this.setState({ distanceRange: event.currentTarget.value });
   },
 
+  openUserSearchModal: function (event) {
+    event.preventDefault();
+
+    this.setState({ userSearchModalVisible: true });
+  },
+
+  closeUserSearchModal: function (event) {
+    event.preventDefault();
+
+    this.setState({ userSearchModalVisible: false });
+  },
+
   render: function () {
-    var locTypeAutoCompleteList, locAreaAutoCompleteList, errMsg;
+    var locTypeAutoCompleteList, locAreaAutoCompleteList, errMsg, userSearchModal;
 
     if (this.state.errMsg) {
       errMsg = <label className="search-error-msg">{this.state.errMsg}</label>;
@@ -258,6 +271,12 @@ var SearchMain = React.createClass({
         klass={"distance-range-button " + klass}
         setDistanceRangeFilter={this.setDistanceRangeFilter} />;
     }.bind(this));
+    
+    if (this.state.userSearchModalVisible) {
+      userSearchModal = <UserSearchModal isOpen modalMode close={this.closeUserSearchModal} />;
+    } else {
+      userSearchModal = <UserSearchModal modalMode close={this.closeUserSearchModal}/>;
+    }
 
     return (
       <div className="location-search group">
@@ -295,7 +314,8 @@ var SearchMain = React.createClass({
 
             </div>
 
-            <div className="location-filter-options-wrapper group">
+            <div className="options-wrapper group">
+              <button onClick={this.openUserSearchModal}>Find Users</button>
 
               <ul className="location-filter-price-range">
                 { priceRangeButtons }
@@ -315,7 +335,8 @@ var SearchMain = React.createClass({
         </form>
 
         { errMsg }
-        
+
+
       </div>
     );
   }

@@ -15,7 +15,7 @@ class Api::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id].to_i)
-    
+
     if @user
       render :show
     else
@@ -29,7 +29,7 @@ class Api::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:username, :password, :profile_pic)
+    params.require(:user).permit(:username, :firstname, :lastname, :password, :profile_pic)
   end
 
 end
