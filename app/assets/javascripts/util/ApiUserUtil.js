@@ -17,7 +17,7 @@ window.ApiUserUtil = {
     });
   },
 
-  fetchUser: function (userId) {
+  fetchUser: function (userId, success) {
     $.ajax({
       url: "api/users/" + userId,
       method: "GET",
@@ -25,7 +25,51 @@ window.ApiUserUtil = {
       contentType: "application/json",
       success: function (data) {
         UserActions.receiveSingleUser(data);
+        success && success(data);
       }
     });
-  }
+  },
+
+  fetchUsersAutoComplete: function (userSearch) {
+    $.ajax({
+      url: "api/users/",
+      method: "GET",
+      dataType: "json",
+      contentType: "application/json",
+      data: { userSearchAutoComplete: userSearch },
+      success: function (data) {
+        SearchActions.receiveUsers(data);
+      }
+    });
+  },
+
+  fetchUsers: function (userSearch) {
+    $.ajax({
+      url: "api/users/",
+      method: "GET",
+      dataType: "json",
+      contentType: "application/json",
+      data: { userSearch: userSearch },
+      success: function (data) {
+        UserActions.receiveUsers(data);
+      }
+    });
+  },
+
+  fetchUserByUsername: function (username, success, failure) {
+    $.ajax({
+      url: "api/users/" + username,
+      method: "GET",
+      dataType: "json",
+      contentType: "application/json",
+      data: { username: username },
+      success: function (data) {
+        UserActions.receiveSingleUser(data);
+        success && success(data);
+      },
+      failure: function (data) {
+        failure && failure(data);
+      }
+    });
+  },
 };

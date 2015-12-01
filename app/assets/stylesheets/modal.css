@@ -15,3 +15,11 @@
   font-size: 12px;
   padding: 3px;
 }
+
+.modal {
+  display: none;
+}
+
+.modal.is-open {
+  display: block;
+}

@@ -1,3 +1,8 @@
+var successfulUserSearch = function (user) {
+  this.setState({ userSearchModalVisible: false });
+  this.history.pushState(null, "/users/" + user.id);
+};
+
 var success = function (searchParams) {
   this.setState(
     {
@@ -58,12 +63,14 @@ var SearchMain = React.createClass({
     }.bind(this), 1000);
 
     LocTypeAutoCompleteStore.addChangeListener(this._onChange);
+    LocAreaAutoCompleteStore.addChangeListener(this._onChange);
   },
 
   componentWillUnmount: function () {
     clearInterval(this.intervalId);
 
     LocTypeAutoCompleteStore.removeChangeListener(this._onChange);
+    LocAreaAutoCompleteStore.removeChangeListener(this._onChange);
   },
 
   _onChange: function () {
@@ -271,12 +278,17 @@ var SearchMain = React.createClass({
         klass={"distance-range-button " + klass}
         setDistanceRangeFilter={this.setDistanceRangeFilter} />;
     }.bind(this));
-    
+
     if (this.state.userSearchModalVisible) {
-      userSearchModal = <UserSearchModal isOpen modalMode close={this.closeUserSearchModal} />;
-    } else {
-      userSearchModal = <UserSearchModal modalMode close={this.closeUserSearchModal}/>;
+      userSearchModal = <UserSearchModal
+        isOpen
+        modalMode
+        success={successfulUserSearch.bind(this)}
+        close={this.closeUserSearchModal} />;
     }
+    // } else {
+    //   userSearchModal = <UserSearchModal modalMode close={this.closeUserSearchModal}/>;
+    // }
 
     return (
       <div className="location-search group">
@@ -336,6 +348,7 @@ var SearchMain = React.createClass({
 
         { errMsg }
 
+        { userSearchModal }
 
       </div>
     );

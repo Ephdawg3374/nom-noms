@@ -13,4 +13,5 @@ Rails.application.routes.draw do
    resource :session, only: [:create, :destroy, :show]
  end
 
+ # get 'api/users/:username', :to => 'api/users/#show'
 end

@@ -11,10 +11,18 @@ class Api::UsersController < ApplicationController
   end
 
   def index
+    if !params[:userSearchAutoComplete].nil?
+      @users = User.find_users_autocomplete(params[:userSearchAutoComplete])
+      render :index
+    end
   end
 
   def show
-    @user = User.find(params[:id].to_i)
+    if !params[:id].nil?
+      @user = User.find(params[:id].to_i)
+    elsif !params[:username].nil?
+      @user = User.find_by_username(params[:username])
+    end
 
     if @user
       render :show

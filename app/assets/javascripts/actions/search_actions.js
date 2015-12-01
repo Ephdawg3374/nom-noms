@@ -38,14 +38,6 @@ window.SearchActions = {
   receiveLocationTypes: function (locTypesResults) {
     var locTypes = [];
 
-    // locTypesResults.forEach(function (locTypesResult) {
-    //   if (locTypesResult.location_type) {
-    //     locTypes.push(locTypesResult.location_type);
-    //   } else {
-    //     locTypes.push(locTypesResult.cuisine);
-    //   }
-    // });
-
     locTypesResults.forEach(function (locTypesResult) {
       locTypes.push(locTypesResult);
     });
@@ -67,6 +59,13 @@ window.SearchActions = {
     AppDispatcher.dispatch({
       actionType: SearchConstants.RECEIVE_AUTOCOMP_LOC_AREAS,
       locAreas: locAreas
+    });
+  },
+
+  receiveUsers: function (users) {
+    AppDispatcher.dispatch({
+      actionType: SearchConstants.RECEIVE_AUTOCOMP_USERS,
+      users: users
     });
   }
 };

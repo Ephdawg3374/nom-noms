@@ -1,6 +1,6 @@
 var UserSearchModal = React.createClass({
   render: function () {
-    var klass = "user-search-modal ";
+    var klass = "modal ";
 
     if (this.props.isOpen) {
       klass += "is-open";
@@ -8,7 +8,7 @@ var UserSearchModal = React.createClass({
 
     return (
       <div className={ klass }>
-        <LogInForm klass="user-search-modal-form" modalMode success={ this.props.success } close={ this.props.close }/>
+        <UserSearchForm klass="user-search-modal-form" modalMode success={ this.props.success } close={ this.props.close }/>
 
         <div className="modal-screen"></div>
       </div>

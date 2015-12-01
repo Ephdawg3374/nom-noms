@@ -1,6 +1,6 @@
 var LogInModal = React.createClass({
   render: function () {
-    var klass = "login-modal ";
+    var klass = "modal ";
 
     if (this.props.isOpen) {
       klass += "is-open";

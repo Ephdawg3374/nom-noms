@@ -1,79 +1,125 @@
+var failure = function (errMsg) {
+  this.setState(
+    {
+      isValid: false,
+      showUserAutoCompleteList: false,
+      errMsg: errMsg
+    }
+  );
+};
+
 var UserSearchForm = React.createClass({
-  mixins: [React.addons.LinkedStateMixin],
+  mixins: [ReactRouter.History],
 
   getInitialState: function () {
     return (
       {
-        username: "",
-        password: "",
-        isValid: true,
+        userSearch: "",
+        showUserAutoCompleteList: false,
         errMsg: null
       }
     );
   },
 
+  setInitialState: function () {
+    this.setState(
+      {
+        userSearch: "",
+        showUserAutoCompleteList: false,
+        errMsg: null
+      }
+    );
+  },
+
+  componentDidMount: function () {
+    UsersAutoCompleteStore.addChangeListener(this._onChange);
+  },
+
+  componentWillUnmount: function () {
+    UsersAutoCompleteStore.removeChangeListener(this._onChange);
+  },
+
+  _onChange: function () {
+    this.forceUpdate();
+  },
+
   handleUserSearch: function (event) {
     event.preventDefault();
 
-    var username = event.currentTarget.value;
+    ApiUserUtil.fetchUserByUsername(this.state.userSearch, this.props.success, failure.bind(this));
+  },
 
-    var success = function (user) {
-      this.history.pushState(null, "/users/" + user.id);
-    };
+  userSearchAutoComplete: function (event) {
+    event.preventDefault();
 
-    var failure = function (errMsg) {
-      this.setState(
-        {
-          isValid: false,
-          errMsg: errMsg
-        }
-      );
-    };
+    var userSearch = event.currentTarget.value;
 
-    ApiUserUtil.fetchUserByUsername(username, success, failure);
+    this.setState(
+      {
+        userSearch: userSearch,
+        showUserAutoCompleteList: true
+      }
+    );
+
+    ApiUserUtil.fetchUsersAutoComplete(userSearch);
+  },
+
+  selectUser: function (event) {
+    event.preventDefault();
+
+    var userId = event.currentTarget.value;
+
+    this.setInitialState();
+
+    ApiUserUtil.fetchUser(userId, this.props.success);
   },
 
   render: function () {
-    var modalHeaderText, closeButton, errMsg;
+    var modalHeaderText, closeButton, errMsg, userAutoCompleteList;
+
+    if (this.state.showUserAutoCompleteList) {
+      userAutoCompleteList = UsersAutoCompleteStore.matches().map(function (userMatch, i) {
+          return <li key={i} onClick={this.selectUser} value={userMatch.id}>
+            <label className="usermatch-username">{userMatch.username}</label>
+            <label className="usermatch-firstlastname">{userMatch.firstname} {userMatch.lastname}</label>
+          </li>;
+        }.bind(this));
+    }
 
     if (this.state.errMsg) {
       errMsg = <label className="user-search-error-msg">{this.state.errMsg}</label>;
     }
 
     if (this.props.modalMode) {
-      modalHeaderText = "Search for a user by username, first, or last name.";
+      modalHeaderText = "Find a user.";
       closeButton = <button className="modal-close" onClick={this.props.close}>X</button>;
     }
 
+
     return (
-      <div></div>
-      // <form className={this.props.klass} onKeyPress={this.handleKeyPress} onSubmit={this.handleLogin}>
-      //   { closeButton }
-      //
-      //   <h1>{ modalHeaderText }</h1>
-      //
-      //   <div className="errors-wrapper group">
-      //     { errors }
-      //   </div>
-      //
-      //   <div className="auth-page-input-wrapper">
-      //     <label>Username
-      //     <input
-      //       className="auth-page-username"
-      //       type="text"
-      //       valueLink={this.linkState("username")}/>
-      //     </label>
-      //
-      //     <label>Password
-      //     <input
-      //       className="auth-page-password"
-      //       type="password"
-      //       valueLink={this.linkState("password")}/>
-      //     </label>
-      //
-      //     <button className="submit" type="submit">Log In!</button>
-      //   </div>
-      // </form>
+      <form className={this.props.klass} onKeyPress={this.handleKeyPress} onSubmit={this.handleLogin}>
+        { closeButton }
+
+        <h1>{ modalHeaderText }</h1>
+
+        <div className="user-search-err-msg">
+          { errMsg }
+        </div>
+
+        <div className="user-search-input-wrapper group">
+          <input
+            className="auth-page-username"
+            type="text"
+            placeholder="Find username, first, or last name."
+            onChange={ this.userSearchAutoComplete }/>
+
+          <button className="submit" type="submit">Go!</button>
+        </div>
+
+        <ul className="user-search-autocomplete-list">
+          { userAutoCompleteList }
+        </ul>
+      </form>
     );
   }
 });
