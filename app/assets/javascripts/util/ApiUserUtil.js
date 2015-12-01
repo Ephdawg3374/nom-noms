@@ -58,17 +58,16 @@ window.ApiUserUtil = {
 
   fetchUserByUsername: function (username, success, failure) {
     $.ajax({
-      url: "api/users/" + username,
+      url: "api/usernames/" + username,
       method: "GET",
       dataType: "json",
       contentType: "application/json",
-      data: { username: username },
       success: function (data) {
         UserActions.receiveSingleUser(data);
         success && success(data);
       },
-      failure: function (data) {
-        failure && failure(data);
+      error: function (data) {
+        failure && failure(data.responseText);
       }
     });
   },

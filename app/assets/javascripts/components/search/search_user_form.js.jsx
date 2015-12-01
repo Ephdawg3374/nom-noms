@@ -1,7 +1,6 @@
 var failure = function (errMsg) {
   this.setState(
     {
-      isValid: false,
       showUserAutoCompleteList: false,
       errMsg: errMsg
     }
@@ -44,7 +43,9 @@ var UserSearchForm = React.createClass({
   },
 
   handleUserSearch: function (event) {
-    event.preventDefault();
+    if (event) {
+      event.preventDefault();
+    }
 
     ApiUserUtil.fetchUserByUsername(this.state.userSearch, this.props.success, failure.bind(this));
   },
@@ -74,6 +75,14 @@ var UserSearchForm = React.createClass({
     ApiUserUtil.fetchUser(userId, this.props.success);
   },
 
+  handleKeyPress: function (event) {
+    if (event.which === 13) {
+      event.preventDefault();
+
+      this.handleUserSearch();
+    }
+  },
+
   render: function () {
     var modalHeaderText, closeButton, errMsg, userAutoCompleteList;
 
@@ -97,7 +106,7 @@ var UserSearchForm = React.createClass({
 
 
     return (
-      <form className={this.props.klass} onKeyPress={this.handleKeyPress} onSubmit={this.handleLogin}>
+      <form className={this.props.klass} onKeyPress={this.handleKeyPress} onSubmit={this.handleUserSearch}>
         { closeButton }
 
         <h1>{ modalHeaderText }</h1>
@@ -113,7 +122,7 @@ var UserSearchForm = React.createClass({
             placeholder="Find username, first, or last name."
             onChange={ this.userSearchAutoComplete }/>
 
-          <button className="submit" type="submit">Go!</button>
+          <button type="submit">Go!</button>
         </div>
 
         <ul className="user-search-autocomplete-list">
