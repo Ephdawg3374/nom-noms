@@ -3,15 +3,14 @@
   margin: auto;
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
   background: white;
+  padding: 20px 0;
 }
 
 .review-form-page-header {
   min-height: 150px;
   width: 800px;
   margin: 0 auto;
-  padding: 20px 0;
 }
 
 .review-form-page-header > h2 {
@@ -70,10 +69,13 @@
   margin-left: 50px;
 }
 
-
 .header-details-wrapper > .review-rating-bar {
   margin: 0;
   padding-top: 5px;
   padding-bottom: 0;
   width: 90%;
+}
+
+.review-form-page > .review-form {
+  margin: 50px auto;
 }

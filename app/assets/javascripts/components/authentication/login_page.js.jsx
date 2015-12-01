@@ -1,6 +1,12 @@
 var LogInPage = React.createClass({
   mixins: [React.addons.LinkedStateMixin, ReactRouter.History],
 
+  componentWillMount: function () {
+    if (CurrentUserStore.isLoggedIn()) {
+      this.history.goBack();
+    }
+  },
+
   render: function () {
     var success = function () {
      this.history.goBack();

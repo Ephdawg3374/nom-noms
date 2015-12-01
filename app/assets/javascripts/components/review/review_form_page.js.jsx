@@ -17,7 +17,8 @@ var ReviewFormPage = React.createClass({
 
   _ensureLoggedIn: function () {
     if (!CurrentUserStore.isLoggedIn()) {
-      this.history.goBack();
+      // go to locationShowPage
+      this.history.pushState(null, "/locations/" + this.props.params.location_id);
     }
   },
 

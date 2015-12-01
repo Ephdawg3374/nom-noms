@@ -40,7 +40,7 @@ var UserShowPage = React.createClass({
   render: function () {
     // var user = UsersStore.findUser(parseInt(this.props.params.user_id));
     var user = this.state.user;
-    debugger;
+
     var fiveStarProgressVal, fourStarProgressVal, threeStarProgressVal,
       twoStarProgressVal, oneStarProgressVal, noProgessVal, reviewIndex;
 

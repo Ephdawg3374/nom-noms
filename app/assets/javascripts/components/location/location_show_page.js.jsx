@@ -9,6 +9,10 @@ var LocationShowPage = React.createClass({
     localStorage.removeItem("review_index");
   },
 
+  componentWillReceiveProps: function () {
+    ApiLocationUtil.fetchSingleLocation(this.props.params.location_id);
+  },
+
   componentDidMount: function () {
     ApiLocationUtil.fetchSingleLocation(this.props.params.location_id);
 
@@ -25,15 +29,19 @@ var LocationShowPage = React.createClass({
     this.forceUpdate();
   },
 
-  goToReviewFormPage: function (event) {
+  handleReviewButtonClick: function (event) {
     event.preventDefault();
 
     if (!CurrentUserStore.isLoggedIn()) {
       this.openLogInModal();
     } else {
-      var location = { locationId: this.props.params.location_id };
-      this.history.pushState(null, "/locations/" + location.locationId + "/reviews/new", location);
+      this.goToReviewFormPage();
     }
+  },
+
+  goToReviewFormPage: function () {
+    var location = { locationId: this.props.params.location_id };
+    this.history.pushState(null, "/locations/" + location.locationId + "/reviews/new", location);
   },
 
   openLogInModal: function () {
@@ -42,20 +50,21 @@ var LocationShowPage = React.createClass({
 
   closeLogInModal: function (event) {
     event.preventDefault();
-    
+
     this.setState({ logInModalVisible: false });
   },
 
   render: function () {
     var location = LocationStore.find_location(parseInt(this.props.params.location_id));
 
-    var reviewForm, map, numReviewsText, reviewIndex;
+    var reviewForm, map, numReviewsText, reviewIndex, logInModal;
 
     var logInModalSuccessCallback = function () {
       this.setState({ logInModalVisible: false });
+      this.goToReviewFormPage();
     }.bind(this);
 
-    var logInModal = this.state.logInModalVisible ?
+    logInModal = this.state.logInModalVisible ?
       <LogInModal isOpen success={logInModalSuccessCallback} close={this.closeLogInModal}/> :
       <LogInModal success={logInModalSuccessCallback} close={this.closeLogInModal}/>;
 
@@ -86,7 +95,7 @@ var LocationShowPage = React.createClass({
               <div className="sub-header-options">
                 <button
                   className="sub-header-options-review-button"
-                  onClick={this.goToReviewFormPage} >
+                  onClick={this.handleReviewButtonClick} >
                   Write a Review
                 </button>
               </div>

@@ -1,5 +1,5 @@
 var LogInForm = React.createClass({
-  mixins: [React.addons.LinkedStateMixin, ReactRouter.History],
+  mixins: [React.addons.LinkedStateMixin],
 
   getInitialState: function () {
     return (
@@ -12,14 +12,17 @@ var LogInForm = React.createClass({
     );
   },
 
-  componentWillMount: function () {
-    if (CurrentUserStore.isLoggedIn()) {
-      this.history.goBack();
+  handleKeyPress: function (event) {
+    if (event.which === 13) {
+      event.preventDefault();
+      this.handleLogin();
     }
   },
 
   handleLogin: function (event) {
-    event.preventDefault();
+    if (event) {
+      event.preventDefault();
+    }
 
     var credentials = {
       username: this.state.username,
@@ -54,7 +57,7 @@ var LogInForm = React.createClass({
     }
 
     return (
-      <form className={this.props.klass} onSubmit={this.handleLogin}>
+      <form className={this.props.klass} onKeyPress={this.handleKeyPress} onSubmit={this.handleLogin}>
         { closeButton }
 
         <h1>{ modalHeaderText }</h1>
