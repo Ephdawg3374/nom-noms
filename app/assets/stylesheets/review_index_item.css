@@ -12,7 +12,12 @@
   float: left;
 }
 
-.review-index-item-pic > img {
+.review-index-item-pic > a {
+  text-align: center;
+}
+
+.review-index-item-pic > a > img {
+  border: 1px solid #ccc;
   border-radius: 10px;
 }
 
@@ -50,11 +55,18 @@
 }
 
 .review-index-item-images {
-  overflow-x: scroll;
+  white-space: nowrap;
+  width: 600px;
+  overflow-x: auto;
+  display: inline-block;
 }
 
 .review-index-item-images > img {
-  width: 320px;
+  width: 200px;
+  display: inline-block;
+  margin: 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
 }
 
 .delete-review-button {

@@ -6,6 +6,8 @@ var ReviewIndexItem = React.createClass({
   },
 
   componentDidMount: function() {
+    ApiImageUtil.fetchReviewImages(this.props.review.id);
+
     ImageStore.addChangeListener(this._onImageUpload);
   },
 
