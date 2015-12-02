@@ -21,6 +21,8 @@
           ImageStore.emit(CHANGE_EVENT);
           break;
         case ImageConstants.RECEIVE_REVIEW_IMAGES:
+          AppDispatcher.waitFor([ReviewStore.dispatcherId]);
+          ReviewStore.resetImages(payload.images[0].review_id);
           payload.images.forEach(function (image) {
             ImageStore.addImageToReview(image);
           });

@@ -58,7 +58,6 @@
   white-space: nowrap;
   width: 600px;
   overflow-x: auto;
-  display: inline-block;
 }
 
 .review-index-item-images > img {

@@ -2,7 +2,7 @@ var ReviewIndex = React.createClass({
   mixins: [ReactPersistentState],
 
   getInitialState: function () {
-    return ({ reviews: ReviewStore.all() });
+    return ({ reviews: ReviewStore.all(), fetchReviewsComplete: false });
   },
 
   componentWillMount: function () {
@@ -17,11 +17,15 @@ var ReviewIndex = React.createClass({
   },
 
   componentDidMount: function () {
+    var success = function () {
+      this.setState({ fetchReviewsComplete: true });
+    }.bind(this);
+
     if (this.props.user) {
-      ApiReviewUtil.fetchReviewsByUser(this.props.user.id);
+      ApiReviewUtil.fetchReviewsByUser(this.props.user.id, success);
       ApiLocationUtil.fetchReviewedLocationsByUser(this.props.user.id);
     } else if (this.props.location) {
-      ApiReviewUtil.fetchReviewsByLocation(this.props.location.id);
+      ApiReviewUtil.fetchReviewsByLocation(this.props.location.id, success);
     }
 
     LocationStore.addChangeListener(this._onLocationUpdate);
@@ -45,18 +49,20 @@ var ReviewIndex = React.createClass({
   render: function () {
     var reviewIndexItems;
 
-    if (this.props.location) {
-      reviewIndexItems = this.state.reviews.map(function (review, idx) {
-        return <ReviewIndexItem key={idx} isLoggedIn={this.props.isLoggedIn} review={review} location={this.props.location}/>;
-      }.bind(this));
-    } else if (this.props.user) {
-      reviewIndexItems = this.state.reviews.map(function (review, idx) {
-        var location = LocationStore.find_location(review.location_id);
+    if (this.state.fetchReviewsComplete) {
+      if (this.props.location) {
+        reviewIndexItems = this.state.reviews.map(function (review, idx) {
+          return <ReviewIndexItem key={idx} isLoggedIn={this.props.isLoggedIn} review={review} location={this.props.location}/>;
+        }.bind(this));
+      } else if (this.props.user) {
+        reviewIndexItems = this.state.reviews.map(function (review, idx) {
+          var location = LocationStore.find_location(review.location_id);
 
-        if (Object.keys(location).length !== 0) {
-          return <ReviewIndexItem key={idx} isLoggedIn={this.props.isLoggedIn} review={review}  location={location} user/>;
-        }
-      }.bind(this));
+          if (Object.keys(location).length !== 0) {
+            return <ReviewIndexItem key={idx} isLoggedIn={this.props.isLoggedIn} review={review}  location={location} user/>;
+          }
+        }.bind(this));
+      }
     }
 
     return (

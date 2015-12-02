@@ -5,18 +5,8 @@ var ReviewIndexItem = React.createClass({
     ApiReviewUtil.destroy(event.currentTarget.value);
   },
 
-  componentDidMount: function() {
+  componentDidMount: function () {
     ApiImageUtil.fetchReviewImages(this.props.review.id);
-
-    ImageStore.addChangeListener(this._onImageUpload);
-  },
-
-  componentWillUnmount: function () {
-    ImageStore.removeChangeListener(this._onImageUpload);
-  },
-
-  _onImageUpload: function () {
-    this.forceUpdate();
   },
 
   render: function () {

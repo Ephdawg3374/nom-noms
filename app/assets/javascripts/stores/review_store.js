@@ -7,13 +7,21 @@
       _reviews = reviews;
     },
 
+    resetImages: function (reviewId) {
+      var review = this.findReview(reviewId);
+
+      if (review) {
+        review.images = [];
+      }
+    },
+
     appendImage: function (image) {
       var review = this.findReview(image.review_id);
 
       if (review) {
         review.images.push(image);
       }
-
+      
       this.emit(CHANGE_EVENT);
     },
 
@@ -36,23 +44,25 @@
     },
 
     findReview: function (reviewId) {
+      var review;
+
       for (var i = 0; i < _reviews.length; i++) {
         if (_reviews[i].id === reviewId) {
-          return _reviews[i];
-        }
-      }
-      return null;
-
-      var review = {};
-
-      for (i = 0; i < _reviews.length; i++) {
-        if (_reviews[i].id === id) {
           review = _reviews[i];
-          break;
         }
       }
-
       return review;
+
+      // var review = {};
+      //
+      // for (i = 0; i < _reviews.length; i++) {
+      //   if (_reviews[i].id === id) {
+      //     review = _reviews[i];
+      //     break;
+      //   }
+      // }
+      //
+      // return review;
     },
 
     all: function () {

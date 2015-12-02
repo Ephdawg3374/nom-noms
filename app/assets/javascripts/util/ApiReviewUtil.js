@@ -1,5 +1,5 @@
 window.ApiReviewUtil = {
-  fetchReviewsByLocation: function (locId) {
+  fetchReviewsByLocation: function (locId, success) {
     $.ajax({
       url: "/api/reviews",
       method: "GET",
@@ -8,11 +8,12 @@ window.ApiReviewUtil = {
       data: { locId: locId },
       success: function (data) {
         ReviewActions.receiveReviews(data);
+        success && success();
       }
     });
   },
 
-  fetchReviewsByUser: function (userId) {
+  fetchReviewsByUser: function (userId, success) {
     $.ajax({
       url: "/api/reviews",
       method: "GET",
@@ -21,6 +22,7 @@ window.ApiReviewUtil = {
       data: { userId: userId },
       success: function (data) {
         ReviewActions.receiveReviews(data);
+        success && success();
       }
     });
   },

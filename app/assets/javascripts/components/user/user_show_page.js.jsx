@@ -12,16 +12,10 @@ var UserShowPage = React.createClass({
   },
 
   componentWillReceiveProps: function () {
-    var userId = this.props.params.user_id;
-    var user = UsersStore.findUser(userId);
-
     ApiUserUtil.fetchUser(this.props.params.user_id);
   },
 
   componentDidMount: function () {
-    var userId = this.props.params.user_id;
-    var user = UsersStore.findUser(userId);
-
     ApiUserUtil.fetchUser(this.props.params.user_id);
 
     CurrentUserStore.addChangeListener(this._onChange);
@@ -46,6 +40,7 @@ var UserShowPage = React.createClass({
 
     if (Object.keys(user).length !== 0) {
       reviewIndex = <ReviewIndex user={user} isLoggedIn={CurrentUserStore.isLoggedIn()} />;
+
       if (user.num_reviews !== 0) {
         fiveStarProgressVal = ((user.num_5_star_reviews / user.num_reviews) * 100).toString();
         fourStarProgressVal = ((user.num_4_star_reviews / user.num_reviews) * 100).toString();
