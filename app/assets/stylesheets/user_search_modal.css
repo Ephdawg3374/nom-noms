@@ -12,7 +12,6 @@
   border-radius: 10px;
   border: 1px solid #000;
   height: 300px;
-  overflow-y: scroll;
 }
 
 .user-search-modal-form > h1 {
@@ -25,6 +24,7 @@
 .user-search-input-wrapper {
   margin: 20px 45px;
   width: auto;
+  white-space: nowrap;
 }
 
 .user-search-input-wrapper > button {
@@ -39,6 +39,7 @@
 .user-search-autocomplete-list {
   width: 260px;
   margin: auto;
+  overflow-y: auto;
 }
 
 .user-search-autocomplete-list > li {

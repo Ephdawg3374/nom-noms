@@ -16,10 +16,11 @@
 
 .footer-about {
   font-size: 16px;
-  color: darkgrey;
+  color: white;
   text-align: center;
   margin-top: 10px;
   float: left;
+  opacity: .7;
 }
 
 .footer-links {
