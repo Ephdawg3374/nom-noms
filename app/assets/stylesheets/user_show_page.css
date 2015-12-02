@@ -27,7 +27,6 @@
   position: absolute;
   top: 500px;
   width: 240px;
-  min-height: 300px;
   border: 1px solid #ccc;
   border-radius: 10px;
 }

@@ -286,9 +286,6 @@ var SearchMain = React.createClass({
         success={successfulUserSearch.bind(this)}
         close={this.closeUserSearchModal} />;
     }
-    // } else {
-    //   userSearchModal = <UserSearchModal modalMode close={this.closeUserSearchModal}/>;
-    // }
 
     return (
       <div className="location-search group">
@@ -327,7 +324,15 @@ var SearchMain = React.createClass({
             </div>
 
             <div className="options-wrapper group">
-              <button onClick={this.openUserSearchModal}>Find Users</button>
+              <button className="home">
+                <Link to={"/"}>Home</Link>
+              </button>
+
+              <button
+                className="open-user-search-modal"
+                onClick={this.openUserSearchModal}>
+                Find Users
+              </button>
 
               <ul className="location-filter-price-range">
                 { priceRangeButtons }

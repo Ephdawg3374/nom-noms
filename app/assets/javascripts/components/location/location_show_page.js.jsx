@@ -64,9 +64,9 @@ var LocationShowPage = React.createClass({
       this.goToReviewFormPage();
     }.bind(this);
 
-    logInModal = this.state.logInModalVisible ?
-      <LogInModal isOpen success={logInModalSuccessCallback} close={this.closeLogInModal}/> :
-      <LogInModal success={logInModalSuccessCallback} close={this.closeLogInModal}/>;
+    if (this.state.logInModalVisible) {
+      logInModal = <LogInModal isOpen success={logInModalSuccessCallback} close={this.closeLogInModal}/>;
+    }
 
     if (CurrentUserStore.isLoggedIn()) {
       reviewForm = <ReviewForm location={location} />;

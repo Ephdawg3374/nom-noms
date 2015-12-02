@@ -33,7 +33,7 @@
 
 .location-search-button {
   float: right;
-  margin-top: -60px;
+  margin-top: -70px;
 }
 
 .location-search-button > button {
@@ -72,12 +72,20 @@
 
 .options-wrapper {
   float: right;
-  margin: 15px 0 0 100px;
+  margin: 15px 10px;
 }
 
 .options-wrapper > * {
   float: left;
-  padding: 0 65px 0 0;
+  margin: 0 65px 0 0;
+}
+
+.open-user-search-modal {
+  padding: 5px;
+}
+
+.home {
+  padding: 5px;
 }
 
 .price-range-button, .distance-range-button {

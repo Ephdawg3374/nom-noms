@@ -31,6 +31,8 @@ var UserSearchForm = React.createClass({
   },
 
   componentDidMount: function () {
+    $(".auth-page-username").focus();
+
     UsersAutoCompleteStore.addChangeListener(this._onChange);
   },
 
@@ -119,7 +121,7 @@ var UserSearchForm = React.createClass({
           <input
             className="auth-page-username"
             type="text"
-            placeholder="Find username, first, or last name."
+            placeholder="Enter username, first, or last name."
             onChange={ this.userSearchAutoComplete }/>
 
           <button type="submit">Go!</button>

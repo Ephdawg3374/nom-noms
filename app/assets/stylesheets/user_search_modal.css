@@ -11,12 +11,58 @@
   z-index: 3;
   border-radius: 10px;
   border: 1px solid #000;
+  height: 300px;
+  overflow-y: scroll;
 }
 
-.user-search-modal-form
- > h1 {
+.user-search-modal-form > h1 {
   font-size: 30px;
   line-height: 1;
   font-weight: bold;
   text-align: center;
+}
+
+.user-search-input-wrapper {
+  margin: 20px 45px;
+  width: auto;
+}
+
+.user-search-input-wrapper > button {
+  padding: 3px;
+  margin-left: 10px;
+}
+
+.user-search-input-wrapper > input {
+  width: 260px;
+}
+
+.user-search-autocomplete-list {
+  width: 260px;
+  margin: auto;
+}
+
+.user-search-autocomplete-list > li {
+  display: inline-block;
+  border-radius: 5px;
+  padding: 3px;
+}
+
+.usermatch-username {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.usermatch-firstlastname {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.user-search-autocomplete-list > li:hover {
+  background: lightgrey;
+  cursor: pointer;
+}
+
+.user-search-autocomplete-list > li:active {
+  box-shadow: inset 0 0 0 1px #27496d, inset 0 5px 30px #193047;
+  cursor: pointer;
 }

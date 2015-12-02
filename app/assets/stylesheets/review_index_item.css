@@ -49,6 +49,10 @@
   outline: 0;
 }
 
+.review-index-item-images {
+  overflow-x: scroll;
+}
+
 .review-index-item-images > img {
   width: 320px;
 }

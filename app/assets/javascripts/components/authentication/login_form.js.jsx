@@ -12,6 +12,10 @@ var LogInForm = React.createClass({
     );
   },
 
+  componentDidMount: function () {
+    $(".auth-page-username").focus();
+  },
+
   handleKeyPress: function (event) {
     if (event.which === 13) {
       event.preventDefault();

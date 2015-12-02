@@ -48,6 +48,8 @@ var ReviewForm = React.createClass({
   },
 
   componentDidMount: function () {
+    $(".review-form-body").focus();
+    
     setTimeout(function () {
       this.setState({
         images: []
