@@ -44,10 +44,6 @@ var ReviewIndexItem = React.createClass({
       );
     }
 
-    var pics = this.props.review.images.map(function (image, idx) {
-      return <img key={idx} src={image.medium_url}/>;
-    });
-
     return (
       <div className="review-index-item group">
         <div className="review-index-item-side-bar">
@@ -78,9 +74,7 @@ var ReviewIndexItem = React.createClass({
             readOnly
             value={this.props.review.body}/>
 
-          <div className="review-index-item-images">
-            { pics }
-          </div>
+          <ImageScroll Review review={this.props.review} klass="review-index-item-images"/>
         </div>
       </div>
     );

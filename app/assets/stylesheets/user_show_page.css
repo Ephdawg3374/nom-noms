@@ -42,11 +42,26 @@
   padding: 0 50px 0 292px;
   margin: 40px auto 0 auto;
   width: 400px;
+  border-right: 1px solid #ccc;
 }
 
 .user-show-page-header-mid-section > h1 {
   font-size: 40px;
   font-weight: bold;
+}
+
+.user-show-page-images {
+  white-space: nowrap;
+  width: 190px;
+  overflow-x: auto;
+}
+
+.user-show-page-images > img {
+  width: 150px;
+  display: inline-block;
+  margin: 0 0 0 30px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
 }
 
 .user-show-page-header-stats {
@@ -55,11 +70,6 @@
 
 .user-show-page-header-stats > li:nth-child(2) {
   margin-top: 10px;
-}
-
-.user-show-page-header-right-section {
-  float: right;
-  border-left: 1px solid #ccc;
 }
 
 .user-show-page-content-wrapper {
@@ -74,7 +84,6 @@
 .user-show-page-content-mid-section {
   float: left;
   margin-left: 240px;
-  border-right: 1px solid #ccc;
 }
 
 .user-show-page-content-mid-section > .review-index {

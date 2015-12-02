@@ -65,8 +65,9 @@ var UserShowPage = React.createClass({
                 </div>
               </div>
 
-              <div className="user-show-page-header-mid-section">
+              <div className="user-show-page-header-mid-section group">
                 <h1>{user.username}</h1>
+                <h3>{user.firstname} {user.lastname}</h3>
 
                 <ul className="user-show-page-header-stats">
                   <li>{user.num_reviews} reviews</li>
@@ -97,10 +98,11 @@ var UserShowPage = React.createClass({
                   </li>
                 </ul>
 
+                <label className="user-show-page-images-label">Pictures</label>
               </div>
 
               <div className="user-show-page-header-right-section">
-
+                <ImageScroll User user={user} klass="user-show-page-images" />
               </div>
 
             </div>

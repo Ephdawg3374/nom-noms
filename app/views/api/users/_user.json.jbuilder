@@ -4,6 +4,10 @@ json.large_url asset_path(user.profile_pic.url(:avatar))
 
 json.reviews user.reviews
 
+image_urls = []
+user.images.each { |image| image_urls.push(asset_path(image.image_pic.url(:medium))) }
+json.images image_urls
+
 #stats
 
 json.num_reviews user.reviews.count
