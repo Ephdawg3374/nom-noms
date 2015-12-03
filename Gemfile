@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
 # Use postgresql as the database for Active Record
@@ -38,7 +37,6 @@ gem 'aws-sdk', '~>1.6'
 
 gem 'faker'
 
-gem 'shepherd', '~> 0.3.1'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
