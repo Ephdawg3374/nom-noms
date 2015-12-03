@@ -25,6 +25,8 @@ var SortButton = React.createClass({
     this.setState({
       mode: event.currentTarget.value
     });
+
+
   },
 
   render: function () {
