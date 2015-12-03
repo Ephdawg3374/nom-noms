@@ -325,7 +325,7 @@ var SearchMain = React.createClass({
 
             <div className="options-wrapper group">
               <button className="home">
-                <Link to={"/"}>Home</Link>
+                <a href="/">Home</a>
               </button>
 
               <button

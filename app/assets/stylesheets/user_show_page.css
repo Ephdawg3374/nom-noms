@@ -1,6 +1,6 @@
 .user-show-page {
   background: white;
-  min-height: 760px;
+  min-height: 83.6vh;
 }
 
 .user-show-page-header-wrapper {
@@ -15,7 +15,7 @@
 }
 
 .user-show-page-header-floater-section {
-  float: left;
+
 }
 
 .user-profile-pic {
@@ -24,7 +24,7 @@
 }
 
 .user-options {
-  position: absolute;
+  position: relative;
   top: 425px;
   width: 240px;
   border: 1px solid #ccc;
@@ -92,6 +92,22 @@
 
 .user-show-page-right-section {
   float: right;
+}
+
+.no-images {
+  display: inline-block;
+  width: 190px;
+  height: 190px;
+  border: 1px solid #ccc;
+  margin: 40px 30px;
+  border-radius: 10px;
+}
+
+.no-images > label {
+  display: block;
+  margin: 80px 0;
+  text-align: center;
+  opacity: .5;
 }
 
 .user-show-page-content-mid-section > .review-index > .review-index-item > .review-index-item-content > .review-index-item-content-header > .review-rating-bar {

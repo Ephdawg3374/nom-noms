@@ -36,7 +36,7 @@ var UserShowPage = React.createClass({
     var user = this.state.user;
 
     var fiveStarProgressVal, fourStarProgressVal, threeStarProgressVal,
-      twoStarProgressVal, oneStarProgressVal, noProgessVal, reviewIndex;
+      twoStarProgressVal, oneStarProgressVal, noProgessVal, reviewIndex, imageSection;
 
     if (Object.keys(user).length !== 0) {
       reviewIndex = <ReviewIndex user={user} isLoggedIn={CurrentUserStore.isLoggedIn()} />;
@@ -49,6 +49,14 @@ var UserShowPage = React.createClass({
         oneStarProgressVal = ((user.num_1_star_reviews / user.num_reviews) * 100).toString();
       } else {
         noProgessVal = 0;
+      }
+
+      if (user.images.length === 0) {
+        imageSection = <div className="no-images">
+                          <label>No Photos :(</label>
+                        </div>;
+      } else {
+        imageSection = <ImageScroll User user={user} klass="user-show-page-images" />;
       }
 
       return (
@@ -97,12 +105,10 @@ var UserShowPage = React.createClass({
                      {user.num_1_star_reviews}
                   </li>
                 </ul>
-
-                <label className="user-show-page-images-label">Pictures</label>
               </div>
 
               <div className="user-show-page-header-right-section">
-                <ImageScroll User user={user} klass="user-show-page-images" />
+                { imageSection }
               </div>
 
             </div>
