@@ -12,6 +12,10 @@ var LogInForm = React.createClass({
     );
   },
 
+  goToSignUpPage: function () {
+    this.history.pushState(null, "/users/new");
+  },
+
   componentDidMount: function () {
     $(".auth-page-username").focus();
   },
@@ -86,6 +90,7 @@ var LogInForm = React.createClass({
           </label>
 
           <button className="submit" type="submit">Log In!</button>
+          <button onClick={this.goToSignUpPage}>Sign Up</button>
         </div>
       </form>
     );

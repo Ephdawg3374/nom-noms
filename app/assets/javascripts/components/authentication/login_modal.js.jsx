@@ -9,7 +9,6 @@ var LogInModal = React.createClass({
     return (
       <div className={ klass }>
         <LogInForm klass="login-modal-form" modalMode success={ this.props.success } close={this.props.close}/>
-
         <div className="modal-screen"></div>
       </div>
     );
