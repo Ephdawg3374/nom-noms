@@ -5,7 +5,7 @@ var NavLoggedInTutorial = new Shepherd.Tour({
 });
 
 NavLoggedInTutorial.addStep("go-to-your-page", {
-  text: "Great, you just logged in. Click here to go to your page!",
+  text: "Great, you just logged in. Click on your pic to go to your page!",
   attachTo: ".nav-logged-in-tiny-pic right",
   buttons: [
     {

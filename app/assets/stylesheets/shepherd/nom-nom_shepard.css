@@ -13,3 +13,15 @@
 body > .shepherd-target-attached-bottom {
   width: 350px;
 }
+
+.shepherd-step[data-id="location-page"] {
+  width: 350px;
+}
+
+.shepherd-step[data-id="map-marker"] {
+  width: 350px;
+}
+
+.shepherd-step[data-id="go-to-your-page"] {
+  width: 250px;
+}

@@ -3,11 +3,11 @@ var SearchIndexItem = React.createClass({
     return ({ hover: false });
   },
 
-  mouseOverHeader: function () {
+  hoverMarker: function () {
     this.setState({ hover: true });
   },
 
-  mouseOutHeader: function () {
+  stopHoveringMarker: function () {
     this.setState({ hover: false });
   },
 
@@ -27,14 +27,15 @@ var SearchIndexItem = React.createClass({
     return (
       <div className="search-index-item" data-loc-id={location.id}>
 
-        <Link to={"/locations/"+location.id} className="search-index-item-img">
+        <Link
+          to={"/locations/"+location.id}
+          className="search-index-item-img"
+          onMouseOver={this.hoverMarker}
+          onMouseOut={this.stopHoveringMarker}>
           <img src={location.img_url}/>
         </Link>
 
-        <h2 className="search-index-item-name"
-          onMouseOver={this.mouseOverHeader}
-          onMouseOut={this.mouseOutHeader}>
-
+        <h2 className="search-index-item-name">
           <Link to={'/locations/' + location.id} params={ location }>
             {location.name}
           </Link>

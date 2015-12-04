@@ -26,6 +26,11 @@ var SearchResultsPage = React.createClass({
   },
 
   componentDidMount: function () {
+    if (!window.NomNomsApp.searchIndexTutorial) {
+      SearchIndexTutorial.start();
+      window.NomNomsApp.searchIndexTutorial = true;
+    }
+    
     LocationStore.addChangeListener(this._onChange);
   },
 

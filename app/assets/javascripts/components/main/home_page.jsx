@@ -10,6 +10,12 @@ var HomePage = React.createClass({
   },
 
   componentDidMount: function () {
+    if (!window.NomNomsApp.homePageTutorial) {
+      HomePageTutorial.start();
+
+      window.NomNomsApp.homePageTutorial = true;
+    }
+
     setTimeout(function () {
       this.setState({ message1: true });
     }.bind(this), 2000);
