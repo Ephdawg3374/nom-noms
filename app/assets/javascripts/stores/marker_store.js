@@ -37,10 +37,29 @@
     createNewMarkers: function (map, newLocations) {
       newLocations.forEach(function (location) {
         var marker = this.createNewMarker(map, location);
+        this.setInfoWindowOnMarker(marker, location);
         _markers.push(marker);
       }.bind(this));
     },
 
+    setInfoWindowOnMarker: function (marker, location) {
+      var contentString =
+        "<div class='info-window-wrapper'>" +
+        "<figure class='info-window-image>'" +
+        "<img src=" +
+      var infowindow = new google.maps.InfoWindow({
+        content: contentString
+      });
+
+      var marker = new google.maps.Marker({
+        position: uluru,
+        map: map,
+        title: 'Uluru (Ayers Rock)'
+      });
+      marker.addListener('click', function() {
+        infowindow.open(map, marker);
+      });
+    },
     // setMarkerLabelsToSearchIndices: function () {
     //   _markers.forEach(function (marker, idx) {
     //     marker.set('label', (idx + 1).toString());

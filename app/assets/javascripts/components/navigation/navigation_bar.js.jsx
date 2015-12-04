@@ -1,5 +1,5 @@
 var NavigationBar = React.createClass({
-  componentDidMount: function () {
+  componentDidMount: function () {    
     CurrentUserStore.addChangeListener(this._onChange);
   },
 

@@ -37,9 +37,14 @@
 }
 
 .user-search-autocomplete-list {
+  display: none;
   width: 260px;
   margin: auto;
   overflow-y: auto;
+}
+
+.user-search-autocomplete-list.filled {
+  display: block;
 }
 
 .user-search-autocomplete-list > li {

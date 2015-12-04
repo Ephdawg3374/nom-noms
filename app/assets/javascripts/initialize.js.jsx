@@ -19,9 +19,10 @@ $(document).on('ready', function () {
 
   React.render(<Router>{routes}</Router>, rootEl);
 
-  // window.setTimeout(function () {
-  //   HomePageTutorial.start();
-  // }, 10000);
+  window.setTimeout(function () {
+    HomePageTutorial.start();
+  }, 0);
+
   $(".location-type-autocomplete-list").one("mouseover", function () {
     FindAutocompleteTutorial.start();
   });

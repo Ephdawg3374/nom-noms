@@ -33,6 +33,14 @@ var UserSearchForm = React.createClass({
   componentDidMount: function () {
     $(".auth-page-username").focus();
 
+    // start tutorial if it hasn't been started during the session
+    if (!window.NomNomsApp.userSearchTutorial) {
+      $(".user-search-autocomplete-list").one("mouseover", function () {
+        UserSearchAutocompleteTutorial.start();
+        window.NomNomsApp.userSearchTutorial = true;
+      });
+    }
+
     UsersAutoCompleteStore.addChangeListener(this._onChange);
   },
 
@@ -87,6 +95,7 @@ var UserSearchForm = React.createClass({
 
   render: function () {
     var modalHeaderText, closeButton, errMsg, userAutoCompleteList;
+    var userAutoCompleteClass = "user-search-autocomplete-list ";
 
     if (this.state.showUserAutoCompleteList) {
       userAutoCompleteList = UsersAutoCompleteStore.matches().map(function (userMatch, i) {
@@ -95,6 +104,9 @@ var UserSearchForm = React.createClass({
             <label className="usermatch-firstlastname">{userMatch.firstname} {userMatch.lastname}</label>
           </li>;
         }.bind(this));
+      if (userAutoCompleteList.length > 0) {
+        userAutoCompleteClass += "filled";
+      }
     }
 
     if (this.state.errMsg) {
@@ -127,7 +139,7 @@ var UserSearchForm = React.createClass({
           <button type="submit">Go!</button>
         </div>
 
-        <ul className="user-search-autocomplete-list">
+        <ul className={ userAutoCompleteClass }>
           { userAutoCompleteList }
         </ul>
       </form>

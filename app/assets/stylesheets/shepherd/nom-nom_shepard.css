@@ -1,0 +1,15 @@
+.shepherd-step {
+  z-index: 4;
+}
+
+.shepherd-content > header {
+  text-align: center;
+}
+
+.shepherd-content > .shepherd-text > p {
+  text-align: center;
+}
+
+body > .shepherd-target-attached-bottom {
+  width: 350px;
+}
