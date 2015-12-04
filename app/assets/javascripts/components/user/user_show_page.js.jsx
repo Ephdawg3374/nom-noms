@@ -68,9 +68,6 @@ var UserShowPage = React.createClass({
                 <figure className="user-profile-pic">
                   <img src={user.large_url}/>
                 </figure>
-
-                <div className="user-options">
-                </div>
               </div>
 
               <div className="user-show-page-header-mid-section group">
@@ -115,14 +112,8 @@ var UserShowPage = React.createClass({
           </div>
 
           <div className="user-show-page-content-wrapper">
-            <div className="user-show-page-content group">
-
-              <div className="user-show-page-content-mid-section">
-                { reviewIndex }
-              </div>
-
-              <div className="user-show-page-content-right-section">
-              </div>
+            <div className="user-show-page-content">
+              { reviewIndex }
             </div>
           </div>
         </div>

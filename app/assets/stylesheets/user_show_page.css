@@ -59,7 +59,7 @@
 .user-show-page-images > img {
   width: 150px;
   display: inline-block;
-  margin: 0 0 0 30px;
+  margin: 0 0 0 15px;
   border: 1px solid #ccc;
   border-radius: 10px;
 }
@@ -81,17 +81,8 @@
   margin: auto;
 }
 
-.user-show-page-content-mid-section {
-  float: left;
-  margin-left: 240px;
-}
-
-.user-show-page-content-mid-section > .review-index {
+.user-show-page-content > .review-index {
   margin: 50px 25px;
-}
-
-.user-show-page-right-section {
-  float: right;
 }
 
 .no-images {
@@ -110,11 +101,11 @@
   opacity: .5;
 }
 
-.user-show-page-content-mid-section > .review-index > .review-index-item > .review-index-item-content > .review-index-item-content-header > .review-rating-bar {
+.user-show-page-content > .review-index > .review-index-item > .review-index-item-content > .review-index-item-content-header > .review-rating-bar {
   padding: 0;
   margin: 0;
 }
 
-.user-show-page-content-mid-section > .review-index > .review-index-item > .review-index-item-content > .review-index-item-content-header {
+.user-show-page-content > .review-index > .review-index-item > .review-index-item-content > .review-index-item-content-header {
   padding: 15px;
 }

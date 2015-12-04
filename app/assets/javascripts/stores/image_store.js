@@ -22,7 +22,9 @@
           break;
         case ImageConstants.RECEIVE_REVIEW_IMAGES:
           AppDispatcher.waitFor([ReviewStore.dispatcherId]);
-          ReviewStore.resetImages(payload.images[0].review_id);
+          if (payload.images.length > 0) {
+            ReviewStore.resetImages(payload.images[0].review_id);
+          }
           payload.images.forEach(function (image) {
             ImageStore.addImageToReview(image);
           });

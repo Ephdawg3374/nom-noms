@@ -21,7 +21,7 @@
       if (review) {
         review.images.push(image);
       }
-      
+
       this.emit(CHANGE_EVENT);
     },
 
@@ -52,17 +52,6 @@
         }
       }
       return review;
-
-      // var review = {};
-      //
-      // for (i = 0; i < _reviews.length; i++) {
-      //   if (_reviews[i].id === id) {
-      //     review = _reviews[i];
-      //     break;
-      //   }
-      // }
-      //
-      // return review;
     },
 
     all: function () {
