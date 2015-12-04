@@ -25,7 +25,7 @@ var SearchIndexItem = React.createClass({
     var num_reviews_text = location.num_reviews + " reviews";
 
     return (
-      <div className="search-index-item">
+      <div className="search-index-item" data-loc-id={location.id}>
 
         <Link to={"/locations/"+location.id} className="search-index-item-img">
           <img src={location.img_url}/>

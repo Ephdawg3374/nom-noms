@@ -1,0 +1,11 @@
+.info-window-wrapper > .info-window-image > a > img {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  width: 160px;
+}
+
+.info-window-wrapper > h3 {
+  color: blue;
+  font-weight: bold;
+  font-size: 13px;
+}

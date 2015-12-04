@@ -15,6 +15,8 @@
 
 .search-index-map {
   float: right;
-  width: 745px;
+  width: 740px;
   height: 700px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
 }

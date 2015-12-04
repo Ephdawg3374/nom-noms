@@ -37,29 +37,45 @@
     createNewMarkers: function (map, newLocations) {
       newLocations.forEach(function (location) {
         var marker = this.createNewMarker(map, location);
-        this.setInfoWindowOnMarker(marker, location);
+        this.setInfoWindowOnMarker(marker, location, map);
         _markers.push(marker);
       }.bind(this));
     },
 
-    setInfoWindowOnMarker: function (marker, location) {
+    setInfoWindowOnMarker: function (marker, location, map) {
       var contentString =
         "<div class='info-window-wrapper'>" +
-        "<figure class='info-window-image>'" +
-        "<img src=" +
+        "<figure class='info-window-image'>" +
+        "<a href='#/locations/" + location.id + "'>" +
+        "<img src=" + location.img_url + "></a>" +
+        "</figure>" +
+        "<h3><a href='#/locations/" + location.id + "'>" + location.name + "</a></h3>" +
+        "<label>" + location.price_range + " " +
+        location.location_type + " " + location.cuisine + "</label>" + "<br>" +
+        "<label>Average rating: " + location.ave_rating + "</label>" +
+        "</div>";
+
       var infowindow = new google.maps.InfoWindow({
         content: contentString
       });
 
-      var marker = new google.maps.Marker({
-        position: uluru,
-        map: map,
-        title: 'Uluru (Ayers Rock)'
-      });
       marker.addListener('click', function() {
         infowindow.open(map, marker);
+
+        var selectorStr = ".search-index-item[data-loc-id=" + location.id + "]";
+        var outer = $(".search-index");
+        var target = $(selectorStr);
+
+        var x = outer.height();
+        var y = target.outerHeight(true);
+        var z = target.index();
+
+        outer.animate({
+           scrollTop: Math.max(0, (y * z) - (x - y) / 2)
+        }, 1000);
       });
     },
+
     // setMarkerLabelsToSearchIndices: function () {
     //   _markers.forEach(function (marker, idx) {
     //     marker.set('label', (idx + 1).toString());
