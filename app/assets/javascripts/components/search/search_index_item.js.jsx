@@ -27,9 +27,9 @@ var SearchIndexItem = React.createClass({
     return (
       <div className="search-index-item">
 
-        <figure className="search-index-item-img">
+        <Link to={"/locations/"+location.id} className="search-index-item-img">
           <img src={location.img_url}/>
-        </figure>
+        </Link>
 
         <h2 className="search-index-item-name"
           onMouseOver={this.mouseOverHeader}

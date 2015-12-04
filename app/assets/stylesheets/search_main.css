@@ -47,6 +47,7 @@
 }
 
 .location-type-autocomplete-list, .location-area-autocomplete {
+  display: none;
   position: absolute;
   left: 39px;
   top: 25px;
@@ -59,6 +60,10 @@
   border-bottom-right-radius: 5px;
   z-index: 1;
   overflow: hidden;
+}
+
+.location-type-autocomplete-list.filled, .location-area-autocomplete.filled {
+  display: block;
 }
 
 .location-type-autocomplete-list > li, .location-area-autocomplete > li {

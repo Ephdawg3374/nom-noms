@@ -232,6 +232,8 @@ var SearchMain = React.createClass({
 
   render: function () {
     var locTypeAutoCompleteList, locAreaAutoCompleteList, errMsg, userSearchModal;
+    var locTypeAutocompleteClass = "location-type-autocomplete-list ";
+    var locAreaAutocompleteClass = "location-area-autocomplete ";
 
     if (this.state.errMsg) {
       errMsg = <label className="search-error-msg">{this.state.errMsg}</label>;
@@ -250,12 +252,15 @@ var SearchMain = React.createClass({
       locTypeAutoCompleteList = LocTypeAutoCompleteStore.matches().map(function (locTypeMatch, i) {
         return <li key={i} onClick={this.selectLocType} value={locTypeMatch}>{locTypeMatch}</li>;
       }.bind(this));
+
+      if (locTypeAutoCompleteList.length > 0) { locTypeAutocompleteClass += "filled"; }
     }
 
     if (this.state.showLocAreaAutoCompleteList) {
       locAreaAutoCompleteList = LocAreaAutoCompleteStore.matches().map(function (locAreaMatch, i) {
         return <li key={i} onClick={this.selectLocArea} value={locAreaMatch}>{locAreaMatch}</li>;
       }.bind(this));
+      if (locAreaAutoCompleteList.length > 0) { locAreaAutocompleteClass += "filled"; }
     }
 
     var priceRangeButtons = priceRangeMapping.map(function (priceRange, idx) {
@@ -302,7 +307,7 @@ var SearchMain = React.createClass({
                   placeholder="Location name, type, or cuisine"
                   onChange={this.autoCompleteLocationType}/>
 
-                <ul className="location-type-autocomplete-list">
+                <ul className={ locTypeAutocompleteClass }>
                   { locTypeAutoCompleteList }
                 </ul>
 
@@ -316,7 +321,7 @@ var SearchMain = React.createClass({
                   placeholder="Select a city"
                   onChange={this.autoCompleteLocationArea}/>
 
-                <ul className="location-area-autocomplete">
+                <ul className={ locAreaAutocompleteClass }>
                   { locAreaAutoCompleteList }
                 </ul>
               </label>

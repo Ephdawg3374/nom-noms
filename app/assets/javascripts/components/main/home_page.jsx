@@ -26,7 +26,7 @@ var HomePage = React.createClass({
   render: function () {
     var msg1Text = "Tryin' to nom?";
     var msg2Text = "Use the search bars. Go nom or go home.";
-    var msg3Text = "Nom noms is a Yelp clone (www.yelp.com).";
+    var msg3Text = "Nom noms is inspired by Yelp (www.yelp.com).";
     var msgBaseClass = "home-page-splash-msg ";
 
     var msg1Class = msgBaseClass + "first " + (this.state.message1 ? "active" : "inactive");

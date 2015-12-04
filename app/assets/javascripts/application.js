@@ -18,4 +18,6 @@
 //= require eventemitter
 //= require reactrouter.min.js
 //= require reactpstate.min.js
+//= require tether.min.js
+//= require shepherd.min.js
 //= require_tree .

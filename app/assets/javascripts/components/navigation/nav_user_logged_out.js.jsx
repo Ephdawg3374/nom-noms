@@ -16,7 +16,7 @@ var UserLoggedOut = React.createClass({
   render: function () {
     return (
       <div className="nav-logged-out">
-        <button onClick={this.goToSignUpPage}>
+        <button className="nav-sign-up" onClick={this.goToSignUpPage}>
           Sign Up
         </button>
 

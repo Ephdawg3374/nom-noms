@@ -4,7 +4,7 @@ $(document).on('ready', function () {
   var Route = ReactRouter.Route;
   var IndexRoute = ReactRouter.IndexRoute;
   var rootEl = document.getElementById('content');
-  localStorage.clear();
+
   var routes = (
     <Route path="/" component={NomNomsApp}>
       <IndexRoute component={HomePage} />
@@ -18,4 +18,15 @@ $(document).on('ready', function () {
   );
 
   React.render(<Router>{routes}</Router>, rootEl);
+
+  // window.setTimeout(function () {
+  //   HomePageTutorial.start();
+  // }, 10000);
+  $(".location-type-autocomplete-list").one("mouseover", function () {
+    FindAutocompleteTutorial.start();
+  });
+
+  $(".location-area-autocomplete").one("mouseover", function () {
+    NearAutocompleteTutorial.start();
+  });
 });

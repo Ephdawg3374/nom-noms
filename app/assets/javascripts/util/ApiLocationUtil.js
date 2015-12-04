@@ -27,7 +27,7 @@ window.ApiLocationUtil = {
     });
   },
 
-  fetchLocationTypes: function (locTypePartial) {
+  fetchLocationTypes: function (locTypePartial, success) {
     $.ajax({
       url: "api/locations",
       method: "GET",
@@ -36,11 +36,12 @@ window.ApiLocationUtil = {
       data: {locTypeAutoCompleteRequest: locTypePartial},
       success: function (data) {
         SearchActions.receiveLocationTypes(data);
+        success && success(data);
       }
     });
   },
 
-  fetchLocationAreas: function (locAddressPartial) {
+  fetchLocationAreas: function (locAddressPartial, success) {
     $.ajax({
       url: "api/locations",
       method: "GET",
@@ -49,6 +50,7 @@ window.ApiLocationUtil = {
       data: {locAddressAutoCompleteRequest: locAddressPartial},
       success: function (data) {
         SearchActions.receiveLocationAreas(data);
+        success && success();
       }
     });
   },
