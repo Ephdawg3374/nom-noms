@@ -62,15 +62,35 @@ var SearchMain = React.createClass({
       });
     }.bind(this), 1000);
 
+    this.setAutoCompleteTutorialListeners();
+
     LocTypeAutoCompleteStore.addChangeListener(this._onChange);
     LocAreaAutoCompleteStore.addChangeListener(this._onChange);
+  },
+
+  setAutoCompleteTutorialListeners: function () {
+    if (!autoCompleteTutorials) {
+      $(".location-type-autocomplete-list").one("mouseover", function () {
+        FindAutocompleteTutorial.start();
+      });
+
+      $(".location-area-autocomplete").one("mouseover", function () {
+        NearAutocompleteTutorial.start();
+      });
+    }
   },
 
   componentWillUnmount: function () {
     clearInterval(this.intervalId);
 
+    this.cancelActiveTours();
+
     LocTypeAutoCompleteStore.removeChangeListener(this._onChange);
     LocAreaAutoCompleteStore.removeChangeListener(this._onChange);
+  },
+
+  cancelActiveTours: function () {
+    if (Shepherd.activeTour) { Shepherd.activeTour.cancel(); }
   },
 
   _onChange: function () {
@@ -227,6 +247,10 @@ var SearchMain = React.createClass({
   closeUserSearchModal: function (event) {
     event.preventDefault();
 
+    if (UserSearchAutocompleteTutorial) {
+      UserSearchAutocompleteTutorial.cancel();
+    }
+
     this.setState({ userSearchModalVisible: false });
   },
 
@@ -330,7 +354,7 @@ var SearchMain = React.createClass({
 
             <div className="options-wrapper group">
               <button className="home">
-                <a href="/">Home</a>
+                <a href="/#">Home</a>
               </button>
 
               <button

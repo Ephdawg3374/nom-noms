@@ -14,12 +14,6 @@ var skipButton = {
     action: HomePageTutorial.cancel
   };
 
-var welcome = {
-  title: "Welcome",
-  text: "Welcome to Nom-noms! I hope you find this tutorial helpful. Click Next to begin!",
-  buttons: [ nextButton, skipButton]
-};
-
 var find = {
   title: "Find",
   text: "Use this search bar to search for location type, cuisine, or name. It does partial searching so feel free to not type the entire phrase!",
@@ -62,8 +56,7 @@ var userSearch = {
   buttons: [ nextButton, skipButton]
 };
 
-HomePageTutorial.addStep("welcome", welcome)
-  .addStep("find", find)
+HomePageTutorial.addStep("find", find)
   .addStep("near", near)
   .addStep("price-filter", priceFilter)
   .addStep("distance-filter", distanceFilter)

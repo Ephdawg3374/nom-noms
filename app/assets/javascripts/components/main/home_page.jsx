@@ -10,12 +10,6 @@ var HomePage = React.createClass({
   },
 
   componentDidMount: function () {
-    if (!window.NomNomsApp.homePageTutorial) {
-      HomePageTutorial.start();
-
-      window.NomNomsApp.homePageTutorial = true;
-    }
-
     setTimeout(function () {
       this.setState({ message1: true });
     }.bind(this), 2000);
@@ -27,6 +21,10 @@ var HomePage = React.createClass({
     setTimeout(function () {
       this.setState({ message3: true });
     }.bind(this), 8000);
+  },
+
+  componentWillUnmount: function () {
+    if (Shepherd.activeTour) { Shepherd.activeTour.cancel(); }
   },
 
   render: function () {

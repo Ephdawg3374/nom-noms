@@ -1,9 +1,9 @@
 var UserLoggedIn = React.createClass({
   componentDidMount: function () {
-    if (!window.NomNomsApp.loggedInTutorial) {
+    if (!loggedInTutorial) {
       NavLoggedInTutorial.start();
-      window.NomNomsApp.loggedInTutorial = true;
-    }  
+      loggedInTutorial = true;
+    }
   },
 
   handleUserLogout: function (event) {

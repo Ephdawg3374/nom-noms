@@ -1,5 +1,5 @@
 var NavigationBar = React.createClass({
-  componentDidMount: function () {    
+  componentDidMount: function () {
     CurrentUserStore.addChangeListener(this._onChange);
   },
 
@@ -24,7 +24,7 @@ var NavigationBar = React.createClass({
       <div className="nav-bar group">
 
         <figure className="nav-bar-logo">
-          <a href="/">
+          <a href="/#">
             <img src={window.NomNomsApp.images.logoImage}/>
           </a>
         </figure>

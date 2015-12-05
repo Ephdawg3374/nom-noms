@@ -33,11 +33,9 @@ var UserSearchForm = React.createClass({
   componentDidMount: function () {
     $(".auth-page-username").focus();
 
-    // start tutorial if it hasn't been started during the session
-    if (!window.NomNomsApp.userSearchTutorial) {
+    if (!autoCompleteTutorials) {
       $(".user-search-autocomplete-list").one("mouseover", function () {
         UserSearchAutocompleteTutorial.start();
-        window.NomNomsApp.userSearchTutorial = true;
       });
     }
 

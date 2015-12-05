@@ -26,16 +26,19 @@ var SearchResultsPage = React.createClass({
   },
 
   componentDidMount: function () {
-    if (!window.NomNomsApp.searchIndexTutorial) {
+    if (!searchIndexTutorial) {
       SearchIndexTutorial.start();
-      window.NomNomsApp.searchIndexTutorial = true;
+
+      searchIndexTutorial = true;
     }
-    
+
     LocationStore.addChangeListener(this._onChange);
   },
 
   componentWillUnmount: function () {
     window.NomNomsApp.searchAuto = false;
+
+    if (Shepherd.activeTour) { Shepherd.activeTour.cancel(); }
 
     LocationStore.removeChangeListener(this._onChange);
   },
