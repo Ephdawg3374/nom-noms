@@ -1,4 +1,6 @@
 $(document).on('ready', function () {
+  localStorage.clear();
+  
   Link = ReactRouter.Link;
   var Router = ReactRouter.Router;
   var Route = ReactRouter.Route;

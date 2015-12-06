@@ -49,6 +49,8 @@
 }
 
 .review-index-item-body {
+  min-height: 75px;
+  max-height: 300px;
   width: 80%;
   padding: 20px;
   outline: 0;
