@@ -17,7 +17,7 @@ var NavigationBar = React.createClass({
     if (CurrentUserStore.isLoggedIn()) {
       authComponent = <UserLoggedIn />;
     } else {
-      authComponent = <UserLoggedOut />;
+      authComponent = <UserLoggedOut showErrors={ this.props.showErrors }/>;
     }
 
     return (
@@ -25,11 +25,11 @@ var NavigationBar = React.createClass({
 
         <figure className="nav-bar-logo">
           <a href="/#">
-            <img src={window.NomNomsApp.images.logoImage}/>
+            <img src={ window.NomNomsApp.images.logoImage }/>
           </a>
         </figure>
 
-        <SearchMain />
+        <SearchMain showErrors={ this.props.showErrors }/>
 
         { authComponent }
 

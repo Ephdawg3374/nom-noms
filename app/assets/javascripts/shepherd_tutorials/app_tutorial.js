@@ -22,7 +22,9 @@ var turnOffTutorials = {
     homePageTutorial = true;
     searchIndexTutorial = true;
     loggedInTutorial = true;
-    autoCompleteTutorials = true;
+    locTypeAutocompleteTutorial = true;
+    locAreaAutocompleteTutorial = true;
+    userSearchAutocompleteTutorial = true;
 
     AppTutorial.complete();
   }

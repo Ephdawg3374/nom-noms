@@ -23,7 +23,9 @@ var NomNomsApp = React.createClass({
     homePageTutorial = window.NomNomsApp.homePageTutorial = false;
     searchIndexTutorial = window.NomNomsApp.searchIndexTutorial = false;
     loggedInTutorial = window.NomNomsApp.loggedInTutorial = false;
-    autoCompleteTutorials = window.NomNomsApp.autoCompleteTutorials = false;
+    locTypeAutocompleteTutorial = window.NomNomsApp.locTypeAutocompleteTutorial = false;
+    locAreaAutocompleteTutorial = window.NomNomsApp.locAreaAutocompleteTutorial = false;
+    userSearchAutocompleteTutorial = window.NomNomsApp.userSearchAutocompleteTutorial = false;
 
     ApiSessionUtil.fetchCurrentUser();
   },
@@ -38,7 +40,7 @@ var NomNomsApp = React.createClass({
 
     if (!this.state.isValid) {
       errors = this.state.errors.map( function(err, idx) {
-        return <li key={idx}>{err}</li>;
+        return <li key={ idx }>{ err }</li>;
       });
 
       errorClass += "display";
@@ -56,7 +58,7 @@ var NomNomsApp = React.createClass({
         </div>
 
         <header className="header">
-          <NavigationBar />
+          <NavigationBar showErrors={ this.showErrors }/>
         </header>
 
         { this.props.children }

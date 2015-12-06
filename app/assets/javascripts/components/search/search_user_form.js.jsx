@@ -33,12 +33,6 @@ var UserSearchForm = React.createClass({
   componentDidMount: function () {
     $(".auth-page-username").focus();
 
-    if (!autoCompleteTutorials) {
-      $(".user-search-autocomplete-list").one("mouseover", function () {
-        UserSearchAutocompleteTutorial.start();
-      });
-    }
-
     UsersAutoCompleteStore.addChangeListener(this._onChange);
   },
 
@@ -91,6 +85,13 @@ var UserSearchForm = React.createClass({
     }
   },
 
+  beginUserSearchAutoTutorial: function () {
+    if (!userSearchAutocompleteTutorial) {
+      UserSearchAutocompleteTutorial.start();
+      userSearchAutocompleteTutorial = true;
+    }
+  },
+
   render: function () {
     var modalHeaderText, closeButton, errMsg, userAutoCompleteList;
     var userAutoCompleteClass = "user-search-autocomplete-list ";
@@ -137,7 +138,9 @@ var UserSearchForm = React.createClass({
           <button type="submit">Go!</button>
         </div>
 
-        <ul className={ userAutoCompleteClass }>
+        <ul
+          className={ userAutoCompleteClass }
+          onMouseOver={ this.beginUserSearchAutoTutorial }>
           { userAutoCompleteList }
         </ul>
       </form>

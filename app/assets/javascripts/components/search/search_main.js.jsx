@@ -6,23 +6,23 @@ var successfulUserSearch = function (user) {
 var success = function (searchParams) {
   this.setState(
     {
-      errMsg: null,
       showLocTypeAutoCompleteList: false,
       showLocAreaAutoCompleteList: false
     }
   );
 
-  this.history.pushState(null, "search/", searchParams);
+  this.history.pushState(null, "search/", searchParams, this.props.showErrors);
 };
 
 var failure = function (errMsg) {
   this.setState(
     {
-      errMsg: errMsg,
       showLocTypeAutoCompleteList: false,
       showLocAreaAutoCompleteList: false
     }
   );
+
+  this.props.showErrors([errMsg]);
 };
 
 var SearchMain = React.createClass({
@@ -37,7 +37,6 @@ var SearchMain = React.createClass({
         priceRange: "All",
         showLocTypeAutoCompleteList: false,
         showLocAreaAutoCompleteList: false,
-        errMsg: null,
         userSearchModalVisible: false
       }
     );
@@ -58,25 +57,24 @@ var SearchMain = React.createClass({
         priceRange: this.state.priceRange,
         showLocTypeAutoCompleteList: this.state.showLocTypeAutoCompleteList,
         showLocAreaAutoCompleteList: this.state.showLocAreaAutoCompleteList,
-        errMsg: null,
       });
     }.bind(this), 1000);
-
-    this.setAutoCompleteTutorialListeners();
 
     LocTypeAutoCompleteStore.addChangeListener(this._onChange);
     LocAreaAutoCompleteStore.addChangeListener(this._onChange);
   },
 
-  setAutoCompleteTutorialListeners: function () {
-    if (!autoCompleteTutorials) {
-      $(".location-type-autocomplete-list").one("mouseover", function () {
-        FindAutocompleteTutorial.start();
-      });
+  beginLocTypeAutoTutorial: function () {
+    if (!locTypeAutocompleteTutorial) {
+      FindAutocompleteTutorial.start();
+      locTypeAutocompleteTutorial = true;
+    }
+  },
 
-      $(".location-area-autocomplete").one("mouseover", function () {
-        NearAutocompleteTutorial.start();
-      });
+  beginLocAreaAutoTutorial: function () {
+    if (!locAreaAutocompleteTutorial) {
+      NearAutocompleteTutorial.start();
+      locAreaAutocompleteTutorial = true;
     }
   },
 
@@ -255,16 +253,9 @@ var SearchMain = React.createClass({
   },
 
   render: function () {
-    var locTypeAutoCompleteList, locAreaAutoCompleteList, errMsg, userSearchModal;
+    var locTypeAutoCompleteList, locAreaAutoCompleteList, userSearchModal;
     var locTypeAutocompleteClass = "location-type-autocomplete-list ";
     var locAreaAutocompleteClass = "location-area-autocomplete ";
-
-    if (this.state.errMsg) {
-      errMsg = <label className="search-error-msg">{this.state.errMsg}</label>;
-      setTimeout(function() {
-        $(".search-error-msg").fadeOut('fast');
-      }, 3000);
-    }
 
     var handleKeyPress = function (e) {
       if (e.which === 13) {
@@ -331,7 +322,8 @@ var SearchMain = React.createClass({
                   placeholder="Location name, type, or cuisine"
                   onChange={this.autoCompleteLocationType}/>
 
-                <ul className={ locTypeAutocompleteClass }>
+                <ul className={ locTypeAutocompleteClass }
+                  onMouseOver={ this.beginLocTypeAutoTutorial }>
                   { locTypeAutoCompleteList }
                 </ul>
 
@@ -345,7 +337,8 @@ var SearchMain = React.createClass({
                   placeholder="Select a city"
                   onChange={this.autoCompleteLocationArea}/>
 
-                <ul className={ locAreaAutocompleteClass }>
+                <ul className={ locAreaAutocompleteClass }
+                  onMouseOver={ this.beginLocAreaAutoTutorial }>
                   { locAreaAutoCompleteList }
                 </ul>
               </label>
@@ -379,8 +372,6 @@ var SearchMain = React.createClass({
           </div>
 
         </form>
-
-        { errMsg }
 
         { userSearchModal }
 
