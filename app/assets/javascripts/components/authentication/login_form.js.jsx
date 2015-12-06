@@ -53,7 +53,7 @@ var LogInForm = React.createClass({
     }
 
     var credentials = {
-      username: "TheRealGrumpyCat",
+      username: "GrumpyCat",
       password: "password"
     };
 
