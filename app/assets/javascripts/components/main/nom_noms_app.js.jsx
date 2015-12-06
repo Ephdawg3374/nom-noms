@@ -36,26 +36,30 @@ var NomNomsApp = React.createClass({
 
   render: function () {
     var errors;
-    var errorClass = "errors ";
+    var errorsClass = "errors ";
 
     if (!this.state.isValid) {
       errors = this.state.errors.map( function(err, idx) {
         return <li key={ idx }>{ err }</li>;
       });
 
-      errorClass += "display";
+      errorsClass += "active";
 
       window.setTimeout(function () {
-        $(".errors").removeClass("display");
-      }, 0);
+        $(".errors").removeClass("active");
+      }, 1000);
+
+      window.setTimeout(function () {
+        this.setState({ isValid: true });
+      }.bind(this), 2000);
     }
 
     return (
       <div className="main-app">
 
-        <div className={ errorClass }>
+        <ul className={ errorsClass }>
           { errors }
-        </div>
+        </ul>
 
         <header className="header">
           <NavigationBar showErrors={ this.showErrors }/>

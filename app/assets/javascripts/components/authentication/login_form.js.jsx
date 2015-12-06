@@ -6,8 +6,6 @@ var LogInForm = React.createClass({
       {
         username: "",
         password: "",
-        isValid: true,
-        errors: []
       }
     );
   },

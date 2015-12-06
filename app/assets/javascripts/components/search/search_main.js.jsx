@@ -3,7 +3,7 @@ var successfulUserSearch = function (user) {
   this.history.pushState(null, "/users/" + user.id);
 };
 
-var success = function (searchParams) {
+var searchSuccess = function (searchParams) {
   this.setState(
     {
       showLocTypeAutoCompleteList: false,
@@ -14,7 +14,7 @@ var success = function (searchParams) {
   this.history.pushState(null, "search/", searchParams, this.props.showErrors);
 };
 
-var failure = function (errMsg) {
+var searchFailure = function (errMsg) {
   this.setState(
     {
       showLocTypeAutoCompleteList: false,
@@ -148,19 +148,19 @@ var SearchMain = React.createClass({
 
     var searchParams = this.buildSearchObject();
 
-    ApiLocationUtil.fetchLocations(searchParams, success.bind(this), failure.bind(this));
+    ApiLocationUtil.fetchLocations(searchParams, searchSuccess.bind(this), searchFailure.bind(this));
   },
 
   handlePriceRangeFilter: function (priceRange) {
     var searchParams = this.buildSearchObject();
     searchParams.priceRange = priceRange;
-    ApiLocationUtil.fetchLocations(searchParams, success.bind(this), failure.bind(this));
+    ApiLocationUtil.fetchLocations(searchParams, searchSuccess.bind(this), searchFailure.bind(this));
   },
 
   handleDistanceRangeFilter: function (distanceRange) {
     var searchParams = this.buildSearchObject();
     searchParams.distanceRange = distanceRange;
-    ApiLocationUtil.fetchLocations(searchParams, success.bind(this), failure.bind(this));
+    ApiLocationUtil.fetchLocations(searchParams, searchSuccess.bind(this), searchFailure.bind(this));
   },
 
   autoCompleteLocationType: function (event) {
@@ -303,7 +303,7 @@ var SearchMain = React.createClass({
       userSearchModal = <UserSearchModal
         isOpen
         modalMode
-        success={successfulUserSearch.bind(this)}
+        searchSuccess={successfulUserSearch.bind(this)}
         close={this.closeUserSearchModal} />;
     }
 
