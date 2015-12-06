@@ -4,6 +4,8 @@ var LogInForm = React.createClass({
   getInitialState: function () {
     return (
       {
+        isValid: true,
+        errors: [],
         username: "",
         password: "",
       }
