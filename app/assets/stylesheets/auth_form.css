@@ -20,8 +20,12 @@
 
 .auth-page-input-wrapper > button {
   padding: 5px;
-  width: 75px;
+  white-space: nowrap;
   margin: 10px 65px 0 65px;
+}
+
+.auth-page-input-wrapper > .auth-page-demo-account {
+  margin: 0 40px;
 }
 
 .auth-page-username, .auth-page-password, .auth-page-firstname, .auth-page-lastname {

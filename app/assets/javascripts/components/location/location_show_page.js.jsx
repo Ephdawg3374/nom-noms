@@ -60,6 +60,11 @@ var LocationShowPage = React.createClass({
     var reviewForm, map, numReviewsText, reviewIndex, logInModal;
 
     var logInModalSuccessCallback = function () {
+      if (!loggedInTutorial) {
+        NavLoggedInTutorial.start();
+        loggedInTutorial = true;
+      }
+      
       this.setState({ logInModalVisible: false });
       this.goToReviewFormPage();
     }.bind(this);

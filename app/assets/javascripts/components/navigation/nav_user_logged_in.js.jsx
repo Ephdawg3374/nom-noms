@@ -1,11 +1,4 @@
 var UserLoggedIn = React.createClass({
-  componentDidMount: function () {
-    if (!loggedInTutorial) {
-      NavLoggedInTutorial.start();
-      loggedInTutorial = true;
-    }
-  },
-
   handleUserLogout: function (event) {
     event.preventDefault();
 

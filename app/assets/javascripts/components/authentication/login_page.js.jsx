@@ -9,6 +9,11 @@ var LogInPage = React.createClass({
 
   render: function () {
     var success = function () {
+      if (!loggedInTutorial) {
+        NavLoggedInTutorial.start();
+        loggedInTutorial = true;
+      }
+
      this.history.goBack();
     }.bind(this);
 

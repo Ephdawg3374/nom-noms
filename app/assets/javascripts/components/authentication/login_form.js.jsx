@@ -37,10 +37,6 @@ var LogInForm = React.createClass({
       password: this.state.password
     };
 
-    // var success = function () {
-    //  this.history.goBack();
-    // }.bind(this);
-
     var failure = function (errors) {
       this.setState({
         isValid: false,
@@ -49,6 +45,19 @@ var LogInForm = React.createClass({
     }.bind(this);
 
     ApiSessionUtil.login(credentials, this.props.success, failure);
+  },
+
+  logIntoDemoAccount: function () {
+    if (event) {
+      event.preventDefault();
+    }
+
+    var credentials = {
+      username: "TheRealGrumpyCat",
+      password: "password"
+    };
+
+    ApiSessionUtil.login(credentials, this.props.success);
   },
 
   render: function () {
@@ -75,6 +84,9 @@ var LogInForm = React.createClass({
         </div>
 
         <div className="auth-page-input-wrapper">
+          <button className="auth-page-demo-account"
+            onClick={this.logIntoDemoAccount}>Demo Account</button>
+
           <label>Username
           <input
             className="auth-page-username"

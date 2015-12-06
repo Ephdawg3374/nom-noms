@@ -10,6 +10,8 @@ var turnOnTutorials = {
     HomePageTutorial.start();
     homePageTutorial = true;
 
+    if (CurrentUserStore.isLoggedIn()) { loggedInTutorial = true; }
+
     AppTutorial.complete();
   }
 };

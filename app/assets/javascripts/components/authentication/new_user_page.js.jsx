@@ -37,6 +37,11 @@ var NewUserPage = React.createClass({
     formData.append("user[profile_pic]", this.state.imageFile);
 
     var success = function () {
+      if (!loggedInTutorial) {
+        NavLoggedInTutorial.start();
+        loggedInTutorial = true;
+      }
+
       this.history.goBack();
     }.bind(this);
 
