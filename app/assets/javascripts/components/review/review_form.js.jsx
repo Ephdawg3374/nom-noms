@@ -11,6 +11,7 @@ var ReviewForm = React.createClass({
         isSubmitting: false,
         isValid: true,
         errors: [],
+        editMode: false
       }
     );
   },
@@ -24,19 +25,8 @@ var ReviewForm = React.createClass({
         isUploading: false,
         isSubmitting: false,
         isValid: true,
-        errors: []
-      }
-    );
-
-    this.setPState(
-      {
-        rating: 1,
-        body: "",
-        images: [],
-        isUploading: false,
-        isSubmitting: false,
-        isValid: true,
-        errors: []
+        errors: [],
+        editMode: false
       }
     );
   },
@@ -51,7 +41,8 @@ var ReviewForm = React.createClass({
 
       this.setState({
         rating: parseInt(reviewToEdit.rating),
-        body: reviewToEdit.body
+        body: reviewToEdit.body,
+        editMode: true
       });
     }
   },
@@ -144,7 +135,11 @@ var ReviewForm = React.createClass({
       this.history.pushState(null, "/locations/" + this.props.location.id);
     }.bind(this);
 
-    ApiReviewUtil.create(formDataNoImages, success, failure);
+    if (this.state.editMode) {
+      ApiReviewUtil.update(this.props.review.id, formDataNoImages, success, failure);
+    } else {
+      ApiReviewUtil.create(formDataNoImages, success, failure);
+    }
   },
 
   goBack: function (event) {

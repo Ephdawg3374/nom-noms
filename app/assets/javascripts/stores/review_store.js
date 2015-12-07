@@ -33,15 +33,7 @@
         }
       }
 
-      _reviews.push(review);
-
-      // var idx = _reviews.indexOf(review);
-      //
-      // if (idx === -1) {
-      //   _reviews.unshift(review);
-      // } else {
-      //   _review[idx] = review;
-      // }
+      _reviews.unshift(review);
     },
 
     _deleteReview: function (review) {

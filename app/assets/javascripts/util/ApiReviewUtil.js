@@ -56,7 +56,7 @@ window.ApiReviewUtil = {
     });
   },
 
-  update: function (reviewId) {
+  update: function (reviewId, formData, success, failure) {
     $.ajax({
       url: "/api/reviews/" + reviewId,
       method: "PATCH",
