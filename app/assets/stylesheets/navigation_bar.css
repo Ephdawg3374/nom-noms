@@ -46,6 +46,7 @@
 }
 
 .nav-logged-in-tiny-pic > img {
+  display: inline;
   border: 1px solid darkgrey;
   width: 63px;
   height: 63px;

@@ -60,7 +60,8 @@ var UserSearchForm = React.createClass({
     this.setState(
       {
         userSearch: userSearch,
-        showUserAutoCompleteList: true
+        showUserAutoCompleteList: true,
+        errMsg: null
       }
     );
 
@@ -109,7 +110,7 @@ var UserSearchForm = React.createClass({
     }
 
     if (this.state.errMsg) {
-      errMsg = <label className="user-search-error-msg">{this.state.errMsg}</label>;
+      errMsg = <label>{this.state.errMsg}</label>;
     }
 
     if (this.props.modalMode) {
@@ -124,7 +125,7 @@ var UserSearchForm = React.createClass({
 
         <h1>{ modalHeaderText }</h1>
 
-        <div className="user-search-err-msg">
+        <div className="user-search-error">
           { errMsg }
         </div>
 

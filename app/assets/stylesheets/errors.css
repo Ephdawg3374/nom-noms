@@ -17,3 +17,8 @@
   opacity: 1;
   visibility: visible;
 }
+
+.user-search-error {
+  position: absolute;
+  left: 150px;
+}

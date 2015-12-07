@@ -9,16 +9,10 @@ var ReviewIndex = React.createClass({
     return ({ reviews: ReviewStore.all(), fetchReviewsComplete: false });
   },
 
-  // shouldComponentUpdate: function (nextProps, nextState) {
-  //   return nextProps.user.id !== this.props.user.id;
-  // },
-  //
-  // componentWillUpdate: function () {
-  //   this.checkPropsAndFetch();
-  // },
-
   componentWillReceiveProps: function (nextProps) {
-    this.checkPropsAndFetch(nextProps.user.id);
+    if (this.props.user) {
+      this.checkPropsAndFetch(nextProps.user.id);
+    }
   },
 
   componentDidMount: function () {

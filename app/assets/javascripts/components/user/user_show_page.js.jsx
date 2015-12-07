@@ -7,11 +7,6 @@ var UserShowPage = React.createClass({
     return UsersStore.findUser(parseInt(this.props.params.user_id));
   },
 
-  // shouldComponentUpdate: function (nextProps, nextState) {
-  //   debugger;
-  //   return (nextProps.params.user_id !== this.props.params.user_id);
-  // },
-  //
   componentWillReceiveProps: function (nextProps) {
     ApiUserUtil.fetchUser(nextProps.params.user_id);
   },

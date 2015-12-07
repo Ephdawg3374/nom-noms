@@ -51,21 +51,19 @@
   font-weight: bold;
 }
 
-.user-show-page-header-right-section {
-  float: right;
-}
-
 .user-show-page-images {
-  margin: 120px 50px 0 0;
+  position: relative;
+  top: 60px;
   white-space: nowrap;
   width: 190px;
   overflow-x: auto;
 }
 
 .user-show-page-images > img {
+  height: 150px;
   width: 150px;
   display: inline-block;
-  margin: 0 0 0 15px;
+  margin: 0 0 0 30px;
   border: 1px solid #ccc;
   border-radius: 10px;
 }
