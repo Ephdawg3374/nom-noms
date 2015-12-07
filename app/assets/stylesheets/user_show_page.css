@@ -32,6 +32,7 @@
 }
 
 .user-profile-pic > img {
+  max-height: 250px;
   width: 240px;
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -50,7 +51,12 @@
   font-weight: bold;
 }
 
+.user-show-page-header-right-section {
+  float: right;
+}
+
 .user-show-page-images {
+  margin: 120px 50px 0 0;
   white-space: nowrap;
   width: 190px;
   overflow-x: auto;

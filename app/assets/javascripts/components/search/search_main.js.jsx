@@ -1,5 +1,6 @@
 var successfulUserSearch = function (user) {
   this.setState({ userSearchModalVisible: false });
+
   this.history.pushState(null, "/users/" + user.id);
 };
 
@@ -42,24 +43,7 @@ var SearchMain = React.createClass({
     );
   },
 
-  componentWillMount: function () {
-    this.setPId('search_params');
-    this.setPStorage(this.localStorage);
-    this.restorePState();
-  },
-
   componentDidMount: function () {
-    this.intervalId = setInterval(function () {
-      this.setPState({
-        locType: this.state.locType,
-        locArea: this.state.locArea,
-        distanceRange: this.state.distanceRange,
-        priceRange: this.state.priceRange,
-        showLocTypeAutoCompleteList: this.state.showLocTypeAutoCompleteList,
-        showLocAreaAutoCompleteList: this.state.showLocAreaAutoCompleteList,
-      });
-    }.bind(this), 1000);
-
     LocTypeAutoCompleteStore.addChangeListener(this._onChange);
     LocAreaAutoCompleteStore.addChangeListener(this._onChange);
   },
@@ -303,7 +287,7 @@ var SearchMain = React.createClass({
       userSearchModal = <UserSearchModal
         isOpen
         modalMode
-        searchSuccess={successfulUserSearch.bind(this)}
+        success={successfulUserSearch.bind(this)}
         close={this.closeUserSearchModal} />;
     }
 

@@ -1,3 +1,7 @@
+var success = function () {
+  this.setState({ fetchReviewsComplete: true });
+};
+
 var ReviewIndex = React.createClass({
   mixins: [ReactPersistentState],
 
@@ -5,31 +9,33 @@ var ReviewIndex = React.createClass({
     return ({ reviews: ReviewStore.all(), fetchReviewsComplete: false });
   },
 
-  componentWillMount: function () {
-    this.setPId('review_index');
-    this.setPStorage(this.localStorage);
-    this.restorePState();
+  // shouldComponentUpdate: function (nextProps, nextState) {
+  //   return nextProps.user.id !== this.props.user.id;
+  // },
+  //
+  // componentWillUpdate: function () {
+  //   this.checkPropsAndFetch();
+  // },
 
-    if (localStorage.review_index) {
-      var reviews = JSON.parse(localStorage.review_index).reviews;
-      ReviewActions.receiveReviews(reviews);
-    }
+  componentWillReceiveProps: function (nextProps) {
+    this.checkPropsAndFetch(nextProps.user.id);
   },
 
   componentDidMount: function () {
-    var success = function () {
-      this.setState({ fetchReviewsComplete: true });
-    }.bind(this);
-
-    if (this.props.user) {
-      ApiReviewUtil.fetchReviewsByUser(this.props.user.id, success);
-      ApiLocationUtil.fetchReviewedLocationsByUser(this.props.user.id);
-    } else if (this.props.location) {
-      ApiReviewUtil.fetchReviewsByLocation(this.props.location.id, success);
-    }
+    this.checkPropsAndFetch();
 
     LocationStore.addChangeListener(this._onLocationUpdate);
     ReviewStore.addChangeListener(this._onChange);
+  },
+
+  checkPropsAndFetch: function (newUserId) {
+    if (this.props.user) {
+      var userId = newUserId || this.props.user.id;
+      ApiReviewUtil.fetchReviewsByUser(userId, success.bind(this));
+      ApiLocationUtil.fetchReviewedLocationsByUser(userId);
+    } else if (this.props.location) {
+      ApiReviewUtil.fetchReviewsByLocation(this.props.location.id, success.bind(this));
+    }
   },
 
   componentWillUnmount: function () {
@@ -43,7 +49,6 @@ var ReviewIndex = React.createClass({
 
   _onChange: function () {
     this.setState({ reviews: ReviewStore.all() });
-    this.setPState({ reviews: ReviewStore.all() });
   },
 
   render: function () {

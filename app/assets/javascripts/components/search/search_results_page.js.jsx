@@ -5,32 +5,16 @@ var SearchResultsPage = React.createClass({
     return ({ locations: LocationStore.all() });
   },
 
-  componentWillMount: function () {
-    window.NomNomsApp.searchAuto = true;
-    this.setPId('search_index');
-    this.setPStorage(this.localStorage);
-    this.restorePState();
-
-    if (localStorage.search_index) {
-      var locations = JSON.parse(localStorage.search_index).locations;
-      SearchActions.receiveLocations(locations);
-    } else {
-      ApiLocationUtil.fetchLocations(this.props.location.query);
-    }
-  },
-
-  componentWillReceiveProps: function () {
-    this.setPState({
-      locations: LocationStore.all()
-    });
-  },
-
   componentDidMount: function () {
+    window.NomNomsApp.searchAuto = true;
+
     if (!searchIndexTutorial) {
       SearchIndexTutorial.start();
 
       searchIndexTutorial = true;
     }
+
+    ApiLocationUtil.fetchLocations(this.props.location.query);
 
     LocationStore.addChangeListener(this._onChange);
   },

@@ -5,10 +5,6 @@ var LocationShowPage = React.createClass({
     return ({ logInModalVisible: false });
   },
 
-  componentWillMount: function () {
-    localStorage.removeItem("review_index");
-  },
-
   componentWillReceiveProps: function () {
     ApiLocationUtil.fetchSingleLocation(this.props.params.location_id);
   },
@@ -64,7 +60,7 @@ var LocationShowPage = React.createClass({
         NavLoggedInTutorial.start();
         loggedInTutorial = true;
       }
-      
+
       this.setState({ logInModalVisible: false });
       this.goToReviewFormPage();
     }.bind(this);

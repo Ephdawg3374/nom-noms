@@ -39,4 +39,3 @@
 * Flux Dispatcher
 * React
 * React Router
-* React PState
