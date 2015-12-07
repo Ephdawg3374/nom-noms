@@ -28,6 +28,10 @@
   margin: 0 40px;
 }
 
+.auth-page-input-wrapper > button:disabled {
+  background: grey;
+}
+
 .auth-page-username, .auth-page-password, .auth-page-firstname, .auth-page-lastname {
   font-size: 16px;
   width: 195px;
@@ -39,4 +43,15 @@
   display: block;
   padding: 10px 0;
   font-weight: bold;
+}
+
+.new-user-errors-wrapper {
+  width: 100%;
+  height: 0;
+  margin: 10px auto;
+}
+
+.new-user-errors-wrapper > li {
+  display: inline-block;
+  padding: 0 10px;
 }

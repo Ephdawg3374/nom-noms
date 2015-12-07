@@ -6,6 +6,7 @@
   background: white;
   padding: 50px;
   min-height: 650px;
+  text-align: center;
 }
 
 .auth-page > h1 {

@@ -75,18 +75,20 @@ var NewUserPage = React.createClass({
 
     var errors = this.state.errors.length > 0 ?
       this.state.errors.map(function (error, idx) {
-        return <label key={idx} className="user-error-msg">{error}</label>;
+        return <li key={idx} className="user-error-msg">{error}</li>;
       }) : "";
 
-    var submitButton = this.state.isSubmitting === true ?
-      <button className="submit disabled" disabled>Submit</button> :
+    var submitButton = this.state.isSubmitting ?
+      <button className="submit" disabled>Submit</button> :
       <button className="submit">Submit</button>;
 
     return (
       <div className="auth-page">
         <h1>Create a new user</h1>
 
-        { errors }
+        <ul className="new-user-errors-wrapper">
+          { errors }
+        </ul>
 
         <form className="auth-page-form" onSubmit={this.handleNewUserSubmit}>
           <div className="auth-page-input-wrapper">
