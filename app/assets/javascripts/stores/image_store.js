@@ -17,6 +17,7 @@
     dispatcherId: AppDispatcher.register(function (payload) {
       switch (payload.actionType) {
         case ImageConstants.RECEIVE_IMAGE:
+          AppDispatcher.waitFor([ReviewStore.dispatcherId]);
           ImageStore.addImageToReview(payload.image);
           ImageStore.emit(CHANGE_EVENT);
           break;

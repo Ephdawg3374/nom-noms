@@ -6,4 +6,6 @@ json.user_thumbnail_url asset_path(review.author.profile_pic.url(:thumb))
 
 json.author review.author.username
 
-json.images []
+image_urls = []
+review.images.each { |image| image_urls.push(asset_path(image.image_pic.url(:medium))) }
+json.images image_urls

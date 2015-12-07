@@ -8,7 +8,7 @@ var ImageScroll = React.createClass({
       });
     } else if (this.props.Review) {
       images = this.props.review.images.map(function (image, idx) {
-        return <img key={idx} src={image.medium_url}/>;
+        return <img key={idx} src={image}/>;
       });
     }
 

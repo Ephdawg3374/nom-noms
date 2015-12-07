@@ -15,10 +15,6 @@ var ReviewIndexItem = React.createClass({
     this.history.pushState(null, "/locations/" + this.props.location.id + "/reviews/edit", review);
   },
 
-  componentDidMount: function () {
-    ApiImageUtil.fetchReviewImages(this.props.review.id);
-  },
-
   render: function () {
     var deleteReviewButton, editReviewButton, locationContactDetails, num_reviews_text;
 
