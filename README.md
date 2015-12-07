@@ -1,27 +1,31 @@
 # Nom-noms
 
-[Heroku link][nom-noms.herokuapp.com] **NB:** This should be a link to your production site
+[Live][www.feed-the-noms.com]
 
 [heroku]: http://www.herokuapp.com
 
 ## Minimum Viable Product
 
-Nom-noms is a web application inspired by Yelp built using Ruby on Rails
-and React.js. Nom-noms allows users to:
+Nom-noms is a social-themed location search platform inspired by Yelp built using Ruby on Rails and React.js. Nom-noms allows users to:
 
-<!-- This is a Markdown checklist. Use it to keep track of your progress! -->
-
-- [X] Create an account
+- [X] Create an account with an avatar
 - [X] Log in / Log out
-- [X] Search for locations by Location name, type, cuisine and by City w/ autocomplete listings
-- [X] View search results by index or by Google Maps view
+- [X] Search for locations by name, type, cuisine and city
+- [X] Use autocomplete lists to facilitate searches
+- [X] View search results by search index or by interactive Google Maps view
+- [X] Access location pages from the index or map view
 - [X] Filter search results by price range and distance
 - [X] Create, read, edit, and delete Location reviews
-- [X] Upload pictures to location reviews
+- [X] Upload multiple pictures to location reviews
+- [X] Access personal page with stats and reviews
+- [X] Search for other users' page by username, first name, or last name
+
+To be released soon...:
 - [ ] Follow other users
-- [ ] Comment on other user reviews
-- [ ] Tag reviews with multiple tags
-- [ ] Home page shows recent activity from followed users
+- [ ] Show followed users' activity on personal page
+- [ ] Bookmark locations
+- [ ] Bookmarked locations index available on personal page
+- [ ] Comment on other users' reviews
 
 ## Design Docs
 * [View Wireframes][view]
