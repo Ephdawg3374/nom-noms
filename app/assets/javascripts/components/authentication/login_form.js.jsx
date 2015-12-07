@@ -65,7 +65,7 @@ var LogInForm = React.createClass({
 
     var errors = this.state.errors.length > 0 ?
       this.state.errors.map(function (error, idx) {
-        return <label key={idx} className="user-form-error-msg">{error}</label>;
+        return <label key={idx}>{error}</label>;
       }) : "";
 
     if (this.props.modalMode) {
@@ -79,7 +79,7 @@ var LogInForm = React.createClass({
 
         <h1>{ modalHeaderText }</h1>
 
-        <div className="errors-wrapper group">
+        <div className="login-error-wrapper">
           { errors }
         </div>
 

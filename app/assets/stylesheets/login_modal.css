@@ -21,3 +21,10 @@
 .login-modal-form > .auth-page-input-wrapper {
   margin-top: 20px;
 }
+
+.login-modal-form > .login-error-wrapper {
+  height: 0;
+  margin-top: 15px;
+  width: 100%;
+  text-align: center;
+}
