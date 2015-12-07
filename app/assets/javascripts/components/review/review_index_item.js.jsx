@@ -1,8 +1,18 @@
 var ReviewIndexItem = React.createClass({
+  mixins: [ReactRouter.History],
+
   deleteReview: function (event) {
     event.preventDefault();
 
     ApiReviewUtil.destroy(event.currentTarget.value);
+  },
+
+  editReview: function (event) {
+    event.preventDefault();
+
+    var review = { review: this.props.review };
+
+    this.history.pushState(null, "/locations/" + this.props.location.id + "/reviews/edit", review);
   },
 
   componentDidMount: function () {
@@ -10,7 +20,7 @@ var ReviewIndexItem = React.createClass({
   },
 
   render: function () {
-    var deleteReviewButton, locationContactDetails, num_reviews_text;
+    var deleteReviewButton, editReviewButton, locationContactDetails, num_reviews_text;
 
     if (this.props.user) {
       num_reviews_text = this.props.location.num_reviews + " reviews";
@@ -34,6 +44,15 @@ var ReviewIndexItem = React.createClass({
     }
 
     if (this.props.isLoggedIn && CurrentUserStore.currentUser().id === this.props.review.user_id) {
+      editReviewButton = (
+        <button
+          className="edit-review-button"
+          onClick={this.editReview}
+          value={this.props.review.id}>
+          Edit
+        </button>
+      );
+
       deleteReviewButton = (
         <button
           className="delete-review-button"
@@ -66,7 +85,10 @@ var ReviewIndexItem = React.createClass({
 
             <span className="review-creation-date">{this.props.review.time_ago} ago</span>
 
-            { deleteReviewButton }
+            <div className="review-index-item-options">
+              { deleteReviewButton }
+              { editReviewButton }
+            </div>
           </div>
 
           <textarea

@@ -10,7 +10,6 @@ class Api::ReviewsController < ApplicationController
   end
 
   def index
-    
     if !params[:locId].nil?
       @reviews = Review.where(location_id: params[:locId]).order(created_at: :desc)
     elsif !params[:userId].nil?
@@ -20,6 +19,16 @@ class Api::ReviewsController < ApplicationController
     end
 
     render :index
+  end
+
+  def update
+    @review = Review.find(params[:id])
+
+    if @review.update(review_params)
+      render :show
+    else
+      render json: @review.errors.full_messages, status: 400
+    end
   end
 
   def destroy

@@ -41,34 +41,19 @@ var ReviewForm = React.createClass({
     );
   },
 
-  componentWillMount: function () {
-    this.setPId('review_form');
-    this.setPStorage(this.localStorage);
-    this.restorePState();
-  },
-
   componentDidMount: function () {
     $(".review-form-body").focus();
-
-    setTimeout(function () {
-      this.setState({
-        images: []
-      });
-    }.bind(this), 100);
-
-    this.intervalId = setInterval(function () {
-      this.setPState({
-        rating: this.state.rating,
-        body: this.state.body,
-        isSubmitting: false,
-        isUploading: false,
-        isValid: true,
-      });
-    }.bind(this), 1000);
   },
 
-  componentWillUnmount: function () {
-    clearInterval(this.intervalId);
+  componentWillReceiveProps: function(nextProps) {
+    if (nextProps.review) {
+      var reviewToEdit = nextProps.review;
+
+      this.setState({
+        rating: parseInt(reviewToEdit.rating),
+        body: reviewToEdit.body
+      });
+    }
   },
 
   setReviewRating: function (event) {
@@ -145,7 +130,7 @@ var ReviewForm = React.createClass({
       });
     }.bind(this);
 
-    var successfulReviewCreation = function (review) {
+    var success = function (review) {
       for (var i = 0; i < imageFiles.length; i++) {
         var formDataImage = new FormData();
         formDataImage.append("image[review_id]", review.id);
@@ -159,7 +144,13 @@ var ReviewForm = React.createClass({
       this.history.pushState(null, "/locations/" + this.props.location.id);
     }.bind(this);
 
-    ApiReviewUtil.create(formDataNoImages, successfulReviewCreation, failure);
+    ApiReviewUtil.create(formDataNoImages, success, failure);
+  },
+
+  goBack: function (event) {
+    event.preventDefault();
+
+    this.history.goBack();
   },
 
   render: function () {
@@ -224,8 +215,10 @@ var ReviewForm = React.createClass({
 
         { submitButton }
 
-        <button className="review-form-cancel-button">
-          <Link to={"/locations/" + this.props.location.id}>Cancel</Link>
+        <button
+          className="review-form-cancel-button"
+          onClick={this.goBack}>
+          Cancel
         </button>
       </form>
     );

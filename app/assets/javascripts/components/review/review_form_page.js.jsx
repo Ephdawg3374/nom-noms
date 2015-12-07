@@ -2,10 +2,12 @@ var ReviewFormPage = React.createClass({
   mixins: [ReactRouter.History],
 
   componentWillMount: function () {
-    ApiLocationUtil.fetchSingleLocation(this.props.params.location_id);
+
   },
 
   componentDidMount: function () {
+    ApiLocationUtil.fetchSingleLocation(this.props.params.location_id);
+
     LocationStore.addChangeListener(this._onLocationUpdate);
     CurrentUserStore.addChangeListener(this._ensureLoggedIn);
   },
@@ -29,6 +31,11 @@ var ReviewFormPage = React.createClass({
   render: function () {
     var location = LocationStore.find_location(parseInt(this.props.params.location_id));
     var num_reviews_text = location.num_reviews + " reviews";
+
+    var reviewForm = this.props.location.pathname.match("edit") ?
+      <ReviewForm location={location} review={this.props.location.query.review}/> :
+      <ReviewForm location={location} />;
+
     return (
       <div className="review-form-page">
 
@@ -64,7 +71,7 @@ var ReviewFormPage = React.createClass({
           <LocationContactDetails location={location} />
         </div>
 
-        <ReviewForm location={location}/>
+        { reviewForm }
 
       </div>
     );

@@ -54,5 +54,24 @@ window.ApiReviewUtil = {
         ReviewActions.deleteSingleReview(data);
       }
     });
+  },
+
+  update: function (reviewId) {
+    $.ajax({
+      url: "/api/reviews/" + reviewId,
+      method: "PATCH",
+      processData: false,
+      contentType: false,
+      dataType: "json",
+      data: formData,
+      success: function (data) {
+        ReviewActions.receiveSingleReview(data);
+        ApiLocationUtil.fetchSingleLocation(data.location_id);
+        success(data);
+      },
+      error: function (data) {
+        failure(JSON.parse(data.responseText));
+      }
+    });
   }
 };

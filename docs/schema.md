@@ -4,10 +4,12 @@
 column name     | data type | details
 ----------------|-----------|-----------------------
 id              | integer   | not null, primary key
-username        | string    | not null
+username        | string    | not null, indexed
+firstname       | string    | not null, indexed
+lastname        | string    | not null, indexed
 password_digest | string    | not null
 session_token   | string    | not null, indexed
-
+profile_pic     | string    | from Paperclip
 
 ## locations
 column name      | data type | details
@@ -26,6 +28,8 @@ state_long       | string    | not null
 zipcode          | string    | not null, limit 5
 lat              | float     | not null
 lng              | float     | not null
+cuisine          | string    | not null
+
 
 ## reviews
 column name | data type | details
@@ -33,9 +37,9 @@ column name | data type | details
 id          | integer   | not null, primary key
 user_id     | integer   | not null, foreign key (references users), indexed
 location_id | integer   | not null, foreign key (references locations), indexed
-tag_ids     | integer[] |
 body        | text      | not null
-date        | datetime  | not null
+updated_at  | datetime  | not null
+created_at  | datetime  | not null
 
 ## comments
 column name     | data type | details

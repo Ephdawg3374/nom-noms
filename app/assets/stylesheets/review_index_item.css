@@ -69,10 +69,11 @@
   border-radius: 10px;
 }
 
-.delete-review-button {
+.delete-review-button, .edit-review-button {
   float: right;
   padding: 5px;
   font-size: 12px;
+  margin: 0 10px;
 }
 
 .review-index-item-location-details {

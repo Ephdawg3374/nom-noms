@@ -37,6 +37,7 @@ var LocationShowPage = React.createClass({
 
   goToReviewFormPage: function () {
     var location = { locationId: this.props.params.location_id };
+
     this.history.pushState(null, "/locations/" + location.locationId + "/reviews/new", location);
   },
 

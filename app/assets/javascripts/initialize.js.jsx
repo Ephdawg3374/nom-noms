@@ -14,6 +14,7 @@ $(document).on('ready', function () {
       <Route path="/users/:user_id" component={UserShowPage} />
       <Route path="/locations/:location_id" component={LocationShowPage} />
       <Route path="/locations/:location_id/reviews/new" component={ReviewFormPage} />
+      <Route path="/locations/:location_id/reviews/edit" component={ReviewFormPage} />
     </Route>
   );
 

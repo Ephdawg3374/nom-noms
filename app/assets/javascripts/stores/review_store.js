@@ -26,13 +26,22 @@
     },
 
     addReview: function (review) {
-      var idx = _reviews.indexOf(review);
-
-      if (idx === -1) {
-        _reviews.unshift(review);
-      } else {
-        _review[idx] = review;
+      for (var i = 0; i < _reviews.length; i++) {
+        if (_reviews[i].id === review.id) {
+          _reviews[i] = review;
+          return;
+        }
       }
+
+      _reviews.push(review);
+
+      // var idx = _reviews.indexOf(review);
+      //
+      // if (idx === -1) {
+      //   _reviews.unshift(review);
+      // } else {
+      //   _review[idx] = review;
+      // }
     },
 
     _deleteReview: function (review) {
