@@ -50,7 +50,7 @@ var ReviewIndex = React.createClass({
   },
 
   render: function () {
-    var reviewIndexItems;
+    var reviewIndexItems, sortOptions;
 
     if (this.state.fetchReviewsComplete) {
       if (this.props.location) {
@@ -66,11 +66,16 @@ var ReviewIndex = React.createClass({
           }
         }.bind(this));
       }
+
+      if (this.state.reviews.length > 0) {
+        sortOptions =
+          <label>Sort by <SortOptions LocationShowPage sortItems={this.sortReviews} /></label>;
+        }
     }
 
     return (
       <ul className="review-index">
-        <label>Sort by <SortOptions LocationShowPage sortItems={this.sortReviews} /></label>
+        { sortOptions }
 
         { reviewIndexItems }
       </ul>

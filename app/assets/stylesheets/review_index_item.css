@@ -19,6 +19,8 @@
 .review-index-item-pic > a > img {
   border: 1px solid #ccc;
   border-radius: 10px;
+  width: 100px;
+  height: 100px;
 }
 
 .review-index-item-content {
