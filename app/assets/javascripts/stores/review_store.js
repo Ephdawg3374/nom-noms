@@ -15,6 +15,59 @@
       }
     },
 
+    sortReviews: function (newMode) {
+      switch (newMode) {
+        case "Rating":
+          this.sortReviewsByRating();
+          this.emit(CHANGE_EVENT);
+          break;
+        case "Time":
+          this.sortReviewsByTime();
+          this.emit(CHANGE_EVENT);
+          break;
+        default:
+          this.sortReviewsByTime();
+          this.emit(CHANGE_EVENT);
+          break;
+      }
+    },
+
+    sortReviewsByRating: function () {
+      var sortable = [];
+
+      for (var idx in _reviews) {
+        sortable.push([_reviews[idx], _reviews[idx].rating]);
+      }
+
+      sortable.sort(function(b, a) {
+        return a[1] - b[1];
+      });
+
+      var sortedReviews = sortable.map(function(review) {
+        return review[0];
+      });
+
+      _reviews = sortedReviews;
+    },
+
+    sortReviewsByTime: function () {
+      var sortable = [];
+
+      for (var idx in _reviews) {
+        sortable.push([_reviews[idx], _reviews[idx].time_i]);
+      }
+
+      sortable.sort(function(b, a) {
+        return a[1] - b[1];
+      });
+
+      var sortedReviews = sortable.map(function(review) {
+        return review[0];
+      });
+
+      _reviews = sortedReviews;
+    },
+
     appendImage: function (image) {
       var review = this.findReview(image.review_id);
 

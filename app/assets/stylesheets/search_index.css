@@ -6,3 +6,8 @@
   overflow-x: hidden;
   height: 700px;
 }
+
+.search-index > label > .sort-options {
+  font-size: 14px;
+  margin: 5px 0;
+}

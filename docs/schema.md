@@ -30,7 +30,6 @@ lat              | float     | not null
 lng              | float     | not null
 cuisine          | string    | not null
 
-
 ## reviews
 column name | data type | details
 ------------|-----------|-----------------------
@@ -40,32 +39,3 @@ location_id | integer   | not null, foreign key (references locations), indexed
 body        | text      | not null
 updated_at  | datetime  | not null
 created_at  | datetime  | not null
-
-## comments
-column name     | data type | details
-----------------|-----------|-----------------------
-id              | integer   | not null, primary key
-user_id         | integer   | not null, foreign key (references users), indexed
-review_id       | integer   | not null, foreign key (references reviews), indexed
-body            | string    | not null
-date            | datetime  | not null
-
-## tags
-column name | data type | details
-------------|-----------|-----------------------
-id          | integer   | not null, primary key
-name        | string    | not null
-
-## taggings
-column name | data type | details
-------------|-----------|-----------------------
-id          | integer   | not null, primary key
-tag_id      | integer   | not null, foreign key (references tags), indexed
-review_id   | integer   | not null, foreign key (references reviews), indexed, unique [tag_id]
-
-## followings
-column name      | data type | details
------------------|-----------|-----------------------
-id               | integer   | not null, primary key
-follower_user_id | integer   | not null, foreign key (references notes), indexed, unique [tag_id]
-followee_user_id | integer   | not null, foreign key (references tags), indexed

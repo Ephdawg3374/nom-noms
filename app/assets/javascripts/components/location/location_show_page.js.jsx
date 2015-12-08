@@ -71,7 +71,7 @@ var LocationShowPage = React.createClass({
     }
 
     if (CurrentUserStore.isLoggedIn()) {
-      reviewForm = <ReviewForm location={location} />;
+      reviewForm = <ReviewForm location={location} LocationShowPage/>;
     }
 
     if (Object.keys(location).length !== 0) {

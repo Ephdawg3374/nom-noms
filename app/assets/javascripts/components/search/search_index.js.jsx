@@ -11,6 +11,10 @@ var SearchIndex = React.createClass({
     this.forceUpdate();
   },
 
+  sortLocations: function (newMode) {
+    LocationStore.sortLocations(newMode);
+  },
+
   render: function () {
     var searchIndexItems;
 
@@ -26,6 +30,8 @@ var SearchIndex = React.createClass({
 
     return (
       <div className="search-index">
+        <label>Sort by <SortOptions sortItems={this.sortLocations} SearchIndex/></label>
+
         {searchIndexItems}
       </div>
     );

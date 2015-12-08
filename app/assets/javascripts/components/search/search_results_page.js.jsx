@@ -22,7 +22,8 @@ var SearchResultsPage = React.createClass({
   componentWillUnmount: function () {
     window.NomNomsApp.searchAuto = false;
 
-    if (Shepherd.activeTour) { Shepherd.activeTour.cancel(); }
+    SearchIndexTutorial.cancel();
+    searchIndexTutorial = true;
 
     LocationStore.removeChangeListener(this._onChange);
   },

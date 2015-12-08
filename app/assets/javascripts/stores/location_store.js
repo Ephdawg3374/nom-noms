@@ -12,6 +12,59 @@
       _latLngObjects = latLngObjects;
     },
 
+    sortLocations: function (newMode) {
+      switch (newMode) {
+        case "Distance":
+          this.sortLocationsByDistance();
+          this.emit(CHANGE_EVENT);
+          break;
+        case "Rating":
+          this.sortLocationsByRating();
+          this.emit(CHANGE_EVENT);
+          break;
+        default:
+          this.sortLocationsByDistance();
+          this.emit(CHANGE_EVENT);
+          break;
+      }
+    },
+
+    sortLocationsByDistance: function () {
+      var sortable = [];
+
+      for (var idx in _locations) {
+        sortable.push([_locations[idx], _locations[idx].distance]);
+      }
+
+      sortable.sort(function(a, b) {
+        return a[1] - b[1];
+      });
+
+      var sortedLocations = sortable.map(function(location) {
+        return location[0];
+      });
+
+      _locations = sortedLocations;
+    },
+
+    sortLocationsByRating: function () {
+      var sortable = [];
+
+      for (var idx in _locations) {
+        sortable.push([_locations[idx], _locations[idx].ave_rating]);
+      }
+
+      sortable.sort(function(b, a) {
+        return a[1] - b[1];
+      });
+
+      var sortedLocations = sortable.map(function(location) {
+        return location[0];
+      });
+
+      _locations = sortedLocations;
+    },
+
     find_location: function (id) {
       var location = {};
 

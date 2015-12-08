@@ -45,6 +45,10 @@ var ReviewIndex = React.createClass({
     this.setState({ reviews: ReviewStore.all() });
   },
 
+  sortReviews: function (newMode) {
+    ReviewStore.sortReviews(newMode);
+  },
+
   render: function () {
     var reviewIndexItems;
 
@@ -66,6 +70,8 @@ var ReviewIndex = React.createClass({
 
     return (
       <ul className="review-index">
+        <label>Sort by <SortOptions LocationShowPage sortItems={this.sortReviews} /></label>
+
         { reviewIndexItems }
       </ul>
     );

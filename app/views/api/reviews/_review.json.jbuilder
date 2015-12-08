@@ -9,3 +9,5 @@ json.author review.author.username
 image_urls = []
 review.images.each { |image| image_urls.push(asset_path(image.image_pic.url(:medium))) }
 json.images image_urls
+
+json.time_i review.created_at.to_i

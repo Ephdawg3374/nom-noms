@@ -24,7 +24,8 @@ var HomePage = React.createClass({
   },
 
   componentWillUnmount: function () {
-    if (Shepherd.activeTour) { Shepherd.activeTour.cancel(); }
+    HomePageTutorial.cancel();
+    homePageTutorial = true;
   },
 
   render: function () {

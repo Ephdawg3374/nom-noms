@@ -132,7 +132,7 @@ var ReviewForm = React.createClass({
 
       this.setInitialState();
 
-      this.history.pushState(null, "/locations/" + this.props.location.id);
+      if (!this.props.LocationShowPage) { this.history.goBack(); }
     }.bind(this);
 
     if (this.state.editMode) {
@@ -145,7 +145,11 @@ var ReviewForm = React.createClass({
   goBack: function (event) {
     event.preventDefault();
 
-    this.history.goBack();
+    if (this.props.LocationShowPage) {
+      this.setInitialState();
+    } else {
+      this.history.goBack();
+    }
   },
 
   render: function () {
