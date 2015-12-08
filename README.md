@@ -1,6 +1,6 @@
 # Nom-noms
 
-[Live][live]
+[Live Site][live]
 
 [live]: www.feed-the-noms.com
 
@@ -36,6 +36,7 @@ You can:
 - Log in / Log out (demo account available too)
 - Search for locations by name, type, cuisine and city
 - View search results by search index or by interactive Google Maps view
+- Sort index items by rating, distance, or time
 - Access location pages from the index or map view
 - Filter search results by price range and distance
 - Create, read, edit, and delete location reviews
@@ -58,7 +59,7 @@ Many API responses handle nested data, associations, and perform basic mathemati
 
 API responses are structured to prevent N+1 queries. I used model scoping with find_by_sql as needed to minimize database fetching and keep controllers slim.
 
-I structured user comments and contributions as polymorphic associations in order to prevent bloat. This greatly reduced the overhead for my Rails models and Backbone views.
+Sorting the index results is done completely in the front end. Since data is already loaded into the stores, the sort functions simply sort the stores rather than refetching from the database.  Therefore, sorting is a very inexpensive operation.
 
 ### Future enhancements
 
