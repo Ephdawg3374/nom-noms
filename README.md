@@ -20,6 +20,7 @@ Nom noms is a social-themed location search platform inspired by Yelp that allow
 * React.js
 
 ### Libraries and Technologies
+* PostgreSQL
 * jQuery
 * Google Maps API
 * Google Maps Geocoding API
