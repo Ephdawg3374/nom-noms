@@ -2,7 +2,7 @@
 
 [Live Site][live]
 
-[live]: www.feed-the-noms.com
+[live]: http://www.feed-the-noms.com/
 
 ## Summary
 
