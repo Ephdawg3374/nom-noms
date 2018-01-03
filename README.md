@@ -2,7 +2,7 @@
 
 [Live Site][live]
 
-[live]: http://www.feed-the-noms.com/
+[live]: https://nom-noms.herokuapp.com/
 
 ## Summary
 
